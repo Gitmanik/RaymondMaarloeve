@@ -1,0 +1,1519 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>System.Numerics.Tensors</name>
+    </assembly>
+    <members>
+        <member name="T:System.Numerics.Tensors.TensorPrimitives">
+            <summary>Performs primitive tensor operations over spans of memory.</summary>
+            <summary>Performs primitive tensor operations over spans of memory.</summary>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.Abs(System.ReadOnlySpan{System.Single},System.Span{System.Single})">
+            <summary>Computes the element-wise absolute value of each single-precision floating-point number in the specified tensor.</summary>
+            <param name="x">The tensor, represented as a span.</param>
+            <param name="destination">The destination tensor, represented as a span.</param>
+            <exception cref="T:System.ArgumentException">Destination is too short.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="x"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <remarks>
+            <para>
+            This method effectively computes <c><paramref name="destination" />[i] = MathF.Abs(<paramref name="x" />[i])</c>.
+            </para>
+            <para>
+            The absolute value of a <see cref="T:System.Single"/> is its numeric value without its sign. For example, the absolute value of both 1.2e-03 and -1.2e03 is 1.2e03.
+            </para>
+            <para>
+            If a value is equal to <see cref="F:System.Single.NegativeInfinity"/> or <see cref="F:System.Single.PositiveInfinity"/>, the result stored into the corresponding destination location is set to <see cref="F:System.Single.PositiveInfinity"/>.
+            If a value is equal to <see cref="F:System.Single.NaN"/>, the result stored into the corresponding destination location is the original NaN value with the sign bit removed.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.Add(System.ReadOnlySpan{System.Single},System.ReadOnlySpan{System.Single},System.Span{System.Single})">
+            <summary>Computes the element-wise addition of single-precision floating-point numbers in the specified tensors.</summary>
+            <param name="x">The first tensor, represented as a span.</param>
+            <param name="y">The second tensor, represented as a span.</param>
+            <param name="destination">The destination tensor, represented as a span.</param>
+            <exception cref="T:System.ArgumentException">Length of <paramref name="x" /> must be same as length of <paramref name="y" />.</exception>
+            <exception cref="T:System.ArgumentException">Destination is too short.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="x"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="y"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <remarks>
+            <para>
+            This method effectively computes <c><paramref name="destination" />[i] = <paramref name="x" />[i] + <paramref name="y" />[i]</c>.
+            </para>
+            <para>
+            If either of the element-wise input values is equal to <see cref="F:System.Single.NaN"/>, the resulting element-wise value is also NaN.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.Add(System.ReadOnlySpan{System.Single},System.Single,System.Span{System.Single})">
+            <summary>Computes the element-wise addition of single-precision floating-point numbers in the specified tensors.</summary>
+            <param name="x">The first tensor, represented as a span.</param>
+            <param name="y">The second tensor, represented as a scalar.</param>
+            <param name="destination">The destination tensor, represented as a span.</param>
+            <exception cref="T:System.ArgumentException">Destination is too short.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="x"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <remarks>
+            <para>
+            This method effectively computes <c><paramref name="destination" />[i] = <paramref name="x" />[i] + <paramref name="y" /></c>.
+            </para>
+            <para>
+            If either of the element-wise input values is equal to <see cref="F:System.Single.NaN"/>, the resulting element-wise value is also NaN.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.AddMultiply(System.ReadOnlySpan{System.Single},System.ReadOnlySpan{System.Single},System.ReadOnlySpan{System.Single},System.Span{System.Single})">
+            <summary>Computes the element-wise result of <c>(<paramref name="x" /> + <paramref name="y" />) * <paramref name="multiplier" /></c> for the specified tensors.</summary>
+            <param name="x">The first tensor, represented as a span.</param>
+            <param name="y">The second tensor, represented as a span.</param>
+            <param name="multiplier">The third tensor, represented as a span.</param>
+            <param name="destination">The destination tensor, represented as a span.</param>
+            <exception cref="T:System.ArgumentException">Length of <paramref name="x" /> must be same as length of <paramref name="y" /> and the length of <paramref name="multiplier" />.</exception>
+            <exception cref="T:System.ArgumentException">Destination is too short.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="x"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="y"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="multiplier"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <remarks>
+            <para>
+            This method effectively computes <c><paramref name="destination" />[i] = (<paramref name="x" />[i] + <paramref name="y" />[i]) * <paramref name="multiplier" />[i]</c>.
+            </para>
+            <para>
+            If any of the element-wise input values is equal to <see cref="F:System.Single.NaN"/>, the resulting element-wise value is also NaN.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.AddMultiply(System.ReadOnlySpan{System.Single},System.ReadOnlySpan{System.Single},System.Single,System.Span{System.Single})">
+            <summary>Computes the element-wise result of <c>(<paramref name="x" /> + <paramref name="y" />) * <paramref name="multiplier" /></c> for the specified tensors.</summary>
+            <param name="x">The first tensor, represented as a span.</param>
+            <param name="y">The second tensor, represented as a span.</param>
+            <param name="multiplier">The third tensor, represented as a scalar.</param>
+            <param name="destination">The destination tensor, represented as a span.</param>
+            <exception cref="T:System.ArgumentException">Length of <paramref name="x" /> must be same as length of <paramref name="y" />.</exception>
+            <exception cref="T:System.ArgumentException">Destination is too short.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="x"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="y"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <remarks>
+            <para>
+            This method effectively computes <c><paramref name="destination" />[i] = (<paramref name="x" />[i] + <paramref name="y" />[i]) * <paramref name="multiplier" /></c>.
+            </para>
+            <para>
+            If any of the element-wise input values is equal to <see cref="F:System.Single.NaN"/>, the resulting element-wise value is also NaN.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.AddMultiply(System.ReadOnlySpan{System.Single},System.Single,System.ReadOnlySpan{System.Single},System.Span{System.Single})">
+            <summary>Computes the element-wise result of <c>(<paramref name="x" /> + <paramref name="y" />) * <paramref name="multiplier" /></c> for the specified tensors.</summary>
+            <param name="x">The first tensor, represented as a span.</param>
+            <param name="y">The second tensor, represented as a scalar.</param>
+            <param name="multiplier">The third tensor, represented as a span.</param>
+            <param name="destination">The destination tensor, represented as a span.</param>
+            <exception cref="T:System.ArgumentException">Length of <paramref name="x" /> must be same as length of <paramref name="multiplier" />.</exception>
+            <exception cref="T:System.ArgumentException">Destination is too short.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="x"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="multiplier"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <remarks>
+            <para>
+            This method effectively computes <c><paramref name="destination" />[i] = (<paramref name="x" />[i] + <paramref name="y" />) * <paramref name="multiplier" />[i]</c>.
+            </para>
+            <para>
+            If any of the element-wise input values is equal to <see cref="F:System.Single.NaN"/>, the resulting element-wise value is also NaN.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.Cosh(System.ReadOnlySpan{System.Single},System.Span{System.Single})">
+            <summary>Computes the element-wise hyperbolic cosine of each single-precision floating-point radian angle in the specified tensor.</summary>
+            <param name="x">The tensor, represented as a span.</param>
+            <param name="destination">The destination tensor, represented as a span.</param>
+            <exception cref="T:System.ArgumentException">Destination is too short.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="x"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <remarks>
+            <para>
+            This method effectively computes <c><paramref name="destination" />[i] = <see cref="T:System.MathF" />.Cosh(<paramref name="x" />[i])</c>.
+            </para>
+            <para>
+            If a value is equal to <see cref="F:System.Single.NegativeInfinity"/> or <see cref="F:System.Single.PositiveInfinity"/>, the result stored into the corresponding destination location is set to <see cref="F:System.Single.PositiveInfinity"/>.
+            If a value is equal to <see cref="F:System.Single.NaN"/>, the result stored into the corresponding destination location is also NaN.
+            </para>
+            <para>
+            The angles in x must be in radians. Use <see cref="M:System.Single.DegreesToRadians"/> or multiply by <see cref="F:System.MathF.PI"/>/180 to convert degrees to radians.
+            </para>
+            <para>
+            This method may call into the underlying C runtime or employ instructions specific to the current architecture. Exact results may differ between different
+            operating systems or architectures.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.CosineSimilarity(System.ReadOnlySpan{System.Single},System.ReadOnlySpan{System.Single})">
+            <summary>Computes the cosine similarity between the two specified non-empty, equal-length tensors of single-precision floating-point numbers.</summary>
+            <param name="x">The first tensor, represented as a span.</param>
+            <param name="y">The second tensor, represented as a span.</param>
+            <returns>The cosine similarity of the two tensors.</returns>
+            <exception cref="T:System.ArgumentException">Length of <paramref name="x" /> must be same as length of <paramref name="y" />.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="x" /> and <paramref name="y" /> must not be empty.</exception>
+            <remarks>
+            <para>
+            This method effectively computes <c>TensorPrimitives.Dot(x, y) / (MathF.Sqrt(TensorPrimitives.SumOfSquares(x)) * MathF.Sqrt(TensorPrimitives.SumOfSquares(y)).</c>
+            </para>
+            <para>
+            If any element in either input tensor is equal to <see cref="F:System.Single.NegativeInfinity"/>, <see cref="F:System.Single.PositiveInfinity"/>, or <see cref="F:System.Single.NaN"/>,
+            NaN is returned.
+            </para>
+            <para>
+            This method may call into the underlying C runtime or employ instructions specific to the current architecture. Exact results may differ between different
+            operating systems or architectures.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.Distance(System.ReadOnlySpan{System.Single},System.ReadOnlySpan{System.Single})">
+            <summary>Computes the distance between two points, specified as non-empty, equal-length tensors of single-precision floating-point numbers, in Euclidean space.</summary>
+            <param name="x">The first tensor, represented as a span.</param>
+            <param name="y">The second tensor, represented as a span.</param>
+            <returns>The Euclidean distance.</returns>
+            <exception cref="T:System.ArgumentException">Length of <paramref name="x" /> must be same as length of <paramref name="y" />.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="x" /> and <paramref name="y" /> must not be empty.</exception>
+            <remarks>
+            <para>
+            This method effectively computes the equivalent of:
+            <c>
+                Span&lt;float&gt; difference = ...;
+                TensorPrimitives.Subtract(x, y, difference);
+                float result = MathF.Sqrt(TensorPrimitives.SumOfSquares(difference));
+            </c>
+            but without requiring additional temporary storage for the intermediate differences.
+            </para>
+            <para>
+            If any element in either input tensor is equal to <see cref="F:System.Single.NaN"/>, NaN is returned.
+            </para>
+            <para>
+            This method may call into the underlying C runtime or employ instructions specific to the current architecture. Exact results may differ between different
+            operating systems or architectures.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.Divide(System.ReadOnlySpan{System.Single},System.ReadOnlySpan{System.Single},System.Span{System.Single})">
+            <summary>Computes the element-wise division of single-precision floating-point numbers in the specified tensors.</summary>
+            <param name="x">The first tensor, represented as a span.</param>
+            <param name="y">The second tensor, represented as a span.</param>
+            <param name="destination">The destination tensor, represented as a span.</param>
+            <exception cref="T:System.ArgumentException">Length of <paramref name="x" /> must be same as length of <paramref name="y" />.</exception>
+            <exception cref="T:System.ArgumentException">Destination is too short.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="x"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="y"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <remarks>
+            <para>
+            This method effectively computes <c><paramref name="destination" />[i] = <paramref name="x" />[i] / <paramref name="y" />[i]</c>.
+            </para>
+            <para>
+            If either of the element-wise input values is equal to <see cref="F:System.Single.NaN"/>, the resulting element-wise value is also NaN.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.Divide(System.ReadOnlySpan{System.Single},System.Single,System.Span{System.Single})">
+            <summary>Computes the element-wise division of single-precision floating-point numbers in the specified tensors.</summary>
+            <param name="x">The first tensor, represented as a span.</param>
+            <param name="y">The second tensor, represented as a scalar.</param>
+            <param name="destination">The destination tensor, represented as a span.</param>
+            <exception cref="T:System.ArgumentException">Destination is too short.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="x"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <remarks>
+            <para>
+            This method effectively computes <c><paramref name="destination" />[i] = <paramref name="x" />[i] / <paramref name="y" /></c>.
+            </para>
+            <para>
+            If either of the element-wise input values is equal to <see cref="F:System.Single.NaN"/>, the resulting element-wise value is also NaN.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.Dot(System.ReadOnlySpan{System.Single},System.ReadOnlySpan{System.Single})">
+            <summary>Computes the dot product of two tensors containing single-precision floating-point numbers.</summary>
+            <param name="x">The first tensor, represented as a span.</param>
+            <param name="y">The second tensor, represented as a span.</param>
+            <returns>The dot product.</returns>
+            <exception cref="T:System.ArgumentException">Length of <paramref name="x" /> must be same as length of <paramref name="y" />.</exception>
+            <remarks>
+            <para>
+            This method effectively computes the equivalent of:
+            <c>
+                Span&lt;float&gt; products = ...;
+                TensorPrimitives.Multiply(x, y, products);
+                float result = TensorPrimitives.Sum(products);
+            </c>
+            but without requiring additional temporary storage for the intermediate products. It corresponds to the <c>dot</c> method defined by <c>BLAS1</c>.
+            </para>
+            <para>
+            If any of the input elements is equal to <see cref="F:System.Single.NaN"/>, the resulting value is also NaN.
+            </para>
+            <para>
+            This method may call into the underlying C runtime or employ instructions specific to the current architecture. Exact results may differ between different
+            operating systems or architectures.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.Exp(System.ReadOnlySpan{System.Single},System.Span{System.Single})">
+            <summary>Computes the element-wise result of raising <c>e</c> to the single-precision floating-point number powers in the specified tensor.</summary>
+            <param name="x">The tensor, represented as a span.</param>
+            <param name="destination">The destination tensor, represented as a span.</param>
+            <exception cref="T:System.ArgumentException">Destination is too short.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="x"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <remarks>
+            <para>
+            This method effectively computes <c><paramref name="destination" />[i] = <see cref="T:System.MathF" />.Exp(<paramref name="x" />[i])</c>.
+            </para>
+            <para>
+            If a value equals <see cref="F:System.Single.NaN"/> or <see cref="F:System.Single.PositiveInfinity"/>, the result stored into the corresponding destination location is set to NaN.
+            If a value equals <see cref="F:System.Single.NegativeInfinity"/>, the result stored into the corresponding destination location is set to 0.
+            </para>
+            <para>
+            This method may call into the underlying C runtime or employ instructions specific to the current architecture. Exact results may differ between different
+            operating systems or architectures.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.IndexOfMax(System.ReadOnlySpan{System.Single})">
+            <summary>Searches for the index of the largest single-precision floating-point number in the specified tensor.</summary>
+            <param name="x">The tensor, represented as a span.</param>
+            <returns>The index of the maximum element in <paramref name="x"/>, or -1 if <paramref name="x"/> is empty.</returns>
+            <remarks>
+            <para>
+            The determination of the maximum element matches the IEEE 754:2019 `maximum` function. If any value equal to <see cref="F:System.Single.NaN"/>
+            is present, the index of the first is returned. Positive 0 is considered greater than negative 0.
+            </para>
+            <para>
+            This method may call into the underlying C runtime or employ instructions specific to the current architecture. Exact results may differ between different
+            operating systems or architectures.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.IndexOfMaxMagnitude(System.ReadOnlySpan{System.Single})">
+            <summary>Searches for the index of the single-precision floating-point number with the largest magnitude in the specified tensor.</summary>
+            <param name="x">The tensor, represented as a span.</param>
+            <returns>The index of the element in <paramref name="x"/> with the largest magnitude (absolute value), or -1 if <paramref name="x"/> is empty.</returns>
+            <remarks>
+            <para>
+            The determination of the maximum magnitude matches the IEEE 754:2019 `maximumMagnitude` function. If any value equal to <see cref="F:System.Single.NaN"/>
+            is present, the index of the first is returned. If two values have the same magnitude and one is positive and the other is negative,
+            the positive value is considered to have the larger magnitude.
+            </para>
+            <para>
+            This method may call into the underlying C runtime or employ instructions specific to the current architecture. Exact results may differ between different
+            operating systems or architectures.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.IndexOfMin(System.ReadOnlySpan{System.Single})">
+            <summary>Searches for the index of the smallest single-precision floating-point number in the specified tensor.</summary>
+            <param name="x">The tensor, represented as a span.</param>
+            <returns>The index of the minimum element in <paramref name="x"/>, or -1 if <paramref name="x"/> is empty.</returns>
+            <remarks>
+            <para>
+            The determination of the minimum element matches the IEEE 754:2019 `minimum` function. If any value equal to <see cref="F:System.Single.NaN"/>
+            is present, the index of the first is returned. Negative 0 is considered smaller than positive 0.
+            </para>
+            <para>
+            This method may call into the underlying C runtime or employ instructions specific to the current architecture. Exact results may differ between different
+            operating systems or architectures.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.IndexOfMinMagnitude(System.ReadOnlySpan{System.Single})">
+            <summary>Searches for the index of the single-precision floating-point number with the smallest magnitude in the specified tensor.</summary>
+            <param name="x">The tensor, represented as a span.</param>
+            <returns>The index of the element in <paramref name="x"/> with the smallest magnitude (absolute value), or -1 if <paramref name="x"/> is empty.</returns>
+            <remarks>
+            <para>
+            The determination of the minimum magnitude matches the IEEE 754:2019 `minimumMagnitude` function. If any value equal to <see cref="F:System.Single.NaN"/>
+            is present, the index of the first is returned. If two values have the same magnitude and one is positive and the other is negative,
+            the negative value is considered to have the smaller magnitude.
+            </para>
+            <para>
+            This method may call into the underlying C runtime or employ instructions specific to the current architecture. Exact results may differ between different
+            operating systems or architectures.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.Log(System.ReadOnlySpan{System.Single},System.Span{System.Single})">
+            <summary>Computes the element-wise natural (base <c>e</c>) logarithm of single-precision floating-point numbers in the specified tensor.</summary>
+            <param name="x">The tensor, represented as a span.</param>
+            <param name="destination">The destination tensor, represented as a span.</param>
+            <exception cref="T:System.ArgumentException">Destination is too short.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="x"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <remarks>
+            <para>
+            This method effectively computes <c><paramref name="destination" />[i] = <see cref="T:System.MathF" />.Log(<paramref name="x" />[i])</c>.
+            </para>
+            <para>
+            If a value equals 0, the result stored into the corresponding destination location is set to <see cref="F:System.Single.NegativeInfinity"/>.
+            If a value is negative or equal to <see cref="F:System.Single.NaN"/>, the result stored into the corresponding destination location is set to NaN.
+            If a value is positive infinity, the result stored into the corresponding destination location is set to <see cref="F:System.Single.PositiveInfinity"/>.
+            Otherwise, if a value is positive, its natural logarithm is stored into the corresponding destination location.
+            </para>
+            <para>
+            This method may call into the underlying C runtime or employ instructions specific to the current architecture. Exact results may differ between different
+            operating systems or architectures.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.Log2(System.ReadOnlySpan{System.Single},System.Span{System.Single})">
+            <summary>Computes the element-wise base 2 logarithm of single-precision floating-point numbers in the specified tensor.</summary>
+            <param name="x">The tensor, represented as a span.</param>
+            <param name="destination">The destination tensor, represented as a span.</param>
+            <exception cref="T:System.ArgumentException">Destination is too short.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="x"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <remarks>
+            <para>
+            This method effectively computes <c><paramref name="destination" />[i] = <see cref="T:System.MathF" />.Log2(<paramref name="x" />[i])</c>.
+            </para>
+            <para>
+            If a value equals 0, the result stored into the corresponding destination location is set to <see cref="F:System.Single.NegativeInfinity"/>.
+            If a value is negative or equal to <see cref="F:System.Single.NaN"/>, the result stored into the corresponding destination location is set to NaN.
+            If a value is positive infinity, the result stored into the corresponding destination location is set to <see cref="F:System.Single.PositiveInfinity"/>.
+            Otherwise, if a value is positive, its natural logarithm is stored into the corresponding destination location.
+            </para>
+            <para>
+            This method may call into the underlying C runtime or employ instructions specific to the current architecture. Exact results may differ between different
+            operating systems or architectures.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.Max(System.ReadOnlySpan{System.Single})">
+            <summary>Searches for the largest single-precision floating-point number in the specified tensor.</summary>
+            <param name="x">The tensor, represented as a span.</param>
+            <returns>The maximum element in <paramref name="x"/>.</returns>
+            <exception cref="T:System.ArgumentException">Length of <paramref name="x" /> must be greater than zero.</exception>
+            <remarks>
+            <para>
+            The determination of the maximum element matches the IEEE 754:2019 `maximum` function. If any value equal to <see cref="F:System.Single.NaN"/>
+            is present, the first is returned. Positive 0 is considered greater than negative 0.
+            </para>
+            <para>
+            This method may call into the underlying C runtime or employ instructions specific to the current architecture. Exact results may differ between different
+            operating systems or architectures.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.Max(System.ReadOnlySpan{System.Single},System.ReadOnlySpan{System.Single},System.Span{System.Single})">
+            <summary>Computes the element-wise maximum of the single-precision floating-point numbers in the specified tensors.</summary>
+            <param name="x">The first tensor, represented as a span.</param>
+            <param name="y">The second tensor, represented as a span.</param>
+            <param name="destination">The destination tensor, represented as a span.</param>
+            <exception cref="T:System.ArgumentException">Length of <paramref name="x" /> must be same as length of <paramref name="y" />.</exception>
+            <exception cref="T:System.ArgumentException">Destination is too short.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="x"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="y"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <remarks>
+            <para>
+            This method effectively computes <c><paramref name="destination" />[i] = MathF.Max(<paramref name="x" />[i], <paramref name="y" />[i])</c>.
+            </para>
+            <para>
+            The determination of the maximum element matches the IEEE 754:2019 `maximum` function. If either value is equal to <see cref="F:System.Single.NaN"/>,
+            that value is stored as the result. Positive 0 is considered greater than negative 0.
+            </para>
+            <para>
+            This method may call into the underlying C runtime or employ instructions specific to the current architecture. Exact results may differ between different
+            operating systems or architectures.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.MaxMagnitude(System.ReadOnlySpan{System.Single})">
+            <summary>Searches for the single-precision floating-point number with the largest magnitude in the specified tensor.</summary>
+            <param name="x">The tensor, represented as a span.</param>
+            <returns>The element in <paramref name="x"/> with the largest magnitude (absolute value).</returns>
+            <exception cref="T:System.ArgumentException">Length of <paramref name="x" /> must be greater than zero.</exception>
+            <remarks>
+            <para>
+            The determination of the maximum magnitude matches the IEEE 754:2019 `maximumMagnitude` function. If any value equal to <see cref="F:System.Single.NaN"/>
+            is present, the first is returned. If two values have the same magnitude and one is positive and the other is negative,
+            the positive value is considered to have the larger magnitude.
+            </para>
+            <para>
+            This method may call into the underlying C runtime or employ instructions specific to the current architecture. Exact results may differ between different
+            operating systems or architectures.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.MaxMagnitude(System.ReadOnlySpan{System.Single},System.ReadOnlySpan{System.Single},System.Span{System.Single})">
+            <summary>Computes the element-wise single-precision floating-point number with the largest magnitude in the specified tensors.</summary>
+            <param name="x">The first tensor, represented as a span.</param>
+            <param name="y">The second tensor, represented as a span.</param>
+            <param name="destination">The destination tensor, represented as a span.</param>
+            <exception cref="T:System.ArgumentException">Length of <paramref name="x" /> must be same as length of <paramref name="y" />.</exception>
+            <exception cref="T:System.ArgumentException">Destination is too short.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="x"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="y"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <remarks>This method effectively computes <c><paramref name="destination" />[i] = MathF.MaxMagnitude(<paramref name="x" />[i], <paramref name="y" />[i])</c>.</remarks>
+            <remarks>
+            <para>
+            This method may call into the underlying C runtime or employ instructions specific to the current architecture. Exact results may differ between different
+            operating systems or architectures.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.Min(System.ReadOnlySpan{System.Single})">
+            <summary>Searches for the smallest single-precision floating-point number in the specified tensor.</summary>
+            <param name="x">The tensor, represented as a span.</param>
+            <returns>The minimum element in <paramref name="x"/>.</returns>
+            <exception cref="T:System.ArgumentException">Length of <paramref name="x" /> must be greater than zero.</exception>
+            <remarks>
+            <para>
+            The determination of the minimum element matches the IEEE 754:2019 `minimum` function. If any value is equal to <see cref="F:System.Single.NaN"/>
+            is present, the first is returned. Negative 0 is considered smaller than positive 0.
+            </para>
+            <para>
+            This method may call into the underlying C runtime or employ instructions specific to the current architecture. Exact results may differ between different
+            operating systems or architectures.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.Min(System.ReadOnlySpan{System.Single},System.ReadOnlySpan{System.Single},System.Span{System.Single})">
+            <summary>Computes the element-wise minimum of the single-precision floating-point numbers in the specified tensors.</summary>
+            <param name="x">The first tensor, represented as a span.</param>
+            <param name="y">The second tensor, represented as a span.</param>
+            <param name="destination">The destination tensor, represented as a span.</param>
+            <exception cref="T:System.ArgumentException">Length of <paramref name="x" /> must be same as length of <paramref name="y" />.</exception>
+            <exception cref="T:System.ArgumentException">Destination is too short.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="x"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="y"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <remarks>
+            <para>
+            This method effectively computes <c><paramref name="destination" />[i] = MathF.Max(<paramref name="x" />[i], <paramref name="y" />[i])</c>.
+            </para>
+            <para>
+            The determination of the maximum element matches the IEEE 754:2019 `maximum` function. If either value is equal to <see cref="F:System.Single.NaN"/>,
+            that value is stored as the result. Positive 0 is considered greater than negative 0.
+            </para>
+            <para>
+            This method may call into the underlying C runtime or employ instructions specific to the current architecture. Exact results may differ between different
+            operating systems or architectures.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.MinMagnitude(System.ReadOnlySpan{System.Single})">
+            <summary>Searches for the single-precision floating-point number with the smallest magnitude in the specified tensor.</summary>
+            <param name="x">The tensor, represented as a span.</param>
+            <returns>The element in <paramref name="x"/> with the smallest magnitude (absolute value).</returns>
+            <exception cref="T:System.ArgumentException">Length of <paramref name="x" /> must be greater than zero.</exception>
+            <remarks>
+            <para>
+            The determination of the minimum magnitude matches the IEEE 754:2019 `minimumMagnitude` function. If any value equal to <see cref="F:System.Single.NaN"/>
+            is present, the first is returned. If two values have the same magnitude and one is positive and the other is negative,
+            the negative value is considered to have the smaller magnitude.
+            </para>
+            <para>
+            This method may call into the underlying C runtime or employ instructions specific to the current architecture. Exact results may differ between different
+            operating systems or architectures.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.MinMagnitude(System.ReadOnlySpan{System.Single},System.ReadOnlySpan{System.Single},System.Span{System.Single})">
+            <summary>Computes the element-wise single-precision floating-point number with the smallest magnitude in the specified tensors.</summary>
+            <param name="x">The first tensor, represented as a span.</param>
+            <param name="y">The second tensor, represented as a span.</param>
+            <param name="destination">The destination tensor, represented as a span.</param>
+            <exception cref="T:System.ArgumentException">Length of <paramref name="x" /> must be same as length of <paramref name="y" />.</exception>
+            <exception cref="T:System.ArgumentException">Destination is too short.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="x"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="y"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <remarks>This method effectively computes <c><paramref name="destination" />[i] = MathF.MinMagnitude(<paramref name="x" />[i], <paramref name="y" />[i])</c>.</remarks>
+            <remarks>
+            <para>
+            The determination of the maximum magnitude matches the IEEE 754:2019 `minimumMagnitude` function. If either value is equal to <see cref="F:System.Single.NaN"/>,
+            that value is stored as the result. If the two values have the same magnitude and one is positive and the other is negative,
+            the negative value is considered to have the smaller magnitude.
+            </para>
+            <para>
+            This method may call into the underlying C runtime or employ instructions specific to the current architecture. Exact results may differ between different
+            operating systems or architectures.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.Multiply(System.ReadOnlySpan{System.Single},System.ReadOnlySpan{System.Single},System.Span{System.Single})">
+            <summary>Computes the element-wise product of single-precision floating-point numbers in the specified tensors.</summary>
+            <param name="x">The first tensor, represented as a span.</param>
+            <param name="y">The second tensor, represented as a span.</param>
+            <param name="destination">The destination tensor, represented as a span.</param>
+            <exception cref="T:System.ArgumentException">Length of <paramref name="x" /> must be same as length of <paramref name="y" />.</exception>
+            <exception cref="T:System.ArgumentException">Destination is too short.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="x"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="y"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <remarks>
+            <para>
+            This method effectively computes <c><paramref name="destination" />[i] = <paramref name="x" />[i] * <paramref name="y" />[i]</c>.
+            </para>
+            <para>
+            If either of the element-wise input values is equal to <see cref="F:System.Single.NaN"/>, the resulting element-wise value is also NaN.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.Multiply(System.ReadOnlySpan{System.Single},System.Single,System.Span{System.Single})">
+            <summary>Computes the element-wise product of single-precision floating-point numbers in the specified tensors.</summary>
+            <param name="x">The first tensor, represented as a span.</param>
+            <param name="y">The second tensor, represented as a scalar.</param>
+            <param name="destination">The destination tensor, represented as a span.</param>
+            <exception cref="T:System.ArgumentException">Destination is too short.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="x"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <remarks>
+            <para>
+            This method effectively computes <c><paramref name="destination" />[i] = <paramref name="x" />[i] * <paramref name="y" /></c>.
+            It corresponds to the <c>scal</c> method defined by <c>BLAS1</c>.
+            </para>
+            <para>
+            If either of the element-wise input values is equal to <see cref="F:System.Single.NaN"/>, the resulting element-wise value is also NaN.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.MultiplyAdd(System.ReadOnlySpan{System.Single},System.ReadOnlySpan{System.Single},System.ReadOnlySpan{System.Single},System.Span{System.Single})">
+            <summary>Computes the element-wise result of <c>(<paramref name="x" /> * <paramref name="y" />) + <paramref name="addend" /></c> for the specified tensors of single-precision floating-point numbers.</summary>
+            <param name="x">The first tensor, represented as a span.</param>
+            <param name="y">The second tensor, represented as a span.</param>
+            <param name="addend">The third tensor, represented as a span.</param>
+            <param name="destination">The destination tensor, represented as a span.</param>
+            <exception cref="T:System.ArgumentException">Length of <paramref name="x" /> must be same as length of <paramref name="y" /> and length of <paramref name="addend" />.</exception>
+            <exception cref="T:System.ArgumentException">Destination is too short.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="x"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="y"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="addend"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <remarks>
+            <para>
+            This method effectively computes <c><paramref name="destination" />[i] = (<paramref name="x" />[i] * <paramref name="y" />[i]) + <paramref name="addend" />[i]</c>.
+            </para>
+            <para>
+            If either of the element-wise input values is equal to <see cref="F:System.Single.NaN"/>, the resulting element-wise value is also NaN.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.MultiplyAdd(System.ReadOnlySpan{System.Single},System.ReadOnlySpan{System.Single},System.Single,System.Span{System.Single})">
+            <summary>Computes the element-wise result of <c>(<paramref name="x" /> * <paramref name="y" />) + <paramref name="addend" /></c> for the specified tensors of single-precision floating-point numbers.</summary>
+            <param name="x">The first tensor, represented as a span.</param>
+            <param name="y">The second tensor, represented as a span.</param>
+            <param name="addend">The third tensor, represented as a scalar.</param>
+            <param name="destination">The destination tensor, represented as a span.</param>
+            <exception cref="T:System.ArgumentException">Length of <paramref name="x" /> must be same as length of <paramref name="y" />.</exception>
+            <exception cref="T:System.ArgumentException">Destination is too short.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="x"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="y"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <remarks>
+            <para>
+            This method effectively computes <c><paramref name="destination" />[i] = (<paramref name="x" />[i] * <paramref name="y" />[i]) + <paramref name="addend" /></c>.
+            It corresponds to the <c>axpy</c> method defined by <c>BLAS1</c>.
+            </para>
+            <para>
+            If either of the element-wise input values is equal to <see cref="F:System.Single.NaN"/>, the resulting element-wise value is also NaN.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.MultiplyAdd(System.ReadOnlySpan{System.Single},System.Single,System.ReadOnlySpan{System.Single},System.Span{System.Single})">
+            <summary>Computes the element-wise result of <c>(<paramref name="x" /> * <paramref name="y" />) + <paramref name="addend" /></c> for the specified tensors of single-precision floating-point numbers.</summary>
+            <param name="x">The first tensor, represented as a span.</param>
+            <param name="y">The second tensor, represented as a scalar.</param>
+            <param name="addend">The third tensor, represented as a span.</param>
+            <param name="destination">The destination tensor, represented as a span.</param>
+            <exception cref="T:System.ArgumentException">Length of <paramref name="x" /> must be same as length of <paramref name="addend" />.</exception>
+            <exception cref="T:System.ArgumentException">Destination is too short.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="x"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="addend"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <remarks>
+            <para>
+            This method effectively computes <c><paramref name="destination" />[i] = (<paramref name="x" />[i] * <paramref name="y" />) + <paramref name="addend" />[i]</c>.
+            </para>
+            <para>
+            If either of the element-wise input values is equal to <see cref="F:System.Single.NaN"/>, the resulting element-wise value is also NaN.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.Negate(System.ReadOnlySpan{System.Single},System.Span{System.Single})">
+            <summary>Computes the element-wise negation of each single-precision floating-point number in the specified tensor.</summary>
+            <param name="x">The tensor, represented as a span.</param>
+            <param name="destination">The destination tensor, represented as a span.</param>
+            <exception cref="T:System.ArgumentException">Destination is too short.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="x"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <remarks>
+            <para>
+            This method effectively computes <c><paramref name="destination" />[i] = -<paramref name="x" />[i]</c>.
+            </para>
+            <para>
+            If any of the element-wise input values is equal to <see cref="F:System.Single.NaN"/>, the resulting element-wise value is also NaN.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.Norm(System.ReadOnlySpan{System.Single})">
+            <summary>Computes the Euclidean norm of the specified tensor of single-precision floating-point numbers.</summary>
+            <param name="x">The first tensor, represented as a span.</param>
+            <returns>The norm.</returns>
+            <remarks>
+            <para>
+            This method effectively computes <c>MathF.Sqrt(TensorPrimitives.SumOfSquares(x))</c>.
+            This is often referred to as the Euclidean norm or L2 norm.
+            It corresponds to the <c>nrm2</c> method defined by <c>BLAS1</c>.
+            </para>
+            <para>
+            If any of the input values is equal to <see cref="F:System.Single.NaN"/>, the result value is also NaN.
+            </para>
+            <para>
+            This method may call into the underlying C runtime or employ instructions specific to the current architecture. Exact results may differ between different
+            operating systems or architectures.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.Product(System.ReadOnlySpan{System.Single})">
+            <summary>Computes the product of all elements in the specified non-empty tensor of single-precision floating-point numbers.</summary>
+            <param name="x">The tensor, represented as a span.</param>
+            <returns>The result of multiplying all elements in <paramref name="x"/>.</returns>
+            <exception cref="T:System.ArgumentException">Length of <paramref name="x" /> must be greater than zero.</exception>
+            <remarks>
+            <para>
+            If any of the input values is equal to <see cref="F:System.Single.NaN"/>, the result value is also NaN.
+            </para>
+            <para>
+            This method may call into the underlying C runtime or employ instructions specific to the current architecture. Exact results may differ between different
+            operating systems or architectures.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.ProductOfDifferences(System.ReadOnlySpan{System.Single},System.ReadOnlySpan{System.Single})">
+            <summary>Computes the product of the element-wise differences of the single-precision floating-point numbers in the specified non-empty tensors.</summary>
+            <param name="x">The first tensor, represented as a span.</param>
+            <param name="y">The second tensor, represented as a span.</param>
+            <returns>The result of multiplying the element-wise subtraction of the elements in the second tensor from the first tensor.</returns>
+            <exception cref="T:System.ArgumentException">Length of both input spans must be greater than zero.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="x"/> and <paramref name="y"/> must have the same length.</exception>
+            <remarks>
+            <para>
+            This method effectively computes:
+            <c>
+                Span&lt;float&gt; differences = ...;
+                TensorPrimitives.Subtract(x, y, differences);
+                float result = TensorPrimitives.Product(differences);
+            </c>
+            but without requiring additional temporary storage for the intermediate differences.
+            </para>
+            <para>
+            This method may call into the underlying C runtime or employ instructions specific to the current architecture. Exact results may differ between different
+            operating systems or architectures.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.ProductOfSums(System.ReadOnlySpan{System.Single},System.ReadOnlySpan{System.Single})">
+            <summary>Computes the product of the element-wise sums of the single-precision floating-point numbers in the specified non-empty tensors.</summary>
+            <param name="x">The first tensor, represented as a span.</param>
+            <param name="y">The second tensor, represented as a span.</param>
+            <returns>The result of multiplying the element-wise additions of the elements in each tensor.</returns>
+            <exception cref="T:System.ArgumentException">Length of both input spans must be greater than zero.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="x"/> and <paramref name="y"/> must have the same length.</exception>
+            <remarks>
+            <para>
+            This method effectively computes:
+            <c>
+                Span&lt;float&gt; sums = ...;
+                TensorPrimitives.Add(x, y, sums);
+                float result = TensorPrimitives.Product(sums);
+            </c>
+            but without requiring additional temporary storage for the intermediate sums.
+            </para>
+            <para>
+            This method may call into the underlying C runtime or employ instructions specific to the current architecture. Exact results may differ between different
+            operating systems or architectures.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.Sigmoid(System.ReadOnlySpan{System.Single},System.Span{System.Single})">
+            <summary>Computes the element-wise sigmoid function on the specified non-empty tensor of single-precision floating-point numbers.</summary>
+            <param name="x">The tensor, represented as a span.</param>
+            <param name="destination">The destination tensor.</param>
+            <exception cref="T:System.ArgumentException">Destination is too short.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="x" /> must not be empty.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="x"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <remarks>
+            <para>
+            This method effectively computes <c><paramref name="destination" />[i] = 1f / (1f + <see cref="T:System.MathF" />.Exp(-<paramref name="x" />[i]))</c>.
+            </para>
+            <para>
+            This method may call into the underlying C runtime or employ instructions specific to the current architecture. Exact results may differ between different
+            operating systems or architectures.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.Sinh(System.ReadOnlySpan{System.Single},System.Span{System.Single})">
+            <summary>Computes the element-wise hyperbolic sine of each single-precision floating-point radian angle in the specified tensor.</summary>
+            <param name="x">The tensor, represented as a span.</param>
+            <param name="destination">The destination tensor, represented as a span.</param>
+            <exception cref="T:System.ArgumentException">Destination is too short.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="x"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <remarks>
+            <para>
+            This method effectively computes <c><paramref name="destination" />[i] = <see cref="T:System.MathF" />.Sinh(<paramref name="x" />[i])</c>.
+            </para>
+            <para>
+            If a value is equal to <see cref="F:System.Single.NegativeInfinity"/>, <see cref="F:System.Single.PositiveInfinity"/>, or <see cref="F:System.Single.NaN"/>,
+            the corresponding destination location is set to that value.
+            </para>
+            <para>
+            The angles in x must be in radians. Use <see cref="M:System.Single.DegreesToRadians"/> or multiply by <see cref="F:System.MathF.PI"/>/180 to convert degrees to radians.
+            </para>
+            <para>
+            This method may call into the underlying C runtime or employ instructions specific to the current architecture. Exact results may differ between different
+            operating systems or architectures.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.SoftMax(System.ReadOnlySpan{System.Single},System.Span{System.Single})">
+            <summary>Computes the softmax function over the specified non-empty tensor of single-precision floating-point numbers.</summary>
+            <param name="x">The tensor, represented as a span.</param>
+            <param name="destination">The destination tensor.</param>
+            <exception cref="T:System.ArgumentException">Destination is too short.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="x" /> must not be empty.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="x"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <remarks>
+            <para>
+            This method effectively computes a sum of <c>MathF.Exp(x[i])</c> for all elements in <paramref name="x"/>.
+            It then effectively computes <c><paramref name="destination" />[i] = MathF.Exp(<paramref name="x" />[i]) / sum</c>.
+            </para>
+            <para>
+            This method may call into the underlying C runtime or employ instructions specific to the current architecture. Exact results may differ between different
+            operating systems or architectures.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.Subtract(System.ReadOnlySpan{System.Single},System.ReadOnlySpan{System.Single},System.Span{System.Single})">
+            <summary>Computes the element-wise difference between single-precision floating-point numbers in the specified tensors.</summary>
+            <param name="x">The first tensor, represented as a span.</param>
+            <param name="y">The second tensor, represented as a scalar.</param>
+            <param name="destination">The destination tensor, represented as a span.</param>
+            <exception cref="T:System.ArgumentException">Length of <paramref name="x" /> must be same as length of <paramref name="y" />.</exception>
+            <exception cref="T:System.ArgumentException">Destination is too short.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="x"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="y"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <remarks>
+            <para>
+            This method effectively computes <c><paramref name="destination" />[i] = <paramref name="x" />[i] - <paramref name="y" />[i]</c>.
+            </para>
+            <para>
+            If either of the element-wise input values is equal to <see cref="F:System.Single.NaN"/>, the resulting element-wise value is also NaN.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.Subtract(System.ReadOnlySpan{System.Single},System.Single,System.Span{System.Single})">
+            <summary>Computes the element-wise difference between single-precision floating-point numbers in the specified tensors.</summary>
+            <param name="x">The first tensor, represented as a span.</param>
+            <param name="y">The second tensor, represented as a scalar.</param>
+            <param name="destination">The destination tensor, represented as a span.</param>
+            <exception cref="T:System.ArgumentException">Destination is too short.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="x"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <remarks>
+            <para>
+            This method effectively computes <c><paramref name="destination" />[i] = <paramref name="x" />[i] - <paramref name="y" /></c>.
+            </para>
+            <para>
+            If either of the element-wise input values is equal to <see cref="F:System.Single.NaN"/>, the resulting element-wise value is also NaN.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.Sum(System.ReadOnlySpan{System.Single})">
+            <summary>Computes the sum of all elements in the specified tensor of single-precision floating-point numbers.</summary>
+            <param name="x">The tensor, represented as a span.</param>
+            <returns>The result of adding all elements in <paramref name="x"/>, or zero if <paramref name="x"/> is empty.</returns>
+            <remarks>
+            <para>
+            If any of the values in the input is equal to <see cref="F:System.Single.NaN"/>, the result is also NaN.
+            </para>
+            <para>
+            This method may call into the underlying C runtime or employ instructions specific to the current architecture. Exact results may differ between different
+            operating systems or architectures.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.SumOfMagnitudes(System.ReadOnlySpan{System.Single})">
+            <summary>Computes the sum of the absolute values of every element in the specified tensor of single-precision floating-point numbers.</summary>
+            <param name="x">The tensor, represented as a span.</param>
+            <returns>The result of adding the absolute value of every element in <paramref name="x"/>, or zero if <paramref name="x"/> is empty.</returns>
+            <remarks>
+            <para>
+            This method effectively computes:
+            <c>
+                Span&lt;float&gt; absoluteValues = ...;
+                TensorPrimitives.Abs(x, absoluteValues);
+                float result = TensorPrimitives.Sum(absoluteValues);
+            </c>
+            but without requiring intermediate storage for the absolute values. It corresponds to the <c>asum</c> method defined by <c>BLAS1</c>.
+            </para>
+            <para>
+            This method may call into the underlying C runtime or employ instructions specific to the current architecture. Exact results may differ between different
+            operating systems or architectures.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.SumOfSquares(System.ReadOnlySpan{System.Single})">
+            <summary>Computes the sum of the square of every element in the specified tensor of single-precision floating-point numbers.</summary>
+            <param name="x">The tensor, represented as a span.</param>
+            <returns>The result of adding the square of every element in <paramref name="x"/>, or zero if <paramref name="x"/> is empty.</returns>
+            <remarks>
+            <para>
+            This method effectively computes:
+            <c>
+                Span&lt;float&gt; squaredValues = ...;
+                TensorPrimitives.Multiply(x, x, squaredValues);
+                float result = TensorPrimitives.Sum(squaredValues);
+            </c>
+            but without requiring intermediate storage for the squared values.
+            </para>
+            <para>
+            This method may call into the underlying C runtime or employ instructions specific to the current architecture. Exact results may differ between different
+            operating systems or architectures.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.Tanh(System.ReadOnlySpan{System.Single},System.Span{System.Single})">
+            <summary>Computes the element-wise hyperbolic tangent of each single-precision floating-point radian angle in the specified tensor.</summary>
+            <param name="x">The tensor, represented as a span.</param>
+            <param name="destination">The destination tensor, represented as a span.</param>
+            <exception cref="T:System.ArgumentException">Destination is too short.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="x"/> and <paramref name="destination"/> reference overlapping memory locations and do not begin at the same location.</exception>
+            <remarks>
+            <para>
+            This method effectively computes <c><paramref name="destination" />[i] = <see cref="T:System.MathF" />.Tanh(<paramref name="x" />[i])</c>.
+            </para>
+            <para>
+            If a value is equal to <see cref="F:System.Single.NegativeInfinity"/>, the corresponding destination location is set to -1.
+            If a value is equal to <see cref="F:System.Single.PositiveInfinity"/>, the corresponding destination location is set to 1.
+            If a value is equal to <see cref="F:System.Single.NaN"/>, the corresponding destination location is set to NaN.
+            </para>
+            <para>
+            The angles in x must be in radians. Use <see cref="M:System.Single.DegreesToRadians"/> or multiply by <see cref="F:System.MathF.PI"/>/180 to convert degrees to radians.
+            </para>
+            <para>
+            This method may call into the underlying C runtime or employ instructions specific to the current architecture. Exact results may differ between different
+            operating systems or architectures.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.ValidateInputOutputSpanNonOverlapping``1(System.ReadOnlySpan{``0},System.Span{``0})">
+            <summary>Throws an exception if the <paramref name="input"/> and <paramref name="output"/> spans overlap and don't begin at the same memory location.</summary>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.ThrowNegateTwosCompOverflow">
+            <summary>Throws an <see cref="T:System.OverflowException"/> for trying to negate the minimum value of a two-complement value.</summary>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.Rename``2(System.Span{``0})">
+            <summary>Creates a span of <typeparamref name="TTo"/> from a <typeparamref name="TFrom"/> when they're the same type.</summary>
+            <remarks>
+            This is the same as MemoryMarshal.Cast, except only to be used when TFrom and TTo are the same type or effectively
+            the same type (e.g. int and nint in a 32-bit process). MemoryMarshal.Cast can't currently be used as it's
+            TFrom/TTo are constrained to be value types.
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.Rename``2(System.ReadOnlySpan{``0})">
+            <summary>Creates a span of <typeparamref name="TTo"/> from a <typeparamref name="TFrom"/> when they're the same type.</summary>
+            <remarks>
+            This is the same as MemoryMarshal.Cast, except only to be used when TFrom and TTo are the same type or effectively
+            the same type (e.g. int and nint in a 32-bit process). MemoryMarshal.Cast can't currently be used as it's
+            TFrom/TTo are constrained to be value types.
+            </remarks>
+        </member>
+        <member name="P:System.Numerics.Tensors.TensorPrimitives.AlignmentByteMask_64x65">
+             <summary>Mask used to handle alignment elements before vectorized handling of the input.</summary>
+             <remarks>
+             Logically 64 rows of 64 bytes. The Nth row should be used to handle N alignment elements at the
+             beginning of the input, where elements in the vector after that will be zero'd.
+            
+             There actually exists 65 rows in the table with the last row being a repeat of the first. This is
+             done because it allows the main algorithms to use a simplified algorithm when computing the amount
+             of misalignment where we always skip the first 64 elements, even if already aligned, so we don't
+             double process them. This allows us to avoid an additional branch.
+             </remarks>
+        </member>
+        <member name="P:System.Numerics.Tensors.TensorPrimitives.AlignmentUInt16Mask_32x33">
+             <summary>Mask used to handle alignment elements before vectorized handling of the input.</summary>
+             <remarks>
+             Logically 32 rows of 32 uints. The Nth row should be used to handle N alignment elements at the
+             beginning of the input, where elements in the vector after that will be zero'd.
+            
+             There actually exists 33 rows in the table with the last row being a repeat of the first. This is
+             done because it allows the main algorithms to use a simplified algorithm when computing the amount
+             of misalignment where we always skip the first 32 elements, even if already aligned, so we don't
+             double process them. This allows us to avoid an additional branch.
+             </remarks>
+        </member>
+        <member name="P:System.Numerics.Tensors.TensorPrimitives.AlignmentUInt32Mask_16x17">
+             <summary>Mask used to handle alignment elements before vectorized handling of the input.</summary>
+             <remarks>
+             Logically 16 rows of 16 uints. The Nth row should be used to handle N alignment elements at the
+             beginning of the input, where elements in the vector after that will be zero'd.
+            
+             There actually exists 17 rows in the table with the last row being a repeat of the first. This is
+             done because it allows the main algorithms to use a simplified algorithm when computing the amount
+             of misalignment where we always skip the first 16 elements, even if already aligned, so we don't
+             double process them. This allows us to avoid an additional branch.
+             </remarks>
+        </member>
+        <member name="P:System.Numerics.Tensors.TensorPrimitives.AlignmentUInt64Mask_8x9">
+             <summary>Mask used to handle alignment elements before vectorized handling of the input.</summary>
+             <remarks>
+             Logically 8 rows of 8 ulongs. The Nth row should be used to handle N alignment elements at the
+             beginning of the input, where elements in the vector after that will be zero'd.
+            
+             There actually exists 9 rows in the table with the last row being a repeat of the first. This is
+             done because it allows the main algorithms to use a simplified algorithm when computing the amount
+             of misalignment where we always skip the first 8 elements, even if already aligned, so we don't
+             double process them. This allows us to avoid an additional branch.
+             </remarks>
+        </member>
+        <member name="P:System.Numerics.Tensors.TensorPrimitives.RemainderByteMask_64x65">
+             <summary>Mask used to handle remaining elements after vectorized handling of the input.</summary>
+             <remarks>
+             Logically 64 rows of 64 ushorts. The Nth row should be used to handle N remaining elements at the
+             end of the input, where elements in the vector prior to that will be zero'd.
+            
+             Much as with the AlignmentMask table, we actually have 65 rows where the last row is a repeat of
+             the first. Doing this allows us to avoid an additional branch and instead to always process the
+             last 16 elements via a conditional select instead.
+             </remarks>
+        </member>
+        <member name="P:System.Numerics.Tensors.TensorPrimitives.RemainderUInt16Mask_32x33">
+             <summary>Mask used to handle remaining elements after vectorized handling of the input.</summary>
+             <remarks>
+             Logically 32 rows of 32 ushorts. The Nth row should be used to handle N remaining elements at the
+             end of the input, where elements in the vector prior to that will be zero'd.
+            
+             Much as with the AlignmentMask table, we actually have 33 rows where the last row is a repeat of
+             the first. Doing this allows us to avoid an additional branch and instead to always process the
+             last 16 elements via a conditional select instead.
+             </remarks>
+        </member>
+        <member name="P:System.Numerics.Tensors.TensorPrimitives.RemainderUInt32Mask_16x17">
+             <summary>Mask used to handle remaining elements after vectorized handling of the input.</summary>
+             <remarks>
+             Logically 16 rows of 16 uints. The Nth row should be used to handle N remaining elements at the
+             end of the input, where elements in the vector prior to that will be zero'd.
+            
+             Much as with the AlignmentMask table, we actually have 17 rows where the last row is a repeat of
+             the first. Doing this allows us to avoid an additional branch and instead to always process the
+             last 16 elements via a conditional select instead.
+             </remarks>
+        </member>
+        <member name="P:System.Numerics.Tensors.TensorPrimitives.RemainderUInt64Mask_8x9">
+             <summary>Mask used to handle remaining elements after vectorized handling of the input.</summary>
+             <remarks>
+             Logically 8 rows of 8 ulongs. The Nth row should be used to handle N remaining elements at the
+             end of the input, where elements in the vector prior to that will be zero'd.
+            
+             Much as with the AlignmentMask table, we actually have 9 rows where the last row is a repeat of
+             the first. Doing this allows us to avoid an additional branch and instead to always process the
+             last 8 elements via a conditional select instead.
+             </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.CosineSimilarityCore(System.ReadOnlySpan{System.Single},System.ReadOnlySpan{System.Single})">
+            <summary>Computes the cosine similarity between the two specified non-empty, equal-length tensors of single-precision floating-point numbers.</summary>
+            <remarks>Assumes arguments have already been validated to be non-empty and equal length.</remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.Aggregate``2(System.ReadOnlySpan{System.Single},``0,``1)">
+            <summary>Performs an aggregation over all elements in <paramref name="x"/> to produce a single-precision floating-point value.</summary>
+            <typeparam name="TTransformOperator">Specifies the transform operation that should be applied to each element loaded from <paramref name="x"/>.</typeparam>
+            <typeparam name="TAggregationOperator">
+            Specifies the aggregation binary operation that should be applied to multiple values to aggregate them into a single value.
+            The aggregation is applied after the transform is applied to each element.
+            </typeparam>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.Aggregate``2(System.ReadOnlySpan{System.Single},System.ReadOnlySpan{System.Single},``0,``1)">
+            <summary>Performs an aggregation over all pair-wise elements in <paramref name="x"/> and <paramref name="y"/> to produce a single-precision floating-point value.</summary>
+            <typeparam name="TBinaryOperator">Specifies the binary operation that should be applied to the pair-wise elements loaded from <paramref name="x"/> and <paramref name="y"/>.</typeparam>
+            <typeparam name="TAggregationOperator">
+            Specifies the aggregation binary operation that should be applied to multiple values to aggregate them into a single value.
+            The aggregation is applied to the results of the binary operations on the pair-wise values.
+            </typeparam>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.MinMaxCore``1(System.ReadOnlySpan{System.Single},``0)">
+            <remarks>
+            This is the same as <see cref="M:System.Numerics.Tensors.TensorPrimitives.Aggregate``2(System.ReadOnlySpan{System.Single},``0,``1)"/>
+            with an identity transform, except it early exits on NaN.
+            </remarks>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.InvokeSpanIntoSpan``1(System.ReadOnlySpan{System.Single},System.Span{System.Single},``0)">
+            <summary>Performs an element-wise operation on <paramref name="x"/> and writes the results to <paramref name="destination"/>.</summary>
+            <typeparam name="TUnaryOperator">Specifies the operation to perform on each element loaded from <paramref name="x"/>.</typeparam>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.InvokeSpanSpanIntoSpan``1(System.ReadOnlySpan{System.Single},System.ReadOnlySpan{System.Single},System.Span{System.Single},``0)">
+            <summary>
+            Performs an element-wise operation on <paramref name="x"/> and <paramref name="y"/>,
+            and writes the results to <paramref name="destination"/>.
+            </summary>
+            <typeparam name="TBinaryOperator">
+            Specifies the operation to perform on the pair-wise elements loaded from <paramref name="x"/> and <paramref name="y"/>.
+            </typeparam>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.InvokeSpanScalarIntoSpan``1(System.ReadOnlySpan{System.Single},System.Single,System.Span{System.Single},``0)">
+            <summary>
+            Performs an element-wise operation on <paramref name="x"/> and <paramref name="y"/>,
+            and writes the results to <paramref name="destination"/>.
+            </summary>
+            <typeparam name="TBinaryOperator">
+            Specifies the operation to perform on each element loaded from <paramref name="x"/> with <paramref name="y"/>.
+            </typeparam>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.InvokeSpanScalarIntoSpan``2(System.ReadOnlySpan{System.Single},System.Single,System.Span{System.Single},``0,``1)">
+            <summary>
+            Performs an element-wise operation on <paramref name="x"/> and <paramref name="y"/>,
+            and writes the results to <paramref name="destination"/>.
+            </summary>
+            <typeparam name="TTransformOperator">
+            Specifies the operation to perform on each element loaded from <paramref name="x"/>.
+            It is not used with <paramref name="y"/>.
+            </typeparam>
+            <typeparam name="TBinaryOperator">
+            Specifies the operation to perform on the transformed value from <paramref name="x"/> with <paramref name="y"/>.
+            </typeparam>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.InvokeSpanSpanSpanIntoSpan``1(System.ReadOnlySpan{System.Single},System.ReadOnlySpan{System.Single},System.ReadOnlySpan{System.Single},System.Span{System.Single},``0)">
+            <summary>
+            Performs an element-wise operation on <paramref name="x"/>, <paramref name="y"/>, and <paramref name="z"/>,
+            and writes the results to <paramref name="destination"/>.
+            </summary>
+            <typeparam name="TTernaryOperator">
+            Specifies the operation to perform on the pair-wise elements loaded from <paramref name="x"/>, <paramref name="y"/>,
+            and <paramref name="z"/>.
+            </typeparam>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.InvokeSpanSpanScalarIntoSpan``1(System.ReadOnlySpan{System.Single},System.ReadOnlySpan{System.Single},System.Single,System.Span{System.Single},``0)">
+            <summary>
+            Performs an element-wise operation on <paramref name="x"/>, <paramref name="y"/>, and <paramref name="z"/>,
+            and writes the results to <paramref name="destination"/>.
+            </summary>
+            <typeparam name="TTernaryOperator">
+            Specifies the operation to perform on the pair-wise elements loaded from <paramref name="x"/> and <paramref name="y"/>
+            with <paramref name="z"/>.
+            </typeparam>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.InvokeSpanScalarSpanIntoSpan``1(System.ReadOnlySpan{System.Single},System.Single,System.ReadOnlySpan{System.Single},System.Span{System.Single},``0)">
+            <summary>
+            Performs an element-wise operation on <paramref name="x"/>, <paramref name="y"/>, and <paramref name="z"/>,
+            and writes the results to <paramref name="destination"/>.
+            </summary>
+            <typeparam name="TTernaryOperator">
+            Specifies the operation to perform on the pair-wise element loaded from <paramref name="x"/>, with <paramref name="y"/>,
+            and the element loaded from <paramref name="z"/>.
+            </typeparam>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.AsVector(System.Single@)">
+            <summary>Loads a <see cref="T:System.Numerics.Vector`1"/> from <paramref name="start"/>.</summary>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.AsVector(System.Single@,System.Int32)">
+            <summary>Loads a <see cref="T:System.Numerics.Vector`1"/> that begins at the specified <paramref name="offset"/> from <paramref name="start"/>.</summary>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.AsVector(System.Single@,System.UIntPtr)">
+            <summary>Loads a <see cref="T:System.Numerics.Vector`1"/> that begins at the specified <paramref name="offset"/> from <paramref name="start"/>.</summary>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.AsVector(System.Int32@,System.Int32)">
+            <summary>Loads a <see cref="T:System.Numerics.Vector`1"/> that begins at the specified <paramref name="offset"/> from <paramref name="start"/>.</summary>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.IsPositive(System.Single)">
+            <summary>Gets whether the specified <see cref="T:System.Single"/> is positive.</summary>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.IsPositive(System.Numerics.Vector{System.Single})">
+            <summary>Gets whether each specified <see cref="T:System.Single"/> is positive.</summary>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.IsNegative(System.Single)">
+            <summary>Gets whether the specified <see cref="T:System.Single"/> is negative.</summary>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.IsNegative(System.Numerics.Vector{System.Single})">
+            <summary>Gets whether each specified <see cref="T:System.Single"/> is negative.</summary>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.Log2(System.Single)">
+            <summary>Gets the base 2 logarithm of <paramref name="x"/>.</summary>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.CreateAlignmentMaskSingleVector(System.Int32)">
+            <summary>
+            Gets a vector mask that will be all-ones-set for the first <paramref name="count"/> elements
+            and zero for all other elements.
+            </summary>
+        </member>
+        <member name="M:System.Numerics.Tensors.TensorPrimitives.CreateRemainderMaskSingleVector(System.Int32)">
+            <summary>
+            Gets a vector mask that will be all-ones-set for the last <paramref name="count"/> elements
+            and zero for all other elements.
+            </summary>
+        </member>
+        <member name="T:System.Numerics.Tensors.TensorPrimitives.AddOperator_Single">
+            <summary>x + y</summary>
+        </member>
+        <member name="T:System.Numerics.Tensors.TensorPrimitives.SubtractOperator_Single">
+            <summary>x - y</summary>
+        </member>
+        <member name="T:System.Numerics.Tensors.TensorPrimitives.SubtractSquaredOperator_Single">
+            <summary>(x - y) * (x - y)</summary>
+        </member>
+        <member name="T:System.Numerics.Tensors.TensorPrimitives.MultiplyOperator_Single">
+            <summary>x * y</summary>
+        </member>
+        <member name="T:System.Numerics.Tensors.TensorPrimitives.DivideOperator_Single">
+            <summary>x / y</summary>
+        </member>
+        <member name="T:System.Numerics.Tensors.TensorPrimitives.IndexOfMaxOperator_Single">
+            <summary>Returns the index of MathF.Max(x, y)</summary>
+        </member>
+        <member name="T:System.Numerics.Tensors.TensorPrimitives.MaxOperator_Single">
+            <summary>MathF.Max(x, y) (but without guaranteed NaN propagation)</summary>
+        </member>
+        <member name="T:System.Numerics.Tensors.TensorPrimitives.MaxPropagateNaNOperator_Single">
+            <summary>MathF.Max(x, y)</summary>
+        </member>
+        <member name="T:System.Numerics.Tensors.TensorPrimitives.MaxMagnitudeOperator_Single">
+            <summary>Operator to get x or y based on which has the larger MathF.Abs (but NaNs may not be propagated)</summary>
+        </member>
+        <member name="T:System.Numerics.Tensors.TensorPrimitives.MaxMagnitudePropagateNaNOperator_Single">
+            <summary>Operator to get x or y based on which has the larger MathF.Abs</summary>
+        </member>
+        <member name="T:System.Numerics.Tensors.TensorPrimitives.MinOperator_Single">
+            <summary>MathF.Min(x, y) (but NaNs may not be propagated)</summary>
+        </member>
+        <member name="T:System.Numerics.Tensors.TensorPrimitives.MinPropagateNaNOperator_Single">
+            <summary>MathF.Min(x, y)</summary>
+        </member>
+        <member name="T:System.Numerics.Tensors.TensorPrimitives.MinMagnitudeOperator_Single">
+            <summary>Operator to get x or y based on which has the smaller MathF.Abs (but NaNs may not be propagated)</summary>
+        </member>
+        <member name="T:System.Numerics.Tensors.TensorPrimitives.MinMagnitudePropagateNaNOperator_Single">
+            <summary>Operator to get x or y based on which has the smaller MathF.Abs</summary>
+        </member>
+        <member name="T:System.Numerics.Tensors.TensorPrimitives.NegateOperator_Single">
+            <summary>-x</summary>
+        </member>
+        <member name="T:System.Numerics.Tensors.TensorPrimitives.AddMultiplyOperator_Single">
+            <summary>(x + y) * z</summary>
+        </member>
+        <member name="T:System.Numerics.Tensors.TensorPrimitives.MultiplyAddOperator_Single">
+            <summary>(x * y) + z</summary>
+        </member>
+        <member name="T:System.Numerics.Tensors.TensorPrimitives.IdentityOperator_Single">
+            <summary>x</summary>
+        </member>
+        <member name="T:System.Numerics.Tensors.TensorPrimitives.SquaredOperator_Single">
+            <summary>x * x</summary>
+        </member>
+        <member name="T:System.Numerics.Tensors.TensorPrimitives.AbsoluteOperator_Single">
+            <summary>MathF.Abs(x)</summary>
+        </member>
+        <member name="T:System.Numerics.Tensors.TensorPrimitives.ExpOperator_Single">
+            <summary>MathF.Exp(x)</summary>
+        </member>
+        <member name="T:System.Numerics.Tensors.TensorPrimitives.SinhOperator_Single">
+            <summary>MathF.Sinh(x)</summary>
+        </member>
+        <member name="T:System.Numerics.Tensors.TensorPrimitives.CoshOperator_Single">
+            <summary>MathF.Cosh(x)</summary>
+        </member>
+        <member name="T:System.Numerics.Tensors.TensorPrimitives.TanhOperator_Single">
+            <summary>MathF.Tanh(x)</summary>
+        </member>
+        <member name="T:System.Numerics.Tensors.TensorPrimitives.LogOperator_Single">
+            <summary>MathF.Log(x)</summary>
+        </member>
+        <member name="T:System.Numerics.Tensors.TensorPrimitives.Log2Operator_Single">
+            <summary>MathF.Log2(x)</summary>
+        </member>
+        <member name="T:System.Numerics.Tensors.TensorPrimitives.SigmoidOperator_Single">
+            <summary>1f / (1f + MathF.Exp(-x))</summary>
+        </member>
+        <member name="T:System.Numerics.Tensors.TensorPrimitives.IUnaryOperator">
+            <summary>Operator that takes one input value and returns a single value.</summary>
+        </member>
+        <member name="T:System.Numerics.Tensors.TensorPrimitives.IBinaryOperator">
+            <summary>Operator that takes two input values and returns a single value.</summary>
+        </member>
+        <member name="T:System.Numerics.Tensors.TensorPrimitives.IAggregationOperator">
+            <summary><see cref="T:System.Numerics.Tensors.TensorPrimitives.IBinaryOperator"/> that specializes horizontal aggregation of all elements in a vector.</summary>
+        </member>
+        <member name="T:System.Numerics.Tensors.TensorPrimitives.ITernaryOperator">
+            <summary>Operator that takes three input values and returns a single value.</summary>
+        </member>
+        <member name="P:System.SR.Argument_DestinationTooShort">
+            <summary>Destination is too short.</summary>
+        </member>
+        <member name="P:System.SR.Argument_SpansMustBeNonEmpty">
+            <summary>Input span arguments must not be empty.</summary>
+        </member>
+        <member name="P:System.SR.Argument_SpansMustHaveSameLength">
+            <summary>Input span arguments must all have the same length.</summary>
+        </member>
+        <member name="P:System.SR.Argument_InputAndDestinationSpanMustNotOverlap">
+            <summary>The destination span may only overlap with an input span if the two spans start at the same memory location.</summary>
+        </member>
+        <member name="P:System.SR.Overflow_NegateTwosCompNum">
+            <summary>Negating the minimum value of a twos complement number is invalid.</summary>
+        </member>
+        <member name="P:System.SR.Argument_InvalidEnumValue">
+            <summary>The value '{0}' is not valid for this usage of the type {1}.</summary>
+        </member>
+        <member name="P:System.SR.Argument_InvalidTypeWithPointersNotSupported">
+            <summary>Cannot use type '{0}'. Only value types without pointers or references are supported.</summary>
+        </member>
+        <member name="P:System.SR.DestinationTooShort">
+            <summary>Destination is too short.</summary>
+        </member>
+        <member name="P:System.SR.NotSupported_CannotCallEqualsOnSpan">
+            <summary>Equals() on TensorSpan and ReadOnlyTensorSpan is not supported. Use operator== instead.</summary>
+        </member>
+        <member name="P:System.SR.NotSupported_CannotCallGetHashCodeOnSpan">
+            <summary>GetHashCode() on TensorSpan and ReadOnlyTensorSpan is not supported.</summary>
+        </member>
+        <member name="P:System.SR.ThrowArgument_IndicesLengthMustEqualRank">
+            <summary>Number of Indices must equal the rank of the TensorSpan.</summary>
+        </member>
+        <member name="P:System.SR.ThrowArgument_LengthsMustEqualArrayLength">
+            <summary>The total length specified by the lengths must equal the length of the array.</summary>
+        </member>
+        <member name="P:System.SR.ThrowArgument_1DTensorRequired">
+            <summary>Must be a 1d tensor</summary>
+        </member>
+        <member name="P:System.SR.ThrowArgument_AxisLargerThanRank">
+            <summary>Cannot select an axis greater than the current Rank</summary>
+        </member>
+        <member name="P:System.SR.ThrowArgument_ConcatenateTooFewTensors">
+            <summary>Must provide at least 2 tensors to Concatenate</summary>
+        </member>
+        <member name="P:System.SR.ThrowArgument_DimensionsNotSame">
+            <summary>Number of dimensions to slice does not equal the number of dimensions in the span</summary>
+        </member>
+        <member name="P:System.SR.ThrowArgument_FilterTensorMustEqualTensorLength">
+            <summary>The total length of the filter tensor must equal the length of the tensor to be filtered.</summary>
+        </member>
+        <member name="P:System.SR.ThrowArgument_IncorrectNumberOfFilterItems">
+            <summary>Number of elements provided does not match the number of filters.</summary>
+        </member>
+        <member name="P:System.SR.ThrowArgument_InPlaceInvalidShape">
+            <summary>In place operations require the same shape for both tensors</summary>
+        </member>
+        <member name="P:System.SR.ThrowArgument_InvalidAxis">
+            <summary>Invalid axis provided. Must be greater then or equal to 0 and less than the tensor rank.</summary>
+        </member>
+        <member name="P:System.SR.ThrowArgument_InvalidConcatenateShape">
+            <summary>The tensors must have the same shape, except in the dimension corresponding to axis.</summary>
+        </member>
+        <member name="P:System.SR.ThrowArgument_InvalidReshapeDimensions">
+            <summary>Provided dimensions are not valid for reshaping</summary>
+        </member>
+        <member name="P:System.SR.ThrowArgument_InvalidSqueezeAxis">
+            <summary>Cannot select an axis to squeeze which has size not equal to one</summary>
+        </member>
+        <member name="P:System.SR.ThrowArgument_OnlyOneWildcard">
+            <summary>Provided dimensions can only include 1 wildcard.</summary>
+        </member>
+        <member name="P:System.SR.ThrowArgument_PermuteAxisOrder">
+            <summary>Must provide an axis order for each axis</summary>
+        </member>
+        <member name="P:System.SR.ThrowArgument_SetSliceInvalidShapes">
+            <summary>Provided values must have the same shape as the input tensor.</summary>
+        </member>
+        <member name="P:System.SR.ThrowArgument_SetSliceNoRange">
+            <summary>When no ranges are specified the values tensor must be equal in size as the input tensor.</summary>
+        </member>
+        <member name="P:System.SR.ThrowArgument_LengthsNotBroadcastCompatible">
+            <summary>Lengths are not broadcast compatible.</summary>
+        </member>
+        <member name="P:System.SR.ThrowArgument_SplitNotSplitEvenly">
+            <summary>The number of splits must perfectly divide the dimension.</summary>
+        </member>
+        <member name="P:System.SR.ThrowArgument_StackTooFewTensors">
+            <summary>Must provide at least 2 tensors to Stack.</summary>
+        </member>
+        <member name="P:System.SR.ThrowArgument_TransposeTooFewDimensions">
+            <summary>Must provide a tensor with at least 2 dimensions to transpose it.</summary>
+        </member>
+        <member name="P:System.SR.ThrowArgument_ValueNonNegative">
+            <summary>The provided value must be non-negative.</summary>
+        </member>
+        <member name="P:System.SR.ThrowArgument_InvalidStridesAndLengths">
+            <summary>The provided lengths and strides would allow you to access elements outside the provided memory.</summary>
+        </member>
+        <member name="P:System.SR.ThrowArgument_StrideLessThan0">
+            <summary>Strides cannot be less than 0.</summary>
+        </member>
+        <member name="P:System.SR.Argument_2DTensorRequired">
+            <summary>Must be a 2d Tensor.</summary>
+        </member>
+        <member name="P:System.SR.Argument_IncompatibleDimensions">
+            <summary>Incompatible dimensions for provided tensors. left.Lengths[1] == {0} while right.Lengths[1] == {1}.</summary>
+        </member>
+        <member name="P:System.SR.ThrowArgument_StackShapesNotSame">
+            <summary>All tensors must have the same shape.</summary>
+        </member>
+        <member name="P:System.SR.Argument_CannotReshapeNonContiguousOrDense">
+            <summary>The Tensor provided is either non-contiguous or non-dense. Reshape only works with contigous and dense memory. You may need to Broadcast or Copy the data to be contigous.</summary>
+        </member>
+        <member name="T:System.Runtime.InteropServices.LibraryImportAttribute">
+            <summary>
+            Attribute used to indicate a source generator should create a function for marshalling
+            arguments instead of relying on the runtime to generate an equivalent marshalling function at run-time.
+            </summary>
+            <remarks>
+            This attribute is meaningless if the source generator associated with it is not enabled.
+            The current built-in source generator only supports C# and only supplies an implementation when
+            applied to static, partial, non-generic methods.
+            </remarks>
+        </member>
+        <member name="M:System.Runtime.InteropServices.LibraryImportAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.LibraryImportAttribute"/>.
+            </summary>
+            <param name="libraryName">Name of the library containing the import.</param>
+        </member>
+        <member name="P:System.Runtime.InteropServices.LibraryImportAttribute.LibraryName">
+            <summary>
+            Gets the name of the library containing the import.
+            </summary>
+        </member>
+        <member name="P:System.Runtime.InteropServices.LibraryImportAttribute.EntryPoint">
+            <summary>
+            Gets or sets the name of the entry point to be called.
+            </summary>
+        </member>
+        <member name="P:System.Runtime.InteropServices.LibraryImportAttribute.StringMarshalling">
+            <summary>
+            Gets or sets how to marshal string arguments to the method.
+            </summary>
+            <remarks>
+            If this field is set to a value other than <see cref="F:System.Runtime.InteropServices.StringMarshalling.Custom" />,
+            <see cref="P:System.Runtime.InteropServices.LibraryImportAttribute.StringMarshallingCustomType" /> must not be specified.
+            </remarks>
+        </member>
+        <member name="P:System.Runtime.InteropServices.LibraryImportAttribute.StringMarshallingCustomType">
+            <summary>
+            Gets or sets the <see cref="T:System.Type"/> used to control how string arguments to the method are marshalled.
+            </summary>
+            <remarks>
+            If this field is specified, <see cref="P:System.Runtime.InteropServices.LibraryImportAttribute.StringMarshalling" /> must not be specified
+            or must be set to <see cref="F:System.Runtime.InteropServices.StringMarshalling.Custom" />.
+            </remarks>
+        </member>
+        <member name="P:System.Runtime.InteropServices.LibraryImportAttribute.SetLastError">
+            <summary>
+            Gets or sets whether the callee sets an error (SetLastError on Windows or errno
+            on other platforms) before returning from the attributed method.
+            </summary>
+        </member>
+        <member name="T:System.Runtime.InteropServices.StringMarshalling">
+            <summary>
+            Specifies how strings should be marshalled for generated p/invokes
+            </summary>
+        </member>
+        <member name="F:System.Runtime.InteropServices.StringMarshalling.Custom">
+            <summary>
+            Indicates the user is supplying a specific marshaller in <see cref="P:System.Runtime.InteropServices.LibraryImportAttribute.StringMarshallingCustomType"/>.
+            </summary>
+        </member>
+        <member name="F:System.Runtime.InteropServices.StringMarshalling.Utf8">
+            <summary>
+            Use the platform-provided UTF-8 marshaller.
+            </summary>
+        </member>
+        <member name="F:System.Runtime.InteropServices.StringMarshalling.Utf16">
+            <summary>
+            Use the platform-provided UTF-16 marshaller.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.AllowNullAttribute">
+            <summary>Specifies that null is allowed as an input even if the corresponding type disallows it.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.DisallowNullAttribute">
+            <summary>Specifies that null is disallowed as an input even if the corresponding type allows it.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.MaybeNullAttribute">
+            <summary>Specifies that an output may be null even if the corresponding type disallows it.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.NotNullAttribute">
+            <summary>Specifies that an output will not be null even if the corresponding type allows it. Specifies that an input argument was not null when the call returns.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute">
+            <summary>Specifies that when a method returns <see cref="P:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.ReturnValue"/>, the parameter may be null even if the corresponding type disallows it.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.#ctor(System.Boolean)">
+            <summary>Initializes the attribute with the specified return value condition.</summary>
+            <param name="returnValue">
+            The return value condition. If the method returns this value, the associated parameter may be null.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.ReturnValue">
+            <summary>Gets the return value condition.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute">
+            <summary>Specifies that when a method returns <see cref="P:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.ReturnValue"/>, the parameter will not be null even if the corresponding type allows it.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.#ctor(System.Boolean)">
+            <summary>Initializes the attribute with the specified return value condition.</summary>
+            <param name="returnValue">
+            The return value condition. If the method returns this value, the associated parameter will not be null.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.ReturnValue">
+            <summary>Gets the return value condition.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute">
+            <summary>Specifies that the output will be non-null if the named parameter is non-null.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute.#ctor(System.String)">
+            <summary>Initializes the attribute with the associated parameter name.</summary>
+            <param name="parameterName">
+            The associated parameter name.  The output will be non-null if the argument to the parameter specified is non-null.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute.ParameterName">
+            <summary>Gets the associated parameter name.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute">
+            <summary>Applied to a method that will never return under any circumstance.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute">
+            <summary>Specifies that the method will not return if the associated Boolean parameter is passed the specified value.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute.#ctor(System.Boolean)">
+            <summary>Initializes the attribute with the specified parameter value.</summary>
+            <param name="parameterValue">
+            The condition parameter value. Code after the method will be considered unreachable by diagnostics if the argument to
+            the associated parameter matches this value.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute.ParameterValue">
+            <summary>Gets the condition parameter value.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute">
+            <summary>Specifies that the method or property will ensure that the listed field and property members have not-null values.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.#ctor(System.String)">
+            <summary>Initializes the attribute with a field or property member.</summary>
+            <param name="member">
+            The field or property member that is promised to be not-null.
+            </param>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.#ctor(System.String[])">
+            <summary>Initializes the attribute with the list of field and property members.</summary>
+            <param name="members">
+            The list of field and property members that are promised to be not-null.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.Members">
+            <summary>Gets field or property member names.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute">
+            <summary>Specifies that the method or property will ensure that the listed field and property members have not-null values when returning with the specified return value condition.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.#ctor(System.Boolean,System.String)">
+            <summary>Initializes the attribute with the specified return value condition and a field or property member.</summary>
+            <param name="returnValue">
+            The return value condition. If the method returns this value, the associated field or property member will not be null.
+            </param>
+            <param name="member">
+            The field or property member that is promised to be not-null.
+            </param>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.#ctor(System.Boolean,System.String[])">
+            <summary>Initializes the attribute with the specified return value condition and list of field and property members.</summary>
+            <param name="returnValue">
+            The return value condition. If the method returns this value, the associated field and property members will not be null.
+            </param>
+            <param name="members">
+            The list of field and property members that are promised to be not-null.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.ReturnValue">
+            <summary>Gets the return value condition.</summary>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.Members">
+            <summary>Gets field or property member names.</summary>
+        </member>
+    </members>
+</doc>

@@ -1,8 +1,9 @@
 {
   "dependencies": {
+    "ai.undream.llm": "https://github.com/undreamai/LLMUnity.git",
     "com.unity.collab-proxy": "2.7.1",
     "com.unity.feature.2d": "2.0.1",
-    "com.unity.ide.rider": "3.0.31",
+    "com.unity.ide.rider": "3.0.34",
     "com.unity.ide.visualstudio": "2.0.22",
     "com.unity.inputsystem": "1.13.0",
     "com.unity.multiplayer.center": "1.0.0",
