@@ -1,0 +1,34 @@
+Archetypy osobowości:
+- Indywidualista (tragiczny romantyk)
+- Lojalista (wiecznie zlękniony)
+- Epikurejczyk (poszukiwacz przygód)
+- Szef (odważny, idealny władca)
+- Dawca (ciepły, troskliwy)
+- Diabeł (wiecznie zwodzący i zdenerwowany)
+
+Morderstwo w 1. dniu:
+- Rozwiązuje problemy techniczne dotyczące implementacji mechaniki morderstwa.
+
+Decyzje podejmowane przez "Boga" (Supervisora gry):
+- Wydarzenie morderstwa.
+- Ustalanie relacji pomiędzy NPC.
+- Przypisywanie cech postaci.
+- Pisanie początkowych promptów dla każdego NPC.
+
+Przebieg śledztwa dotyczącego morderstwa:
+- Kto?
+- Dlaczego?
+- Czym?
+- Gdzie?
+
+---------------------------------------------
+
+Ze względu na fakt, że obecnie nie mamy pełnej mapy, grupa LLM jest zmuszona na razie pisać dataset tylko do rozmów. 
+Zbiór danych będzie zawierał prompty dla dwóch różnych stanów NPC – "idle" oraz "conversation".
+
+Przykładowe modele LLM to LLaMA 2, GPT-2 i Mistral.
+
+---------------------------------------------
+
+Lista osób na spotkaniu:
+Cały zespół.
