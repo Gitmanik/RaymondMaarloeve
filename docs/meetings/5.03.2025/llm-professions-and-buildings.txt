@@ -1,0 +1,26 @@
+Added LLM character archetypes and dynamic profession assignment
+
+- Defined six main LLM character archetypes (e.g., Gloomy, Cheerful, Sad, Crazy, etc.).
+- Professions are assigned dynamically within prompts instead of being hardcoded in the dataset.
+- This approach allows for adding new buildings dedicated to specific professions in the final milestone.
+
+- The supervisor should generate an initial prompt for each NPC at the start of the game.
+- In the second semester, the supervisor can be expanded to generate random events.
+
+Planned building ideas:
+- Well
+- Mill
+- Blacksmith
+- Farm
+- Ruler's building
+- Potter's workshop
+- Inn/Tavern
+- Church (Priest)
+- Cemetery
+- Bathhouse
+- Market
+- Lazaret
+- Dungeon
+- Gallows
+
+Additionally, we found a modeling software for creating buildings in Unity that also includes free assets.
