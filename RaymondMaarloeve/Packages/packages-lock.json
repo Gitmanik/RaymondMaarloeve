@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.gitmanik.base": {
+      "version": "https://github.com/Gitmanik/GitmanikUnityTools.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "fdfda58daba328915362c7690ce4a969f9ab91bb"
+    },
     "com.unity.2d.animation": {
       "version": "10.1.4",
       "depth": 1,
