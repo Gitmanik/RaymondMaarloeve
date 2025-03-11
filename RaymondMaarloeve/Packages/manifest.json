@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "ai.undream.llm": "https://github.com/undreamai/LLMUnity.git",
     "com.unity.feature.2d": "2.0.1",
     "com.unity.ide.rider": "3.0.34",
     "com.unity.ide.visualstudio": "2.0.22",
