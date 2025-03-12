@@ -2,7 +2,7 @@ using UnityEngine;
 
 public enum PlayerState
 {
-    Moving,     // Gracz mo¿e siê poruszaæ
+    Moving,     // Gracz moze sie poruszac
     Interacting // Gracz jest w interakcji z NPC
 }
 
@@ -79,16 +79,18 @@ public class PlayerController : MonoBehaviour
 
         characterMesh.enabled = false;
 
+        targetNPC.GetComponent<NPC>().LookAt(CameraFollow.Instance.transform);
+        
         if (CameraFollow.Instance != null)
         {
-            CameraFollow.Instance.SetTarget(targetNPC, true); // Kamera przybli¿a siê do NPC
+            CameraFollow.Instance.SetTarget(targetNPC, true); // Kamera przybliza sie do NPC
         }
         else
         {
             Debug.LogError("CameraFollow.Instance is NULL!");
         }
 
-        Debug.Log("Rozpoczêto interakcjê z NPC: " + targetNPC.name);
+        Debug.Log("Rozpoczeto interakcje z NPC: " + targetNPC.name);
     }
 
     public void EndInteraction()
@@ -97,6 +99,9 @@ public class PlayerController : MonoBehaviour
 
         characterMesh.enabled = true;
 
+        targetNPC.GetComponent<NPC>().LookAt(null);
+
+        
         if (CameraFollow.Instance != null)
         {
             CameraFollow.Instance.SetTarget(transform, false); // Kamera wraca do gracza
@@ -106,7 +111,7 @@ public class PlayerController : MonoBehaviour
             Debug.LogError("CameraFollow.Instance is NULL!");
         }
 
-        Debug.Log("Zakoñczono interakcjê");
+        Debug.Log("Zakonczono interakcje");
     }
 
     void OnTriggerEnter(Collider other)
