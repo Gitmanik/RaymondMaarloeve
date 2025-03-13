@@ -1,0 +1,13 @@
+# Made using Asset Forge (2.1.2)
+
+:materials
+
+[name:Wood;color:RGBA(0.153, 0.068, 0.024, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+[name:Bag;color:RGBA(0.288, 0.226, 0.129, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+[name:RoofTiles_Red;color:RGBA(0.147, 0.027, 0.015, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+[name:Stone_Dark;color:RGBA(0.155, 0.183, 0.227, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+[name:Stone_Light;color:RGBA(0.222, 0.264, 0.288, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+
+:models
+
+[name:;collection:Full Models;type:Well;position:(0.0000, 2.5000, 0.0000);rotation:(0.0000, 0.0000, 0.0000);scale:(0.1000, 0.1000, 0.1000);group:;locked:False;hidden:False;materials:Wood+Bag+RoofTiles_Red+Stone_Dark+Stone_Light;]
