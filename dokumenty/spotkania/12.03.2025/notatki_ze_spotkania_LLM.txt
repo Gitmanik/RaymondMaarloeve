@@ -1,0 +1,65 @@
+Na spotkaniu uzgodniliśmy conversation pipeline, formę promptów, sposób przechowywania pamięci agenta, która będzie wpływała na wypowiedzi. W tym etapie musimy jeszcze sprawdzić, jaki model dla naszych promptów będzie generował najbardziej zadowalające nas odpowiedzi (aktualnie wybieramy spośród: GPT 2,Mistral 7B, Deepseek R1 7B, LLama 2). Do tego spotkania każdy z członków robił research, jednym z głównych źródeł, z którego korzystamy jest ten artykuł: https://arxiv.org/pdf/2304.03442.pdf
+
+Bardziej szczegółowy opis diagramu:
+
+Memory stream:
+
+  -Dane będą przechowywane w pliku .xml (lub json)
+   przykładowy format pliku:
+
+    <informacje>
+    imie: Gerat
+    nazwisko: Z Rivii
+    zawod: Wiedźmin
+    ....
+    </informacje>
+    <wspomnienia>
+    Wczoraj zdechła Płotka (waga 6, obliczona przez LLM)
+    Wstałeś o 9:00 (waga 1, obliczona przez LLM)
+    ....
+    </wspomnienia>
+    <plany>
+
+    #z tym ustalimy dokładniej, gdy będziemy znali akcje możliwe do wykonania w grze, będą one generowane na podstawie wag wspomnień
+
+    </plany>
+    <mapa>
+    #mapa w postaci drzewa:
+      korzeń: budynek
+      głęzie: pomieszczenie
+      liście: przedmioty w pomieszczeniach
+    </mapa>
+    <parametry>
+    zmęczenie
+    głód
+    ....
+    </parametry>
+
+Retrieve:
+  - LLM, który na podstawie wag wspomnień będzie wybierał najważniejsze informacje, generował opis do Memories(data) oraz obliczał relevance.
+  - Wagi będą składać się z:
+    -> recency (na podstawie timestampu wspomnienia)
+    -> importance
+    -> relevance
+    -> retrieve = recency + importance + relevance
+Retrieved Memory:
+  - Wyjscie retrieve (LLM), które podowane jest jako część wejściowego prompta
+
+Player's input:
+  - Interakcja (dialog) ze strony gracza
+
+Input promt:
+  - Połączenie Retrieved Memory z wejściem od gracza
+
+Saving conversation memories:
+  - LLM, który będzie obliczał importance przykładowy prompt:
+  "On the scale of 1 to 10, where 1 is purely mundane (e.g., brushing teeth, making bed) and 10 is extremely poignant (e.g., a break up, college acceptance), rate the likely poignancy of the following piece of memory. Memory: buying groceries at The Willows Market and Pharmacy Rating:"
+
+Lista osób na spotkaniu:
+-Maciej Włudarski
+-Maciej Pitucha
+-Karol Rzepiński
+-Kamil Włodarczyk
+-Łukasz Jastrzębski
+-Michał Eisler
+-Łukasz Czarzasty
