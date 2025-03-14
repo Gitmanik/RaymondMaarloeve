@@ -13,4 +13,9 @@ public class RandomDecisionMaker : IDecisionSystem
     {
         return new IdleDecision();
     }
+
+    public string GetNPCName()
+    {
+        return "Random NPC name";
+    }
 }
