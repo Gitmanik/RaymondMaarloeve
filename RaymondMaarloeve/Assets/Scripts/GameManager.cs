@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +13,9 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Game Manager starting");
         Application.targetFrameRate = 60;
+        
+        // TODO: Prawdopodobnie tutaj konfiguracja połączenia z serwerem LLM
+        // Będzie wymagany centralny system tych systemów, żeby korzystały z jednego połączenia sieciowego?
         
         TerrainGenerator.Instance.GenerateMap();
         
@@ -23,7 +28,10 @@ public class GameManager : MonoBehaviour
             int npcVariant = Random.Range(0, npcs.Count);
             GameObject newNpc = Instantiate(npcs[npcVariant], npcPosition, Quaternion.identity);
             npcs.RemoveAt(npcVariant);
-            newNpc.GetComponent<NPC>().Setup();
+            
+            // TODO: Prawdopodobnie tutaj konfiguracja pamięci NPC
+            // TODO: Przekazać tutaj obiekt IDecisionSystem połączony z LLM z fabryki
+            newNpc.GetComponent<NPC>().Setup(new RandomDecisionMaker());
         }
         
     }

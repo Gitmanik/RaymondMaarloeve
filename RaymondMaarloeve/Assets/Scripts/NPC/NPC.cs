@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class NPC : MonoBehaviour
@@ -10,9 +11,9 @@ public class NPC : MonoBehaviour
 
     public string npcName = "Unnamed NPC";
 
-    public void Setup()
+    public void Setup(IDecisionSystem decisionSystem)
     {
-        decisionSystem = new RandomDecisionMaker();
+        this.decisionSystem = decisionSystem;
         decisionSystem.Setup(this);
     }
     
