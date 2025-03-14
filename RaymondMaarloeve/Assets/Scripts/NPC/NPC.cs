@@ -10,7 +10,7 @@ public class NPC : MonoBehaviour
 
     public string npcName = "Unnamed NPC";
 
-    void Start()
+    public void Setup()
     {
         decisionSystem = new RandomDecisionMaker();
         decisionSystem.Setup(this);
