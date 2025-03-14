@@ -15,6 +15,9 @@ public class NPC : MonoBehaviour
     {
         this.decisionSystem = decisionSystem;
         decisionSystem.Setup(this);
+
+        npcName = decisionSystem.GetNPCName();
+        name = "NPC: " + npcName;
     }
     
     void Update()
