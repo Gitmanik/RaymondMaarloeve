@@ -6,7 +6,7 @@ public class TerrainGenerator : MonoBehaviour
 {
     public static TerrainGenerator Instance { get; private set; }
     
-    private int width = 100, height = 100;
+    public int width = 100, height = 100;
     // public int sqrtLayerResolution = 10;
 
     public Terrain terrain;
