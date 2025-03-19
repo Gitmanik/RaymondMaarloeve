@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Gitmanik.Console;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -39,6 +40,22 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.F12)){
+            string folderPath = "Assets/Screenshots/"; 
+    
+            if (!System.IO.Directory.Exists(folderPath))
+                System.IO.Directory.CreateDirectory(folderPath);
+            
+            var screenshotName =
+                                    "Screenshot_" +
+                                    System.DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss") +
+                                    ".png";
+            ScreenCapture.CaptureScreenshot(System.IO.Path.Combine(folderPath, screenshotName));
+            Debug.Log(folderPath + screenshotName);
+        }
+        if (Input.GetKeyDown(KeyCode.BackQuote))
+        {
+            GitmanikConsole.singleton.ToggleConsole();
+        }
     }
 }
