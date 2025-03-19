@@ -1,5 +1,16 @@
 # Raymond Maarloeve sp. z o.o.
 
+<table>
+<tr>
+<td>
+<img src="Documents/Screenshots/Game.png" alt="Screenshot" width="600"/>
+</td>
+<td>
+<img src="Documents/Screenshots/GameInteraction.png" alt="Screenshot" width="600"/>
+</td>
+</tr>
+</table>
+
 ## Introduction
 
 ### Description
@@ -10,7 +21,11 @@ What sets this game apart is the lack of traditional, rigid scripting for events
 ### Technology Stack
 - **Game Engine:** Unity 6 (6000.0.38f1) + C#
 - **Artificial Intelligence:** Large Language Model (LLM), pathfinding with NavMeshPlus
-- **Graphics:** Free assets ([Itch.io Free Assets](https://itch.io/game-assets/free/tag-isometric))
+- **Graphics:** 
+  - [Kenney Fantasy UI](https://kenney.nl/assets/fantasy-ui-borders) 
+  - [Free Medieval 3D People Low Poly Pack](https://free-game-assets.itch.io/free-medieval-3d-people-low-poly-pack)
+  - [CC0 Terrain Textures](https://opengameart.org/content/cc0-terrain-textures)
+  - Free assets ([Itch.io Free Assets](https://itch.io/game-assets/free/tag-isometric))
 
 ### Team
 - **Leader:** Cyprian Zasada
