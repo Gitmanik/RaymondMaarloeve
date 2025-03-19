@@ -1,3 +1,4 @@
+using Gitmanik.Console;
 using UnityEngine;
 
 public enum PlayerState
@@ -34,6 +35,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (GitmanikConsole.Visible)
+            return;
+        
         if (currentState == PlayerState.Moving)
         {
             HandleMovement();

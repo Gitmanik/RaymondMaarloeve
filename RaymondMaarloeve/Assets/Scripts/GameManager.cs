@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Gitmanik.Console;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -51,6 +52,10 @@ public class GameManager : MonoBehaviour
                                     ".png";
             ScreenCapture.CaptureScreenshot(System.IO.Path.Combine(folderPath, screenshotName));
             Debug.Log(folderPath + screenshotName);
+        }
+        if (Input.GetKeyDown(KeyCode.BackQuote))
+        {
+            GitmanikConsole.singleton.ToggleConsole();
         }
     }
 }
