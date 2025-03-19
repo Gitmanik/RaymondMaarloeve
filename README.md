@@ -1,21 +1,21 @@
 # Raymond Maarloeve sp. z o.o.
 
-## Wprowadzenie
+## Introduction
 
-### Opis
-Projekt, nad którym pracujemy, to gra komputerowa, w której kluczową rolę odgrywa sztuczna inteligencja (AI). Jej główną cechą jest dynamiczny świat, w którym postacie niezależne (NPC) posiadają własne osobowości, harmonogramy dnia oraz zdolność do reagowania na działania gracza. Dzięki wykorzystaniu AI każda rozgrywka jest unikalna, a zachowanie NPC wpływa zarówno na fabułę, jak i na decyzje podejmowane przez gracza.
+### Description
+The project we are working on is a computer game in which artificial intelligence (AI) plays a key role. Its main feature is a dynamic world where non-player characters (NPCs) have their own personalities, daily schedules, and the ability to react to player actions. Thanks to AI, each gameplay session is unique, and NPC behavior influences both the storyline and the player's decisions.
 
-To, co wyróżnia tę grę, to brak klasycznego, sztywnego oskryptowania wydarzeń. Zamiast tego świat gry rozwija się w sposób organiczny, a interakcje między NPC oraz graczem determinują przebieg śledztwa detektywistycznego, które stanowi centralny element rozgrywki. Proceduralnie generowane otoczenie oraz złożone systemy decyzyjne NPC sprawiają, że każda sesja gry jest niepowtarzalnym doświadczeniem.
+What sets this game apart is the lack of traditional, rigid scripting for events. Instead, the game world develops organically, and interactions between NPCs and the player determine the course of the detective investigation, which is the central element of the gameplay. Procedurally generated environments and complex NPC decision-making systems make each game session a unique experience.
 
-### Stack technologiczny
-- **Silnik gry:** Unity 6 (6000.0.38f1) + C#
-- **Sztuczna inteligencja:** Large Language Model (LLM), pathfinding NavMeshPlus
-- **Grafika:** Darmowe assety ([Itch.io Free Assets](https://itch.io/game-assets/free/tag-isometric))
+### Technology Stack
+- **Game Engine:** Unity 6 (6000.0.38f1) + C#
+- **Artificial Intelligence:** Large Language Model (LLM), pathfinding with NavMeshPlus
+- **Graphics:** Free assets ([Itch.io Free Assets](https://itch.io/game-assets/free/tag-isometric))
 
-### Grupa
-- **Lider:** Cyprian Zasada
-- **Zastępca lidera:** Marek Nijakowski
-- **Zespół:**
+### Team
+- **Leader:** Cyprian Zasada
+- **Deputy Leader:** Marek Nijakowski
+- **Team Members:**
   - Paweł Reich
   - Paweł Dolak
   - Maciej Pitucha
@@ -28,34 +28,33 @@ To, co wyróżnia tę grę, to brak klasycznego, sztywnego oskryptowania wydarze
 
 ---
 
-## Założenia
+## Assumptions
 
-### Rozgrywka
-- **Cel gry:**
-  Gracz wciela się w detektywa badającego sprawę morderstwa w małej społeczności NPC. Śledztwo opiera się na analizie poszlak oraz rozmowach z NPC sterowanymi przez AI. Na końcu gracz rekonstruuje przebieg wydarzeń, co decyduje o sukcesie lub porażce.
-- **Metryki sukcesu:**
-  - Gra umożliwia swobodną eksplorację świata i interakcje z NPC.
-  - Morderstwo następuje w pewnym momencie gry (np. trzeciego dnia).
-  - Istnieją co najmniej 2 źródła poszlak (np. rozmowy z NPC + dowody fizyczne).
-  - Gracz może prezentować swoją teorię w finale gry poprzez interaktywny system układania sekwencji wydarzeń.
+### Gameplay
+- **Game Objective:**
+  The player takes on the role of a detective investigating a murder case in a small NPC community. The investigation is based on analyzing clues and conversing with AI-controlled NPCs. In the end, the player reconstructs the sequence of events, determining their success or failure.
+- **Success Metrics:**
+  - The game allows free world exploration and interactions with NPCs.
+  - There are at least two sources of clues (e.g., NPC conversations + physical evidence).
+  - The player can present their theory in the game's finale through an interactive sequence-building system.
 
-### Postacie NPC
-- **Zachowanie:**
-  NPC posiadają unikalne osobowości, harmonogramy dnia oraz zdolność dynamicznej reakcji na działania gracza.
-- **Metryki sukcesu:**
-  - Liczba NPC w grze: minimum 6, docelowo 10.
-  - NPC generują odpowiedzi i decyzje dzięki LLM.
-  - NPC mogą dynamicznie zmieniać swoje trasy w odpowiedzi na interakcje z graczem (docelowo, w odpowiedzi na interakcje z innymi NPC).
+### NPC Characters
+- **Behavior:**
+  NPCs have unique personalities, daily schedules, and the ability to dynamically react to player actions.
+- **Success Metrics:**
+  - Minimum number of NPCs: 6, target: 10.
+  - NPCs generate responses and make decisions using LLM.
+  - NPCs can dynamically change their routes in response to player interactions (eventually, also in response to interactions with other NPCs).
 
-### Mapa
-- **Wygląd:**
-  W grze każdy NPC ma swój dom, a ich rozłożenie jest generowane proceduralnie.
+### Map
+- **Appearance:**
+  Each NPC in the game has their own home, and their placement is procedurally generated.
 
 ---
 
-## Wykonanie
+## Execution
 
-### Podział prac
+### Task Distribution
 #### Unity:
 - Paweł Reich
 - Marek Nijakowski
@@ -71,21 +70,19 @@ To, co wyróżnia tę grę, to brak klasycznego, sztywnego oskryptowania wydarze
 - Łukasz Czarzasty
 
 ### Milestones
-#### 1. Milestone - Prototyp gry (bez LLM)
-- Istnieje baza gry, w której postacie się poruszają.
-- Akcje NPC są podejmowane losowo lub według predefiniowanych schematów.
+#### 1st Milestone - Game Prototype (without LLM)
+- A game base exists where characters move around.
+- NPC actions are taken randomly or follow predefined patterns.
 
-#### 2. Milestone - Integracja LLM z Unity
-- Do gry wprowadzono system dnia i nocy.
-- Dataset posiada 50% zamierzonych promptów.
+#### 2nd Milestone - LLM Integration with Unity
+- A day and night system is introduced.
+- The dataset contains 50% of the intended prompts.
 
+#### 3rd Milestone - Final Touches
+- Main menu
+- Soundtrack
+- Credits
+- Fine-tuning of the LLM model completed.
 
-#### 3. Milestone - Ostatnie szlify
-- Menu główne
-- Ścieżka dźwiękowa
-- Napisy końcowe
-- Wykonano fine-tuning modelu LLM.
-
-### Podział zadań
-📌 [Harmonogram Gantta](https://docs.google.com/spreadsheets/d/1uFGMCmiO6wAubyI_MKR1ynXz4QdD-30tejBS1lcy7w8/edit?usp=sharing)
-
+### Task Schedule
+📌 [Gantt Schedule](https://docs.google.com/spreadsheets/d/1uFGMCmiO6wAubyI_MKR1ynXz4QdD-30tejBS1lcy7w8/edit?usp=sharing)
