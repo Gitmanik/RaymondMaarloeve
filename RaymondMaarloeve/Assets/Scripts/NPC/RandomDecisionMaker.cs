@@ -11,11 +11,36 @@ public class RandomDecisionMaker : IDecisionSystem
 
     public IDecision Decide()
     {
-        return new IdleDecision();
+        int decision = Random.Range(0, 7);
+
+        switch (decision)
+        {
+            case 0:
+                return new IdleDecision();
+            case 1:
+                return new WalkDecision();
+            case 2:
+                return new NPCConversationDecision();
+            case 3:
+                return new PlayerConversationDecision();
+            case 4:
+                return new BuyGoodsDecision();
+            case 5:
+                return new GetWaterDecision();
+            case 6:
+                return new PrayDecision();
+            default:
+                return new IdleDecision();
+        }
     }
 
     public string GetNPCName()
     {
         return "Random NPC name";
+    }
+
+    public NPC GetNPC()
+    {
+        return npc;
     }
 }
