@@ -11,6 +11,8 @@ public class NPC : MonoBehaviour
 
     public string npcName = "Unnamed NPC";
 
+    public float speed = 3f;
+
     public void Setup(IDecisionSystem decisionSystem)
     {
         this.decisionSystem = decisionSystem;
