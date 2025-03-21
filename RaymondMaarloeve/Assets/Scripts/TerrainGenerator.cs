@@ -90,6 +90,8 @@ public class TerrainGenerator : MonoBehaviour
                 {
                     int n when (n >= 0 && n <= 3) => Instantiate(Buildings[0], position, Quaternion.identity, terrain.transform),
                     int n when (n >= 4 && n <= 13) => Instantiate(Buildings[1], position, Quaternion.identity, terrain.transform),
+                    int n when (n >= 14 && n <= 24) => Instantiate(Buildings[2], position, Quaternion.identity, terrain.transform),
+
                     _ => null
                 };
                 
