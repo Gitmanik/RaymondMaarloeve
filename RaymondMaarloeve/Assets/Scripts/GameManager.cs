@@ -7,6 +7,8 @@ using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
+    
     public int npcCount = 6;
     public GameObject[] npcPrefabs;
     
@@ -14,6 +16,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Game Manager starting");
         Application.targetFrameRate = 60;
+        Instance = this;
         
         // TODO: Prawdopodobnie tutaj konfiguracja połączenia z serwerem LLM
         // Będzie wymagany centralny system tych systemów, żeby korzystały z jednego połączenia sieciowego?
