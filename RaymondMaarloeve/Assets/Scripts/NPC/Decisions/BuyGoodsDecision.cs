@@ -14,12 +14,9 @@ public class BuyGoodsDecision : IDecision
     private float interactionDuration = 3f;
     private float interactionTimer = 0f;
 
-    public void Setup(IDecisionSystem system)
+    public void Setup(IDecisionSystem system, NPC npc)
     {
-        if (system is RandomDecisionMaker rdm)
-        {
-            npc = rdm.GetNPC();
-        }
+        this.npc = npc;
     }
 
     public bool Tick()

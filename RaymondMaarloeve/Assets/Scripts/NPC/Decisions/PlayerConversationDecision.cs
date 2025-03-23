@@ -12,12 +12,9 @@ public class PlayerConversationDecision : IDecision
 
     private bool started = false;
 
-    public void Setup(IDecisionSystem system)
+    public void Setup(IDecisionSystem system, NPC npc)
     {
-        if (system is RandomDecisionMaker rdm)
-        {
-            npc = rdm.GetNPC();
-        }
+        this.npc = npc;
 
         GameObject playerObj = GameObject.FindWithTag("player");
         if (playerObj != null)

@@ -1,5 +1,5 @@
 ﻿public interface IDecision
 {
-    public void Setup(IDecisionSystem system);
+    public void Setup(IDecisionSystem system, NPC npc);
     public bool Tick();
 }

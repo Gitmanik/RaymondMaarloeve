@@ -8,12 +8,9 @@ public class WalkDecision : IDecision
     private bool started = false;
     private bool finished = false;
 
-    public void Setup(IDecisionSystem system)
+    public void Setup(IDecisionSystem system, NPC npc)
     {
-        if (system is RandomDecisionMaker rdm)
-        {
-            npc = rdm.GetNPC();
-        }
+        this.npc = npc;
     }
 
     public bool Tick()

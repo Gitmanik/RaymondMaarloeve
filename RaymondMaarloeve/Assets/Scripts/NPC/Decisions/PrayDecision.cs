@@ -13,12 +13,9 @@ public class PrayDecision : IDecision
     private float prayerDuration = 5f;
     private float prayerTimer = 0f;
 
-    public void Setup(IDecisionSystem system)
+    public void Setup(IDecisionSystem system, NPC npc)
     {
-        if (system is RandomDecisionMaker rdm)
-        {
-            npc = rdm.GetNPC();
-        }
+        this.npc = npc;
     }
 
     public bool Tick()

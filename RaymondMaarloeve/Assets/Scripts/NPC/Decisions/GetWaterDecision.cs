@@ -13,12 +13,9 @@ public class GetWaterDecision : IDecision
     private float waterCollectionDuration = 4f;
     private float waterCollectionTimer = 0f;
 
-    public void Setup(IDecisionSystem system)
+    public void Setup(IDecisionSystem system, NPC npc)
     {
-        if (system is RandomDecisionMaker rdm)
-        {
-            npc = rdm.GetNPC();
-        }
+        this.npc = npc;
     }
 
     public bool Tick()

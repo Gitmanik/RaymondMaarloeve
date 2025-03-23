@@ -11,12 +11,9 @@ public class NPCConversationDecision : IDecision
     private float conversationDuration = 5f;
     private float conversationTimer = 0f;
 
-    public void Setup(IDecisionSystem system)
+    public void Setup(IDecisionSystem system, NPC npc)
     {
-        if (system is RandomDecisionMaker rdm)
-        {
-            npc = rdm.GetNPC();
-        }
+        this.npc = npc;
     }
 
     public bool Tick()
