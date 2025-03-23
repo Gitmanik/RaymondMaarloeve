@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     public int npcCount = 6;
     public GameObject[] npcPrefabs;
     
+    public List<NPC> npcs = new List<NPC>();
+    
     void Start()
     {
         Debug.Log("Game Manager starting");
@@ -23,19 +25,21 @@ public class GameManager : MonoBehaviour
         
         TerrainGenerator.Instance.GenerateMap();
         
-        List<GameObject> npcs = npcPrefabs.ToList();
+        List<GameObject> npcPrefabsList = npcPrefabs.ToList();
         
         for (int i = 0; i < npcCount; i++)
         {
             Vector3 npcPosition = new Vector3(TerrainGenerator.Instance.transform.position.x - TerrainGenerator.Instance.width/2 + Random.Range(0, TerrainGenerator.Instance.width), 0, TerrainGenerator.Instance.transform.position.z - TerrainGenerator.Instance.height/2 + Random.Range(0, TerrainGenerator.Instance.height));
             
-            int npcVariant = Random.Range(0, npcs.Count);
-            GameObject newNpc = Instantiate(npcs[npcVariant], npcPosition, Quaternion.identity);
-            npcs.RemoveAt(npcVariant);
+            int npcVariant = Random.Range(0, npcPrefabsList.Count);
+            GameObject newNpc = Instantiate(npcPrefabsList[npcVariant], npcPosition, Quaternion.identity);
+            npcPrefabsList.RemoveAt(npcVariant);
             
             // TODO: Prawdopodobnie tutaj konfiguracja pamięci NPC
             // TODO: Przekazać tutaj obiekt IDecisionSystem połączony z LLM z fabryki
-            newNpc.GetComponent<NPC>().Setup(new RandomDecisionMaker());
+            var npcComponent = newNpc.GetComponent<NPC>(); 
+            npcComponent.Setup(new RandomDecisionMaker());
+            npcs.Add(npcComponent);
         }
         
     }

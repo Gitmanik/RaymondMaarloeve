@@ -60,14 +60,6 @@ public class NPCConversationDecision : IDecision
 
     private NPC FindConversationPartner()
     {
-        NPC[] allNPCs = GameObject.FindObjectsOfType<NPC>();
-        foreach (var candidate in allNPCs)
-        {
-            if (candidate != npc)
-            {
-                return candidate;
-            }
-        }
-        return null;
+        return GameManager.Instance.npcs[Random.Range(0, GameManager.Instance.npcs.Count)];
     }
 }
