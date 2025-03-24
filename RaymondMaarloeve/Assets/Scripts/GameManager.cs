@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     public int npcCount = 6;
     public GameObject[] npcPrefabs;
     
+    private int entityIDCounter = 0;
+    public int GetEntityID() => ++entityIDCounter;
+    
     public List<NPC> npcs = new List<NPC>();
     
     void Start()
