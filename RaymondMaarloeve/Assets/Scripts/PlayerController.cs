@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     private PlayerState currentState = PlayerState.Moving;
     private Transform targetNPC = null;
     private SkinnedMeshRenderer characterMesh;
+    
+    private NPC currentlyInteractingNPC = null;
 
     void Awake()
     {
@@ -47,7 +49,7 @@ public class PlayerController : MonoBehaviour
         {
             if (currentState == PlayerState.Moving && targetNPC != null)
             {
-                StartInteraction();
+                StartInteraction(targetNPC.GetComponent<NPC>());
             }
             else if (currentState == PlayerState.Interacting)
             {
@@ -76,25 +78,26 @@ public class PlayerController : MonoBehaviour
         characterController.Move(moveDirection * Time.deltaTime);
     }
 
-    void StartInteraction()
+    public void StartInteraction(NPC npc)
     {
         currentState = PlayerState.Interacting;
         moveDirection = Vector3.zero; // Zatrzymanie gracza
 
         characterMesh.enabled = false;
 
-        targetNPC.GetComponent<NPC>().LookAt(CameraFollow.Instance.transform);
+        npc.LookAt(CameraFollow.Instance.transform);
         
         if (CameraFollow.Instance != null)
         {
-            CameraFollow.Instance.SetTarget(targetNPC, true); // Kamera przybliza sie do NPC
+            CameraFollow.Instance.SetTarget(npc.transform, true); // Kamera przybliza sie do NPC
         }
         else
         {
             Debug.LogError("CameraFollow.Instance is NULL!");
         }
 
-        Debug.Log("Rozpoczeto interakcje z NPC: " + targetNPC.name);
+        Debug.Log("Rozpoczeto interakcje z NPC: " + npc.name);
+        currentlyInteractingNPC = npc;
     }
 
     public void EndInteraction()
@@ -103,8 +106,7 @@ public class PlayerController : MonoBehaviour
 
         characterMesh.enabled = true;
 
-        targetNPC.GetComponent<NPC>().LookAt(null);
-
+        currentlyInteractingNPC.LookAt(null);
         
         if (CameraFollow.Instance != null)
         {
