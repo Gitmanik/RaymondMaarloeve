@@ -68,4 +68,42 @@ public class GameManager : MonoBehaviour
             GitmanikConsole.singleton.ToggleConsole();
         }
     }
+
+    [ConsoleCommand("npcs", "List all npcs")]
+    public static bool ListAllNpcs()
+    {
+        string x = "NPCs:\n";
+        foreach (var npc in GameManager.Instance.npcs)
+            x += $"{npc.EntityID} Pos: {npc.transform.position} , Name: ({npc.npcName}) System: ({npc.GetDecisionSystem()}, {npc.GetCurrentDecision()})\n";
+        Debug.Log(x);
+        return true;
+    }
+
+    [ConsoleCommand("tp", "Teleport to NPC")]
+    public static bool TeleportToNPC(string par1)
+    {
+        if (!int.TryParse(par1, out var id))
+            return false;
+        
+        var npc = Instance.npcs.Find(x => x.EntityID == id);
+        if (npc == null)
+            return false;
+        
+        PlayerController.Instance.transform.position = npc.transform.position;
+        return true;
+    }
+
+    [ConsoleCommand("int", "Interact with NPC")]
+    public static bool InteractWithNPC(string par1)
+    {
+        if (!int.TryParse(par1, out var id))
+            return false;
+        
+        var npc = Instance.npcs.Find(x => x.EntityID == id);
+        if (npc == null)
+            return false;
+        
+        PlayerController.Instance.StartInteraction(npc);
+        return true;
+    }
 }

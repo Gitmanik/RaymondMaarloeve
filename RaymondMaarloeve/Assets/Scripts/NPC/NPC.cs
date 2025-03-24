@@ -27,6 +27,9 @@ public class NPC : MonoBehaviour
         npcName = decisionSystem.GetNPCName();
         name = "NPC: " + npcName;
     }
+
+    public IDecision GetCurrentDecision() => currentDecision;
+    public IDecisionSystem GetDecisionSystem() => decisionSystem;
     
     void Update()
     {
