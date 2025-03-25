@@ -1854,6 +1854,7 @@ GameObject:
   - component: {fileID: 1294622896}
   - component: {fileID: 1294622893}
   - component: {fileID: 1294622895}
+  - component: {fileID: 1294622897}
   m_Layer: 0
   m_Name: _GameManager
   m_TagString: Untagged
@@ -1903,12 +1904,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 100
   height: 100
-  terrain: {fileID: 1438901263}
   buildingArea: 10
   Buildings:
-  - {fileID: 919132149155446097, guid: 50666fed71bd2704bb1c48106997c1d8, type: 3}
-  - {fileID: 919132149155446097, guid: 2e69f677fdee73c4e8f5aee4e107dd00, type: 3}
+  - {fileID: 2378057268553226593, guid: e52c8f8704c3b9d44b660c2c75d98192, type: 3}
+  - {fileID: 4128734955017319067, guid: d1afe98c64fbce847b4bb993ad9a349f, type: 3}
   - {fileID: 5083285615235793076, guid: 147ab689729ac2e49b82aac972788668, type: 3}
+  - {fileID: 6108394813680385468, guid: 655e06dc9db1cb746b7da3e9dacba6e0, type: 3}
+  terrain: {fileID: 1438901263}
+  spawnedBuildings: []
 --- !u!114 &1294622896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1921,6 +1924,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7a77b12dd6bc29f8bebb7f7f4e17154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  surface: {fileID: 1438901265}
   npcCount: 6
   npcPrefabs:
   - {fileID: 1668834221483606419, guid: 363a0160b72821de083880c20963240f, type: 3}
@@ -1933,6 +1937,20 @@ MonoBehaviour:
   - {fileID: 5295356990428816727, guid: 1d594f4aa5652b830b466b831969d936, type: 3}
   - {fileID: 7216708267112539949, guid: 91fd27a7afbc63940a1d654ec900c149, type: 3}
   - {fileID: 1148605829637295999, guid: 20e3d70f4158e349da9e7abcd86e2a13, type: 3}
+--- !u!114 &1294622897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294622892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16d9d18e532ee2c4d87144aec4100014, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wanderRadius: 10
+  waitTime: 2
 --- !u!1 &1321225839
 GameObject:
   m_ObjectHideFlags: 0
@@ -2080,6 +2098,7 @@ GameObject:
   - component: {fileID: 1438901264}
   - component: {fileID: 1438901263}
   - component: {fileID: 1438901262}
+  - component: {fileID: 1438901265}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -2162,6 +2181,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1438901265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438901261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedVersion: 0
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 1
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 0}
+  m_BuildHeightMesh: 0
 --- !u!1 &1461570359
 GameObject:
   m_ObjectHideFlags: 0

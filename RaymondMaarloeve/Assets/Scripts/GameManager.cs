@@ -2,16 +2,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Gitmanik.Console;
+using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
+    public NavMeshSurface surface;
     public int npcCount = 6;
     public GameObject[] npcPrefabs;
-    
+
     void Start()
     {
+        
         Debug.Log("Game Manager starting");
         Application.targetFrameRate = 60;
         
@@ -19,7 +23,9 @@ public class GameManager : MonoBehaviour
         // Będzie wymagany centralny system tych systemów, żeby korzystały z jednego połączenia sieciowego?
         
         TerrainGenerator.Instance.GenerateMap();
-        
+
+        surface.BuildNavMesh();
+
         List<GameObject> npcs = npcPrefabs.ToList();
         
         for (int i = 0; i < npcCount; i++)
@@ -33,6 +39,9 @@ public class GameManager : MonoBehaviour
             // TODO: Prawdopodobnie tutaj konfiguracja pamięci NPC
             // TODO: Przekazać tutaj obiekt IDecisionSystem połączony z LLM z fabryki
             newNpc.GetComponent<NPC>().Setup(new RandomDecisionMaker());
+
+            var walker = newNpc.AddComponent<NPCWalker>();
+
         }
         
     }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 public class TerrainGenerator : MonoBehaviour
@@ -43,21 +44,27 @@ public class TerrainGenerator : MonoBehaviour
                 int randomIndex = Random.Range(0, 100);
                 GameObject result = randomIndex switch
                 {
-                    int n when (n >= 0 && n <= 3) => Instantiate(Buildings[0], position, Quaternion.identity, terrain.transform),
-                    int n when (n >= 4 && n <= 13) => Instantiate(Buildings[1], position, Quaternion.identity, terrain.transform),
-                    int n when (n >= 14 && n <= 24) => Instantiate(Buildings[2], position, Quaternion.identity, terrain.transform),
-                    int n when (n >= 25 && n <= 34) => Instantiate(Buildings[3], position, Quaternion.identity, terrain.transform),
+                    int n when (n >= 0 && n <= 4) => Instantiate(Buildings[0], position, Quaternion.identity, terrain.transform),
+                    int n when (n >= 5 && n <= 9) => Instantiate(Buildings[1], position, Quaternion.identity, terrain.transform),
+                    int n when (n >= 10 && n <= 14) => Instantiate(Buildings[2], position, Quaternion.identity, terrain.transform),
+                    int n when (n >= 15 && n <= 19) => Instantiate(Buildings[3], position, Quaternion.identity, terrain.transform),
                     _ => null
                 };
 
                 if (result != null)
                 {
+                    if (!result.TryGetComponent<NavMeshObstacle>(out var obstacle))
+                    {
+                        obstacle = result.AddComponent<NavMeshObstacle>();
+                    }
+                    obstacle.carving = true;
+
                     spawnedBuildings.Add(result);
                 }
             }
         }
 
-        DrawPathsBetweenBuildings();
+        //DrawPathsBetweenBuildings();
     }
 
     void DrawPathsBetweenBuildings()
