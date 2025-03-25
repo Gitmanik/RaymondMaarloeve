@@ -11,6 +11,14 @@ public class NPC : MonoBehaviour
 
     public string npcName = "Unnamed NPC";
 
+    public float speed = 3f;
+    public int EntityID { get; private set; }
+
+    public void Awake()
+    {
+        EntityID = GameManager.Instance.GetEntityID();
+    }
+    
     public void Setup(IDecisionSystem decisionSystem)
     {
         this.decisionSystem = decisionSystem;
@@ -19,6 +27,9 @@ public class NPC : MonoBehaviour
         npcName = decisionSystem.GetNPCName();
         name = "NPC: " + npcName;
     }
+
+    public IDecision GetCurrentDecision() => currentDecision;
+    public IDecisionSystem GetDecisionSystem() => decisionSystem;
     
     void Update()
     {
