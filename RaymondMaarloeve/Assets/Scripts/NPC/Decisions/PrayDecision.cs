@@ -16,7 +16,7 @@ public class PrayDecision : IDecision
     {
         this.npc = npc;
 
-        GameObject churchObj = GameObject.Find("church (Clone)");
+        GameObject churchObj = GameObject.Find("church(Clone)");
         if (churchObj != null)
         {
             Vector3 churchPosition = churchObj.transform.position;
