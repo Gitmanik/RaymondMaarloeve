@@ -1,36 +1,43 @@
 using UnityEngine;
-// let's treat this as a placeholder for now as the walk logic doesn't seem to work properly
+using UnityEngine.AI;
+
 public class WalkDecision : IDecision
 {
     private NPC npc;
-    private Vector3 destination;
-    private float stoppingDistance = 0.1f;
-    private bool started = false;
     private bool finished = false;
+    public float wanderRadius = 20f;
 
     public void Setup(IDecisionSystem system, NPC npc)
     {
         this.npc = npc;
+        SelectNewDestination();
     }
 
     public bool Tick()
     {
-        if (!started && npc != null)
+        if (!npc.agent.pathPending && npc.agent.remainingDistance < 0.5f)
         {
-            destination = npc.transform.position + new Vector3(Random.Range(-5f, 5f), 0, Random.Range(-5f, 5f));
-            started = true;
+            return finished;
         }
-
-        if (started && !finished)
-        {
-            npc.transform.position = Vector3.MoveTowards(npc.transform.position, destination, npc.speed * Time.deltaTime);
-
-            if (Vector3.Distance(npc.transform.position, destination) <= stoppingDistance)
-            {
-                finished = true;
-            }
-        }
-
         return !finished;
+    }
+
+    void SelectNewDestination()
+    {
+        Debug.Log(npc.npcName + ": Choosing new destination!");
+
+        Vector3 randomDirection = Random.insideUnitSphere * wanderRadius;
+        randomDirection.y = 0f;
+        randomDirection += npc.transform.position;
+
+        if (NavMesh.SamplePosition(randomDirection, out NavMeshHit hit, wanderRadius, NavMesh.AllAreas))
+        {
+            npc.agent.SetDestination(hit.position);
+            Debug.Log(npc.npcName + ": New destination: " + hit.position);
+        }
+        else
+        {
+            Debug.LogWarning(npc.npcName + ": Not found point on NavMesh!");
+        }
     }
 }

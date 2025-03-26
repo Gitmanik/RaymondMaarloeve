@@ -30,7 +30,6 @@ public class GameManager : MonoBehaviour
         // Będzie wymagany centralny system tych systemów, żeby korzystały z jednego połączenia sieciowego?
         
         TerrainGenerator.Instance.GenerateMap();
-        surface.BuildNavMesh();
 
         List<GameObject> npcPrefabsList = npcPrefabs.ToList();
         

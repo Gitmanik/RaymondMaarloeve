@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -7,6 +8,7 @@ using Random = UnityEngine.Random;
 public class TerrainGenerator : MonoBehaviour
 {
     public static TerrainGenerator Instance { get; private set; }
+    public NavMeshSurface surface;
 
     public int width = 100, height = 100;
     public int buildingArea = 10;
@@ -50,21 +52,13 @@ public class TerrainGenerator : MonoBehaviour
                     int n when (n >= 15 && n <= 19) => Instantiate(Buildings[3], position, Quaternion.identity, terrain.transform),
                     _ => null
                 };
-
-                if (result != null)
-                {
-                    if (!result.TryGetComponent<NavMeshObstacle>(out var obstacle))
-                    {
-                        obstacle = result.AddComponent<NavMeshObstacle>();
-                    }
-                    obstacle.carving = true;
-
-                    spawnedBuildings.Add(result);
-                }
             }
         }
 
         //DrawPathsBetweenBuildings();
+
+        surface.BuildNavMesh();
+
     }
 
     void DrawPathsBetweenBuildings()
