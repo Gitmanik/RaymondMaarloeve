@@ -1,40 +1,40 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class GetWaterDecision : IDecision
+public class GetAleDecision : IDecision
 {
     private NPC npc;
     private bool finished = false;
-    private bool reachedWell = false;
+    private bool reachedTavern = false;
     private Vector3 destination;
     private float stoppingDistance = 0.5f;
 
-    public float waterCollectionDuration = 4f;
-    private float waterCollectionTimer = 0f;
+    public float drinkingDuration = 5f;
+    private float drinkingTimer = 0f;
 
     public void Setup(IDecisionSystem system, NPC npc)
     {
         this.npc = npc;
 
-        GameObject wellObj = GameObject.Find("well (Clone)");
-        if (wellObj != null)
+        GameObject tavernObj = GameObject.Find("tavern (Clone)");
+        if (tavernObj != null)
         {
-            Vector3 wellPosition = wellObj.transform.position;
-            if (NavMesh.SamplePosition(wellPosition, out NavMeshHit hit, 10f, NavMesh.AllAreas))
+            Vector3 tavernPosition = tavernObj.transform.position;
+            if (NavMesh.SamplePosition(tavernPosition, out NavMeshHit hit, 10f, NavMesh.AllAreas))
             {
                 destination = hit.position;
                 npc.agent.SetDestination(destination);
-                Debug.Log(npc.npcName + ": Going to the well to get water: " + destination);
+                Debug.Log(npc.npcName + ": Going to the tavern: " + destination);
             }
             else
             {
-                Debug.LogWarning(npc.npcName + ": NavMesh point for the well not found!");
+                Debug.LogWarning(npc.npcName + ": NavMesh point for the tavern not found!");
                 finished = true;
             }
         }
         else
         {
-            Debug.LogWarning(npc.npcName + ": Well object not found!");
+            Debug.LogWarning(npc.npcName + ": Tavern object not found!");
             finished = true;
         }
     }
@@ -44,18 +44,18 @@ public class GetWaterDecision : IDecision
         if (finished)
             return false;
 
-        if (!reachedWell)
+        if (!reachedTavern)
         {
             if (!npc.agent.pathPending && npc.agent.remainingDistance < stoppingDistance)
             {
-                reachedWell = true;
+                reachedTavern = true;
             }
             return true;
         }
         else
         {
-            waterCollectionTimer += Time.deltaTime;
-            if (waterCollectionTimer >= waterCollectionDuration)
+            drinkingTimer += Time.deltaTime;
+            if (drinkingTimer >= drinkingDuration)
             {
                 finished = true;
             }
