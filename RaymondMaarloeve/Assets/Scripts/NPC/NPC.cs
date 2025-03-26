@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class NPC : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class NPC : MonoBehaviour
     
     private IDecision currentDecision;
     private IDecisionSystem decisionSystem;
+    public NavMeshAgent agent;
 
     public string npcName = "Unnamed NPC";
 
@@ -18,7 +20,11 @@ public class NPC : MonoBehaviour
     {
         EntityID = GameManager.Instance.GetEntityID();
     }
-    
+    void Start()
+    {
+        agent = GetComponent<NavMeshAgent>();
+    }
+
     public void Setup(IDecisionSystem decisionSystem)
     {
         this.decisionSystem = decisionSystem;
@@ -42,6 +48,7 @@ public class NPC : MonoBehaviour
         {
             Debug.Log($"{npcName}: Current decision finished");
             currentDecision = decisionSystem.Decide();
+            currentDecision.Setup(decisionSystem, this);
             Debug.Log($"New decision: {currentDecision}");
         }
     }
