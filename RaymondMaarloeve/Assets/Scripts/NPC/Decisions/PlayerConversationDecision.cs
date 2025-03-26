@@ -1,59 +1,74 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerConversationDecision : IDecision
 {
     private NPC npc;
     private Transform playerTransform;
+    private bool finished = false;
+    private bool reachedPlayer = false;
 
-    private float conversationDistance = 1.5f;
+    public float conversationDistance = 1.5f;
 
-    private float conversationDuration = 5f;
+    public float conversationDuration = 5f;
     private float conversationTimer = 0f;
-
-    private bool started = false;
 
     public void Setup(IDecisionSystem system, NPC npc)
     {
         this.npc = npc;
 
-        GameObject playerObj = GameObject.FindWithTag("player");
+        GameObject playerObj = GameObject.FindWithTag("Player");
         if (playerObj != null)
         {
             playerTransform = playerObj.transform;
+
+            Vector3 playerPos = playerTransform.position;
+            if (NavMesh.SamplePosition(playerPos, out NavMeshHit hit, 10f, NavMesh.AllAreas))
+            {
+                npc.agent.SetDestination(hit.position);
+                Debug.Log(npc.npcName + ": Going to meet Player: " + hit.position);
+            }
+
+        }
+        else
+        {
+            Debug.LogWarning(npc.npcName + ": Player object not found!");
+            finished = true;
         }
     }
 
     public bool Tick()
     {
-        if (npc == null || playerTransform == null)
+        if (finished)
             return false;
 
-        if (!started)
+        if (playerTransform == null)
         {
-            started = true;
-            Debug.Log($"{npc.npcName} decided to engage in conversation with Raymond Maarloeve");
+            finished = true;
+            return false;
         }
 
-        float distance = Vector3.Distance(npc.transform.position, playerTransform.position);
-        if (distance > conversationDistance)
+        if (!npc.agent.pathPending)
         {
-            npc.transform.position = Vector3.MoveTowards(npc.transform.position, playerTransform.position, npc.speed * Time.deltaTime);
+            npc.agent.SetDestination(playerTransform.position);
+        }
+
+        if (!reachedPlayer)
+        {
+            if (!npc.agent.pathPending && npc.agent.remainingDistance < conversationDistance)
+            {
+                reachedPlayer = true;
+            }
             return true;
         }
         else
         {
-            //placeholder for actual interaction
             conversationTimer += Time.deltaTime;
-            if (conversationTimer < conversationDuration)
+            if (conversationTimer >= conversationDuration)
             {
-                Debug.Log($"{npc.npcName} chats with our Raymond...");
-                return true;
+                finished = true;
             }
-            else
-            {
-                Debug.Log($"{npc.npcName} ended chat with Raymond");
-                return false;
-            }
+            return !finished;
         }
     }
 }

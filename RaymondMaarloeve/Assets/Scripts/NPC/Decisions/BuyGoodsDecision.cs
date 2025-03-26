@@ -1,51 +1,65 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BuyGoodsDecision : IDecision
 {
     private NPC npc;
-    // TODO market stall coordinates are generated procedurally
-    private Vector3 stallPosition = new Vector3(10f, 0f, 10f);
-    private float stoppingDistance = 0.1f;
+    private bool finished = false;
+    private bool reachedMarket = false;
+    private Vector3 destination;
+    private float stoppingDistance = 0.5f;
 
-    private bool started = false;
-    private bool reachedStall = false;
-
-    //npc will stand for a while to simulate buying goods from merchant
-    private float interactionDuration = 3f;
-    private float interactionTimer = 0f;
+    public float buyingDuration = 4f;
+    private float buyingTimer = 0f;
 
     public void Setup(IDecisionSystem system, NPC npc)
     {
         this.npc = npc;
-    }
-
-    public bool Tick()
-    {
-        if (npc == null)
-            return false;
-
-        if (!started)
+        //TODO we don't have market building yet
+        GameObject marketObj = GameObject.Find("market (Clone)");
+        if (marketObj != null)
         {
-            started = true;
-        }
-
-        if (!reachedStall)
-        {
-            npc.transform.position = Vector3.MoveTowards(npc.transform.position, stallPosition, npc.speed * Time.deltaTime);
-            if (Vector3.Distance(npc.transform.position, stallPosition) <= stoppingDistance)
+            Vector3 marketPosition = marketObj.transform.position;
+            if (NavMesh.SamplePosition(marketPosition, out NavMeshHit hit, 10f, NavMesh.AllAreas))
             {
-                reachedStall = true;
+                destination = hit.position;
+                npc.agent.SetDestination(destination);
+                Debug.Log(npc.npcName + ": Going to the market: " + destination);
+            }
+            else
+            {
+                Debug.LogWarning(npc.npcName + ": NavMesh point for the market not found!");
+                finished = true;
             }
         }
         else
         {
-            interactionTimer += Time.deltaTime;
-            if (interactionTimer >= interactionDuration)
-            {
-                return false;
-            }
+            Debug.LogWarning(npc.npcName + ": Market object not found!");
+            finished = true;
         }
+    }
 
-        return true;
+    public bool Tick()
+    {
+        if (finished)
+            return false;
+
+        if (!reachedMarket)
+        {
+            if (!npc.agent.pathPending && npc.agent.remainingDistance < stoppingDistance)
+            {
+                reachedMarket = true;
+            }
+            return true;
+        }
+        else
+        {
+            buyingTimer += Time.deltaTime;
+            if (buyingTimer >= buyingDuration)
+            {
+                finished = true;
+            }
+            return !finished;
+        }
     }
 }

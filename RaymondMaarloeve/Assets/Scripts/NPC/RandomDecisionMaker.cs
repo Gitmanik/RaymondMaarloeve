@@ -29,6 +29,8 @@ public class RandomDecisionMaker : IDecisionSystem
                 return new GetWaterDecision();
             case 6:
                 return new PrayDecision();
+            case 7:
+                return new GetAleDecision();
             default:
                 return new IdleDecision();
         }
