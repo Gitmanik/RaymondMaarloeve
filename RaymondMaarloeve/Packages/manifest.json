@@ -2,6 +2,7 @@
   "dependencies": {
     "com.gitmanik.base": "https://github.com/Gitmanik/GitmanikUnityTools.git",
     "com.gitmanik.gitmanikconsole": "https://github.com/Gitmanik/GitmanikConsole.git",
+    "com.unity.ai.navigation": "2.0.6",
     "com.unity.ide.rider": "3.0.34",
     "com.unity.ide.visualstudio": "2.0.22",
     "com.unity.inputsystem": "1.13.0",

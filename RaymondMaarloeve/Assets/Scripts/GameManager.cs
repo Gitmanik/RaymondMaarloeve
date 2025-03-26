@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Gitmanik.Console;
+using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
@@ -19,6 +21,7 @@ public class GameManager : MonoBehaviour
     
     void Start()
     {
+        
         Debug.Log("Game Manager starting");
         Application.targetFrameRate = 60;
         Instance = this;
@@ -27,7 +30,7 @@ public class GameManager : MonoBehaviour
         // Będzie wymagany centralny system tych systemów, żeby korzystały z jednego połączenia sieciowego?
         
         TerrainGenerator.Instance.GenerateMap();
-        
+
         List<GameObject> npcPrefabsList = npcPrefabs.ToList();
         
         for (int i = 0; i < npcCount; i++)
