@@ -16,7 +16,7 @@ public class GetWaterDecision : IDecision
     {
         this.npc = npc;
 
-        GameObject wellObj = GameObject.Find("well (Clone)");
+        GameObject wellObj = GameObject.Find("well(Clone)");
         if (wellObj != null)
         {
             Vector3 wellPosition = wellObj.transform.position;

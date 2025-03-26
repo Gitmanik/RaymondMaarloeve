@@ -16,7 +16,7 @@ public class GetAleDecision : IDecision
     {
         this.npc = npc;
 
-        GameObject tavernObj = GameObject.Find("tavern (Clone)");
+        GameObject tavernObj = GameObject.Find("tavern(Clone)");
         if (tavernObj != null)
         {
             Vector3 tavernPosition = tavernObj.transform.position;

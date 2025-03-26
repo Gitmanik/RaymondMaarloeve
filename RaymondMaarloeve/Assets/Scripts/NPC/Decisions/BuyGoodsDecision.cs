@@ -16,7 +16,7 @@ public class BuyGoodsDecision : IDecision
     {
         this.npc = npc;
         //TODO we don't have market building yet
-        GameObject marketObj = GameObject.Find("market (Clone)");
+        GameObject marketObj = GameObject.Find("market(Clone)");
         if (marketObj != null)
         {
             Vector3 marketPosition = marketObj.transform.position;
