@@ -54,4 +54,11 @@ On a scale of **1 to 10**, where **1** is completely irrelevant and **10** is ex
 ```
 Rating: <fill in>
 ```
+---
+
+## Meeting Participants
+- Kamil Włodarczyk
+- Maciej Włudarski
+- Karol Rzepiński
+
 
