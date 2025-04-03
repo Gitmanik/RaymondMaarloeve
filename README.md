@@ -101,4 +101,4 @@ What sets this game apart is the lack of traditional, rigid scripting for events
 - Fine-tuning of the LLM model completed.
 
 ### Task Schedule
-📌 [Gantt Schedule](https://docs.google.com/spreadsheets/d/1uFGMCmiO6wAubyI_MKR1ynXz4QdD-30tejBS1lcy7w8/edit?usp=sharing)
+📌 [Gantt Schedule (polish language)](https://docs.google.com/spreadsheets/d/1uFGMCmiO6wAubyI_MKR1ynXz4QdD-30tejBS1lcy7w8/edit?usp=sharing)
