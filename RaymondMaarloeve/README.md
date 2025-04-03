@@ -10,7 +10,7 @@
 3. **Communication** – inform other team members about what you're working on. Use a task tracking system and/or group communication channel.
 
 ## UI Structure
-- The `SampleScene` contains an object called `_UI` with a `Canvas` component, which is the main container for all UI elements.
+- The `Game` contains an object called `_UI` with a `Canvas` component, which is the main container for all UI elements.
 - Each new UI feature should have its **own GameObject** as a child of `_UI`. This makes managing individual elements easier and helps avoid conflicts.
 - Remember to use **TextMeshPro** for all UI text – it ensures better visual quality and additional styling options.
 
@@ -28,5 +28,5 @@
 
 ## Development Plan
 1. Add new modules and test them in `SampleScene`.
-2. Gradually move refined elements to the final scene (or create a new one for the actual game).
+2. Gradually move refined elements to the `'Game` scene.
 3. Optimize, test, and refactor the code before releasing the first official version.
