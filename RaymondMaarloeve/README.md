@@ -1,36 +1,32 @@
 # Raymond Maarloeve - Unity
 
-## Struktura projektu
-- **SampleScene** – ta scena służy jako poligon doświadczalny (sandbox). Wszystkie nowe pomysły i testy można tutaj wprowadzać bez obaw, że wpłyną na ostateczną wersję gry.
-- **Docelowa scena** – planujemy stworzyć osobną scenę (lub sceny) przeznaczone na finalną wersję gry. Szczegóły i terminy przenoszenia funkcjonalności zostaną ustalone w trakcie rozwoju projektu.
+## Project Structure
+- **SampleScene** – this scene serves as a sandbox. All new ideas and tests can be introduced here without worrying about affecting the final version of the game.
+- **Target scene** – we plan to create a separate scene (or scenes) for the final version of the game. Details and timelines for transferring features will be determined as the project progresses.
 
-## Zarządzanie współpracą
-1. **Unikaj jednoczesnej edycji tych samych elementów** – jeśli jedna osoba wprowadza zmiany w danym elemencie (np. prefab, skrypt), staraj się w tym samym czasie go nie modyfikować. Dzięki temu unikniemy konfliktów przy merge.
-2. **Częste komity** – regularnie przesyłaj zmiany, aby reszta zespołu mogła je zobaczyć i uniknąć duplikowania pracy.
-3. **Komunikacja** – informuj pozostałych członków zespołu o tym, nad czym pracujesz. Używaj do tego systemu śledzenia zadań i/lub kanału do komunikacji grupowej.
+## Collaboration Management
+1. **Avoid simultaneous editing of the same elements** – if someone is working on a specific element (e.g., prefab, script), try not to modify it at the same time. This helps avoid merge conflicts.
+2. **Frequent commits** – regularly push your changes so the rest of the team can see them and avoid duplicating work.
+3. **Communication** – inform other team members about what you're working on. Use a task tracking system and/or group communication channel.
 
-## Struktura UI
-- W scenie SampleScene znajduje się obiekt `_UI` z komponentem `Canvas`, który jest głównym kontenerem dla wszystkich elementów interfejsu użytkownika.
-- Każda nowa funkcjonalność UI powinna mieć swój **osobny obiekt** (GameObject) jako dziecko obiektu `_UI`. Dzięki temu łatwiej zarządzać poszczególnymi elementami i uniknąć konfliktów.
-- Pamiętaj, aby korzystać z **TextMeshPro** dla wszelkich tekstów w interfejsie – zapewni to lepszą jakość wyświetlania oraz dodatkowe opcje stylizacji.
+## UI Structure
+- The `SampleScene` contains an object called `_UI` with a `Canvas` component, which is the main container for all UI elements.
+- Each new UI feature should have its **own GameObject** as a child of `_UI`. This makes managing individual elements easier and helps avoid conflicts.
+- Remember to use **TextMeshPro** for all UI text – it ensures better visual quality and additional styling options.
 
-## Konwencje i dobre praktyki
-- **Nazewnictwo obiektów**: Staraj się używać czytelnych nazw opisujących funkcję obiektu (np. `MenuPanel`, `PlayButton`, `ScoreText`).
-- **Prefaby**: Jeśli dany obiekt może się przydać w wielu scenach, warto go zapisać jako prefab. Umożliwi to łatwiejsze aktualizacje i ponowne wykorzystanie.
-- **Skrypty**: Każda nowa funkcjonalność powinna być w miarę możliwości umieszczona w osobnym skrypcie, z zachowaniem zasady pojedynczej odpowiedzialności (Single Responsibility Principle).
-- **Kontrola wersji**: Unikaj wprowadzania wielu radykalnych zmian w jednym commitcie. Lepiej zrobić kilka mniejszych, opisowych committów.
+## Conventions and Best Practices
+- **Naming objects**: Use clear, descriptive names that reflect the object's purpose (e.g., `MenuPanel`, `PlayButton`, `ScoreText`).
+- **Prefabs**: If an object might be used in multiple scenes, save it as a prefab. This allows for easier updates and reuse.
+- **Scripts**: Each new functionality should, where possible, be placed in a separate script that follows the Single Responsibility Principle.
+- **Version control**: Avoid making many radical changes in a single commit. It's better to make several smaller, descriptive commits.
 
-## Jak zacząć?
-1. Sklonuj repozytorium lokalnie.
-2. Otwórz projekt w **Unity**.
-3. W eksploratorze Unity znajdź scenę `SampleScene` i uruchom ją, aby zobaczyć bieżące testowe elementy.
-4. Dodawaj swoje elementy – pamiętając o podanych wyżej zasadach współpracy i konwencjach.
+## Getting Started
+1. Clone the repository locally.
+2. Open the project in **Unity**.
+3. In the Unity explorer, find the `SampleScene` and run it to view the current test elements.
+4. Add your elements – keeping in mind the collaboration and convention guidelines listed above.
 
-## Plan rozwoju
-1. Dodawanie kolejnych modułów i testowanie ich w `SampleScene`.
-2. Stopniowe przenoszenie dopracowanych elementów do finalnej sceny (lub tworzenie nowej sceny pod kątem właściwej gry).
-3. Optymalizacja, testy i refaktoryzacja kodu przed wydaniem pierwszej oficjalnej wersji.
-
----
-
-Jeśli masz dodatkowe pytania lub sugestie dotyczące organizacji projektu, dodaj je w sekcji Issue lub skontaktuj się z resztą zespołu. Dobra komunikacja to klucz do uniknięcia problemów z łączeniem zmian! Powodzenia w dalszym rozwoju projektu.
+## Development Plan
+1. Add new modules and test them in `SampleScene`.
+2. Gradually move refined elements to the final scene (or create a new one for the actual game).
+3. Optimize, test, and refactor the code before releasing the first official version.
