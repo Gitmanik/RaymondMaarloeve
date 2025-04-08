@@ -20,12 +20,13 @@ What sets this game apart is the lack of traditional, rigid scripting for events
 
 ### Technology Stack
 - **Game Engine:** Unity 6 (6000.0.38f1) + C#
-- **Artificial Intelligence:** Large Language Model (LLM), pathfinding with NavMeshPlus
+- **Artificial Intelligence:** Large Language Model (LLM), pathfinding with NavMesh
 - **Graphics:** 
   - [Kenney Fantasy UI](https://kenney.nl/assets/fantasy-ui-borders) 
   - [Free Medieval 3D People Low Poly Pack](https://free-game-assets.itch.io/free-medieval-3d-people-low-poly-pack)
   - [CC0 Terrain Textures](https://opengameart.org/content/cc0-terrain-textures)
   - Free assets ([Itch.io Free Assets](https://itch.io/game-assets/free/tag-isometric))
+- **Target Platform**: Currently developed for ***Windows***. Linux support is a potential goal for future development stages.
 
 ### Team
 - **Leader:** Cyprian Zasada
@@ -100,4 +101,4 @@ What sets this game apart is the lack of traditional, rigid scripting for events
 - Fine-tuning of the LLM model completed.
 
 ### Task Schedule
-📌 [Gantt Schedule](https://docs.google.com/spreadsheets/d/1uFGMCmiO6wAubyI_MKR1ynXz4QdD-30tejBS1lcy7w8/edit?usp=sharing)
+📌 [Gantt Schedule (polish language)](https://docs.google.com/spreadsheets/d/1uFGMCmiO6wAubyI_MKR1ynXz4QdD-30tejBS1lcy7w8/edit?usp=sharing)

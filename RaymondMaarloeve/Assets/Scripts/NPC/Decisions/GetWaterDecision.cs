@@ -1,57 +1,65 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GetWaterDecision : IDecision
 {
     private NPC npc;
-    // TODO well coordinates are generated procedurally 
-    private Vector3 wellPosition = new Vector3(15f, 0f, 20f);
-    private float stoppingDistance = 0.1f;
-
-    private bool started = false;
+    private bool finished = false;
     private bool reachedWell = false;
+    private Vector3 destination;
+    private float stoppingDistance = 0.5f;
 
-    private float waterCollectionDuration = 4f;
+    public float waterCollectionDuration = 4f;
     private float waterCollectionTimer = 0f;
 
     public void Setup(IDecisionSystem system, NPC npc)
     {
         this.npc = npc;
+
+        GameObject wellObj = GameObject.Find("well(Clone)");
+        if (wellObj != null)
+        {
+            Vector3 wellPosition = wellObj.transform.position;
+            if (NavMesh.SamplePosition(wellPosition, out NavMeshHit hit, 10f, NavMesh.AllAreas))
+            {
+                destination = hit.position;
+                npc.agent.SetDestination(destination);
+                Debug.Log(npc.npcName + ": Going to the well to get water: " + destination);
+            }
+            else
+            {
+                Debug.LogWarning(npc.npcName + ": NavMesh point for the well not found!");
+                finished = true;
+            }
+        }
+        else
+        {
+            Debug.LogWarning(npc.npcName + ": Well object not found!");
+            finished = true;
+        }
     }
 
     public bool Tick()
     {
-        if (npc == null)
+        if (finished)
             return false;
-
-        if (!started)
-        {
-            started = true;
-            Debug.Log($"{npc.npcName} is going to the well to get water");
-        }
 
         if (!reachedWell)
         {
-            npc.transform.position = Vector3.MoveTowards(npc.transform.position, wellPosition, npc.speed * Time.deltaTime);
-            if (Vector3.Distance(npc.transform.position, wellPosition) <= stoppingDistance)
+            if (!npc.agent.pathPending && npc.agent.remainingDistance < stoppingDistance)
             {
                 reachedWell = true;
-                Debug.Log($"{npc.npcName} got to the well");
             }
             return true;
         }
         else
         {
             waterCollectionTimer += Time.deltaTime;
-            if (waterCollectionTimer < waterCollectionDuration)
+            if (waterCollectionTimer >= waterCollectionDuration)
             {
-                Debug.Log($"{npc.npcName} takes water from the well");
-                return true;
+                finished = true;
             }
-            else
-            {
-                Debug.Log($"{npc.npcName} finished getting water from the well");
-                return false;
-            }
+            return !finished;
         }
     }
 }
