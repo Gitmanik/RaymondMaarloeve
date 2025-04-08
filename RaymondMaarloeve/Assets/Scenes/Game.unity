@@ -1902,15 +1902,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   surface: {fileID: 1438901265}
+  terrain: {fileID: 1438901263}
   width: 100
   height: 100
   buildingArea: 10
-  Buildings:
-  - {fileID: 2378057268553226593, guid: e52c8f8704c3b9d44b660c2c75d98192, type: 3}
-  - {fileID: 4128734955017319067, guid: d1afe98c64fbce847b4bb993ad9a349f, type: 3}
-  - {fileID: 5083285615235793076, guid: 147ab689729ac2e49b82aac972788668, type: 3}
-  - {fileID: 6108394813680385468, guid: 655e06dc9db1cb746b7da3e9dacba6e0, type: 3}
-  terrain: {fileID: 1438901263}
+  density: 0.2
+  buildingConfigs:
+  - prefab: {fileID: 5083285615235793076, guid: 147ab689729ac2e49b82aac972788668, type: 3}
+    weight: 1
+    maxCount: 2
+    currentCount: 0
+  - prefab: {fileID: 6108394813680385468, guid: 655e06dc9db1cb746b7da3e9dacba6e0, type: 3}
+    weight: 1
+    maxCount: 1
+    currentCount: 0
+  - prefab: {fileID: 4128734955017319067, guid: d1afe98c64fbce847b4bb993ad9a349f, type: 3}
+    weight: 1
+    maxCount: 5
+    currentCount: 0
+  - prefab: {fileID: 206528979659577565, guid: cc6934e2e20fab840a439cc2178719de, type: 3}
+    weight: 1
+    maxCount: 1
+    currentCount: 0
+  - prefab: {fileID: 5809783869429004467, guid: 6c440fd867dc25c43b3eac01ed5171fa, type: 3}
+    weight: 1
+    maxCount: 2
+    currentCount: 0
+  - prefab: {fileID: 6274790113574413117, guid: 386b72050ade1144e9ff3ee9de9de19a, type: 3}
+    weight: 1
+    maxCount: 3
+    currentCount: 0
+  - prefab: {fileID: 2378057268553226593, guid: e52c8f8704c3b9d44b660c2c75d98192, type: 3}
+    weight: 1
+    maxCount: 4
+    currentCount: 0
   spawnedBuildings: []
 --- !u!114 &1294622896
 MonoBehaviour:
