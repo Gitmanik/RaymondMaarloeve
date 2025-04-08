@@ -1,0 +1,34 @@
+# Made using Asset Forge (2.1.2)
+
+:materials
+
+[name:stoneDark;color:RGBA(0.337, 0.358, 0.372, 1.000);scale:(0.9, 0.9);texture:Stone/bricks;shader:Gradient;valueA:1;valueB:0;]
+[name:stone;color:RGBA(0.233, 0.243, 0.262, 1.000);scale:(2.0, 2.0);texture:Brick/greybricks.png;shader:Gradient;valueA:0.7;valueB:0;]
+[name:glass;color:RGBA(0.366, 0.281, 0.198, 1.000);scale:(0.1, 0.1);shader:Unlit;]
+[name:_defaultMat;color:RGBA(0.269, 0.196, 0.144, 1.000);scale:(2.0, 2.0);texture:Wood/planksVertical.png;shader:Gradient;valueA:1;valueB:0;]
+[name:dark;color:RGBA(0.372, 0.108, 0.056, 1.000);scale:(2.0, 2.0);texture:Medieval/cobblestonePainted.png;shader:Gradient;valueA:0;valueB:0;]
+[name:bricks;color:RGBA(0.814, 0.525, 0.485, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.35;valueB:0;]
+[name:wood;color:RGBA(0.840, 0.435, 0.305, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.35;valueB:0;]
+[name:foliage;color:RGBA(0.621, 0.472, 0.347, 1.000);scale:(2.0, 2.0);texture:Wood/panels.png;shader:Gradient;valueA:1;valueB:0.25;]
+[name:bricksDark;color:RGBA(0.379, 0.227, 0.100, 1.000);scale:(2.0, 2.0);texture:Wood/logs;shader:Gradient;valueA:1;valueB:0.25;]
+[name:custom9;color:RGBA(0.433, 0.521, 0.710, 1.000);scale:(2.0, 2.0);texture:Medieval/water.png;shader:Gradient;valueA:0;valueB:0;]
+[name:metalLight;color:RGBA(0.698, 0.686, 0.867, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.35;valueB:0.25;]
+[name:metal;color:RGBA(0.580, 0.569, 0.769, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.35;valueB:0.25;]
+[name:woodDark;color:RGBA(0.703, 0.370, 0.134, 1.000);scale:(1.5, 1.5);texture:Wood/bark;shader:Default;valueA:0.25;valueB:0.25;]
+[name:custom13;color:RGBA(0.533, 0.527, 0.614, 1.000);scale:(1.0, 1.0);texture:Metal/metalGalvan.png;shader:Default;valueA:0.4;valueB:1;]
+[name:stoneLight;color:RGBA(0.710, 0.701, 0.840, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.5;valueB:0;]
+
+:models
+
+[name:;collection:Hexagons;type:hexagon_arches;position:(-0.0164, 0.0000, -0.0221);rotation:(0.0000, 0.0000, 0.0000);scale:(0.5400, 0.9000, 0.5000);group:Group_14;locked:False;hidden:False;materials:_defaultMat;]
+[name:;collection:Hexagons;type:hexagon_ring;position:(-0.0164, 0.0000, -0.0221);rotation:(0.0000, 0.0000, 0.0000);scale:(0.5400, 0.4500, 0.5000);group:Group_14;locked:False;hidden:False;materials:stoneDark;]
+[name:;collection:Mechanical;type:pipe_large;position:(-0.0164, 0.0000, -0.0221);rotation:(0.0000, 0.0000, 0.0000);scale:(0.5400, 0.4500, 0.5000);group:Group_14;locked:False;hidden:False;materials:stone+dark;]
+[name:;collection:Hexagons;type:hexagon_point;position:(-0.0304, 0.9000, -0.0215);rotation:(0.0000, 0.0000, 0.0000);scale:(0.7841, 0.4500, 0.7321);group:Group_14;locked:False;hidden:False;materials:dark;]
+[name:;collection:Western;type:detail_wagonWheel;position:(-0.4141, 0.1915, 0.0360);rotation:(0.0000, 0.0000, 345.0000);scale:(0.8089, 0.6637, 0.6480);group:Group_14;locked:False;hidden:False;materials:woodDark+woodDark+woodDark+woodDark;]
+[name:;collection:Vehicles;type:detail_light;position:(-0.0159, 0.3629, -0.0390);rotation:(270.0000, 0.0000, 0.0000);scale:(0.4335, 0.4118, 0.8301);group:Group_14;locked:False;hidden:False;materials:custom13+custom13+custom13;]
+[name:;collection:Primitives;type:cylinderHollow_half;position:(-0.0139, 0.5589, -0.0517);rotation:(90.0000, 0.0000, 0.0000);scale:(0.1620, 0.0300, 0.2304);group:Group_14;locked:False;hidden:False;materials:custom13;]
+[name:;collection:Primitives;type:sphere_half;position:(-0.0170, 0.4329, -0.0401);rotation:(0.0000, 180.0000, 180.0000);scale:(0.1306, 0.1835, 0.1158);group:Group_14;locked:False;hidden:False;materials:custom9;]
+[name:;collection:Primitives;type:sphere_half;position:(0.0106, 0.3000, -0.0200);rotation:(0.0000, 0.0000, 180.0000);scale:(0.3780, 0.0600, 0.3600);group:Group_14;locked:False;hidden:False;materials:custom9;]
+[name:;collection:Ships;type:mast_middle;position:(-0.0151, 0.5600, -0.0355);rotation:(0.0000, 0.0000, 0.0000);scale:(0.2499, 0.2400, 0.2449);group:Group_14;locked:False;hidden:False;materials:foliage;]
+[name:;collection:Ships;type:detail_tireEmergency;position:(0.0604, 0.8502, -0.0305);rotation:(0.0000, 0.0000, 90.0000);scale:(0.3063, 1.2708, 0.2858);group:Group_14;locked:False;hidden:False;materials:foliage+foliage;]
+[name:;collection:Ships;type:mast_middle;position:(-0.2660, 0.8536, -0.0309);rotation:(0.0000, 180.0000, 90.0000);scale:(0.8073, 0.5095, 0.8023);group:Group_14;locked:False;hidden:False;materials:bricksDark;]
