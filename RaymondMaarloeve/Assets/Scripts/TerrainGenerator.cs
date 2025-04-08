@@ -5,17 +5,34 @@ using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
+[Serializable]
+public class BuildingConfig
+{
+    public GameObject prefab;
+    [Range(0f, 1f)] public float weight = 0.1f;
+    public int maxCount = 10;
+
+    [HideInInspector] public int currentCount = 0;
+}
+
 public class TerrainGenerator : MonoBehaviour
 {
     public static TerrainGenerator Instance { get; private set; }
+
     public NavMeshSurface surface;
+    public Terrain terrain;
 
     public int width = 100, height = 100;
     public int buildingArea = 10;
-    public GameObject[] Buildings;
-    public Terrain terrain;
 
+    [Range(0f, 1f)]
+    public float density = 0.2f;
+
+    public List<BuildingConfig> buildingConfigs = new List<BuildingConfig>();
     public List<GameObject> spawnedBuildings = new List<GameObject>();
+
+    private float[,,] baseAlphaMap; // czysta trawa
+    private float[,,] currentAlphaMap;
 
     void Awake()
     {
@@ -33,32 +50,107 @@ public class TerrainGenerator : MonoBehaviour
 
         spawnedBuildings.Clear();
 
-        for (int x = 0; x < terrainData.size.x; x += buildingArea)
-        {
-            for (int z = 0; z < terrainData.size.z; z += buildingArea)
-            {
-                Vector3 position = new Vector3(
-                    transform.position.x - width / 2 + x + buildingArea / 2,
-                    0,
-                    transform.position.z * 2 - height / 2 + z + buildingArea / 2
-                );
+        foreach (var config in buildingConfigs)
+            config.currentCount = 0;
 
-                int randomIndex = Random.Range(0, 100);
-                GameObject result = randomIndex switch
-                {
-                    int n when (n >= 0 && n <= 4) => Instantiate(Buildings[0], position, Quaternion.identity, terrain.transform),
-                    int n when (n >= 5 && n <= 9) => Instantiate(Buildings[1], position, Quaternion.identity, terrain.transform),
-                    int n when (n >= 10 && n <= 14) => Instantiate(Buildings[2], position, Quaternion.identity, terrain.transform),
-                    int n when (n >= 15 && n <= 19) => Instantiate(Buildings[3], position, Quaternion.identity, terrain.transform),
-                    _ => null
-                };
+        // wygeneruj i przetasuj listę możliwych pozycji siatki
+        List<Vector2Int> gridPositions = new List<Vector2Int>();
+        for (int x = 0; x < width; x += buildingArea)
+        {
+            for (int z = 0; z < height; z += buildingArea)
+            {
+                gridPositions.Add(new Vector2Int(x, z));
             }
         }
 
-        //DrawPathsBetweenBuildings();
+        Shuffle(gridPositions);
 
+        foreach (var gridPos in gridPositions)
+        {
+            if (Random.value > density)
+                continue;
+
+            float offsetX = Random.Range(1f, buildingArea - 1f);
+            float offsetZ = Random.Range(1f, buildingArea - 1f);
+
+            Vector3 position = new Vector3(
+                transform.position.x - width / 2 + gridPos.x + offsetX,
+                0,
+                transform.position.z - height / 2 + gridPos.y + offsetZ
+            );
+
+            GameObject prefab = PickBuilding();
+            if (prefab == null) continue;
+
+            GameObject go = Instantiate(prefab, position, Quaternion.identity, terrain.transform);
+            spawnedBuildings.Add(go);
+        }
+
+        baseAlphaMap = CreateCleanAlphaMap();
+        terrainData.SetAlphamaps(0, 0, baseAlphaMap);
+
+        DrawPathsBetweenBuildings();
         surface.BuildNavMesh();
+    }
 
+    private GameObject PickBuilding()
+    {
+        List<BuildingConfig> available = buildingConfigs.FindAll(b => b.currentCount < b.maxCount);
+        if (available.Count == 0) return null;
+
+        float totalWeight = 0f;
+        foreach (var b in available)
+            totalWeight += b.weight;
+
+        float rnd = Random.value * totalWeight;
+        float cumulative = 0f;
+
+        foreach (var b in available)
+        {
+            cumulative += b.weight;
+            if (rnd <= cumulative)
+            {
+                b.currentCount++;
+                return b.prefab;
+            }
+        }
+
+        return null;
+    }
+
+    private float[,,] CreateCleanAlphaMap()
+    {
+        TerrainData data = terrain.terrainData;
+        int w = data.alphamapWidth;
+        int h = data.alphamapHeight;
+        int layers = data.alphamapLayers;
+
+        float[,,] alphaMap = new float[w, h, layers];
+
+        for (int y = 0; y < h; y++)
+            for (int x = 0; x < w; x++)
+                alphaMap[x, y, 0] = 1f; // trawa = layer 0
+
+        return alphaMap;
+    }
+
+    public void ResetTerrainToBase()
+    {
+        if (baseAlphaMap == null)
+        {
+            Debug.LogWarning("baseAlphaMap jest null – nie utworzono go wcześniej.");
+            return;
+        }
+
+        terrain.terrainData.SetAlphamaps(0, 0, baseAlphaMap);
+        Debug.Log("Przywrócono teren do bazowej wersji (sama trawa).");
+    }
+
+    public void ClearBuildings()
+    {
+        foreach (var go in spawnedBuildings)
+            DestroyImmediate(go); // użyj Destroy() jeśli tylko w PlayMode
+        spawnedBuildings.Clear();
     }
 
     void DrawPathsBetweenBuildings()
@@ -75,7 +167,7 @@ public class TerrainGenerator : MonoBehaviour
             return;
         }
 
-        float[,,] alphaMap = terrainData.GetAlphamaps(0, 0, mapWidth, mapHeight);
+        currentAlphaMap = terrainData.GetAlphamaps(0, 0, mapWidth, mapHeight);
 
         foreach (var from in spawnedBuildings)
         {
@@ -96,12 +188,12 @@ public class TerrainGenerator : MonoBehaviour
                 {
                     float t = i / (float)steps;
                     Vector3 pos = Vector3.Lerp(alphaStart, alphaEnd, t);
-                    PaintCircleOnAlphaMap(alphaMap, (int)pos.x, (int)pos.z, pathWidth, 1, numTextures);
+                    PaintCircleOnAlphaMap(currentAlphaMap, (int)pos.x, (int)pos.z, pathWidth, 1, numTextures);
                 }
             }
         }
 
-        terrainData.SetAlphamaps(0, 0, alphaMap);
+        terrainData.SetAlphamaps(0, 0, currentAlphaMap);
     }
 
     Vector3 WorldToAlphaMapCoord(Vector3 worldPos, TerrainData terrainData)
@@ -148,6 +240,15 @@ public class TerrainGenerator : MonoBehaviour
                         alphas[px, pz, i] = (i == texIndex) ? 1f : 0f;
                 }
             }
+        }
+    }
+
+    void Shuffle<T>(List<T> list)
+    {
+        for (int i = list.Count - 1; i > 0; i--)
+        {
+            int rand = Random.Range(0, i + 1);
+            (list[i], list[rand]) = (list[rand], list[i]);
         }
     }
 }
