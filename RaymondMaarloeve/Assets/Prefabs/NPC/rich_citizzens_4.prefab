@@ -69,6 +69,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bb987a561d803eb41a7df901a483cde5, type: 3}
       insertIndex: -1
       addedObject: {fileID: -8302400760321068046}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: bb987a561d803eb41a7df901a483cde5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -3266578521810581984}
   m_SourcePrefab: {fileID: 100100000, guid: bb987a561d803eb41a7df901a483cde5, type: 3}
 --- !u!1 &1148605829637295999 stripped
 GameObject:
@@ -108,6 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ffb55a2648091504a6707d49e338ce6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 0}
   npcName: Unnamed NPC
   speed: 3
 --- !u!195 &-8302400760321068046
@@ -132,3 +136,25 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!95 &-3266578521810581984
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148605829637295999}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: eb2dd7e9d09b37944b24eff814c4db5e, type: 3}
+  m_Controller: {fileID: 9100000, guid: 999f17344bebaf4498cdd4639fd84edd, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
