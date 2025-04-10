@@ -62,10 +62,59 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b791e4f93ce45c62a934f731dfcd0c3d, type: 3}
       propertyPath: m_Name
-      value: studnia
+      value: Well New
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b791e4f93ce45c62a934f731dfcd0c3d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -8163931405584137806}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b791e4f93ce45c62a934f731dfcd0c3d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -119243400799744054}
   m_SourcePrefab: {fileID: 100100000, guid: b791e4f93ce45c62a934f731dfcd0c3d, type: 3}
+--- !u!1 &489591695903564298 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b791e4f93ce45c62a934f731dfcd0c3d, type: 3}
+  m_PrefabInstance: {fileID: 723400432396607323}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &-8163931405584137806
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 489591695903564298}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3145058497754134291, guid: b791e4f93ce45c62a934f731dfcd0c3d, type: 3}
+--- !u!208 &-119243400799744054
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 489591695903564298}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.404, y: 0.68600005, z: 0.423}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.043, y: 0.66400003, z: -0.021000002}
+  m_TimeToStationary: 0.5
