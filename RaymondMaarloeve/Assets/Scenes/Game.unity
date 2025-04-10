@@ -1933,10 +1933,14 @@ MonoBehaviour:
   height: 100
   buildingArea: 10
   Buildings:
-  - {fileID: 2378057268553226593, guid: e52c8f8704c3b9d44b660c2c75d98192, type: 3}
-  - {fileID: 4128734955017319067, guid: d1afe98c64fbce847b4bb993ad9a349f, type: 3}
   - {fileID: 5083285615235793076, guid: 147ab689729ac2e49b82aac972788668, type: 3}
   - {fileID: 6108394813680385468, guid: 655e06dc9db1cb746b7da3e9dacba6e0, type: 3}
+  - {fileID: 4128734955017319067, guid: d1afe98c64fbce847b4bb993ad9a349f, type: 3}
+  - {fileID: 1869102301479979069, guid: 6f8f8f50cef4e5672ace240d64134866, type: 3}
+  - {fileID: 9012655438019880852, guid: dd61dcfce8cdfb1b9b2e09368a5c9e67, type: 3}
+  - {fileID: 8097970678501141546, guid: 2728991a092826047ac869844385d4fe, type: 3}
+  - {fileID: 2378057268553226593, guid: e52c8f8704c3b9d44b660c2c75d98192, type: 3}
+  - {fileID: 489591695903564298, guid: cc6d52fdd67e37739b5d6a53fb8d7af7, type: 3}
   terrain: {fileID: 1438901263}
   spawnedBuildings: []
 --- !u!114 &1294622896
