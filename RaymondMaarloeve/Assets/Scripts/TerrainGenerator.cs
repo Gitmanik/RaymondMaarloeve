@@ -43,15 +43,11 @@ public class TerrainGenerator : MonoBehaviour
                     transform.position.z * 2 - height / 2 + z + buildingArea / 2
                 );
 
-                int randomIndex = Random.Range(0, 100);
-                GameObject result = randomIndex switch
+                if (Random.Range(0f, 1f) < 0.3f)
                 {
-                    int n when (n >= 0 && n <= 4) => Instantiate(Buildings[0], position, Quaternion.identity, terrain.transform),
-                    int n when (n >= 5 && n <= 9) => Instantiate(Buildings[1], position, Quaternion.identity, terrain.transform),
-                    int n when (n >= 10 && n <= 14) => Instantiate(Buildings[2], position, Quaternion.identity, terrain.transform),
-                    int n when (n >= 15 && n <= 19) => Instantiate(Buildings[3], position, Quaternion.identity, terrain.transform),
-                    _ => null
-                };
+                    int randomIdx = Random.Range(0, Buildings.Length);
+                    Instantiate(Buildings[randomIdx], position, Quaternion.identity, terrain.transform);
+                }
             }
         }
 

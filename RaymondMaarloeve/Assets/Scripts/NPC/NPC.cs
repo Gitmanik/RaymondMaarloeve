@@ -42,7 +42,9 @@ public class NPC : MonoBehaviour
         if (lookTarget != null)
         {
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, lookTarget.eulerAngles.y - 180, transform.eulerAngles.z);
-        }
+            currentDecision = null;
+            agent.ResetPath();
+        } else
 
         if (currentDecision == null || !currentDecision.Tick())
         {
