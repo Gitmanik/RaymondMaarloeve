@@ -1,3 +1,4 @@
+//MapGenerator.cs
 using System;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
@@ -25,8 +26,8 @@ public class MapGenerator : MonoBehaviour
 
     private float[,,] baseAlphaMap;
     //private float[,,] currentAlphaMap;
-    public int mapWidth;
-    public int mapLength;
+    [HideInInspector] public int mapWidth;
+    [HideInInspector] public int mapLength;
 
     void Awake()
     {
@@ -55,6 +56,10 @@ public class MapGenerator : MonoBehaviour
             {
                 tiles[x, z] = new Tile();
                 tiles[x, z].GridPosition = new Vector2Int(x * tileSize, z * tileSize);
+                tiles[x, z].TileCenter = new Vector2(transform.position.x - mapWidth / 2 + tiles[x, z].GridPosition.x + tileSize / 2f,
+                                                     transform.position.z - mapLength / 2 + tiles[x, z].GridPosition.y + tileSize / 2f);
+                tiles[x, z].PosXWallCenter = new Vector2(transform.position.x - mapWidth / 2 + tiles[x, z].GridPosition.x + tileSize,
+                                                     transform.position.z - mapLength / 2 + tiles[x, z].GridPosition.y + tileSize / 2f);
                 tiles[x, z].IsBuilding = false;
 
                 if (Random.value > buildingsDensity) continue; //spawn building decision
@@ -78,7 +83,10 @@ public class MapGenerator : MonoBehaviour
         }
         foreach (var tile in tiles)
         {
-            
+            if(tile.IsBuilding)
+            {
+                PaintPath(tile.TileCenter, tile.PosXWallCenter, 0.7f, 1);
+            }
 
         }
 
@@ -109,11 +117,6 @@ public class MapGenerator : MonoBehaviour
 
         return null;
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     private void OnDestroy()
     {
         terrain.terrainData.SetAlphamaps(0, 0, baseAlphaMap);
@@ -123,10 +126,100 @@ public class MapGenerator : MonoBehaviour
     //{
     //    terrain.terrainData.SetAlphamaps(0, 0, baseAlphaMap);
     //}
+    public void PaintPath(Vector2 start, Vector2 end, float radius, int textureLayerIndex)
+    {
+        TerrainData data = terrain.terrainData;
+        Vector3 terrainPos = terrain.transform.position;
+
+        int alphaWidth = data.alphamapWidth;
+        int alphaHeight = data.alphamapHeight;
+        int numLayers = data.alphamapLayers;
+
+        float[,,] alphas = data.GetAlphamaps(0, 0, alphaWidth, alphaHeight);
+
+        float distance = Vector2.Distance(start, end);
+        int steps = Mathf.CeilToInt(distance / (radius * 0.5f)); // krok co pó³ promienia
+        float mapRadius = (radius / data.size.x) * alphaWidth;
+
+        for (int i = 0; i <= steps; i++)
+        {
+            float t = i / (float)steps;
+            Vector2 point = Vector2.Lerp(start, end, t);
+
+            //WARNING coords are switched, in other way paths are painted in mirror Tile. IDK where is bug
+            int mapZ = (int)(((point.x - terrainPos.x) / data.size.x) * alphaWidth);
+            int mapX = (int)(((point.y - terrainPos.z) / data.size.z) * alphaHeight);
+
+            PaintCircle(alphas, mapX, mapZ, mapRadius, textureLayerIndex, numLayers);
+        }
+
+        data.SetAlphamaps(0, 0, alphas);
+    }
+
+    private void PaintCircle(float[,,] alphas, int centerX, int centerZ, float radius, int texIndex, int numTextures)
+    {
+        int r = Mathf.CeilToInt(radius);
+        for (int z = -r; z <= r; z++)
+        {
+            for (int x = -r; x <= r; x++)
+            {
+                int px = centerX + x;
+                int pz = centerZ + z;
+
+                if (px < 0 || pz < 0 || px >= alphas.GetLength(0) || pz >= alphas.GetLength(1)) continue;
+
+                if (x * x + z * z <= radius * radius)
+                {
+                    for (int i = 0; i < numTextures; i++)
+                        alphas[px, pz, i] = (i == texIndex) ? 1f : 0f;
+                }
+            }
+        }
+    }
+
+
+    private void OnDrawGizmos()
+    {
+        if (tiles == null) return;
+
+        // Kolor i rozmiar kó³ek dla œrodków kafelków
+        Gizmos.color = Color.green;
+        float sphereOffset = 0.1f;
+        float sphereRadius = 0.2f;
+
+        for (int x = 0; x < mapWidthInTiles; x++)
+        {
+            for (int z = 0; z < mapLengthInTiles; z++)
+            {
+                // jeœli nie masz Vector3 TileCenter, to zast¹p TileCenter.X i .Y odpowiednio
+                Vector3 tc = new Vector3(
+                    tiles[x, z].TileCenter.x,
+                    terrain.transform.position.y,
+                    tiles[x, z].TileCenter.y
+                );
+                Gizmos.DrawSphere(tc + Vector3.up * sphereOffset, sphereRadius);
+
+                if (tiles[x, z].IsBuilding && tiles[x, z].Building != null)
+                {
+                    // rysujemy druciany szeœcian wokó³ budynku
+                    Gizmos.color = Color.red;
+                    Vector3 bp = tiles[x, z].Building.transform.position;
+                    Gizmos.DrawWireCube(bp + Vector3.up * sphereOffset, Vector3.one * 0.5f);
+
+                    // przywracamy kolor dla kulki
+                    Gizmos.color = Color.green;
+                }
+            }
+        }
+    }
+
+
 }
 public class Tile
 {
     public Vector2Int GridPosition;
+    public Vector2 TileCenter;
+    public Vector2 PosXWallCenter;
     public GameObject TileObject;
     public GameObject Building;
     public bool IsBuilding = false;
