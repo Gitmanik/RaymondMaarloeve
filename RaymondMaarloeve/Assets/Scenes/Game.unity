@@ -1969,9 +1969,9 @@ MonoBehaviour:
   surface: {fileID: 1438901265}
   terrain: {fileID: 1438901263}
   tileSize: 10
-  mapWidthInTiles: 10
-  mapLengthInTiles: 10
-  buildingsDensity: 0.2
+  mapWidthInTiles: 14
+  mapLengthInTiles: 14
+  buildingsDensity: 0.125
   buildings:
   - prefab: {fileID: 5083285615235793076, guid: 147ab689729ac2e49b82aac972788668, type: 3}
     weight: 1
@@ -2255,7 +2255,7 @@ Transform:
   m_GameObject: {fileID: 1438901261}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -50, y: 0, z: -50}
+  m_LocalPosition: {x: -70, y: 0, z: -70}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

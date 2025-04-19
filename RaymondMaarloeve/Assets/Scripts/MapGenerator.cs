@@ -2,11 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
 public class MapGenerator : MonoBehaviour
@@ -28,7 +26,7 @@ public class MapGenerator : MonoBehaviour
     private List<Tile> buildingTiles;
     private int n;
     private float[,] d;
-    private Vector2[,] bestStart, bestGoal;
+    private Tile[,] bestStartTile, bestGoalTile;
     private List<int> nnPath, optPath;
 
 
@@ -58,17 +56,19 @@ public class MapGenerator : MonoBehaviour
         mapLength = tileSize * mapLengthInTiles;
         buildingTiles = new List<Tile>();
 
+        for (int x = 0; x < mapWidthInTiles; x++)
+            for (int z = 0; z < mapLengthInTiles; z++)
+                tiles[x, z] = new Tile();
 
         //Tiles init
         for (int x = 0; x < mapWidthInTiles; x++)   
         for (int z = 0; z < mapLengthInTiles; z++)
         {
-            tiles[x, z] = new Tile();
-            tiles[x, z].GridPosition = new Vector2Int(x * tileSize, z * tileSize);
-            tiles[x, z].TileCenter = new Vector2(transform.position.x - mapWidth / 2 + tiles[x, z].GridPosition.x + tileSize / 2f,
-                                                    transform.position.z - mapLength / 2 + tiles[x, z].GridPosition.y + tileSize / 2f);
-            tiles[x, z].PosXWallCenter = new Vector2(transform.position.x - mapWidth / 2 + tiles[x, z].GridPosition.x + tileSize,
-                                                    transform.position.z - mapLength / 2 + tiles[x, z].GridPosition.y + tileSize / 2f);
+            tiles[x, z].GridPosition = new Vector2Int(x, z);
+            tiles[x, z].TileCenter = new Vector2(transform.position.x - mapWidth / 2 + tiles[x, z].GridPosition.x * tileSize + tileSize / 2f,
+                                                    transform.position.z - mapLength / 2 + tiles[x, z].GridPosition.y * tileSize + tileSize / 2f);
+            tiles[x, z].PosXWallCenter = new Vector2(transform.position.x - mapWidth / 2 + tiles[x, z].GridPosition.x * tileSize + tileSize,
+                                                    transform.position.z - mapLength / 2 + tiles[x, z].GridPosition.y * tileSize + tileSize / 2f);
             var list = new List<Tile>();
             if (x > 0) list.Add(tiles[x - 1, z]);
             if (z > 0) list.Add(tiles[x , z -1]);
@@ -81,9 +81,9 @@ public class MapGenerator : MonoBehaviour
             if (Random.value > buildingsDensity) continue; //spawn building decision
 
             Vector3 buildingPosition = new Vector3(
-                transform.position.x - mapWidth / 2 + tiles[x, z].GridPosition.x + tileSize / 2f,
+                transform.position.x - mapWidth / 2 + tiles[x, z].GridPosition.x * tileSize + tileSize / 2f,
                 0,
-                transform.position.z - mapLength / 2 + tiles[x, z].GridPosition.y + tileSize / 2f
+                transform.position.z - mapLength / 2 + tiles[x, z].GridPosition.y * tileSize + tileSize / 2f
             );
 
             GameObject buildingPrefab = PickBuilding();
@@ -100,9 +100,11 @@ public class MapGenerator : MonoBehaviour
 
         //Manhattan distance matrix between buildings
         n = buildingTiles.Count;
+        if (n < 2) { surface.BuildNavMesh(); return; }
         d = new float[n, n];
-        bestStart = new Vector2[n, n];
-        bestGoal = new Vector2[n, n];
+        bestStartTile = new Tile[n, n];
+        bestGoalTile = new Tile[n, n];
+
         for (int i = 0; i < n; i++)
         {
             Tile startTile = buildingTiles[i];
@@ -112,13 +114,13 @@ public class MapGenerator : MonoBehaviour
                 if (i == j)
                 {
                     d[i, j] = 0f;
-                    bestStart[i, j] = startTile.TileCenter;
-                    bestGoal[i, j] = startTile.TileCenter;
+                    bestStartTile[i, j] = startTile;
+                    bestGoalTile[i, j] = endTile;
                     continue;
                 }
 
                 float bestDist = float.MaxValue;
-                Vector2 bp = default, bq = default;
+                Tile bp = default, bq = default;
                 foreach (Tile p in startTile.Neighbors)
                 {
                     if(p == null) continue;
@@ -132,8 +134,8 @@ public class MapGenerator : MonoBehaviour
                         if (dist < bestDist)
                         {
                             bestDist = dist;
-                            bp = p.TileCenter;
-                            bq = q.TileCenter;
+                            bp = p;
+                            bq = q;
                         }
                     }
                 }
@@ -141,50 +143,70 @@ public class MapGenerator : MonoBehaviour
                     bestDist = float.MaxValue / 2f;
 
                 d[i, j] = bestDist;
-                bestStart[i, j] = bp;
-                bestGoal[i, j] = bq;
+                bestStartTile[i, j] = bp;
+                bestGoalTile[i, j] = bq;
             }
         }
         nnPath = NearestNeighbor();
         optPath = TwoOpt(nnPath);
 
-        var fullPath = new List<Vector2Int>();
+        foreach (var t in tiles) t.IsPath = false;
+
+        var fullPath = new List<Tile>();
+        Tile lastTile = null;
+
         for (int k = 0; k < optPath.Count - 1; k++)
         {
-            // światowe współrzędne punktów sparowanych
-            Vector2 wFrom = bestStart[optPath[k], optPath[k + 1]];
-            Vector2 wTo = bestGoal[optPath[k], optPath[k + 1]];
+            Tile p = (k == 0)
+                ? bestStartTile[optPath[k], optPath[k + 1]]
+                : lastTile;
 
-            // zamiana world→grid indices
-            Vector2Int gFrom = WorldToGrid(wFrom);
-            Vector2Int gTo = WorldToGrid(wTo);
+            Tile q = bestGoalTile[optPath[k], optPath[k + 1]];
 
-            // BFS omijający budynki
-            var segment = BFSPath(gFrom, gTo);
-            if (fullPath.Count == 0)
-                fullPath.AddRange(segment);
-            else
-                fullPath.AddRange(segment.Skip(1));  // pomiń powtórzony węzeł
+            var segment = FindPath(p, q);
+
+            if (segment.Count == 0)  continue;  
+
+            if (k > 0) segment.RemoveAt(0);
+            fullPath.AddRange(segment);
+
+            lastTile = fullPath[fullPath.Count - 1];
         }
+        foreach (var t in tiles)    t.IsPath = false;
+        foreach (var t in fullPath) t.IsPath = true;
 
-        // 2) Narysuj każdy ruch bokiem
-        foreach (var (a, b) in fullPath.Zip(fullPath.Skip(1), (a, b) => (a, b)))
+        int pathTileCount = tiles.Cast<Tile>().Count(t => t.IsPath);
+        Debug.Log($"[DEBUG] liczba kafelków na ścieżce: {pathTileCount}");
+
+        // Drawing paths
+        foreach (var t in tiles)
         {
-            Vector2 cA = tiles[a.x, a.y].TileCenter;
-            Vector2 cB = tiles[b.x, b.y].TileCenter;
-            PaintPath(cA, cB, 1.0f, 1);
-        }
-
-
-
-        foreach (var tile in tiles)
-        {
-            if (tile.IsBuilding)
+            if (t.IsBuilding)
             {
-                PaintPath(tile.TileCenter, tile.PosXWallCenter, 0.7f, 1);
+                foreach (var nb in t.Neighbors)
+                {
+                    if (nb == null) continue;
+                    if (nb.IsPath)
+                    {
+                        PaintPath(t.TileCenter, nb.TileCenter, 0.7f, 1);
+                        break;
+                    }
+                }
             }
-
+            if (t.IsPath)
+            {
+                foreach (var nb in t.Neighbors)
+                {
+                    if (nb == null) continue;
+                    if (nb.IsPath)
+                    {
+                        PaintPath(t.TileCenter, nb.TileCenter, 0.9f, 1);
+                    }
+                }
+            }
+            
         }
+
         surface.BuildNavMesh();
     }
     private GameObject PickBuilding()
@@ -269,6 +291,7 @@ public class MapGenerator : MonoBehaviour
             }
         }
     }
+
     private float PathLength(List<int> path)
     {
         float len = 0f;
@@ -326,39 +349,42 @@ public class MapGenerator : MonoBehaviour
         }
         return path;
     }
-    private Vector2Int WorldToGrid(Vector2 world)
+    
+    
+    private List<Tile> FindPath(Tile start, Tile goal)
     {
-        // odwrotność obliczenia TileCenter → indeks kafelka
-        float fx = (world.x - (transform.position.x - mapWidth / 2) - tileSize / 2f) / tileSize;
-        float fz = (world.y - (transform.position.z - mapLength / 2) - tileSize / 2f) / tileSize;
-        return new Vector2Int(Mathf.Clamp(Mathf.RoundToInt(fx), 0, mapWidthInTiles - 1),
-                              Mathf.Clamp(Mathf.RoundToInt(fz), 0, mapLengthInTiles - 1));
-    }
-
-    private List<Vector2Int> BFSPath(Vector2Int start, Vector2Int goal)
-    {
-        var dirs = new[] { Vector2Int.right, Vector2Int.left, Vector2Int.up, Vector2Int.down };
-        var prev = new Dictionary<Vector2Int, Vector2Int>();
-        var queue = new Queue<Vector2Int>();
-        queue.Enqueue(start);
-        prev[start] = start;
-
-        while (queue.Count > 0)
+        if (start == null || goal == null)
         {
-            var cur = queue.Dequeue();
+            Debug.LogError($"FindPath: start ({start}) lub goal ({goal}) jest null");
+            return new List<Tile>();
+        }
+
+        // BFS
+        var prev = new Dictionary<Tile, Tile>();
+        var q = new Queue<Tile>();
+        prev[start] = start;
+        q.Enqueue(start);
+
+        while (q.Count > 0)
+        {
+            var cur = q.Dequeue();
             if (cur == goal) break;
-            foreach (var d in dirs)
+            foreach (var nb in cur.Neighbors)
             {
-                var nb = cur + d;
-                if (nb.x < 0 || nb.x >= mapWidthInTiles || nb.y < 0 || nb.y >= mapLengthInTiles) continue;
-                if (prev.ContainsKey(nb) || tiles[nb.x, nb.y].IsBuilding) continue;
+                if (nb == null || nb.IsBuilding || prev.ContainsKey(nb))
+                    continue;
                 prev[nb] = cur;
-                queue.Enqueue(nb);
+                q.Enqueue(nb);
             }
         }
 
-        var path = new List<Vector2Int>();
-        if (!prev.ContainsKey(goal)) return path;
+        if (!prev.ContainsKey(goal))
+        {
+            Debug.LogWarning($"FindPath: brak ścieżki {start.GridPosition}→{goal.GridPosition}");
+            return new List<Tile>();
+        }
+
+        var path = new List<Tile>();
         var node = goal;
         while (true)
         {
@@ -367,8 +393,14 @@ public class MapGenerator : MonoBehaviour
             node = prev[node];
         }
         path.Reverse();
+        foreach (var t in path)
+        {
+            Debug.Log($"FindPath segment tile: {t.GridPosition.x}, {t.GridPosition.y}");
+        }
         return path;
     }
+
+
 
 }
 public class Tile
@@ -380,6 +412,7 @@ public class Tile
     public GameObject TileObject;
     public GameObject Building;
     public bool IsBuilding = false;
+    public bool IsPath = false;
 }
 
 [Serializable]
