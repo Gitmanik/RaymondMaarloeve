@@ -1,0 +1,9 @@
+[project]
+name = "LLMServer"
+version = "0.1.0"
+description = "RaymondMaarloeve LLMServer"
+requires-python = ">=3.12"
+dependencies = [
+    "flask>=3.1.0",
+    "llama-cpp-python>=0.3.8",
+]
