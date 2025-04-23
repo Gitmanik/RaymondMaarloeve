@@ -4,6 +4,7 @@ using UnityEngine.AI;
 
 public class NPC : MonoBehaviour
 {
+
     private Transform lookTarget;
     private Vector3 oldLookTarget;
     
@@ -23,6 +24,8 @@ public class NPC : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+
+
     }
 
     public void Setup(IDecisionSystem decisionSystem)
@@ -42,7 +45,9 @@ public class NPC : MonoBehaviour
         if (lookTarget != null)
         {
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, lookTarget.eulerAngles.y - 180, transform.eulerAngles.z);
-        }
+            currentDecision = null;
+            agent.ResetPath();
+        } else
 
         if (currentDecision == null || !currentDecision.Tick())
         {
@@ -51,8 +56,9 @@ public class NPC : MonoBehaviour
             currentDecision.Setup(decisionSystem, this);
             Debug.Log($"New decision: {currentDecision}");
         }
+
     }
-    
+
     public void LookAt(Transform targetTransform)
     {
         Debug.Log($"{npcName} Looking at {(targetTransform == null ? "null" :  targetTransform.name)}");
