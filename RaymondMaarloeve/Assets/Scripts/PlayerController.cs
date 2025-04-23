@@ -56,10 +56,15 @@ public class PlayerController : MonoBehaviour
             {
                 StartInteraction(targetNPC.GetComponent<NPC>());
             }
-            else if (currentState == PlayerState.Interacting)
-            {
-                EndInteraction();
-            }
+            // else if (currentState == PlayerState.Interacting)
+            // {
+            //     EndInteraction();
+            // }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && currentState == PlayerState.Interacting)
+        {
+            EndInteraction();
         }
     }
 
@@ -108,6 +113,15 @@ public class PlayerController : MonoBehaviour
             Debug.LogError("CameraFollow.Instance is NULL!");
         }
 
+        if (UIManager.Instance != null)
+        {
+            UIManager.Instance.ShowDialogBox(); // Pokazanie okna dialogowego
+        }
+        else
+        {
+            Debug.LogError("UIManager.Instance is NULL!");
+        }
+
         Debug.Log("Rozpoczeto interakcje z NPC: " + npc.name);
         currentlyInteractingNPC = npc;
     }
@@ -127,6 +141,15 @@ public class PlayerController : MonoBehaviour
         else
         {
             Debug.LogError("CameraFollow.Instance is NULL!");
+        }
+
+        if (UIManager.Instance != null)
+        {
+            UIManager.Instance.HideDialogBox(); // Ukrycie okna dialogowego
+        }
+        else
+        {
+            Debug.LogError("UIManager.Instance is NULL!");
         }
 
         Debug.Log("Zakonczono interakcje");
