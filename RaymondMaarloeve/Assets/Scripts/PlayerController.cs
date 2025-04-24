@@ -23,6 +23,9 @@ public class PlayerController : MonoBehaviour
     
     private NPC currentlyInteractingNPC = null;
 
+    private Animator animator;
+
+
     void Awake()
     {
         Instance = this;
@@ -33,6 +36,8 @@ public class PlayerController : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         CameraFollow.Instance.SetTarget(transform, false);
         characterMesh = GetComponentInChildren<SkinnedMeshRenderer>();
+        animator = GetComponentInChildren<Animator>();
+
     }
 
     void Update()
@@ -76,6 +81,13 @@ public class PlayerController : MonoBehaviour
 
 
         characterController.Move(moveDirection * Time.deltaTime);
+        if (animator != null)
+        {
+            Vector3 horizontalMove = moveDirection;
+            horizontalMove.y = 0f; 
+            animator.SetFloat("Speed", horizontalMove.magnitude);
+        }
+
     }
 
     public void StartInteraction(NPC npc)

@@ -1880,7 +1880,6 @@ GameObject:
   - component: {fileID: 1294622894}
   - component: {fileID: 1294622896}
   - component: {fileID: 1294622893}
-  - component: {fileID: 1294622895}
   - component: {fileID: 1294622897}
   m_Layer: 0
   m_Name: _GameManager
@@ -1917,32 +1916,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1294622895
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1294622892}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50fdc9fb52cc1754790c71d56d972c56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  surface: {fileID: 1438901265}
-  width: 100
-  height: 100
-  buildingArea: 10
-  Buildings:
-  - {fileID: 5083285615235793076, guid: 147ab689729ac2e49b82aac972788668, type: 3}
-  - {fileID: 6108394813680385468, guid: 655e06dc9db1cb746b7da3e9dacba6e0, type: 3}
-  - {fileID: 1869102301479979069, guid: 6f8f8f50cef4e5672ace240d64134866, type: 3}
-  - {fileID: 9012655438019880852, guid: dd61dcfce8cdfb1b9b2e09368a5c9e67, type: 3}
-  - {fileID: 8097970678501141546, guid: 2728991a092826047ac869844385d4fe, type: 3}
-  - {fileID: 489591695903564298, guid: cc6d52fdd67e37739b5d6a53fb8d7af7, type: 3}
-  - {fileID: 8645983123983650190, guid: f943be0a40f73c946b4c203502cba513, type: 3}
-  terrain: {fileID: 1438901263}
-  spawnedBuildings: []
 --- !u!114 &1294622896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1983,6 +1956,74 @@ MonoBehaviour:
   timeOfDay: 6
   dayDurationInMinutes: 1
   directionalLight: {fileID: 1930731676}
+  m_Script: {fileID: 11500000, guid: b664b8ddd7031c1439bf5641cb779352, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  surface: {fileID: 1438901265}
+  terrain: {fileID: 1438901263}
+  tileSize: 10
+  mapWidthInTiles: 14
+  mapLengthInTiles: 14
+  buildingsDensity: 0.125
+  buildings:
+  - prefab: {fileID: 5083285615235793076, guid: 147ab689729ac2e49b82aac972788668, type: 3}
+    weight: 1
+    maxCount: 3
+    occurenceRadius: 0
+    currentCount: 0
+  - prefab: {fileID: 6108394813680385468, guid: 655e06dc9db1cb746b7da3e9dacba6e0, type: 3}
+    weight: 1
+    maxCount: 3
+    occurenceRadius: 0
+    currentCount: 0
+  - prefab: {fileID: 4128734955017319067, guid: d1afe98c64fbce847b4bb993ad9a349f, type: 3}
+    weight: 1
+    maxCount: 3
+    occurenceRadius: 0
+    currentCount: 0
+  - prefab: {fileID: 1869102301479979069, guid: 6f8f8f50cef4e5672ace240d64134866, type: 3}
+    weight: 1
+    maxCount: 3
+    occurenceRadius: 0
+    currentCount: 0
+  - prefab: {fileID: 9012655438019880852, guid: dd61dcfce8cdfb1b9b2e09368a5c9e67, type: 3}
+    weight: 1
+    maxCount: 3
+    occurenceRadius: 0
+    currentCount: 0
+  - prefab: {fileID: 206528979659577565, guid: cc6934e2e20fab840a439cc2178719de, type: 3}
+    weight: 1
+    maxCount: 3
+    occurenceRadius: 0
+    currentCount: 0
+  - prefab: {fileID: 8097970678501141546, guid: 2728991a092826047ac869844385d4fe, type: 3}
+    weight: 1
+    maxCount: 3
+    occurenceRadius: 0
+    currentCount: 0
+  - prefab: {fileID: 5809783869429004467, guid: 6c440fd867dc25c43b3eac01ed5171fa, type: 3}
+    weight: 1
+    maxCount: 3
+    occurenceRadius: 0
+    currentCount: 0
+  - prefab: {fileID: 8097970678501141546, guid: 2728991a092826047ac869844385d4fe, type: 3}
+    weight: 1
+    maxCount: 3
+    occurenceRadius: 0
+    currentCount: 0
+  - prefab: {fileID: 8097970678501141546, guid: 2728991a092826047ac869844385d4fe, type: 3}
+    weight: 1
+    maxCount: 3
+    occurenceRadius: 0
+    currentCount: 0
+  - prefab: {fileID: 8097970678501141546, guid: 2728991a092826047ac869844385d4fe, type: 3}
+    weight: 1
+    maxCount: 3
+    occurenceRadius: 0
+    currentCount: 0
+  spawnedBuildings: []
+  mapWidth: 0
+  mapLength: 0
 --- !u!1 &1321225839
 GameObject:
   m_ObjectHideFlags: 0
@@ -2207,7 +2248,7 @@ Transform:
   m_GameObject: {fileID: 1438901261}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -50, y: 0, z: -50}
+  m_LocalPosition: {x: -70, y: 0, z: -70}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2716,7 +2757,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4507222578449718631, guid: f1cd53ea223a5cf43bf282c3a34b494c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.41
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4507222578449718631, guid: f1cd53ea223a5cf43bf282c3a34b494c, type: 3}
       propertyPath: m_LocalRotation.w
