@@ -17,11 +17,12 @@ def load_model():
     Expected JSON payload:
     {
          "model_id": "unique_model_identifier",   // required: used to reference the model later
-         "model_path": "path/to/ggml-model.bin",      // required: path to the model file
-         "n_ctx": 1024,                             // optional: context window size (default: 1024)
-         "n_parts": -1,                             // optional: number of model parts, -1 auto-detects parts
-         "seed": 42,                                // optional: RNG seed (default: 42)
-         "f16_kv": false                            // optional: whether to use fp16 key-value caching
+         "model_path": "path/to/ggml-model.bin",  // required: path to the model file
+         "n_ctx": 1024,                           // optional: context window size (default: 1024)
+         "n_parts": -1,                           // optional: number of model parts, -1 auto-detects parts
+         "seed": 42,                              // optional: RNG seed (default: 42)
+         "f16_kv": false,                         // optional: whether to use fp16 key-value caching
+         "n_gpu_layers": -1                       // optional: number of layers to offload to GPU, -1 for all (default: -1)
     }
     """
     global models
@@ -43,6 +44,7 @@ def load_model():
     n_parts = data.get("n_parts", -1)
     seed = data.get("seed", 42)
     f16_kv = data.get("f16_kv", False)
+    n_gpu_layers = data.get("n_gpu_layers", -1)  # -1 offloads all layers to GPU
 
     try:
         model = Llama(
@@ -50,7 +52,8 @@ def load_model():
             n_ctx=n_ctx,
             n_parts=n_parts,
             seed=seed,
-            f16_kv=f16_kv
+            f16_kv=f16_kv,
+            n_gpu_layers=n_gpu_layers,
         )
         models[model_id] = model
         return jsonify({"message": f"Model '{model_id}' loaded successfully from {model_path}."}), 200
