@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     private Transform targetNPC = null;
     private SkinnedMeshRenderer characterMesh;
     
-    private NPC currentlyInteractingNPC = null;
+    public NPC currentlyInteractingNPC = null;
 
     private Animator animator;
 
@@ -56,10 +56,15 @@ public class PlayerController : MonoBehaviour
             {
                 StartInteraction(targetNPC.GetComponent<NPC>());
             }
-            else if (currentState == PlayerState.Interacting)
-            {
-                EndInteraction();
-            }
+            // else if (currentState == PlayerState.Interacting)
+            // {
+            //     EndInteraction();
+            // }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && currentState == PlayerState.Interacting)
+        {
+            EndInteraction();
         }
     }
 
@@ -99,6 +104,8 @@ public class PlayerController : MonoBehaviour
 
         npc.LookAt(CameraFollow.Instance.transform);
         
+        currentlyInteractingNPC = npc;
+        
         if (CameraFollow.Instance != null)
         {
             CameraFollow.Instance.SetTarget(npc.transform, true); // Kamera przybliza sie do NPC
@@ -108,8 +115,16 @@ public class PlayerController : MonoBehaviour
             Debug.LogError("CameraFollow.Instance is NULL!");
         }
 
+        if (DialogBoxManager.Instance != null)
+        {
+            DialogBoxManager.Instance.ShowDialogBox(); // Pokazanie okna dialogowego
+        }
+        else
+        {
+            Debug.LogError("DialogBoxManager.Instance is NULL!");
+        }
+
         Debug.Log("Rozpoczeto interakcje z NPC: " + npc.name);
-        currentlyInteractingNPC = npc;
     }
 
     public void EndInteraction()
@@ -127,6 +142,15 @@ public class PlayerController : MonoBehaviour
         else
         {
             Debug.LogError("CameraFollow.Instance is NULL!");
+        }
+
+        if (DialogBoxManager.Instance != null)
+        {
+            DialogBoxManager.Instance.HideDialogBox(); // Ukrycie okna dialogowego
+        }
+        else
+        {
+            Debug.LogError("DialogBoxManager.Instance is NULL!");
         }
 
         Debug.Log("Zakonczono interakcje");
