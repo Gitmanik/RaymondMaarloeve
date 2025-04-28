@@ -1,4 +1,4 @@
-# Model Testing Report – Mathstral-7B
+# Model Testing Report – Mistral-7B
 
 **Tester:** Kamil Włodarczyk  
 **Date:** 08.04.2025

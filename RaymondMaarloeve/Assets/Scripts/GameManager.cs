@@ -29,14 +29,15 @@ public class GameManager : MonoBehaviour
         // TODO: Prawdopodobnie tutaj konfiguracja połączenia z serwerem LLM
         // Będzie wymagany centralny system tych systemów, żeby korzystały z jednego połączenia sieciowego?
         
-        TerrainGenerator.Instance.GenerateMap();
+        MapGenerator.Instance.GenerateMap();
+
 
         List<GameObject> npcPrefabsList = npcPrefabs.ToList();
         
         for (int i = 0; i < npcCount; i++)
         {
-            Vector3 npcPosition = new Vector3(TerrainGenerator.Instance.transform.position.x - TerrainGenerator.Instance.width/2 + Random.Range(0, TerrainGenerator.Instance.width), 0, TerrainGenerator.Instance.transform.position.z - TerrainGenerator.Instance.height/2 + Random.Range(0, TerrainGenerator.Instance.height));
-            
+            Vector3 npcPosition = new Vector3(MapGenerator.Instance.transform.position.x - MapGenerator.Instance.mapWidth / 2 + Random.Range(0, MapGenerator.Instance.mapWidth), 0, MapGenerator.Instance.transform.position.z - MapGenerator.Instance.mapLength / 2 + Random.Range(0, MapGenerator.Instance.mapLength));
+
             int npcVariant = Random.Range(0, npcPrefabsList.Count);
             GameObject newNpc = Instantiate(npcPrefabsList[npcVariant], npcPosition, Quaternion.identity);
             npcPrefabsList.RemoveAt(npcVariant);

@@ -70,17 +70,17 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ae23bec6e3696e26c90a08d33f6e22e9, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -2150463856182996623}
+      addedObject: {fileID: 3753647212433442756}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ae23bec6e3696e26c90a08d33f6e22e9, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -210360975581042015}
+      addedObject: {fileID: -1803122639155107940}
   m_SourcePrefab: {fileID: 100100000, guid: ae23bec6e3696e26c90a08d33f6e22e9, type: 3}
 --- !u!1 &8097970678501141546 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ae23bec6e3696e26c90a08d33f6e22e9, type: 3}
   m_PrefabInstance: {fileID: 8980367583544594811}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &-2150463856182996623
+--- !u!64 &3753647212433442756
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -102,7 +102,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -3145058497754134291, guid: ae23bec6e3696e26c90a08d33f6e22e9, type: 3}
---- !u!208 &-210360975581042015
+--- !u!208 &-1803122639155107940
 NavMeshObstacle:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
