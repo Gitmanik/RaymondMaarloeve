@@ -54,12 +54,17 @@ jobs:
         run: echo "::set-output name=current_datetime::$(date '+%Y-%m-%d-%H%M%S')"
         
       - name: Create output directory
-        run: mkdir -p $GITHUB_WORKSPACE/output  # Make sure the output directory exists
+        run: mkdir -p ${{ github.workspace }}/output  # Ensure output directory exists
 
       - name: Zip build artifacts
         run: |
+          echo "Creating zip for ${matrix.targetPlatform}..."
           cd build/${{ matrix.targetPlatform }}
-          zip -r $GITHUB_WORKSPACE/output/${{ matrix.targetPlatform }}.zip .  # Save the zip in the output directory
+          zip -r ${{ github.workspace }}/output/${{ matrix.targetPlatform }}.zip .  # Use the correct workspace variable
+          ls -lh ${{ github.workspace }}/output  # List files to verify the zip is created
+
+      - name: Debug output directory contents
+        run: ls -lh ${{ github.workspace }}/output  # Verify the zip file is there
 
       - name: Create release
         id: create_release
@@ -77,6 +82,6 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: $GITHUB_WORKSPACE/output/${{ matrix.targetPlatform }}.zip
+          asset_path: ${{ github.workspace }}/output/${{ matrix.targetPlatform }}.zip  # Now pointing to the correct zip file
           asset_name: Build-${{ matrix.targetPlatform }}.zip
           asset_content_type: application/zip
