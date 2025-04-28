@@ -3,6 +3,11 @@ name: Build Unity Game Project
 on:
   push:
     branches: [ gitmanik-autobuild ]
+    paths:
+      - 'RaymondMaarloeve/**'  # Trigger on changes in the 'RaymondMaarloeve' folder
+on:
+  push:
+    branches: [ gitmanik-autobuild ]
   pull_request:
     branches: [ gitmanik-autobuild ]
   workflow_dispatch: # Allows manual triggering
@@ -29,15 +34,15 @@ jobs:
       - name: Get commit history since last release for RaymondMaarloeve folder
         id: changelog
         run: |
-          # Get the last tag (release) and find all commits since it
-          LAST_RELEASE=$(git describe --tags --abbrev=0)
+          # Get the last tag (release), or fallback to the first commit if no tags are found
+          LAST_RELEASE=$(git describe --tags --abbrev=0 2>/dev/null || git rev-list --max-parents=0 HEAD)
           echo "Last release: $LAST_RELEASE"
           
           # Get the commit log from the last release to the current commit, limited to the RaymondMaarloeve folder
           COMMITS=$(git log $LAST_RELEASE..HEAD --oneline -- RaymondMaarloeve/)
           echo "Commits affecting RaymondMaarloeve since last release:"
           echo "$COMMITS"
-          
+
           # Set the commit log to be used in the release body
           echo "::set-output name=changelog::$COMMITS"
 
