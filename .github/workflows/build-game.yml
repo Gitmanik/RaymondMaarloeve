@@ -49,14 +49,18 @@ jobs:
           name: Build-${{ matrix.targetPlatform }}
           path: build/${{ matrix.targetPlatform }}
           
+      - name: Get current date and time
+        id: datetime
+        run: echo "::set-output name=current_datetime::$(date '+%Y-%m-%d-%H%M%S')"
+        
       - name: Create release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.sha }}
-          release_name: Release ${{ github.sha }}
+          tag_name: release-${{ steps.datetime.outputs.current_datetime }}  # Tag in format release-YYYY-MM-DD-HHMMSS
+          release_name: Release ${{ steps.datetime.outputs.current_datetime }}
           body: 'Automated release for build of ${{ matrix.targetPlatform }}'
           draft: false
           prerelease: false
