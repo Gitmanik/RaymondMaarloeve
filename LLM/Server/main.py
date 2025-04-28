@@ -28,16 +28,16 @@ def load_model():
     global models
     data = request.get_json()
     if not data:
-        return jsonify({"error": "No input data provided."}), 400
+        return jsonify({"message": "No input data provided.", "success": False}), 400
 
     model_id = data.get("model_id")
     model_path = data.get("model_path")
 
     if not model_id or not model_path:
-        return jsonify({"error": "Missing required parameters: 'model_id' and 'model_path'."}), 400
+        return jsonify({"message": "Missing required parameters: 'model_id' and 'model_path'.", "success": False}), 400
 
     if model_id in models:
-        return jsonify({"error": f"Model with ID '{model_id}' is already loaded."}), 400
+        return jsonify({"message": f"Model with ID '{model_id}' is already loaded.", "success": False}), 400
 
     # Use provided parameters or default values.
     n_ctx = data.get("n_ctx", 1024)
@@ -56,13 +56,15 @@ def load_model():
             n_gpu_layers=n_gpu_layers,
         )
         models[model_id] = model
-        return jsonify({"message": f"Model '{model_id}' loaded successfully from {model_path}."}), 200
+        return jsonify({
+            "message": f"Model '{model_id}' loaded successfully from {model_path}.",
+            "success": True
+        }), 200
     except Exception as e:
         return jsonify({
-            "error": f"Failed to load model '{model_id}': {str(e)}",
-            "trace": traceback.format_exc()
+            "message": f"Failed to load model '{model_id}': {str(e)}\ntrace: {traceback.format_exc()}",
+            "success": False
         }), 500
-
 
 @app.route("/chat", methods=["POST"])
 def chat():
@@ -88,25 +90,24 @@ def chat():
     global models
     data = request.get_json()
     if not data:
-        return jsonify({"error": "No input data provided."}), 400
+        return jsonify({"message": "No input data provided.", "success": False}), 400
 
     model_id = data.get("model_id")
     messages = data.get("messages", [])
 
     if not model_id or not messages:
-        return jsonify({"error": "Missing required parameters: 'model_id' and 'messages'."}), 400
+        return jsonify({"message": "Missing required parameters: 'model_id' and 'messages'.", "success": False}), 400
 
-    # Validate messages format
     for msg in messages:
         if not isinstance(msg, dict) or "role" not in msg or "content" not in msg:
-            return jsonify({"error": "Invalid message format. Each message must have 'role' and 'content' fields."}), 400
+            return jsonify({"message": "Invalid message format. Each message must have 'role' and 'content' fields.", "success": False}), 400
         if msg["role"] not in ["system", "user", "assistant"]:
-            return jsonify({"error": f"Invalid role: '{msg['role']}'. Must be 'system', 'user', or 'assistant'."}), 400
+            return jsonify({"message": f"Invalid role: '{msg['role']}'. Must be 'system', 'user', or 'assistant'.", "success": False}), 400
 
     # Check if the specified model is loaded.
     model = models.get(model_id)
     if model is None:
-        return jsonify({"error": f"No loaded model found for model_id '{model_id}'."}), 400
+        return jsonify({"message": f"No loaded model found for model_id '{model_id}'.", "success": False}), 400
 
     # Optional parameters with default values
     max_tokens = data.get("max_tokens", 100)
@@ -130,13 +131,12 @@ def chat():
         if "choices" in response and response["choices"]:
             generated_text = response["choices"][0]["text"]
             
-        return jsonify({"response": generated_text.strip()}), 200
+        return jsonify({"response": generated_text.strip(), "success": True}), 200
     except Exception as e:
         return jsonify({
-            "error": f"Chat completion failed for model '{model_id}': {str(e)}",
-            "trace": traceback.format_exc()
+            "message": f"Chat completion failed for model '{model_id}': {str(e)}\ntrace:{traceback.format_exc()}",
+            "success": False
         }), 500
-
 
 @app.route("/unload", methods=["POST"])
 def unload_model():
@@ -151,23 +151,28 @@ def unload_model():
     global models
     data = request.get_json()
     if not data:
-        return jsonify({"error": "No input data provided."}), 400
+        return jsonify({"message": "No input data provided.", "success": False}), 400
 
     model_id = data.get("model_id")
     if not model_id:
-        return jsonify({"error": "Missing required parameter: 'model_id'."}), 400
+        return jsonify({"message": "Missing required parameter: 'model_id'.", "success": False}), 400
 
     if model_id not in models:
-        return jsonify({"error": f"Model with ID '{model_id}' is not loaded."}), 400
+        return jsonify({"message": f"Model with ID '{model_id}' is not loaded.", "success": False}), 400
 
     try:
         # Unload the model by removing it from the dictionary. The garbage collector
         # will later reclaim the memory.
         models.pop(model_id)
-        return jsonify({"message": f"Model '{model_id}' has been unloaded successfully."}), 200
+        return jsonify({
+            "message": f"Model '{model_id}' has been unloaded successfully.",
+            "success": True
+        }), 200
     except Exception as e:
-        return jsonify({"error": f"Failed to unload model '{model_id}': {str(e)}"}), 500
-
+        return jsonify({
+            "message": f"Failed to unload model '{model_id}': {str(e)}",
+            "success": False
+        }), 500
 
 @app.route("/status", methods=["GET"])
 def status():
