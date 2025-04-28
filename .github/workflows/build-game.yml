@@ -39,8 +39,8 @@ jobs:
           echo "Commits affecting RaymondMaarloeve since last release:"
           echo "$COMMITS"
 
-          # Set the commit log to be used in the release body
-          echo "::set-output name=changelog::$COMMITS"
+          # Save the commit log to a temporary file to preserve newlines
+          echo "$COMMITS" > $GITHUB_WORKSPACE/commits.txt
 
       - name: Cache Library folder
         uses: actions/cache@v4
@@ -98,7 +98,7 @@ jobs:
             Automated release for build of ${{ matrix.targetPlatform }}
 
             **Changelog:**
-            ${{ steps.changelog.outputs.changelog }}
+            $(cat $GITHUB_WORKSPACE/commits.txt)  # Read from the temporary file
           draft: false
           prerelease: false
 
