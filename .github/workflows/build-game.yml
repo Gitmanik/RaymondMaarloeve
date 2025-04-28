@@ -57,10 +57,12 @@ jobs:
         run: mkdir -p ${{ github.workspace }}/output  # Ensure output directory exists
 
       - name: Zip build artifacts
+        env:
+          TARGET_PLATFORM: ${{ matrix.targetPlatform }}  # Pass matrix variable to the shell as an env variable
         run: |
-          echo "Creating zip for ${matrix.targetPlatform}..."
-          cd build/${{ matrix.targetPlatform }}
-          zip -r ${{ github.workspace }}/output/${{ matrix.targetPlatform }}.zip .  # Use the correct workspace variable
+          echo "Creating zip for $TARGET_PLATFORM..."  # Access the variable as $TARGET_PLATFORM
+          cd build/$TARGET_PLATFORM
+          zip -r ${{ github.workspace }}/output/$TARGET_PLATFORM.zip .  # Use the correct workspace variable
           ls -lh ${{ github.workspace }}/output  # List files to verify the zip is created
 
       - name: Debug output directory contents
