@@ -67,7 +67,7 @@ public class DialogBoxManager : MonoBehaviour
     {
         // Here you can implement your logic to generate a response based on the input.
         // For now, we will just echo the input back to the player.
-        return"You said " + input + " and I agree!" + "\nPress Enter to continue...";
+        return "You said " + input + " and I agree!" + "\nPress Enter to continue...";
     }
 
     private void Update()
