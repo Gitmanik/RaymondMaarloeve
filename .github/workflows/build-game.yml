@@ -39,8 +39,8 @@ jobs:
           echo "Commits affecting RaymondMaarloeve since last release:"
           echo "$COMMITS"
 
-          # Set the commits as an output, preserving multi-line
-          echo "::set-output name=commits::$(echo "$COMMITS" | sed 's/\$/\\$/g' | sed 's/\n/\\n/g')"
+          # Save the commit log to a temporary file
+          echo "$COMMITS" > $RUNNER_TEMP/commits.txt
 
       - name: Cache Library folder
         uses: actions/cache@v4
@@ -98,7 +98,7 @@ jobs:
             Automated release for build of ${{ matrix.targetPlatform }}
 
             **Changelog:**
-            ${{ steps.changelog.outputs.commits }}
+            $(cat $RUNNER_TEMP/commits.txt)
           draft: false
           prerelease: false
 
