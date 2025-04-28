@@ -1,11 +1,11 @@
 name: Build Unity Game Project
 
 on:
-  workflow_dispatch:
   push:
-    branches: [ gitmanik-autobuild ]
+    branches: [ main, gitmanik-autobuild ]
     paths:
       - 'RaymondMaarloeve/**'  # Trigger on changes in the 'RaymondMaarloeve' folder
+  workflow_dispatch:
 
 jobs:
   buildForAllPlatforms:
