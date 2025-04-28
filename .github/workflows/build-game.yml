@@ -39,8 +39,11 @@ jobs:
           echo "Commits affecting RaymondMaarloeve since last release:"
           echo "$COMMITS"
 
-          # Save the commit log to a temporary file
-          echo "$COMMITS" > $RUNNER_TEMP/commits.txt
+          # Save the commit log to a markdown file with additional information
+          echo "# Release Changelog for ${{ github.repository }}" > $RUNNER_TEMP/commits.md
+          echo "Release Date: $(date '+%Y-%m-%d %H:%M:%S')" >> $RUNNER_TEMP/commits.md
+          echo "### Changelog for Game build:" >> $RUNNER_TEMP/commits.md
+          echo "$COMMITS" >> $RUNNER_TEMP/commits.md
 
       - name: Cache Library folder
         uses: actions/cache@v4
@@ -94,11 +97,7 @@ jobs:
         with:
           tag_name: release-${{ steps.datetime.outputs.current_datetime }}  # Tag in format release-YYYY-MM-DD-HHMMSS
           release_name: Release ${{ steps.datetime.outputs.current_datetime }}
-          body: |
-            Automated release for build of ${{ matrix.targetPlatform }}
-
-            **Changelog:**
-            $(cat $RUNNER_TEMP/commits.txt)
+          body_path: ${{ runner.temp }}/commits.md  # Point to the new markdown file with additional info
           draft: false
           prerelease: false
 
