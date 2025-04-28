@@ -53,6 +53,11 @@ jobs:
         id: datetime
         run: echo "::set-output name=current_datetime::$(date '+%Y-%m-%d-%H%M%S')"
         
+      - name: Zip build artifacts
+        run: |
+          cd build/${{ matrix.targetPlatform }}
+          zip -r ../${{ matrix.targetPlatform }}.zip .
+        
       - name: Create release
         id: create_release
         uses: actions/create-release@v1
@@ -69,6 +74,6 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: build/${{ matrix.targetPlatform }}
+          asset_path: build/${{ matrix.targetPlatform }}.zip
           asset_name: Build-${{ matrix.targetPlatform }}.zip
           asset_content_type: application/zip
