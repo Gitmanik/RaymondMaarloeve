@@ -1,6 +1,7 @@
 name: Build Unity Game Project
 
 on:
+  workflow_dispatch:
   push:
     branches: [ gitmanik-autobuild ]
     paths:
