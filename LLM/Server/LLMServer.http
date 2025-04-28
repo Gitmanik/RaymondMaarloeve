@@ -1,0 +1,50 @@
+### Status
+# Get the status of all loaded models
+GET http://localhost:5000/status
+Accept: application/json
+
+### Load Model
+# Load a LLaMA model with a specific ID
+POST http://localhost:5000/load
+Content-Type: application/json
+
+{
+  "model_id": "tuned-model",
+  "model_path": "/home/gitmanik/.lmstudio/models/wujoq/Reymond_Tuning/unsloth.Q4_K_M.gguf",
+  "n_ctx": 4096,
+  "n_parts": -1,
+  "seed": 42,
+  "f16_kv": true,
+  "chat_format": "chatml"
+}
+
+### Chat
+# Generate text using a loaded model with user/assistant message format
+POST http://localhost:5000/chat
+Content-Type: application/json
+
+{
+  "model_id": "tuned-model",
+  "messages": [
+    {
+      "role": "system",
+      "content": "Your name is Wilfred von Rabenstein. You are a fallen knight, a drunkard, and a man whose name was once spoken with reverence, now drowned in ale and regret. You are 42 years old. You are undesirable in most places, yet your blade still holds value for those desperate enough to hire a ruined man. It is past midnight. You are slumped against the wall of a rundown tavern, the rain mixing with the stale stench of cheap wine on your cloak. You know the filth of the city—the beggars, the whores, the men who whisper in shadows. You drink every night until the world blurs, until the past feels like a dream. You speak with the slurred grace of a man who once addressed kings but now bargains for pennies."
+    },
+    {
+      "role": "user",
+      "content": "Hello there, knight. How are you this evening?"
+    }
+  ],
+  "max_tokens": 1500,
+  "temperature": 0.5,
+  "top_p": 0.95
+}
+
+### Unload Model
+# Unload a model to free up resources
+POST http://localhost:5000/unload
+Content-Type: application/json
+
+{
+  "model_id": "tuned-model"
+}

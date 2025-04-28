@@ -64,19 +64,26 @@ def load_model():
         }), 500
 
 
-@app.route("/predict", methods=["POST"])
-def predict():
+@app.route("/chat", methods=["POST"])
+def chat():
     """
-    Generate text using a specified loaded LLaMA model.
+    Generate responses using a chat-based format with user and assistant messages.
 
     Expected JSON payload:
     {
-       "model_id": "unique_model_identifier",  // required: specifies which model to use
-       "prompt": "Your prompt here",             // required: text prompt for generation
-       "max_tokens": 100,                        // optional: maximum tokens to generate (default: 100)
-       "temperature": 0.8,                       // optional: sampling temperature (default: 0.8)
-       "top_p": 0.95                             // optional: nucleus sampling top_p (default: 0.95)
+        "model_id": "unique_model_identifier",  // required: specifies which model to use
+        "messages": [                            // required: array of message objects
+            {"role": "system", "content": "You are a helpful assistant."}, // optional system message
+            {"role": "user", "content": "Hello, how are you?"},            // user messages
+            {"role": "assistant", "content": "I'm doing well, thank you!"}, // assistant messages
+            {"role": "user", "content": "Tell me about yourself."}         // typically ends with user
+        ],
+        "max_tokens": 100,                       // optional: maximum tokens to generate (default: 100)
+        "temperature": 0.8,                      // optional: sampling temperature (default: 0.8)
+        "top_p": 0.95                            // optional: nucleus sampling top_p (default: 0.95)
     }
+
+    Returns just the generated assistant response text.
     """
     global models
     data = request.get_json()
@@ -84,35 +91,49 @@ def predict():
         return jsonify({"error": "No input data provided."}), 400
 
     model_id = data.get("model_id")
-    prompt = data.get("prompt", "")
-    if not model_id or prompt == "":
-        return jsonify({"error": "Missing required parameters: 'model_id' and 'prompt'."}), 400
+    messages = data.get("messages", [])
+
+    if not model_id or not messages:
+        return jsonify({"error": "Missing required parameters: 'model_id' and 'messages'."}), 400
+
+    # Validate messages format
+    for msg in messages:
+        if not isinstance(msg, dict) or "role" not in msg or "content" not in msg:
+            return jsonify({"error": "Invalid message format. Each message must have 'role' and 'content' fields."}), 400
+        if msg["role"] not in ["system", "user", "assistant"]:
+            return jsonify({"error": f"Invalid role: '{msg['role']}'. Must be 'system', 'user', or 'assistant'."}), 400
 
     # Check if the specified model is loaded.
     model = models.get(model_id)
     if model is None:
         return jsonify({"error": f"No loaded model found for model_id '{model_id}'."}), 400
 
-    # Optional parameters with default values.
+    # Optional parameters with default values
     max_tokens = data.get("max_tokens", 100)
     temperature = data.get("temperature", 0.8)
     top_p = data.get("top_p", 0.95)
 
     try:
-        # Generate response using the loaded LLaMA model.
+        # Format the messages into a prompt
+        formatted_prompt = format_chat_messages(messages)
+        
+        # Generate response using the loaded LLaMA model
         response = model(
-            prompt,
+            formatted_prompt,
             max_tokens=max_tokens,
             temperature=temperature,
             top_p=top_p
         )
+        
+        # Extract the generated text
         generated_text = ""
         if "choices" in response and response["choices"]:
             generated_text = response["choices"][0]["text"]
-        return jsonify({"response": generated_text.strip(), "raw": response}), 200
+            
+        return jsonify({"response": generated_text.strip()}), 200
     except Exception as e:
         return jsonify({
-            "error": f"Prediction failed for model '{model_id}': {str(e)}",
+            "error": f"Chat completion failed for model '{model_id}': {str(e)}",
             "trace": traceback.format_exc()
         }), 500
 
@@ -151,14 +172,50 @@ def unload_model():
 @app.route("/status", methods=["GET"])
 def status():
     """
-    Returns the status of all loaded models. The response includes model IDs and
-    a simple message indicating whether the model is loaded.
+    Returns ids of all loaded models.
     """
     global models
-    # Build a dictionary with model IDs.
-    status_dict = {model_id: "loaded" for model_id in models.keys()}
-    return jsonify(status_dict), 200
+    return jsonify({"healthy": True, "models": list(models.keys())}), 200
 
+
+def format_chat_messages(messages):
+    """
+    Format a list of chat messages into a single prompt string.
+    Uses a format compatible with various LLaMA models.
+
+    Args:
+        messages: List of message dictionaries with 'role' and 'content' keys
+
+    Returns:
+        A formatted prompt string
+    """
+    prompt = ""
+
+    # Extract system message if present
+    system_message = None
+    for msg in messages:
+        if msg["role"] == "system":
+            system_message = msg["content"]
+            break
+
+    # Start with system message if available
+    if system_message:
+        prompt += f"<system>\n{system_message}\n</system>\n\n"
+
+    # Add conversation history
+    for msg in messages:
+        if msg["role"] == "system":
+            continue  # Skip system message as it was already handled
+
+        if msg["role"] == "user":
+            prompt += f"<human>: {msg['content']}\n"
+        elif msg["role"] == "assistant":
+            prompt += f"<assistant>: {msg['content']}\n"
+
+    # Add final assistant prompt
+    prompt += "<assistant>: "
+
+    return prompt
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
