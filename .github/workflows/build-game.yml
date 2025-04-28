@@ -25,6 +25,22 @@ jobs:
         with:
           lfs: true
           
+      # Get a list of commits affecting the RaymondMaarloeve folder
+      - name: Get commit history since last release for RaymondMaarloeve folder
+        id: changelog
+        run: |
+          # Get the last tag (release) and find all commits since it
+          LAST_RELEASE=$(git describe --tags --abbrev=0)
+          echo "Last release: $LAST_RELEASE"
+          
+          # Get the commit log from the last release to the current commit, limited to the RaymondMaarloeve folder
+          COMMITS=$(git log $LAST_RELEASE..HEAD --oneline -- RaymondMaarloeve/)
+          echo "Commits affecting RaymondMaarloeve since last release:"
+          echo "$COMMITS"
+          
+          # Set the commit log to be used in the release body
+          echo "::set-output name=changelog::$COMMITS"
+
       - name: Cache Library folder
         uses: actions/cache@v4
         with:
@@ -68,6 +84,7 @@ jobs:
       - name: Debug output directory contents
         run: ls -lh ${{ github.workspace }}/output  # Verify the zip file is there
 
+      # Create the release and upload the changelog
       - name: Create release
         id: create_release
         uses: actions/create-release@v1
@@ -76,7 +93,11 @@ jobs:
         with:
           tag_name: release-${{ steps.datetime.outputs.current_datetime }}  # Tag in format release-YYYY-MM-DD-HHMMSS
           release_name: Release ${{ steps.datetime.outputs.current_datetime }}
-          body: 'Automated release for build of ${{ matrix.targetPlatform }}'
+          body: |
+            Automated release for build of ${{ matrix.targetPlatform }}
+
+            **Changelog:**
+            ${{ steps.changelog.outputs.changelog }}  # Include the commit list
           draft: false
           prerelease: false
 
