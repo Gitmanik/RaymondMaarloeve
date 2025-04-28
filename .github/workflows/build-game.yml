@@ -5,12 +5,6 @@ on:
     branches: [ gitmanik-autobuild ]
     paths:
       - 'RaymondMaarloeve/**'  # Trigger on changes in the 'RaymondMaarloeve' folder
-on:
-  push:
-    branches: [ gitmanik-autobuild ]
-  pull_request:
-    branches: [ gitmanik-autobuild ]
-  workflow_dispatch: # Allows manual triggering
 
 jobs:
   buildForAllPlatforms:
@@ -37,7 +31,7 @@ jobs:
           # Get the last tag (release), or fallback to the first commit if no tags are found
           LAST_RELEASE=$(git describe --tags --abbrev=0 2>/dev/null || git rev-list --max-parents=0 HEAD)
           echo "Last release: $LAST_RELEASE"
-          
+
           # Get the commit log from the last release to the current commit, limited to the RaymondMaarloeve folder
           COMMITS=$(git log $LAST_RELEASE..HEAD --oneline -- RaymondMaarloeve/)
           echo "Commits affecting RaymondMaarloeve since last release:"
