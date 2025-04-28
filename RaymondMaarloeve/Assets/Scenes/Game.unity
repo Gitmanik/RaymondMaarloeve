@@ -1881,6 +1881,7 @@ GameObject:
   - component: {fileID: 1294622896}
   - component: {fileID: 1294622893}
   - component: {fileID: 1294622897}
+  - component: {fileID: 1294622898}
   m_Layer: 0
   m_Name: _GameManager
   m_TagString: Untagged
@@ -1956,70 +1957,74 @@ MonoBehaviour:
   timeOfDay: 6
   dayDurationInMinutes: 1
   directionalLight: {fileID: 1930731676}
+--- !u!114 &1294622898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294622892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b664b8ddd7031c1439bf5641cb779352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   surface: {fileID: 1438901265}
   terrain: {fileID: 1438901263}
   tileSize: 10
-  mapWidthInTiles: 14
-  mapLengthInTiles: 14
-  buildingsDensity: 0.125
+  mapWidthInTiles: 10
+  mapLengthInTiles: 10
+  buildingsDensity: 0.2
   buildings:
   - prefab: {fileID: 5083285615235793076, guid: 147ab689729ac2e49b82aac972788668, type: 3}
     weight: 1
     maxCount: 3
-    occurenceRadius: 0
+    occurenceRadius: 1
     currentCount: 0
   - prefab: {fileID: 6108394813680385468, guid: 655e06dc9db1cb746b7da3e9dacba6e0, type: 3}
     weight: 1
     maxCount: 3
-    occurenceRadius: 0
+    occurenceRadius: 1
     currentCount: 0
   - prefab: {fileID: 4128734955017319067, guid: d1afe98c64fbce847b4bb993ad9a349f, type: 3}
     weight: 1
     maxCount: 3
-    occurenceRadius: 0
+    occurenceRadius: 1
     currentCount: 0
   - prefab: {fileID: 1869102301479979069, guid: 6f8f8f50cef4e5672ace240d64134866, type: 3}
     weight: 1
     maxCount: 3
-    occurenceRadius: 0
+    occurenceRadius: 1
     currentCount: 0
   - prefab: {fileID: 9012655438019880852, guid: dd61dcfce8cdfb1b9b2e09368a5c9e67, type: 3}
     weight: 1
     maxCount: 3
-    occurenceRadius: 0
+    occurenceRadius: 1
     currentCount: 0
   - prefab: {fileID: 206528979659577565, guid: cc6934e2e20fab840a439cc2178719de, type: 3}
     weight: 1
     maxCount: 3
-    occurenceRadius: 0
+    occurenceRadius: 1
     currentCount: 0
   - prefab: {fileID: 8097970678501141546, guid: 2728991a092826047ac869844385d4fe, type: 3}
     weight: 1
     maxCount: 3
-    occurenceRadius: 0
+    occurenceRadius: 1
     currentCount: 0
   - prefab: {fileID: 5809783869429004467, guid: 6c440fd867dc25c43b3eac01ed5171fa, type: 3}
     weight: 1
     maxCount: 3
-    occurenceRadius: 0
+    occurenceRadius: 1
     currentCount: 0
-  - prefab: {fileID: 8097970678501141546, guid: 2728991a092826047ac869844385d4fe, type: 3}
+  - prefab: {fileID: 2378057268553226593, guid: e52c8f8704c3b9d44b660c2c75d98192, type: 3}
     weight: 1
     maxCount: 3
-    occurenceRadius: 0
+    occurenceRadius: 1
     currentCount: 0
-  - prefab: {fileID: 8097970678501141546, guid: 2728991a092826047ac869844385d4fe, type: 3}
+  - prefab: {fileID: 489591695903564298, guid: cc6d52fdd67e37739b5d6a53fb8d7af7, type: 3}
     weight: 1
     maxCount: 3
-    occurenceRadius: 0
-    currentCount: 0
-  - prefab: {fileID: 8097970678501141546, guid: 2728991a092826047ac869844385d4fe, type: 3}
-    weight: 1
-    maxCount: 3
-    occurenceRadius: 0
+    occurenceRadius: 1
     currentCount: 0
   spawnedBuildings: []
   mapWidth: 0
