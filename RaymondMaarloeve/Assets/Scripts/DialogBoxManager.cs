@@ -1,9 +1,11 @@
 using UnityEngine;
 using TMPro;
 
-public class UIManager : MonoBehaviour
+public class DialogBoxManager : MonoBehaviour
 {
-    public static UIManager Instance { get; private set; }
+    public static DialogBoxManager Instance { get; private set; }
+
+
 
     [Header("Dialog Box")]
     [SerializeField] private GameObject dialogBoxParent;
@@ -13,6 +15,9 @@ public class UIManager : MonoBehaviour
 
     [Header("Dialog Box Text Output Field")]
     [SerializeField] private TMP_Text npcResponseText;
+
+    [Header("Dialog Box Npc Name Field")]
+    [SerializeField] private TMP_Text npcNameText;
 
     private bool waitingForNpcDismiss = false;
 
@@ -62,7 +67,7 @@ public class UIManager : MonoBehaviour
     {
         // Here you can implement your logic to generate a response based on the input.
         // For now, we will just echo the input back to the player.
-        return "You said: " + input + " and I agree!" + "\nPress Enter to continue...";
+        return"You said " + input + " and I agree!" + "\nPress Enter to continue...";
     }
 
     private void Update()
@@ -87,6 +92,18 @@ public class UIManager : MonoBehaviour
         npcResponseText.gameObject.SetActive(false);
 
         dialogInputField.text = "";
+
+        // Check if PlayerController.Instance and currentlyInteractingNPC are not null
+        if (PlayerController.Instance != null && PlayerController.Instance.currentlyInteractingNPC != null)
+        {
+            npcNameText.text = PlayerController.Instance.currentlyInteractingNPC.npcName;
+        }
+        else
+        {
+            Debug.LogError("PlayerController.Instance or currentlyInteractingNPC is null!");
+            npcNameText.text = "Unknown NPC"; // Fallback text
+        }
+
         dialogInputField.gameObject.SetActive(true);
         dialogInputField.ActivateInputField();
     }

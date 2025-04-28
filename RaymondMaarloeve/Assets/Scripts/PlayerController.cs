@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     private Transform targetNPC = null;
     private SkinnedMeshRenderer characterMesh;
     
-    private NPC currentlyInteractingNPC = null;
+    public NPC currentlyInteractingNPC = null;
 
     private Animator animator;
 
@@ -104,6 +104,8 @@ public class PlayerController : MonoBehaviour
 
         npc.LookAt(CameraFollow.Instance.transform);
         
+        currentlyInteractingNPC = npc;
+        
         if (CameraFollow.Instance != null)
         {
             CameraFollow.Instance.SetTarget(npc.transform, true); // Kamera przybliza sie do NPC
@@ -113,17 +115,16 @@ public class PlayerController : MonoBehaviour
             Debug.LogError("CameraFollow.Instance is NULL!");
         }
 
-        if (UIManager.Instance != null)
+        if (DialogBoxManager.Instance != null)
         {
-            UIManager.Instance.ShowDialogBox(); // Pokazanie okna dialogowego
+            DialogBoxManager.Instance.ShowDialogBox(); // Pokazanie okna dialogowego
         }
         else
         {
-            Debug.LogError("UIManager.Instance is NULL!");
+            Debug.LogError("DialogBoxManager.Instance is NULL!");
         }
 
         Debug.Log("Rozpoczeto interakcje z NPC: " + npc.name);
-        currentlyInteractingNPC = npc;
     }
 
     public void EndInteraction()
@@ -143,13 +144,13 @@ public class PlayerController : MonoBehaviour
             Debug.LogError("CameraFollow.Instance is NULL!");
         }
 
-        if (UIManager.Instance != null)
+        if (DialogBoxManager.Instance != null)
         {
-            UIManager.Instance.HideDialogBox(); // Ukrycie okna dialogowego
+            DialogBoxManager.Instance.HideDialogBox(); // Ukrycie okna dialogowego
         }
         else
         {
-            Debug.LogError("UIManager.Instance is NULL!");
+            Debug.LogError("DialogBoxManager.Instance is NULL!");
         }
 
         Debug.Log("Zakonczono interakcje");
