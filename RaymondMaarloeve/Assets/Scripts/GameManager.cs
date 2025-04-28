@@ -21,13 +21,24 @@ public class GameManager : MonoBehaviour
     
     void Start()
     {
-        
         Debug.Log("Game Manager starting");
         Application.targetFrameRate = 60;
         Instance = this;
         
-        // TODO: Prawdopodobnie tutaj konfiguracja połączenia z serwerem LLM
-        // Będzie wymagany centralny system tych systemów, żeby korzystały z jednego połączenia sieciowego?
+        LlmManager.Instance.Setup("127.0.0.1", 5000);
+        LlmManager.Instance.Connect(x =>
+        {
+            if (x)
+            {
+                Debug.Log("Connected to LLM Server");
+                LlmManager.Instance.LoadModel("tuned-model",
+                    $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}/.lmstudio/models/wujoq/Reymond_Tuning/unsloth.Q4_K_M.gguf", LlmManager.Instance.GenericComplete, Debug.LogError);
+            }
+            else
+            {
+                Debug.LogError("Failed to connect to LLM Server");
+            }
+        });
         
         MapGenerator.Instance.GenerateMap();
 
