@@ -1950,6 +1950,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1294622892}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b4fe756a0f5fc445858af1eb7cc1546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeOfDay: 6
+  dayDurationInMinutes: 1
+  directionalLight: {fileID: 1930731676}
   m_Script: {fileID: 11500000, guid: b664b8ddd7031c1439bf5641cb779352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
