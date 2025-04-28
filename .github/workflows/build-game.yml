@@ -82,6 +82,8 @@ jobs:
 
       - name: Upload build to release
         uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ${{ github.workspace }}/output/${{ matrix.targetPlatform }}.zip  # Now pointing to the correct zip file
