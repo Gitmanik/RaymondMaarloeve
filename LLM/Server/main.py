@@ -1,6 +1,7 @@
 import traceback
 from flask import Flask, request, jsonify
 from llama_cpp import Llama
+import time  # Add this import at the top with other imports
 
 app = Flask(__name__)
 
@@ -119,6 +120,8 @@ def chat():
         formatted_prompt = format_chat_messages(messages)
         
         # Generate response using the loaded LLaMA model
+        start_time = time.time()
+        
         response = model(
             formatted_prompt,
             max_tokens=max_tokens,
@@ -126,12 +129,22 @@ def chat():
             top_p=top_p
         )
         
-        # Extract the generated text
+        # Calculate generation time
+        generation_time = time.time() - start_time
+        
         generated_text = ""
         if "choices" in response and response["choices"]:
             generated_text = response["choices"][0]["text"]
+        
+        # Get total tokens from the response
+        total_tokens = response.get("usage", {}).get("total_tokens", 0)
             
-        return jsonify({"response": generated_text.strip(), "success": True}), 200
+        return jsonify({
+            "response": generated_text.strip(),
+            "generation_time": round(generation_time, 3),  # Round to 3 decimal places
+            "total_tokens": total_tokens,
+            "success": True
+        }), 200
     except Exception as e:
         return jsonify({
             "message": f"Chat completion failed for model '{model_id}': {str(e)}\ntrace:{traceback.format_exc()}",
