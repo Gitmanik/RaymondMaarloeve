@@ -1,9 +1,11 @@
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
 
 public class DialogBoxManager : MonoBehaviour
 {
     public static DialogBoxManager Instance { get; private set; }
+    private List<Message> currentConversation = new List<Message>();
 
 
 
@@ -51,10 +53,51 @@ public class DialogBoxManager : MonoBehaviour
     {
         Debug.Log("Player entered and confirmed: " + input);
         dialogInputField.gameObject.SetActive(false);
-        npcResponseText.text = GenerateResponse(input);
+
+        // Add player's message to conversation
+        currentConversation.Add(new Message { role = "user", content = input });
+
+        // Send to LLM and get response
+        if (LlmManager.Instance.IsConnected)
+        {
+            Debug.Log("Sending to LLM...");
+            LlmManager.Instance.Chat(
+                PlayerController.Instance.currentlyInteractingNPC.ModelID,
+                currentConversation,
+                OnChatResponse,
+                OnChatError
+            );
+        }
+        else
+        {
+            Debug.LogError("LLM Manager is not connected!");
+            npcResponseText.text = "Sorry, I cannot respond right now.\nPress Enter to continue...";
+            npcResponseText.gameObject.SetActive(true);
+            StartCoroutine(WaitForDismiss());
+        }
+    }
+    
+
+    private void OnChatResponse(ChatResponseDTO response)
+    {
+        // Add AI's response to conversation history
+        currentConversation.Add(new Message { role = "assistant", content = response.response });
+        
+        Debug.Log($"Chat response, took {response.generation_time}, total_tokens: {response.total_tokens}: {response.response}");
+        
+        npcResponseText.text = response.response + "\nPress Enter to continue...";
         npcResponseText.gameObject.SetActive(true);
         StartCoroutine(WaitForDismiss());
     }
+
+    private void OnChatError(string error)
+    {
+        Debug.LogError($"Chat error: {error}");
+        npcResponseText.text = "Sorry, I'm having trouble responding.\nPress Enter to continue...";
+        npcResponseText.gameObject.SetActive(true);
+        StartCoroutine(WaitForDismiss());
+    }
+
     private System.Collections.IEnumerator WaitForDismiss()
     {
         // Wait for a short time before allowing the player to dismiss the dialog box
@@ -62,14 +105,8 @@ public class DialogBoxManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         waitingForNpcDismiss = true;
     }
-
-    private string GenerateResponse(string input)
-    {
-        // Here you can implement your logic to generate a response based on the input.
-        // For now, we will just echo the input back to the player.
-        return "You said " + input + " and I agree!" + "\nPress Enter to continue...";
-    }
-
+    
+    
     private void Update()
     {
         if (waitingForNpcDismiss && Input.GetKeyDown(KeyCode.Return))
@@ -93,7 +130,10 @@ public class DialogBoxManager : MonoBehaviour
 
         dialogInputField.text = "";
 
-        // Check if PlayerController.Instance and currentlyInteractingNPC are not null
+        // Clear previous conversation and add system prompt
+        currentConversation.Clear();
+        currentConversation.Add(new Message { role = "system", content = PlayerController.Instance.currentlyInteractingNPC.SystemPrompt });
+
         if (PlayerController.Instance != null && PlayerController.Instance.currentlyInteractingNPC != null)
         {
             npcNameText.text = PlayerController.Instance.currentlyInteractingNPC.npcName;
