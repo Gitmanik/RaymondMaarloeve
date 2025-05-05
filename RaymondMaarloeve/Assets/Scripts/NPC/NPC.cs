@@ -11,7 +11,10 @@ public class NPC : MonoBehaviour
     private IDecision currentDecision;
     private IDecisionSystem decisionSystem;
     public NavMeshAgent agent;
-    
+
+    private Animator animator;
+
+
     // TODO: Use narrator AI for generating the SystemPrompt
     public string SystemPrompt { get; private set; } = "Your name is Wilfred von Rabenstein. You are a fallen knight, a drunkard, and a man whose name was once spoken with reverence, now drowned in ale and regret. You are 42 years old. You are undesirable in most places, yet your blade still holds value for those desperate enough to hire a ruined man. It is past midnight. You are slumped against the wall of a rundown tavern, the rain mixing with the stale stench of cheap wine on your cloak. You know the filth of the city—the beggars, the whores, the men who whisper in shadows. You drink every night until the world blurs, until the past feels like a dream. You speak with the slurred grace of a man who once addressed kings but now bargains for pennies.";
     public string ModelID { get; private set; } = "tuned-model";
@@ -24,6 +27,9 @@ public class NPC : MonoBehaviour
     public void Awake()
     {
         EntityID = GameManager.Instance.GetEntityID();
+
+        animator = GetComponent<Animator>();
+
     }
     void Start()
     {
@@ -44,6 +50,12 @@ public class NPC : MonoBehaviour
     
     void Update()
     {
+        if (animator != null && agent != null)
+        {
+            bool isWalking = agent.velocity.magnitude > 0.1f;
+            animator.SetBool("isWalking", isWalking);
+        }
+
         if (lookTarget != null)
         {
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, lookTarget.eulerAngles.y - 180, transform.eulerAngles.z);
