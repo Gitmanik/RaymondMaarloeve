@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: c1c961cbd00909b45b34d97fd7df5cbf, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -2096,6 +2096,13 @@ MonoBehaviour:
   timeOfDay: 6
   dayDurationInMinutes: 1
   directionalLight: {fileID: 1930731676}
+  maxSunIntensity: 1
+  minSunIntensity: 0
+  daySky: {fileID: 2100000, guid: 133347283e115d147a5fcce7f47a538f, type: 2}
+  nightSky: {fileID: 2100000, guid: c1c961cbd00909b45b34d97fd7df5cbf, type: 2}
+  maxExposure: 1.3
+  minExposure: 0.3
+  skyboxRotationSpeed: 1
 --- !u!114 &1294622898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2110,7 +2117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   surface: {fileID: 1438901265}
   terrain: {fileID: 1438901263}
-  tileSize: 10
+  tileSize: 20
   mapWidthInTiles: 10
   mapLengthInTiles: 10
   buildingsDensity: 0.2
