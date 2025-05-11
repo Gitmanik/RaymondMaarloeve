@@ -120,7 +120,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: art/windows/Build-StandaloneWindows64.zip
+          asset_path: art/windows/StandaloneWindows64.zip
           asset_name: Build-StandaloneWindows64.zip
           asset_content_type: application/zip
 
@@ -130,6 +130,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: art/linux/Build-StandaloneLinux64.zip
+          asset_path: art/linux/StandaloneLinux64.zip
           asset_name: Build-StandaloneLinux64.zip
           asset_content_type: application/zip
