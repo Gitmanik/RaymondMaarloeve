@@ -57,7 +57,7 @@ jobs:
           path: ${{ github.workspace }}/${{ matrix.targetPlatform }}.zip
 
   release:
-      needs: build
+      needs: buildForAllPlatforms
       runs-on: ubuntu-latest
 
       steps:
