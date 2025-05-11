@@ -2,9 +2,9 @@ name: Build Unity Game Project
 
 on:
   push:
-    branches: [ main, gitmanik-workflow-test ]
-    # paths:
-    #   - 'RaymondMaarloeve/**'  # Trigger on changes in the 'RaymondMaarloeve' folder
+    branches: [ main ]
+    paths:
+      - 'RaymondMaarloeve/**'  # Trigger on changes in the 'RaymondMaarloeve' folder
   workflow_dispatch:
 
 jobs:
