@@ -15,35 +15,14 @@ jobs:
       fail-fast: false
       matrix:
         targetPlatform:
-          - StandaloneWindows64 # Build a Windows 64-bit standalone
-          # Add other platforms as needed
-          # - WebGL
-          # - StandaloneLinux64
+          - StandaloneWindows64
+          - StandaloneLinux64
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           lfs: true
-          fetch-depth: 0  # This fetches the entire history
-          
-      # Get a list of commits affecting the RaymondMaarloeve folder
-      - name: Get commit history since last release for RaymondMaarloeve folder
-        id: changelog
-        run: |
-          # Get the last tag (release), or fallback to the first commit if no tags are found
-          LAST_RELEASE=$(git describe --tags --abbrev=0 2>/dev/null || git rev-list --max-parents=0 HEAD)
-          echo "Last release: $LAST_RELEASE"
-
-          # Get the commit log from the last release to the current commit, limited to the RaymondMaarloeve folder
-          COMMITS=$(git log $LAST_RELEASE..HEAD --oneline -- RaymondMaarloeve/)
-          echo "Commits affecting RaymondMaarloeve since last release:"
-          echo "$COMMITS"
-
-          # Save the commit log to a markdown file with additional information
-          echo "# Release Changelog for ${{ github.repository }}" > $RUNNER_TEMP/commits.md
-          echo "Release Date: $(date '+%Y-%m-%d %H:%M:%S')" >> $RUNNER_TEMP/commits.md
-          echo "### Changelog for Game build:" >> $RUNNER_TEMP/commits.md
-          echo "$COMMITS" >> $RUNNER_TEMP/commits.md
 
       - name: Cache Library folder
         uses: actions/cache@v4
@@ -63,32 +42,66 @@ jobs:
           projectPath: RaymondMaarloeve
           targetPlatform: ${{ matrix.targetPlatform }}
           
+      - name: Zip the build
+        env:
+          TARGET_PLATFORM: ${{ matrix.targetPlatform }}
+        run: |
+          echo "Creating zip for $TARGET_PLATFORM..."
+          cd build/$TARGET_PLATFORM
+          zip -r ${{ github.workspace }}/$TARGET_PLATFORM.zip .
+          
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: Build-${{ matrix.targetPlatform }}
-          path: build/${{ matrix.targetPlatform }}
-          
+          name: ${{ matrix.targetPlatform }}
+          path: ${{ github.workspace }}/${{ matrix.targetPlatform }}.zip
+
+  release:
+      needs: buildForAllPlatforms
+      runs-on: ubuntu-latest
+
+      steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+          fetch-depth: 0
+
+      - name: Get commit history since last release
+        id: changelog
+        shell: bash
+        run: |
+          # Get the last tag (release), or fallback to the first commit if no tags are found
+          LAST_RELEASE=$(git describe --tags --abbrev=0 2>/dev/null || git rev-list --max-parents=0 HEAD)
+          echo "Last release: $LAST_RELEASE"
+    
+          # Get the commit log from the last release to the current commit
+          COMMITS=$(git log $LAST_RELEASE..HEAD --oneline)
+          echo "Commits since last release:"
+          echo "$COMMITS"
+    
+          # Save the commit log to a markdown file with additional information
+          echo "# Release Changelog for ${{ github.repository }}" > $RUNNER_TEMP/commits.md
+          echo "Release Date: $(date '+%Y-%m-%d %H:%M:%S')" >> $RUNNER_TEMP/commits.md
+          echo "### Changelog for Launcher build:" >> $RUNNER_TEMP/commits.md
+          echo "$COMMITS" >> $RUNNER_TEMP/commits.md
+        
+      - name: Download Windows artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: StandaloneWindows64
+          path: art/windows
+
+      - name: Download Linux artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: StandaloneLinux64
+          path: art/linux
+
       - name: Get current date and time
         id: datetime
         run: echo "::set-output name=current_datetime::$(date '+%Y-%m-%d-%H%M%S')"
-        
-      - name: Create output directory
-        run: mkdir -p ${{ github.workspace }}/output  # Ensure output directory exists
 
-      - name: Zip build artifacts
-        env:
-          TARGET_PLATFORM: ${{ matrix.targetPlatform }}  # Pass matrix variable to the shell as an env variable
-        run: |
-          echo "Creating zip for $TARGET_PLATFORM..."  # Access the variable as $TARGET_PLATFORM
-          cd build/$TARGET_PLATFORM
-          zip -r ${{ github.workspace }}/output/$TARGET_PLATFORM.zip .  # Use the correct workspace variable
-          ls -lh ${{ github.workspace }}/output  # List files to verify the zip is created
-
-      - name: Debug output directory contents
-        run: ls -lh ${{ github.workspace }}/output  # Verify the zip file is there
-
-      # Create the release and upload the changelog
       - name: Create release
         id: create_release
         uses: actions/create-release@v1
@@ -97,16 +110,26 @@ jobs:
         with:
           tag_name: release-${{ steps.datetime.outputs.current_datetime }}  # Tag in format release-YYYY-MM-DD-HHMMSS
           release_name: Release ${{ steps.datetime.outputs.current_datetime }}
-          body_path: ${{ runner.temp }}/commits.md  # Point to the new markdown file with additional info
+          body_path: ${{ runner.temp }}/commits.md
           draft: false
           prerelease: false
 
-      - name: Upload build to release
+      - name: Upload Windows Build
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ github.workspace }}/output/${{ matrix.targetPlatform }}.zip  # Now pointing to the correct zip file
-          asset_name: Build-${{ matrix.targetPlatform }}.zip
+          asset_path: art/windows/StandaloneWindows64.zip
+          asset_name: Build-StandaloneWindows64.zip
+          asset_content_type: application/zip
+
+      - name: Upload Linux Build
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: art/linux/StandaloneLinux64.zip
+          asset_name: Build-StandaloneLinux64.zip
           asset_content_type: application/zip
