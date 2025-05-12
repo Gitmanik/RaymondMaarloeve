@@ -12,6 +12,9 @@ public class LlmManager : MonoBehaviour
     
     public bool IsConnected { get; private set; }
 
+    private Queue<IEnumerator> postRequestQueue = new Queue<IEnumerator>();
+    private bool isProcessingQueue = false;
+
     public void Setup(string ip, int port)
     {
         BaseUrl = $"http://{ip}:{port}";
@@ -46,9 +49,37 @@ public class LlmManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Queues one POST request, ensuring that only one executes at a time.
+    /// </summary>
+    public void QueuePostRequest<T, TRequest>(string endpoint, TRequest data, Action<T> onSuccess, Action<string> onError) 
+        where T : class 
+        where TRequest : class
+    {
+        // Dodajemy żądanie do kolejki
+        postRequestQueue.Enqueue(Post<T, TRequest>(endpoint, data, onSuccess, onError));
+        if (!isProcessingQueue)
+        {
+            StartCoroutine(ProcessPostQueue());
+        }
+    }
+
+    private IEnumerator ProcessPostQueue()
+    {
+        isProcessingQueue = true;
+
+        while (postRequestQueue.Count > 0)
+        {
+            var request = postRequestQueue.Dequeue();
+            yield return StartCoroutine(request);
+        }
+
+        isProcessingQueue = false;
+    }
+
+    /// <summary>
     /// Sends a POST request with data and deserializes the response to type T
     /// </summary>
-    public IEnumerator Post<T, TRequest>(string endpoint, TRequest data, Action<T> onSuccess, Action<string> onError) 
+    private IEnumerator Post<T, TRequest>(string endpoint, TRequest data, Action<T> onSuccess, Action<string> onError) 
         where T : class 
         where TRequest : class
     {
@@ -96,7 +127,7 @@ public class LlmManager : MonoBehaviour
             n_gpu_layers = -1,
         };
         
-        StartCoroutine(Post<MessageDTO, LoadModelDTO>("load", data, onComplete, onError));
+        QueuePostRequest<MessageDTO, LoadModelDTO>("load", data, onComplete, onError);
     }
 
     public void UnloadModel(string modelID, Action<MessageDTO> onComplete, Action<string> onError)
@@ -106,7 +137,7 @@ public class LlmManager : MonoBehaviour
             model_id = modelID
         };
         
-        StartCoroutine(Post<MessageDTO, UnloadModelRequestDTO>("unload", data, onComplete, onError));
+        QueuePostRequest<MessageDTO, UnloadModelRequestDTO>("unload", data, onComplete, onError);
     }
     
     public void Chat(string modelID, List<Message> messages, Action<ChatResponseDTO> onComplete, Action<string> onError)
@@ -119,7 +150,7 @@ public class LlmManager : MonoBehaviour
             temperature = 0.5f,
             top_p = 0.95f,
         };
-        StartCoroutine(Post<ChatResponseDTO, ChatRequestDTO>("chat", data, onComplete, onError));
+        QueuePostRequest<ChatResponseDTO, ChatRequestDTO>("chat", data, onComplete, onError);
     }
     #endregion
     
