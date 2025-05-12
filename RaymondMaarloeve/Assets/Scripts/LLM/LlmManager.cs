@@ -29,6 +29,7 @@ public class LlmManager : MonoBehaviour
     {
         using (UnityWebRequest request = UnityWebRequest.Get($"{BaseUrl}/{endpoint}"))
         {
+            Debug.Log($"LlmManager: Get request: /{endpoint}");
             yield return request.SendWebRequest();
 
             if (request.result != UnityWebRequest.Result.Success)
@@ -38,6 +39,7 @@ public class LlmManager : MonoBehaviour
             }
 
             var content = request.downloadHandler.text;
+            Debug.Log($"LlmManager: Get response: {content}");
             var result = JsonUtility.FromJson<T>(content);
             onSuccess?.Invoke(result);
         }
@@ -58,6 +60,8 @@ public class LlmManager : MonoBehaviour
             request.downloadHandler = new DownloadHandlerBuffer();
             request.SetRequestHeader("Content-Type", "application/json");
 
+            Debug.Log($"LlmManager: Post request: {json}");
+            
             yield return request.SendWebRequest();
 
             if (request.result != UnityWebRequest.Result.Success)
@@ -68,6 +72,7 @@ public class LlmManager : MonoBehaviour
 
             var responseContent = request.downloadHandler.text;
             var result = JsonUtility.FromJson<T>(responseContent);
+            Debug.Log($"LlmManager: Post response: {responseContent}");
             onSuccess?.Invoke(result);
         }
     }
