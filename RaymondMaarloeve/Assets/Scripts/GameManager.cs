@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
             // TODO: Prawdopodobnie tutaj konfiguracja pamięci NPC
             // TODO: Przekazać tutaj obiekt IDecisionSystem połączony z LLM z fabryki
             var npcComponent = newNpc.GetComponent<NPC>(); 
-            npcComponent.Setup(new RandomDecisionMaker());
+            npcComponent.Setup(new LlmDecisionMaker());
             npcs.Add(npcComponent);
         }
         
