@@ -58,7 +58,7 @@ public class DialogBoxManager : MonoBehaviour
         currentConversation.Add(new Message { role = "user", content = input });
 
         // Send to LLM and get response
-        if (LlmManager.Instance.IsConnected)
+        if (GameManager.Instance.LlmServerReady)
         {
             Debug.Log("Sending to LLM...");
             LlmManager.Instance.Chat(

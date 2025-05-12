@@ -18,7 +18,8 @@ public class GameManager : MonoBehaviour
     public int GetEntityID() => ++entityIDCounter;
     
     public List<NPC> npcs = new List<NPC>();
-    
+    [HideInInspector] public bool LlmServerReady = false;
+
     void Start()
     {
         Debug.Log("Game Manager starting");
@@ -32,7 +33,8 @@ public class GameManager : MonoBehaviour
             {
                 Debug.Log("Connected to LLM Server");
                 LlmManager.Instance.LoadModel("tuned-model",
-                    $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}/.lmstudio/models/wujoq/Reymond_Tuning/unsloth.Q4_K_M.gguf", LlmManager.Instance.GenericComplete, Debug.LogError);
+                    $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}/.lmstudio/models/wujoq/Reymond_Tuning/unsloth.Q4_K_M.gguf",
+                    (response) => { LlmServerReady = true; LlmManager.Instance.GenericComplete(response);}, Debug.LogError);
             }
             else
             {
