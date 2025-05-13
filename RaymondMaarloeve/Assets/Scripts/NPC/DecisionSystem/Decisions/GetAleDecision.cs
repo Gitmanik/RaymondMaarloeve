@@ -24,17 +24,17 @@ public class GetAleDecision : IDecision
             {
                 destination = hit.position;
                 npc.agent.SetDestination(destination);
-                Debug.Log(npc.npcName + ": Going to the tavern: " + destination);
+                Debug.Log(npc.NpcName + ": Going to the tavern: " + destination);
             }
             else
             {
-                Debug.LogWarning(npc.npcName + ": NavMesh point for the tavern not found!");
+                Debug.LogWarning(npc.NpcName + ": NavMesh point for the tavern not found!");
                 finished = true;
             }
         }
         else
         {
-            Debug.LogWarning(npc.npcName + ": Tavern object not found!");
+            Debug.LogWarning(npc.NpcName + ": Tavern object not found!");
             finished = true;
         }
     }

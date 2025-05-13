@@ -26,13 +26,13 @@ public class PlayerConversationDecision : IDecision
             if (NavMesh.SamplePosition(playerPos, out NavMeshHit hit, 10f, NavMesh.AllAreas))
             {
                 npc.agent.SetDestination(hit.position);
-                Debug.Log(npc.npcName + ": Going to meet Player: " + hit.position);
+                Debug.Log(npc.NpcName + ": Going to meet Player: " + hit.position);
             }
 
         }
         else
         {
-            Debug.LogWarning(npc.npcName + ": Player object not found!");
+            Debug.LogWarning(npc.NpcName + ": Player object not found!");
             finished = true;
         }
     }

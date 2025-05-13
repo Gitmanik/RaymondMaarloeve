@@ -74,11 +74,11 @@ public class GameManager : MonoBehaviour
             
             if (string.IsNullOrEmpty(npcModelPath)) {
                 Debug.LogError($"Model path not found for NPC with ID {npcConfig.ModelId}");
-                npcComponent.Setup(new RandomDecisionMaker(), null);
+                npcComponent.Setup(new RandomDecisionMaker(), null, $"Npc-{npcConfig.Id}");
             }
             else {
                 Debug.Log($"NPC {npcConfig.Id} Model Path: {npcModelPath}");
-                npcComponent.Setup(new LlmDecisionMaker(), npcConfig.ModelId.ToString());
+                npcComponent.Setup(new LlmDecisionMaker(), npcConfig.ModelId.ToString(), $"Npc-{npcConfig.Id}");
             }
             
             npcs.Add(npcComponent);
@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
     {
         string x = "NPCs:\n";
         foreach (var npc in GameManager.Instance.npcs)
-            x += $"{npc.EntityID} Pos: {npc.transform.position} , Name: ({npc.npcName}) System: ({npc.GetDecisionSystem()}, {npc.GetCurrentDecision()})\n";
+            x += $"{npc.EntityID} Pos: {npc.transform.position} , Name: ({npc.NpcName}) System: ({npc.GetDecisionSystem()}, {npc.GetCurrentDecision()})\n";
         Debug.Log(x);
         return true;
     }

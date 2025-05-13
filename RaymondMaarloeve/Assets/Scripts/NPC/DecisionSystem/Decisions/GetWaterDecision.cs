@@ -24,17 +24,17 @@ public class GetWaterDecision : IDecision
             {
                 destination = hit.position;
                 npc.agent.SetDestination(destination);
-                Debug.Log(npc.npcName + ": Going to the well to get water: " + destination);
+                Debug.Log(npc.NpcName + ": Going to the well to get water: " + destination);
             }
             else
             {
-                Debug.LogWarning(npc.npcName + ": NavMesh point for the well not found!");
+                Debug.LogWarning(npc.NpcName + ": NavMesh point for the well not found!");
                 finished = true;
             }
         }
         else
         {
-            Debug.LogWarning(npc.npcName + ": Well object not found!");
+            Debug.LogWarning(npc.NpcName + ": Well object not found!");
             finished = true;
         }
     }

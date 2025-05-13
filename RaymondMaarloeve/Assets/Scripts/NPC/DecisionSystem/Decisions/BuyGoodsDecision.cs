@@ -24,17 +24,17 @@ public class BuyGoodsDecision : IDecision
             {
                 destination = hit.position;
                 npc.agent.SetDestination(destination);
-                Debug.Log(npc.npcName + ": Going to the market: " + destination);
+                Debug.Log(npc.NpcName + ": Going to the market: " + destination);
             }
             else
             {
-                Debug.LogWarning(npc.npcName + ": NavMesh point for the market not found!");
+                Debug.LogWarning(npc.NpcName + ": NavMesh point for the market not found!");
                 finished = true;
             }
         }
         else
         {
-            Debug.LogWarning(npc.npcName + ": Market object not found!");
+            Debug.LogWarning(npc.NpcName + ": Market object not found!");
             finished = true;
         }
     }

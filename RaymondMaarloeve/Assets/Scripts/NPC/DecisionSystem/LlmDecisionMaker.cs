@@ -32,7 +32,7 @@ public class LlmDecisionMaker : IDecisionSystem
     }
     public string GetNPCName()
     {
-        return npc.npcName;
+        return npc.NpcName;
     }
 
     private void RequestResponse()

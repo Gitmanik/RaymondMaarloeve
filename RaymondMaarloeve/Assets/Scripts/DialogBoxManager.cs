@@ -136,7 +136,7 @@ public class DialogBoxManager : MonoBehaviour
 
         if (PlayerController.Instance != null && PlayerController.Instance.currentlyInteractingNPC != null)
         {
-            npcNameText.text = PlayerController.Instance.currentlyInteractingNPC.npcName;
+            npcNameText.text = PlayerController.Instance.currentlyInteractingNPC.NpcName;
         }
         else
         {
