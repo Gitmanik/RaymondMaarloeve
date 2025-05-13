@@ -95,15 +95,16 @@ public class LlmManager : MonoBehaviour
             
             yield return request.SendWebRequest();
 
+            var responseContent = request.downloadHandler.text;
+            
             if (request.result != UnityWebRequest.Result.Success)
             {
-                onError?.Invoke($"Web request failed: {request.error}");
+                onError?.Invoke($"LlmManager: Post request failed ({request.error}): {responseContent}");
                 yield break;
             }
-
-            var responseContent = request.downloadHandler.text;
-            var result = JsonUtility.FromJson<T>(responseContent);
             Debug.Log($"LlmManager: Post response: {responseContent}");
+
+            var result = JsonUtility.FromJson<T>(responseContent);
             onSuccess?.Invoke(result);
         }
     }
