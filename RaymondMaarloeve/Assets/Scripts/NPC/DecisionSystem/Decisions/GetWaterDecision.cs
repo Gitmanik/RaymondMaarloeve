@@ -57,6 +57,7 @@ public class GetWaterDecision : IDecision
             waterCollectionTimer += Time.deltaTime;
             if (waterCollectionTimer >= waterCollectionDuration)
             {
+                npc.Thirst = 0f;
                 finished = true;
             }
             return !finished;

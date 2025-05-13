@@ -44,11 +44,10 @@ public class LlmDecisionMaker : IDecisionSystem
       var dto = new IdleDTO();
       dto.core_memories = npc.SystemPrompt.Split('.').ToList().ConvertAll(x => x.Trim());
       
-      // TODO: This should belong to each NPC
       dto.needs = new List<NeedDTO>()
       {
-        new NeedDTO { need = "hunger", weight = 1 },
-        new NeedDTO { need = "thirst", weight = 2 }
+        new NeedDTO { need = "hunger", weight = (int) npc.Hunger },
+        new NeedDTO { need = "thirst", weight = (int) npc.Thirst }
       };
       dto.stopped_action = "";
       dto.current_environment = new List<CurrentEnvironmentDTO>()

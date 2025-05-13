@@ -57,6 +57,7 @@ public class BuyGoodsDecision : IDecision
             buyingTimer += Time.deltaTime;
             if (buyingTimer >= buyingDuration)
             {
+                npc.Hunger = 0f;
                 finished = true;
             }
             return !finished;

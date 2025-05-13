@@ -57,6 +57,7 @@ public class GetAleDecision : IDecision
             drinkingTimer += Time.deltaTime;
             if (drinkingTimer >= drinkingDuration)
             {
+                npc.Thirst = 0f;
                 finished = true;
             }
             return !finished;

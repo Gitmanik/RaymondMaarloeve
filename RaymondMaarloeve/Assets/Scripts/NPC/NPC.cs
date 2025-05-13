@@ -72,7 +72,9 @@ public class NPC : MonoBehaviour
             currentDecision.Setup(decisionSystem, this);
             Debug.Log($"New decision: {currentDecision}");
         }
-
+        
+        Hunger += Time.deltaTime * 0.5f;
+        Thirst += Time.deltaTime * 0.5f;
     }
 
     public void LookAt(Transform targetTransform)
