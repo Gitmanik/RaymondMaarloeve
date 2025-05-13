@@ -123,6 +123,7 @@ public static class PathGenerator
                     {
                         PaintPath(terrain, t.TileCenter, nb.TileCenter, 0.7f, 1);
                         RotateBuilding(t.Building, t.TileCenter, nb.TileCenter);
+                        t.FrontWallCenter = (t.TileCenter + nb.TileCenter) / 2f;
                         break;
                     }
                 }

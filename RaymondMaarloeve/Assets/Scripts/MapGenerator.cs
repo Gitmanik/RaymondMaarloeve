@@ -71,7 +71,7 @@ public class MapGenerator : MonoBehaviour
                     transform.position.x - mapWidth / 2 + x * tileSize + tileSize / 2f,
                     transform.position.z - mapLength / 2 + z * tileSize + tileSize / 2f);
 
-                tile.PosXWallCenter = new Vector2(
+                tile.FrontWallCenter = new Vector2(
                     transform.position.x - mapWidth / 2 + x * tileSize + tileSize,
                     transform.position.z - mapLength / 2 + z * tileSize + tileSize / 2f);
 
@@ -102,14 +102,6 @@ public class MapGenerator : MonoBehaviour
                         if (buildingData != null)
                         {
                             buildingData.HisTile = tile;
-                            if (buildingData.HisTile == tile)
-                            {
-                                Debug.LogWarning($"✅ Tile poprawnie przypisany do budynku: {tile}");
-                            }
-                            else
-                            {
-                                Debug.LogWarning("⚠️ Tile NIE został poprawnie przypisany!");
-                            }
 
                         }
 
@@ -160,7 +152,7 @@ public class Tile
 {
     public Vector2Int GridPosition;
     public Vector2 TileCenter;
-    public Vector2 PosXWallCenter;
+    public Vector2 FrontWallCenter;
     public Tile[] Neighbors = new Tile[0];
     public GameObject TileObject;
     public GameObject Building;

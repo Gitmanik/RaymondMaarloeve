@@ -45,21 +45,22 @@ public class GameManager : MonoBehaviour
 
         List<GameObject> npcPrefabsList = npcPrefabs.ToList();
         
-        for (int i = 0; i < npcCount; i++)
-        {
-            Vector3 npcPosition = new Vector3(MapGenerator.Instance.transform.position.x - MapGenerator.Instance.mapWidth / 2 + Random.Range(0, MapGenerator.Instance.mapWidth), 0, MapGenerator.Instance.transform.position.z - MapGenerator.Instance.mapLength / 2 + Random.Range(0, MapGenerator.Instance.mapLength));
+        //for (int i = 0; i < npcCount; i++)
+        //{
+        //    Vector3 npcPosition = new Vector3(MapGenerator.Instance.transform.position.x - MapGenerator.Instance.mapWidth / 2 + Random.Range(0, MapGenerator.Instance.mapWidth), 0, MapGenerator.Instance.transform.position.z - MapGenerator.Instance.mapLength / 2 + Random.Range(0, MapGenerator.Instance.mapLength));
 
-            int npcVariant = Random.Range(0, npcPrefabsList.Count);
-            GameObject newNpc = Instantiate(npcPrefabsList[npcVariant], npcPosition, Quaternion.identity);
-            npcPrefabsList.RemoveAt(npcVariant);
+        //    int npcVariant = Random.Range(0, npcPrefabsList.Count);
+        //    GameObject newNpc = Instantiate(npcPrefabsList[npcVariant], npcPosition, Quaternion.identity);
+        //    npcPrefabsList.RemoveAt(npcVariant);
             
-            // TODO: Prawdopodobnie tutaj konfiguracja pamięci NPC
-            // TODO: Przekazać tutaj obiekt IDecisionSystem połączony z LLM z fabryki
-            var npcComponent = newNpc.GetComponent<NPC>(); 
-            npcComponent.Setup(new RandomDecisionMaker());
-            npcs.Add(npcComponent);
-        }
-        
+        //    // TODO: Prawdopodobnie tutaj konfiguracja pamięci NPC
+        //    // TODO: Przekazać tutaj obiekt IDecisionSystem połączony z LLM z fabryki
+        //    var npcComponent = newNpc.GetComponent<NPC>(); 
+        //    npcComponent.Setup(new RandomDecisionMaker());
+        //    npcs.Add(npcComponent);
+        //}
+        npcs = NPCspawner.SpawnNPCs(npcPrefabsList, npcCount);
+
     }
 
     // Update is called once per frame

@@ -17,6 +17,7 @@ public class NPC : MonoBehaviour
     public string ModelID { get; private set; } = "tuned-model";
 
     public string npcName = "Unnamed NPC";
+    public GameObject HisBuilding = null;
 
     public float speed = 3f;
     public int EntityID { get; private set; }
