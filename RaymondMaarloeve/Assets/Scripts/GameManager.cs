@@ -1,10 +1,8 @@
-using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Gitmanik.Console;
-using Unity.AI.Navigation;
 using UnityEngine;
-using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
@@ -19,22 +17,35 @@ public class GameManager : MonoBehaviour
     
     public List<NPC> npcs = new List<NPC>();
     [HideInInspector] public bool LlmServerReady = false;
+    
+    public GameConfig gameConfig { get; private set; }
 
     void Start()
     {
         Debug.Log("Game Manager starting");
-        Application.targetFrameRate = 60;
         Instance = this;
         
-        LlmManager.Instance.Setup("127.0.0.1", 5000);
+        gameConfig = GameConfig.LoadGameConfig(Path.Combine(Application.dataPath, "game_config.json"));
+        
+        Screen.SetResolution(gameConfig.GameWindowWidth, gameConfig.GameWindowHeight, gameConfig.FullScreen);
+        Application.targetFrameRate = 60;
+        
+        LlmManager.Instance.Setup(gameConfig.LlmServerApi);
         LlmManager.Instance.Connect(x =>
         {
             if (x)
             {
                 Debug.Log("Connected to LLM Server");
-                LlmManager.Instance.LoadModel("tuned-model",
-                    $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}/.lmstudio/models/wujoq/Reymond_Tuning/unsloth.Q4_K_M.gguf",
-                    (response) => { LlmServerReady = true; LlmManager.Instance.GenericComplete(response);}, Debug.LogError);
+                int modelsToLoad = gameConfig.Models.Count;
+                
+                foreach (var model in gameConfig.Models)
+                    LlmManager.Instance.LoadModel(model.Id.ToString(), model.Path, (dto) =>
+                    {
+                        modelsToLoad--;
+                        if (modelsToLoad == 0)
+                            LlmServerReady = true;
+                        LlmManager.Instance.GenericComplete(dto);
+                    }, Debug.LogError);
             }
             else
             {
@@ -43,25 +54,35 @@ public class GameManager : MonoBehaviour
         });
         
         MapGenerator.Instance.GenerateMap();
-
-
+        
         List<GameObject> npcPrefabsList = npcPrefabs.ToList();
         
-        for (int i = 0; i < npcCount; i++)
+        foreach (var npcConfig in gameConfig.Npcs)
         {
-            Vector3 npcPosition = new Vector3(MapGenerator.Instance.transform.position.x - MapGenerator.Instance.mapWidth / 2 + Random.Range(0, MapGenerator.Instance.mapWidth), 0, MapGenerator.Instance.transform.position.z - MapGenerator.Instance.mapLength / 2 + Random.Range(0, MapGenerator.Instance.mapLength));
+            Vector3 npcPosition = new Vector3(
+                MapGenerator.Instance.transform.position.x - MapGenerator.Instance.mapWidth / 2 + Random.Range(0, MapGenerator.Instance.mapWidth),
+                0,
+                MapGenerator.Instance.transform.position.z - MapGenerator.Instance.mapLength / 2 + Random.Range(0, MapGenerator.Instance.mapLength)
+            );
 
+            string npcModelPath = gameConfig.Models.FirstOrDefault(m => m.Id == npcConfig.ModelId)?.Path;
             int npcVariant = Random.Range(0, npcPrefabsList.Count);
+            
             GameObject newNpc = Instantiate(npcPrefabsList[npcVariant], npcPosition, Quaternion.identity);
             npcPrefabsList.RemoveAt(npcVariant);
-            
-            // TODO: Prawdopodobnie tutaj konfiguracja pamięci NPC
-            // TODO: Przekazać tutaj obiekt IDecisionSystem połączony z LLM z fabryki
             var npcComponent = newNpc.GetComponent<NPC>(); 
-            npcComponent.Setup(new LlmDecisionMaker());
+            
+            if (string.IsNullOrEmpty(npcModelPath)) {
+                Debug.LogError($"Model path not found for NPC with ID {npcConfig.ModelId}");
+                npcComponent.Setup(new RandomDecisionMaker(), null);
+            }
+            else {
+                Debug.Log($"NPC {npcConfig.Id} Model Path: {npcModelPath}");
+                npcComponent.Setup(new LlmDecisionMaker(), npcConfig.ModelId.ToString());
+            }
+            
             npcs.Add(npcComponent);
         }
-        
     }
 
     // Update is called once per frame

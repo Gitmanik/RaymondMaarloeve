@@ -15,9 +15,9 @@ public class LlmManager : MonoBehaviour
     private Queue<IEnumerator> postRequestQueue = new Queue<IEnumerator>();
     private bool isProcessingQueue = false;
 
-    public void Setup(string ip, int port)
+    public void Setup(string api)
     {
-        BaseUrl = $"http://{ip}:{port}";
+        BaseUrl = api;
     }
     
     private void Awake()
