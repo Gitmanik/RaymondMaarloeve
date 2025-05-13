@@ -8,6 +8,8 @@ public class LlmDecisionMaker : IDecisionSystem
     
     private ChatResponseDTO waitingResponse = null;
 
+    private IdleDTO idleDto = null;
+
     public void Setup(NPC npc)
     {
         this.npc = npc;
@@ -51,12 +53,12 @@ public class LlmDecisionMaker : IDecisionSystem
       dto.stopped_action = "";
       dto.current_environment = new List<CurrentEnvironmentDTO>()
       {
-        new CurrentEnvironmentDTO("Stand by the chapel steps, unmoving", 2),
-        new CurrentEnvironmentDTO("Sit upright beneath a broken statue", 1),
-        new CurrentEnvironmentDTO("Gaze at the river without blinking", 3),
-        new CurrentEnvironmentDTO("Walk slowly through the square without speaking", 2),
-        new CurrentEnvironmentDTO("Trace the burned symbol on his ring", 1),
-        new CurrentEnvironmentDTO("Watch birds scatter in the market", 2)
+        new CurrentEnvironmentDTO("Stand by the chapel steps, unmoving (pray)", 2),
+        new CurrentEnvironmentDTO("Sit upright beneath a broken statue (walk)", 1),
+        new CurrentEnvironmentDTO("Gaze at the river without blinking (idle)", 3),
+        new CurrentEnvironmentDTO("Walk slowly through the square without speaking (walk)", 2),
+        new CurrentEnvironmentDTO("Trace the burned symbol on his ring (walk)", 1),
+        new CurrentEnvironmentDTO("Watch birds scatter in the market (buy goods)", 2)
       };
       dto.obtained_memories = new List<ObtainedMemoryDTO>()
       {
@@ -91,12 +93,14 @@ public class LlmDecisionMaker : IDecisionSystem
           weight = 19
         }
       };
+      
+      idleDto = dto;
 
       var content = JsonUtility.ToJson(dto);
       currentConversation.Add(new Message { role = "system", content = content});
       
       // TODO: Read options from key -> Decision system
-      currentConversation.Add(new Message { role = "user", content = $"What should {npc.npcName} do now? Options: idle, walk, talk to another npc, talk to player, buy goods, get water, pray, get ale. Respond ONLY with valid JSON: {{ \"action\": value }}" });
+      currentConversation.Add(new Message { role = "user", content = $"What should {npc.NpcName} do now? Choose from CurrentEnvironment. Respond ONLY with the action index."});
       
       LlmManager.Instance.Chat(
         npc.ModelID,
@@ -113,26 +117,21 @@ public class LlmDecisionMaker : IDecisionSystem
     private IDecision ParseDecision(ChatResponseDTO chatResponseDto)
     {
       Debug.Log($"Idle response, content: ({chatResponseDto.response})");
-      var resp = chatResponseDto.response;
-      resp = resp.Substring(resp.IndexOf('{'));
-      resp = resp.Substring(0,resp.IndexOf('}')+1);
+
+      if (int.TryParse(chatResponseDto.response, out int response) == false)
+      {
+        Debug.LogError($"Idle response, invalid response: {chatResponseDto.response}");
+        return new IdleDecision();
+      }
       
-      Debug.Log($"Parsed Idle response: ({resp}) ({chatResponseDto.response})");
-      
-      var response = JsonUtility.FromJson<IdleResponseDTO>(resp);
-      var action = response.action.ToLower();
+      var action = idleDto.current_environment[response - 1].action;
       
       Debug.Log($"Idle response, action: {action}");
 
-      // TODO: Change to key -> Decision system
       if (action.Contains("idle"))
         return new IdleDecision();
       if (action.Contains("walk"))
         return new WalkDecision();
-      if (action.Contains("talk to another npc"))
-        return new WalkDecision(); // TODO: Probably remove
-      if (action.Contains("talk to player"))
-        return new PlayerConversationDecision();
       if (action.Contains("buy goods"))
         return new PrayDecision(); // TODO: Change to BuyGoodsDecision when Market building is added
       if (action.Contains("get water"))
