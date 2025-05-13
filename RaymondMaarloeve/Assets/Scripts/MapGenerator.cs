@@ -19,7 +19,7 @@ public class MapGenerator : MonoBehaviour
 
     Tile[,] tiles;
 
-    public List<Building> buildings = new();
+    public List<BuildingSetup> buildings = new();
     public List<GameObject> spawnedBuildings = new();
 
     private List<Tile> buildingTiles;
@@ -97,7 +97,24 @@ public class MapGenerator : MonoBehaviour
                         spawnedBuildings.Add(go);
                         tile.IsBuilding = true;
                         tile.Building = go;
+                        var buildingData = go.GetComponent<BuildingData>();
+
+                        if (buildingData != null)
+                        {
+                            buildingData.HisTile = tile;
+                            if (buildingData.HisTile == tile)
+                            {
+                                Debug.LogWarning($"✅ Tile poprawnie przypisany do budynku: {tile}");
+                            }
+                            else
+                            {
+                                Debug.LogWarning("⚠️ Tile NIE został poprawnie przypisany!");
+                            }
+
+                        }
+
                         buildingTiles.Add(tile);
+
                     }
                 }
             }
@@ -152,7 +169,7 @@ public class Tile
 }
 
 [Serializable]
-public class Building
+public class BuildingSetup
 {
     public GameObject prefab;
     public GameObject OwnerNPC = null;

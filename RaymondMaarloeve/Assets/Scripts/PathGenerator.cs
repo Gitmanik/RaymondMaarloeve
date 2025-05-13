@@ -106,10 +106,11 @@ public static class PathGenerator
 
             fullPath.AddRange(segment);
             lastTile = fullPath[fullPath.Count - 1];
+            foreach (var t in segment) t.IsPath = true;
+
         }
 
-        foreach (var t in fullPath)
-            t.IsPath = true;
+
 
         // 4) Rysowanie ścieżek
         foreach (var t in tiles)

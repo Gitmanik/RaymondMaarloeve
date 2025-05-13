@@ -69,6 +69,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a55a308aa5fd544fa9b04f1561c6eb09, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: -3500173569266234944}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a55a308aa5fd544fa9b04f1561c6eb09, type: 3}
       insertIndex: -1
       addedObject: {fileID: -5123453470506747391}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a55a308aa5fd544fa9b04f1561c6eb09, type: 3}
@@ -80,6 +83,20 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a55a308aa5fd544fa9b04f1561c6eb09, type: 3}
   m_PrefabInstance: {fileID: 8201630581514558149}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &-3500173569266234944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9012655438019880852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0705b4361b0b4c14d81d8e2614abf563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HisNPC: {fileID: 0}
+  HisType: 1
 --- !u!208 &-5123453470506747391
 NavMeshObstacle:
   m_ObjectHideFlags: 0
