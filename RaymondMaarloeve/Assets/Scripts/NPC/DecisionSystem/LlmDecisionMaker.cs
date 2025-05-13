@@ -50,48 +50,8 @@ public class LlmDecisionMaker : IDecisionSystem
         new NeedDTO { need = "thirst", weight = (int) npc.Thirst }
       };
       dto.stopped_action = "";
-      dto.current_environment = new List<CurrentEnvironmentDTO>()
-      {
-        new CurrentEnvironmentDTO("Stand by the chapel steps, unmoving (pray)", 2),
-        new CurrentEnvironmentDTO("Sit upright beneath a broken statue (walk)", 1),
-        new CurrentEnvironmentDTO("Gaze at the river without blinking (idle)", 3),
-        new CurrentEnvironmentDTO("Walk slowly through the square without speaking (walk)", 2),
-        new CurrentEnvironmentDTO("Trace the burned symbol on his ring (walk)", 1),
-        new CurrentEnvironmentDTO("Watch birds scatter in the market (buy goods)", 2)
-      };
-      dto.obtained_memories = new List<ObtainedMemoryDTO>()
-      {
-        new ObtainedMemoryDTO
-        {
-          memory = "A child asked what the sigil on my ring was. I told him it meant 'nothing'.",
-          weight = 21
-        },
-        new ObtainedMemoryDTO
-        {
-          memory = "A merchant mentioned my house name, then spat. I didn’t blink.",
-          weight = 20
-        },
-        new ObtainedMemoryDTO
-        {
-          memory = "Saw my old banner being used to wrap fish. I said nothing. But I watched.",
-          weight = 23
-        },
-        new ObtainedMemoryDTO
-        {
-          memory = "Heard someone say I should’ve been executed too. He’s not wrong.",
-          weight = 22
-        },
-        new ObtainedMemoryDTO
-        {
-          memory = "A drunken man bowed to me by mistake. For a moment, I let him.",
-          weight = 18
-        },
-        new ObtainedMemoryDTO
-        {
-          memory = "Someone asked if I’d return home. I said ‘Home is gone.’",
-          weight = 19
-        }
-      };
+      dto.current_environment = npc.GetCurrentEnvironment();
+      dto.obtained_memories = npc.ObtainedMemories;
       
       idleDto = dto;
 
