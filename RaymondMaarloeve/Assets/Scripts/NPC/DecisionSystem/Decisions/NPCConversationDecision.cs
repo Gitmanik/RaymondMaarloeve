@@ -18,12 +18,12 @@ public class NPCConversationDecision : IDecision
         if (partner != null)
         {
             npc.agent.SetDestination(partner.transform.position);
-            Debug.Log(npc.npcName + ": Going to chat with " + partner.npcName);
+            Debug.Log(npc.NpcName + ": Going to chat with " + partner.NpcName);
         }
         else
         {
             finished = true;
-            Debug.Log(npc.npcName + ": Conversation partner not found!");
+            Debug.Log(npc.NpcName + ": Conversation partner not found!");
         }
     }
 

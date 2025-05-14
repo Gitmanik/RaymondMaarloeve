@@ -28,10 +28,16 @@ public class MapGenerator : MonoBehaviour
     [HideInInspector] public int mapWidth;
     [HideInInspector] public int mapLength;
 
+    [SerializeField]
+    private TerrainData terrainFileData; // Reference to the terrain asset
+
+    
     void Awake()
     {
         Instance = this;
         tiles = new Tile[mapWidthInTiles, mapLengthInTiles];
+        
+        terrain.terrainData = terrainFileData;
 
         PathGenerator.ClearMap(terrain);
         // zapamiętanie oryginalnych alphamap
