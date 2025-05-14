@@ -5,8 +5,8 @@ public class NPCspawner : MonoBehaviour
 {
     public static List<NPC> SpawnNPCs(List<GameObject> npcPrefabs, int npcCount)
     {
-        // --- Przygotowanie listy budynków prywatnych ---
-        // --- przygotowanie listy GameObjectów budynków ---
+        // --- Przygotowanie listy budynkÃ³w prywatnych ---
+        // --- przygotowanie listy GameObjectÃ³w budynkÃ³w ---
         var allowedTypes = new HashSet<BuildingData.BuildingType>
         {
             BuildingData.BuildingType.House,
@@ -22,11 +22,11 @@ public class NPCspawner : MonoBehaviour
             var buildingdata = go.GetComponent<BuildingData>();
             if (buildingdata != null && allowedTypes.Contains(buildingdata.HisType))
             {
-                buildings.Add(go); // <- dodajesz ca³y GameObject
+                buildings.Add(go); // <- dodajesz caÂ³y GameObject
             }
         }
 
-        // --- Tasowanie budynków ---
+        // --- Tasowanie budynkÃ³w ---
         for (int i = 0; i < buildings.Count; i++)
         {
             int j = Random.Range(i, buildings.Count);
@@ -35,7 +35,7 @@ public class NPCspawner : MonoBehaviour
             buildings[j] = tmp;
         }
 
-        // --- Tasowanie prefabów NPC ---
+        // --- Tasowanie prefabÃ³w NPC ---
         var prefabs = new List<GameObject>(npcPrefabs);
         for (int i = 0; i < prefabs.Count; i++)
         {
@@ -51,16 +51,16 @@ public class NPCspawner : MonoBehaviour
         // --- Spawnowanie NPC ---
         for (int i = 0; i < npcCount; i++)
         {
-            // Wybór budynku (jeœli jest)
+            // WybÃ³r budynku (jeÅ“li jest)
             GameObject chosenBuilding = null;
             if (i < buildings.Count)
                 chosenBuilding = buildings[i];
 
-            // Wybór prefabrykatów NPC (modulo liczba prefabów)
+            // WybÃ³r prefabrykatÃ³w NPC (modulo liczba prefabÃ³w)
             int prefabIdx = i % prefabs.Count;
             var go = Instantiate(prefabs[prefabIdx]);
             var chosenBuildingData = chosenBuilding.GetComponent<BuildingData>();
-            // Jeœli budynek zosta³ przydzielony, spawn przy budynku
+            // JeÅ“li budynek zostaÂ³ przydzielony, spawn przy budynku
             if (chosenBuilding != null)
             {
                 var coords = chosenBuildingData.HisTile.FrontWallCenter;
@@ -69,7 +69,7 @@ public class NPCspawner : MonoBehaviour
             }
             else
             {
-                // Jeœli nie ma budynku, spawn losowy + log b³êdu
+                // JeÅ“li nie ma budynku, spawn losowy + log bÂ³Ãªdu
                 Debug.LogError("NPC doesn't have his building!");
 
                 float x = go.transform.position.x - MapGenerator.Instance.mapWidth / 2f + Random.Range(0f, MapGenerator.Instance.mapWidth);
@@ -79,7 +79,7 @@ public class NPCspawner : MonoBehaviour
 
             // Konfiguracja NPC
             var npc = go.GetComponent<NPC>();
-            npc.Setup(new RandomDecisionMaker());
+            //npc.Setup(new RandomDecisionMaker());
             npc.HisBuilding = chosenBuilding;
 
             result.Add(npc);
