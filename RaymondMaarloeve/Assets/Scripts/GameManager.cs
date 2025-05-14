@@ -58,7 +58,6 @@ public class GameManager : MonoBehaviour
         List<GameObject> npcPrefabsList = npcPrefabs.ToList();
         
         
-        //npcs = NPCspawner.SpawnNPCs(npcPrefabsList, npcCount);
 
         foreach (var npcConfig in gameConfig.Npcs)
         {
@@ -87,7 +86,17 @@ public class GameManager : MonoBehaviour
                 Debug.Log($"NPC {npcConfig.Id} Model Path: {npcModelPath}");
                 npcComponent.Setup(new LlmDecisionMaker(), npcConfig.ModelId.ToString(), $"Npc-{npcConfig.Id}", tmpSystemPrompt);
             }
-            
+            HashSet<BuildingData.BuildingType> allowedTypes = new HashSet<BuildingData.BuildingType>()
+            {
+                BuildingData.BuildingType.House,
+                BuildingData.BuildingType.Tavern,
+                BuildingData.BuildingType.Blacksmith,
+                BuildingData.BuildingType.Church
+            };
+            npcComponent.HisBuilding = MapGenerator.Instance.GetBuilding(allowedTypes);
+            var buildingData = npcComponent.HisBuilding.GetComponent<BuildingData>();
+            buildingData.HisNPC = npcComponent;
+
             npcs.Add(npcComponent);
         }
     }

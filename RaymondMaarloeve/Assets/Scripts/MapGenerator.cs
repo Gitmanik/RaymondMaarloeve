@@ -145,6 +145,25 @@ public class MapGenerator : MonoBehaviour
     }
 
 
+    public GameObject GetBuilding(HashSet<BuildingData.BuildingType> allowedTypes)
+    {
+        List<GameObject> buildings = new List<GameObject>();
+
+        foreach (GameObject go in spawnedBuildings)
+        {
+            var buildingdata = go.GetComponent<BuildingData>();
+            if (buildingdata != null && allowedTypes.Contains(buildingdata.HisType) && buildingdata.HisNPC == null)
+            {
+                buildings.Add(go);
+            }
+        }
+        GameObject chosenBuilding = null;
+        int j = Random.Range(0, buildings.Count);
+        chosenBuilding = buildings[j];
+
+
+        return chosenBuilding;
+    }
 
 
     private void MarkTiles()
@@ -195,7 +214,6 @@ public class Tile
 public class BuildingSetup
 {
     public GameObject prefab;
-    public GameObject OwnerNPC = null;
     [Range(0f, 1f)] public float weight = 0.1f;
     public int maxCount = 3;
     public int occurenceRadius = 5;
