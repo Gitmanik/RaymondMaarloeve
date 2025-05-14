@@ -18,6 +18,25 @@ The project we are working on is a computer game in which artificial intelligenc
 
 What sets this game apart is the lack of traditional, rigid scripting for events. Instead, the game world develops organically, and interactions between NPCs and the player determine the course of the detective investigation, which is the central element of the gameplay. Procedurally generated environments and complex NPC decision-making systems make each game session a unique experience.
 
+### 🛰️ Game Launcher
+
+The **Raymond Maarloeve** game includes a dedicated cross-platform launcher:
+👉 [RaymondMaarloeveLauncher](https://github.com/cyptrix12/RaymondMaarloeveLauncher)
+
+The launcher provides a streamlined way to manage the game:
+
+* 📥 Automatically fetches the latest available game builds from GitHub
+* ⬇️ Downloads selected releases (game, server) and LLM models
+* 🤖 Configurates NPC's and game settings
+* 📄 Displays changelogs and version history
+* 🚀 Launches the game with one click
+* 🔄 Tracks the currently installed version
+* 🌓 Supports both dark and light modes
+
+Using the launcher is the recommended way to **download, update, and play the game**, especially for new players or testers.
+It is available for both **Windows** and **Linux**.
+
+
 ### Technology Stack
 - **Game Engine:** Unity 6 (6000.0.38f1) + C#
 - **Artificial Intelligence:** Large Language Model (LLM), pathfinding with NavMesh
