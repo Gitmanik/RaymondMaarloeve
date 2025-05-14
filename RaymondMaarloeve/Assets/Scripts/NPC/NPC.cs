@@ -12,6 +12,8 @@ public class NPC : MonoBehaviour
     private IDecisionSystem decisionSystem;
     public NavMeshAgent agent;
 
+    //public string npcName = "Unnamed NPC";
+    public GameObject HisBuilding = null;
     private Animator animator;
     
     public string SystemPrompt { get; private set; } = null;
