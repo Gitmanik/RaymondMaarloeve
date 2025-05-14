@@ -20,6 +20,13 @@ public class GameManager : MonoBehaviour
     
     public GameConfig gameConfig { get; private set; }
 
+    [SerializeField] private GameObject uiGameObject;
+    
+    void Awake()
+    {
+        uiGameObject.SetActive(true);
+    }
+    
     void Start()
     {
         Debug.Log("Game Manager starting");

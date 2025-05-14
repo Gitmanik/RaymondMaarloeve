@@ -2082,6 +2082,7 @@ MonoBehaviour:
   - {fileID: 1148605829637295999, guid: 20e3d70f4158e349da9e7abcd86e2a13, type: 3}
   npcs: []
   LlmServerReady: 0
+  uiGameObject: {fileID: 330165694}
 --- !u!114 &1294622897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2122,6 +2123,7 @@ MonoBehaviour:
   mapWidthInTiles: 10
   mapLengthInTiles: 10
   buildingsDensity: 0.2
+  markTiles: 0
   buildings:
   - prefab: {fileID: 5083285615235793076, guid: 147ab689729ac2e49b82aac972788668, type: 3}
     weight: 1
