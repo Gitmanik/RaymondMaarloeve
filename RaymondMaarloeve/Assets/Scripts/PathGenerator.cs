@@ -261,7 +261,7 @@ public static class PathGenerator
         data.SetAlphamaps(0, 0, alphas);
     }
 
-    private static void PaintCircle(float[,,] alphas, int cx, int cz, float rad, int li, int lt)
+    public static void PaintCircle(float[,,] alphas, int cx, int cz, float rad, int li, int lt)
     {
         int r = Mathf.CeilToInt(rad);
         for (int dz = -r; dz <= r; dz++)

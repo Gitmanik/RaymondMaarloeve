@@ -16,6 +16,7 @@ public class MapGenerator : MonoBehaviour
     public int mapWidthInTiles = 10, mapLengthInTiles = 10;
     [Range(0f, 1f)]
     public float buildingsDensity = 0.2f;
+    public bool markTiles = false; 
 
     Tile[,] tiles;
 
@@ -111,6 +112,11 @@ public class MapGenerator : MonoBehaviour
 
         // 3) Wyznaczanie i rysowanie ścieżek w osobnym managerze
         PathGenerator.GeneratePaths(tiles, buildingTiles, terrain);
+        if (markTiles)
+        {
+            MarkTiles();
+
+        }
 
         // 4) Budowa NavMesh dla całej mapy
         surface.BuildNavMesh();
@@ -138,10 +144,37 @@ public class MapGenerator : MonoBehaviour
         return null;
     }
 
-    private void OnDestroy()
+
+
+
+    private void MarkTiles()
+    // Narysuj kropki na budynkach (taką samą grubością jak ścieżki)
     {
-        // przy zniszczeniu przywracamy oryginalne alphamapy
-        terrain.terrainData.SetAlphamaps(0, 0, baseAlphaMap);
+        var data = terrain.terrainData;
+        var tPos = terrain.transform.position;
+        int w = data.alphamapWidth;
+        int h = data.alphamapHeight;
+        int layers = data.alphamapLayers;
+        var alphas = data.GetAlphamaps(0, 0, w, h);
+
+        float radius = 1.0f; // Taka sama jak szerokość ścieżki
+        float mapRad = (radius / data.size.x) * w; // Skalowanie promienia
+
+        foreach (var tile in tiles)
+        {
+            if (tile != null && tile.IsBuilding == false)
+            {
+                Vector2 center = tile.TileCenter;
+
+                int mapZ = (int)(((center.x - tPos.x) / data.size.x) * w);
+                int mapX = (int)(((center.y - tPos.z) / data.size.z) * h);
+
+                // Maluj na trzeciej warstwie
+                PathGenerator.PaintCircle(alphas, mapX, mapZ, mapRad, 2, layers);
+            }
+        }
+
+        data.SetAlphamaps(0, 0, alphas);
     }
 }
 
