@@ -71,14 +71,18 @@ public class GameManager : MonoBehaviour
             GameObject newNpc = Instantiate(npcPrefabsList[npcVariant], npcPosition, Quaternion.identity);
             npcPrefabsList.RemoveAt(npcVariant);
             var npcComponent = newNpc.GetComponent<NPC>(); 
+
+            var tmpSystemPrompt =
+                "Your name is Wilfred von Rabenstein. You are a fallen knight, a drunkard, and a man whose name was once spoken with reverence, now drowned in ale and regret. You are 42 years old. You are undesirable in most places, yet your blade still holds value for those desperate enough to hire a ruined man. It is past midnight. You are slumped against the wall of a rundown tavern, the rain mixing with the stale stench of cheap wine on your cloak. You know the filth of the city—the beggars, the whores, the men who whisper in shadows. You drink every night until the world blurs, until the past feels like a dream. You speak with the slurred grace of a man who once addressed kings but now bargains for pennies.";
             
             if (string.IsNullOrEmpty(npcModelPath)) {
                 Debug.LogError($"Model path not found for NPC with ID {npcConfig.ModelId}");
-                npcComponent.Setup(new RandomDecisionMaker(), null, $"Npc-{npcConfig.Id}");
+                npcComponent.Setup(new RandomDecisionMaker(), null, $"Npc-{npcConfig.Id}", tmpSystemPrompt
+                    );
             }
             else {
                 Debug.Log($"NPC {npcConfig.Id} Model Path: {npcModelPath}");
-                npcComponent.Setup(new LlmDecisionMaker(), npcConfig.ModelId.ToString(), $"Npc-{npcConfig.Id}");
+                npcComponent.Setup(new LlmDecisionMaker(), npcConfig.ModelId.ToString(), $"Npc-{npcConfig.Id}", tmpSystemPrompt);
             }
             
             npcs.Add(npcComponent);
