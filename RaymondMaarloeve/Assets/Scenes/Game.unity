@@ -2185,7 +2185,6 @@ MonoBehaviour:
   spawnedBuildings: []
   mapWidth: 0
   mapLength: 0
-  terrainFileData: {fileID: 15600000, guid: 1cad06c38c7e74942a2ab16a022385ea, type: 2}
 --- !u!114 &1294622899
 MonoBehaviour:
   m_ObjectHideFlags: 0
