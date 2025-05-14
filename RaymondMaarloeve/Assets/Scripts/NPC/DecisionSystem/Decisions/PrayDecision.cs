@@ -24,17 +24,17 @@ public class PrayDecision : IDecision
             {
                 destination = hit.position;
                 npc.agent.SetDestination(destination);
-                Debug.Log(npc.npcName + ": Going to the church: " + destination);
+                Debug.Log(npc.NpcName + ": Going to the church: " + destination);
             }
             else
             {
-                Debug.LogWarning(npc.npcName + ": NavMesh point for the church not found!");
+                Debug.LogWarning(npc.NpcName + ": NavMesh point for the church not found!");
                 finished = true;
             }
         }
         else
         {
-            Debug.LogWarning(npc.npcName + ": Church object not found!");
+            Debug.LogWarning(npc.NpcName + ": Church object not found!");
             finished = true;
         }
     }

@@ -24,7 +24,7 @@ public class WalkDecision : IDecision
 
     void SelectNewDestination()
     {
-        Debug.Log(npc.npcName + ": Choosing new destination!");
+        Debug.Log(npc.NpcName + ": Choosing new destination!");
 
         Vector3 randomDirection = Random.insideUnitSphere * wanderRadius;
         randomDirection.y = 0f;
@@ -33,11 +33,11 @@ public class WalkDecision : IDecision
         if (NavMesh.SamplePosition(randomDirection, out NavMeshHit hit, wanderRadius, NavMesh.AllAreas))
         {
             npc.agent.SetDestination(hit.position);
-            Debug.Log(npc.npcName + ": New destination: " + hit.position);
+            Debug.Log(npc.NpcName + ": New destination: " + hit.position);
         }
         else
         {
-            Debug.LogWarning(npc.npcName + ": Not found point on NavMesh!");
+            Debug.LogWarning(npc.NpcName + ": Not found point on NavMesh!");
         }
     }
 }

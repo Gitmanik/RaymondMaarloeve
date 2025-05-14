@@ -83,7 +83,7 @@ jobs:
           # Save the commit log to a markdown file with additional information
           echo "# Release Changelog for ${{ github.repository }}" > $RUNNER_TEMP/commits.md
           echo "Release Date: $(date '+%Y-%m-%d %H:%M:%S')" >> $RUNNER_TEMP/commits.md
-          echo "### Changelog for Launcher build:" >> $RUNNER_TEMP/commits.md
+          echo "### Changelog for Game build:" >> $RUNNER_TEMP/commits.md
           echo "$COMMITS" >> $RUNNER_TEMP/commits.md
         
       - name: Download Windows artifact
