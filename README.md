@@ -2,7 +2,8 @@
 
 ![Unity](https://img.shields.io/badge/engine-Unity%206-blue)
 ![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux-informational)
-![Last Commit](https://img.shields.io/github/last-commit/RaymondMaarloeve/RaymondMaarloeve)
+[![Last Commit](https://img.shields.io/github/last-commit/RaymondMaarloeve/RaymondMaarloeve)]()
+[![Build Unity Game Project](https://github.com/RaymondMaarloeve/RaymondMaarloeve/actions/workflows/build-game.yml/badge.svg)](https://github.com/RaymondMaarloeve/RaymondMaarloeve/actions/workflows/build-game.yml)
 
 
 <table>
@@ -32,7 +33,7 @@ The launcher provides a streamlined way to manage the game:
 
 * 📥 Automatically fetches the latest available game builds from GitHub
 * ⬇️ Downloads selected releases (game, server) and LLM models
-* 🤖 Configurates NPC's and game settings
+* 🤖 Configures NPC's and game settings
 * 📄 Displays changelogs and version history
 * 🚀 Launches the game with one click
 * 🔄 Tracks the currently installed version
