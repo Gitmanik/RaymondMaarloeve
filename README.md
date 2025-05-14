@@ -1,5 +1,10 @@
 # Raymond Maarloeve sp. z o.o.
 
+![Unity](https://img.shields.io/badge/engine-Unity%206-blue)
+![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux-informational)
+![Last Commit](https://img.shields.io/github/last-commit/RaymondMaarloeve/RaymondMaarloeve)
+
+
 <table>
 <tr>
 <td>
