@@ -29,7 +29,7 @@ public class GameConfig
                 Debug.Log("Game configuration loaded successfully.");
                 return gameConfig;
             }
-            Debug.LogWarning("Game configuration is outdated. Please update it.");
+            Debug.LogWarning("Unsupported Configuration file. Make sure you are using the latest version of the Game and Launcher.");
         }
         else
         {
