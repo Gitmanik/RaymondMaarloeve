@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Game Manager starting");
         Application.targetFrameRate = 60;
         Instance = this;
+
         
         LlmManager.Instance.Setup("127.0.0.1", 5000);
         LlmManager.Instance.Connect(x =>

@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class DayNightCycle : MonoBehaviour
 {
+    public static DayNightCycle Instance { get; private set; }
+
+
+
     [Range(0, 24)] public float timeOfDay;
     public float dayDurationInMinutes = 1f; // 1 minute = 24h
     public Light directionalLight;
@@ -30,6 +34,9 @@ public class DayNightCycle : MonoBehaviour
             {
                 DayBoxManager.Instance.UpdateDayText(currentDay);
             }
+
+            
+
         }
 
         UpdateLighting(timeOfDay);
@@ -52,4 +59,10 @@ public class DayNightCycle : MonoBehaviour
     {
         return currentDay;
     }
+    void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
+
 }

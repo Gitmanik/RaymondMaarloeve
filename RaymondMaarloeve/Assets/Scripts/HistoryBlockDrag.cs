@@ -33,10 +33,8 @@ public class HistoryBlockDrag : MonoBehaviour,
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        // Jeżeli upuszczono na SequencePanel lub PoolPanel, zostanie tam parentowany przez SlotDropHandler
         if (transform.parent == rootCanvas.transform)
         {
-            // nie trafiono w żaden slot -> wróć na start
             transform.SetParent(startParent);
             rect.anchoredPosition = startPosition;
         }
