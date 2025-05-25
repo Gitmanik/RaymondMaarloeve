@@ -1,10 +1,8 @@
-using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Gitmanik.Console;
-using Unity.AI.Navigation;
 using UnityEngine;
-using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
@@ -18,22 +16,44 @@ public class GameManager : MonoBehaviour
     public int GetEntityID() => ++entityIDCounter;
     
     public List<NPC> npcs = new List<NPC>();
+    [HideInInspector] public bool LlmServerReady = false;
+    
+    public GameConfig gameConfig { get; private set; }
+
+    [SerializeField] private GameObject uiGameObject;
+    
+    void Awake()
+    {
+        uiGameObject.SetActive(true);
+    }
     
     void Start()
     {
         Debug.Log("Game Manager starting");
-        Application.targetFrameRate = 60;
         Instance = this;
 
         
-        LlmManager.Instance.Setup("127.0.0.1", 5000);
+        gameConfig = GameConfig.LoadGameConfig(Path.Combine(Application.dataPath, "game_config.json"));
+        
+        Screen.SetResolution(gameConfig.GameWindowWidth, gameConfig.GameWindowHeight, gameConfig.FullScreen);
+        Application.targetFrameRate = 60;
+        
+        LlmManager.Instance.Setup(gameConfig.LlmServerApi);
         LlmManager.Instance.Connect(x =>
         {
             if (x)
             {
                 Debug.Log("Connected to LLM Server");
-                LlmManager.Instance.LoadModel("tuned-model",
-                    $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}/.lmstudio/models/wujoq/Reymond_Tuning/unsloth.Q4_K_M.gguf", LlmManager.Instance.GenericComplete, Debug.LogError);
+                int modelsToLoad = gameConfig.Models.Count;
+                
+                foreach (var model in gameConfig.Models)
+                    LlmManager.Instance.LoadModel(model.Id.ToString(), model.Path, (dto) =>
+                    {
+                        modelsToLoad--;
+                        if (modelsToLoad == 0)
+                            LlmServerReady = true;
+                        LlmManager.Instance.GenericComplete(dto);
+                    }, Debug.LogError);
             }
             else
             {
@@ -42,25 +62,51 @@ public class GameManager : MonoBehaviour
         });
         
         MapGenerator.Instance.GenerateMap();
-
-
+        
         List<GameObject> npcPrefabsList = npcPrefabs.ToList();
         
-        for (int i = 0; i < npcCount; i++)
-        {
-            Vector3 npcPosition = new Vector3(MapGenerator.Instance.transform.position.x - MapGenerator.Instance.mapWidth / 2 + Random.Range(0, MapGenerator.Instance.mapWidth), 0, MapGenerator.Instance.transform.position.z - MapGenerator.Instance.mapLength / 2 + Random.Range(0, MapGenerator.Instance.mapLength));
+        
 
+        foreach (var npcConfig in gameConfig.Npcs)
+        {
+            Vector3 npcPosition = new Vector3(
+                MapGenerator.Instance.transform.position.x - MapGenerator.Instance.mapWidth / 2 + Random.Range(0, MapGenerator.Instance.mapWidth),
+                0,
+                MapGenerator.Instance.transform.position.z - MapGenerator.Instance.mapLength / 2 + Random.Range(0, MapGenerator.Instance.mapLength)
+            );
+
+            string npcModelPath = gameConfig.Models.FirstOrDefault(m => m.Id == npcConfig.ModelId)?.Path;
             int npcVariant = Random.Range(0, npcPrefabsList.Count);
+            
             GameObject newNpc = Instantiate(npcPrefabsList[npcVariant], npcPosition, Quaternion.identity);
             npcPrefabsList.RemoveAt(npcVariant);
-            
-            // TODO: Prawdopodobnie tutaj konfiguracja pamięci NPC
-            // TODO: Przekazać tutaj obiekt IDecisionSystem połączony z LLM z fabryki
             var npcComponent = newNpc.GetComponent<NPC>(); 
-            npcComponent.Setup(new RandomDecisionMaker());
+
+            var tmpSystemPrompt =
+                "Your name is Wilfred von Rabenstein. You are a fallen knight, a drunkard, and a man whose name was once spoken with reverence, now drowned in ale and regret. You are 42 years old. You are undesirable in most places, yet your blade still holds value for those desperate enough to hire a ruined man. It is past midnight. You are slumped against the wall of a rundown tavern, the rain mixing with the stale stench of cheap wine on your cloak. You know the filth of the city—the beggars, the whores, the men who whisper in shadows. You drink every night until the world blurs, until the past feels like a dream. You speak with the slurred grace of a man who once addressed kings but now bargains for pennies.";
+            
+            if (string.IsNullOrEmpty(npcModelPath)) {
+                Debug.LogError($"Model path not found for NPC with ID {npcConfig.ModelId}");
+                npcComponent.Setup(new RandomDecisionMaker(), null, $"Npc-{npcConfig.Id}", tmpSystemPrompt
+                    );
+            }
+            else {
+                Debug.Log($"NPC {npcConfig.Id} Model Path: {npcModelPath}");
+                npcComponent.Setup(new LlmDecisionMaker(), npcConfig.ModelId.ToString(), $"Npc-{npcConfig.Id}", tmpSystemPrompt);
+            }
+            HashSet<BuildingData.BuildingType> allowedTypes = new HashSet<BuildingData.BuildingType>()
+            {
+                BuildingData.BuildingType.House,
+                BuildingData.BuildingType.Tavern,
+                BuildingData.BuildingType.Blacksmith,
+                BuildingData.BuildingType.Church
+            };
+            npcComponent.HisBuilding = MapGenerator.Instance.GetBuilding(allowedTypes);
+            var buildingData = npcComponent.HisBuilding.GetComponent<BuildingData>();
+            buildingData.HisNPC = npcComponent;
+
             npcs.Add(npcComponent);
         }
-        
     }
 
     // Update is called once per frame
@@ -90,7 +136,7 @@ public class GameManager : MonoBehaviour
     {
         string x = "NPCs:\n";
         foreach (var npc in GameManager.Instance.npcs)
-            x += $"{npc.EntityID} Pos: {npc.transform.position} , Name: ({npc.npcName}) System: ({npc.GetDecisionSystem()}, {npc.GetCurrentDecision()})\n";
+            x += $"{npc.EntityID} Pos: {npc.transform.position} , Name: ({npc.NpcName}) System: ({npc.GetDecisionSystem()}, {npc.GetCurrentDecision()}), Hunger: {npc.Hunger}, Thirst: {npc.Thirst}\n";
         Debug.Log(x);
         return true;
     }

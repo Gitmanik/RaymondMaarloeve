@@ -69,6 +69,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b791e4f93ce45c62a934f731dfcd0c3d, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: -1669818346788490889}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b791e4f93ce45c62a934f731dfcd0c3d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1511603426173459639}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b791e4f93ce45c62a934f731dfcd0c3d, type: 3}
@@ -80,6 +83,20 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b791e4f93ce45c62a934f731dfcd0c3d, type: 3}
   m_PrefabInstance: {fileID: 723400432396607323}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &-1669818346788490889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 489591695903564298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0705b4361b0b4c14d81d8e2614abf563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HisNPC: {fileID: 0}
+  HisType: 3
 --- !u!64 &1511603426173459639
 MeshCollider:
   m_ObjectHideFlags: 0

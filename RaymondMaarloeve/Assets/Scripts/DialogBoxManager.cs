@@ -58,7 +58,7 @@ public class DialogBoxManager : MonoBehaviour
         currentConversation.Add(new Message { role = "user", content = input });
 
         // Send to LLM and get response
-        if (LlmManager.Instance.IsConnected)
+        if (GameManager.Instance.LlmServerReady)
         {
             Debug.Log("Sending to LLM...");
             LlmManager.Instance.Chat(
@@ -136,7 +136,7 @@ public class DialogBoxManager : MonoBehaviour
 
         if (PlayerController.Instance != null && PlayerController.Instance.currentlyInteractingNPC != null)
         {
-            npcNameText.text = PlayerController.Instance.currentlyInteractingNPC.npcName;
+            npcNameText.text = PlayerController.Instance.currentlyInteractingNPC.NpcName;
         }
         else
         {

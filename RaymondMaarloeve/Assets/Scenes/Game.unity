@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 133347283e115d147a5fcce7f47a538f, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -761,7 +761,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &330165695
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2676,8 +2676,8 @@ GameObject:
   - component: {fileID: 1294622894}
   - component: {fileID: 1294622896}
   - component: {fileID: 1294622893}
-  - component: {fileID: 1294622897}
   - component: {fileID: 1294622898}
+  - component: {fileID: 1294622897}
   - component: {fileID: 1294622899}
   - component: {fileID: 1294622900}
   - component: {fileID: 1294622901}
@@ -2742,6 +2742,8 @@ MonoBehaviour:
   - {fileID: 7216708267112539949, guid: 91fd27a7afbc63940a1d654ec900c149, type: 3}
   - {fileID: 1148605829637295999, guid: 20e3d70f4158e349da9e7abcd86e2a13, type: 3}
   npcs: []
+  LlmServerReady: 0
+  uiGameObject: {fileID: 330165694}
 --- !u!114 &1294622897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2757,6 +2759,13 @@ MonoBehaviour:
   timeOfDay: 6
   dayDurationInMinutes: 1
   directionalLight: {fileID: 1930731676}
+  maxSunIntensity: 1
+  minSunIntensity: 0
+  daySky: {fileID: 2100000, guid: 133347283e115d147a5fcce7f47a538f, type: 2}
+  nightSky: {fileID: 2100000, guid: 133347283e115d147a5fcce7f47a538f, type: 2}
+  maxExposure: 1
+  minExposure: 0.2
+  skyboxRotationSpeed: 0.5
 --- !u!114 &1294622898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2775,6 +2784,7 @@ MonoBehaviour:
   mapWidthInTiles: 10
   mapLengthInTiles: 10
   buildingsDensity: 0.2
+  markTiles: 0
   buildings:
   - prefab: {fileID: 5083285615235793076, guid: 147ab689729ac2e49b82aac972788668, type: 3}
     weight: 1

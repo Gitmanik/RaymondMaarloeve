@@ -1,40 +1,40 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class GetAleDecision : IDecision
+public class BuyGoodsDecision : IDecision
 {
     private NPC npc;
     private bool finished = false;
-    private bool reachedTavern = false;
+    private bool reachedMarket = false;
     private Vector3 destination;
     private float stoppingDistance = 0.5f;
 
-    public float drinkingDuration = 5f;
-    private float drinkingTimer = 0f;
+    public float buyingDuration = 4f;
+    private float buyingTimer = 0f;
 
     public void Setup(IDecisionSystem system, NPC npc)
     {
         this.npc = npc;
-
-        GameObject tavernObj = GameObject.Find("tavern(Clone)");
-        if (tavernObj != null)
+        //TODO we don't have market building yet
+        GameObject marketObj = GameObject.Find("market(Clone)");
+        if (marketObj != null)
         {
-            Vector3 tavernPosition = tavernObj.transform.position;
-            if (NavMesh.SamplePosition(tavernPosition, out NavMeshHit hit, 10f, NavMesh.AllAreas))
+            Vector3 marketPosition = marketObj.transform.position;
+            if (NavMesh.SamplePosition(marketPosition, out NavMeshHit hit, 10f, NavMesh.AllAreas))
             {
                 destination = hit.position;
                 npc.agent.SetDestination(destination);
-                Debug.Log(npc.npcName + ": Going to the tavern: " + destination);
+                Debug.Log(npc.NpcName + ": Going to the market: " + destination);
             }
             else
             {
-                Debug.LogWarning(npc.npcName + ": NavMesh point for the tavern not found!");
+                Debug.LogWarning(npc.NpcName + ": NavMesh point for the market not found!");
                 finished = true;
             }
         }
         else
         {
-            Debug.LogWarning(npc.npcName + ": Tavern object not found!");
+            Debug.LogWarning(npc.NpcName + ": Market object not found!");
             finished = true;
         }
     }
@@ -44,19 +44,20 @@ public class GetAleDecision : IDecision
         if (finished)
             return false;
 
-        if (!reachedTavern)
+        if (!reachedMarket)
         {
             if (!npc.agent.pathPending && npc.agent.remainingDistance < stoppingDistance)
             {
-                reachedTavern = true;
+                reachedMarket = true;
             }
             return true;
         }
         else
         {
-            drinkingTimer += Time.deltaTime;
-            if (drinkingTimer >= drinkingDuration)
+            buyingTimer += Time.deltaTime;
+            if (buyingTimer >= buyingDuration)
             {
+                npc.Hunger = 0f;
                 finished = true;
             }
             return !finished;
