@@ -14443,7 +14443,6 @@ GameObject:
   - component: {fileID: 7356446083010830845}
   - component: {fileID: 2183915206851776544}
   - component: {fileID: 1431321819391462217}
-  - component: {fileID: 8067385489842019016}
   m_Layer: 0
   m_Name: church
   m_TagString: Untagged
@@ -14667,28 +14666,6 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
---- !u!64 &8067385489842019016
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6108394813680385468}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!1 &6116990581196797896
 GameObject:
   m_ObjectHideFlags: 0
