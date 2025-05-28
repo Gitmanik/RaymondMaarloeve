@@ -65,6 +65,8 @@ public class BuildingData : MonoBehaviour
 
                 Tile tile = tiles[x, z];
                 if (tile != null)
+        if (HisType != BuildingType.Wall && HisType != BuildingType.Gate && HisType != BuildingType.Tower)
+        {
                 {
                     tile.IsPartOfBuilding = true;
                     tile.Building = gameObject;

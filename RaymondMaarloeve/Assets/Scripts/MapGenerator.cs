@@ -64,6 +64,7 @@ public class MapGenerator : MonoBehaviour
         spawnedBuildings = new List<GameObject>();
 
         InitializeTiles();
+        SpawnWalls();
         SpawnBuildings();
 
         PathGenerator.GeneratePaths(tiles, buildingsMainTile, terrain);
@@ -109,14 +110,171 @@ public class MapGenerator : MonoBehaviour
             }
     }
 
+    void SpawnWalls()
+    {
+        // Wyszukiwanie prefabów typu Wall i Tower z BuildingData
+        GameObject wallPrefab = null;
+        GameObject towerPrefab = null;
+        GameObject gatePrefab = null;
 
+        foreach (var wall in walls)
+        {
+            if (wall.prefab == null) continue;
 
+            var data = wall.prefab.GetComponent<BuildingData>();
+            if (data == null) continue;
 
-
-
+            switch (data.HisType)
+            {
+                case BuildingData.BuildingType.Wall:
+                    if (wallPrefab == null)
+                        wallPrefab = wall.prefab;
+                    break;
+                case BuildingData.BuildingType.Tower:
+                    if (towerPrefab == null)
+                        towerPrefab = wall.prefab;
+                    break;
+                case BuildingData.BuildingType.Gate:
+                    if (gatePrefab == null)
+                        gatePrefab = wall.prefab;
+                    break;
             }
 
+            if (wallPrefab != null && towerPrefab != null && gatePrefab != null)
+                break;
+        }
+
+
+        if (wallPrefab == null)
         {
+            Debug.LogWarning("Nie znaleziono prefabów typu Wall.");
+            return;
+        }
+
+        if (towerPrefab == null)
+        {
+            Debug.LogWarning("Nie znaleziono prefabów typu Tower.");
+            return;
+        }
+
+        if (gatePrefab == null)
+        {
+            Debug.LogWarning("Nie znaleziono prefabów typu Gate.");
+            return;
+        }
+
+
+        // Usunięcie starych murów
+        if (wallsRoot != null)
+            DestroyImmediate(wallsRoot);
+        wallsRoot = new GameObject("WallsRoot");
+        wallsRoot.transform.SetParent(terrain.transform);
+
+        // Pomiar długości segmentu muru
+        GameObject temp = Instantiate(wallPrefab);
+        float segmentLength = GetSegmentLength(temp) * 0.97f;
+        DestroyImmediate(temp);
+
+        float mapWidth = tileSize * mapWidthInTiles;
+        float mapLength = tileSize * mapLengthInTiles;
+
+        // === ŚCIANY ===
+
+        // Południe
+        Vector3 southStart = new Vector3(tiles[2, 0].TileCenter.x, 0, tiles[2, 0].TileCenter.y);
+        southStart.y = terrain.SampleHeight(southStart) + terrain.transform.position.y;
+        SpawnWallLineWithGate(southStart, Vector3.right, mapWidth, segmentLength, Quaternion.identity, wallPrefab, gatePrefab);
+
+        // Północ
+        Vector3 northStart = new Vector3(tiles[2, mapLengthInTiles - 1].TileCenter.x, 0, tiles[2, mapLengthInTiles - 1].TileCenter.y);
+        northStart.y = terrain.SampleHeight(northStart) + terrain.transform.position.y;
+        SpawnWallLine(northStart, Vector3.right, mapWidth, segmentLength, Quaternion.identity, wallPrefab);
+
+        // Zachód
+        Vector3 westStart = new Vector3(tiles[0, 0].TileCenter.x, 0, tiles[0, 0].TileCenter.y);
+        westStart.y = terrain.SampleHeight(westStart) + terrain.transform.position.y;
+        SpawnWallLine(westStart, Vector3.forward, mapLength, segmentLength, Quaternion.Euler(0, 90, 0), wallPrefab);
+
+        // Wschód
+        Vector3 eastStart = new Vector3(tiles[mapWidthInTiles - 1, 0].TileCenter.x, 0, tiles[mapWidthInTiles - 1, 0].TileCenter.y);
+        eastStart.y = terrain.SampleHeight(eastStart) + terrain.transform.position.y;
+        SpawnWallLine(eastStart, Vector3.forward, mapLength, segmentLength, Quaternion.Euler(0, 90, 0), wallPrefab);
+
+        // === WIEŻE (narożniki) ===
+        PlaceTowerAtTile(tiles[0, 0], towerPrefab);                                      // SW
+        PlaceTowerAtTile(tiles[mapWidthInTiles - 1, 0], towerPrefab);                   // SE
+        PlaceTowerAtTile(tiles[0, mapLengthInTiles - 1], towerPrefab);                 // NW
+        PlaceTowerAtTile(tiles[mapWidthInTiles - 1, mapLengthInTiles - 1], towerPrefab); // NE
+
+        MarkWallTiles();
+
+        Debug.Log("Postawiono mury i wieże.");
+    }
+    float GetSegmentLength(GameObject go)
+    {
+        var renderer = go.GetComponentInChildren<Renderer>();
+        if (renderer == null)
+        {
+            Debug.LogError("Prefab nie ma Renderera.");
+            return tileSize;
+        }
+
+        Vector3 size = renderer.bounds.size;
+        return Mathf.Max(size.x, size.z);
+    }
+    void SpawnWallLine(Vector3 origin, Vector3 direction, float totalLength, float segmentLength, Quaternion rotation, GameObject prefab)
+    {
+        int count = Mathf.FloorToInt(totalLength / segmentLength);
+
+        for (int i = 0; i < count; i++)
+        {
+            Vector3 pos = origin + direction * segmentLength * i;
+            pos.y = terrain.SampleHeight(pos) + terrain.transform.position.y;
+
+            Instantiate(prefab, pos, rotation, wallsRoot.transform);
+        }
+    }
+    void SpawnWallLineWithGate(Vector3 origin, Vector3 direction, float totalLength, float segmentLength, Quaternion rotation, GameObject wallPrefab, GameObject gatePrefab)
+    {
+        int count = Mathf.FloorToInt(totalLength / segmentLength);
+        int gateIndex = count / 2;
+
+        for (int i = 0; i < count; i++)
+        {
+            Vector3 pos = origin + direction * segmentLength * i;
+            pos.y = terrain.SampleHeight(pos) + terrain.transform.position.y;
+
+            GameObject prefabToUse = (i == gateIndex) ? gatePrefab : wallPrefab;
+
+            if (i == gateIndex)
+            {
+                pos -= direction * 2f; // 🔧 twardy offset tylko dla bramy
+            }
+            Instantiate(prefabToUse, pos, rotation, wallsRoot.transform);
+        }
+    }
+
+    void PlaceTowerAtTile(Tile tile, GameObject prefab)
+    {
+        Vector3 pos = new Vector3(tile.TileCenter.x, 0, tile.TileCenter.y);
+        pos.y = terrain.SampleHeight(pos) + terrain.transform.position.y;
+
+        GameObject go = Instantiate(prefab, pos, Quaternion.identity, wallsRoot.transform);
+        tile.IsPartOfBuilding = true;
+        tile.Building = go;
+    }
+    void MarkWallTiles()
+    {
+        int count = 0;
+
+        foreach (Transform child in wallsRoot.transform)
+        {
+            var buildingData = child.GetComponent<BuildingData>();
+            if (buildingData == null)
+                continue;
+
+            bool success = buildingData.AssignOccupiedTiles(tileSize, tiles);
+            if (success) count++;
         }
 
         Debug.Log($"Zaznaczono tile zajęte przez mury (AssignOccupiedTiles) – {count} obiektów.");
