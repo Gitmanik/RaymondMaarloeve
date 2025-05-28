@@ -18,6 +18,12 @@ public class BuildingData : MonoBehaviour
         Blacksmith,
         Tavern,
         Scaffold,
+        Wall,
+        Armoury,
+        Barracks,
+        Fortress,
+        Tower,
+        Gate,
         Other
     }
 
