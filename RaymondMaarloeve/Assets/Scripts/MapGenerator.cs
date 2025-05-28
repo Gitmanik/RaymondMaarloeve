@@ -26,7 +26,8 @@ public class MapGenerator : MonoBehaviour
     private int WallsMargin = 10;
     private GameObject wallsRoot;
 
-    private List<Tile> buildingTiles;
+
+    public List<Tile> buildingsMainTile;
 
     private float[,,] baseAlphaMap;
     [HideInInspector] public int mapWidth;
@@ -56,7 +57,8 @@ public class MapGenerator : MonoBehaviour
         Debug.Log("Generating map");
         mapWidth = tileSize * mapWidthInTiles;
         mapLength = tileSize * mapLengthInTiles;
-        buildingTiles = new List<Tile>();
+        buildingsMainTile = new List<Tile>();
+        spawnedBuildings = new List<GameObject>();
 
         // 1) Inicjalizacja kafelków
         for (int x = 0; x < mapWidthInTiles; x++)

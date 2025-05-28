@@ -4,7 +4,7 @@ using UnityEngine;
 public class BuildingData : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public Tile HisTile = null;
+    public Tile HisMainTile = null;
     public NPC HisNPC = null;
     public BuildingType HisType = BuildingType.None;
     public List<Tile> HisTiles = new(); // <- trzymamy referencje do tile’i, które budynek zajmuje
