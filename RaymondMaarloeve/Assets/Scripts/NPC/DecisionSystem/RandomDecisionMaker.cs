@@ -43,13 +43,4 @@ public class RandomDecisionMaker : IDecisionSystem
                 return new IdleDecision();
         }
     }
-
-    /// <summary>
-    /// Returns the name of the NPC.
-    /// </summary>
-    /// <returns>The name of the NPC.</returns>
-    public string GetNPCName()
-    {
-        return "Random NPC name";
-    }
 }

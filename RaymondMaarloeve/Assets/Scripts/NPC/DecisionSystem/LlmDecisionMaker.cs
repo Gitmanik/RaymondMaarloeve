@@ -43,15 +43,6 @@ public class LlmDecisionMaker : IDecisionSystem
     }
 
     /// <summary>
-    /// Returns the name of the NPC.
-    /// </summary>
-    /// <returns>The name of the NPC.</returns>
-    public string GetNPCName()
-    {
-        return npc.NpcName;
-    }
-
-    /// <summary>
     /// Requests a response from the LLMServer to determine the NPC's next action.
     /// </summary>
     private void RequestResponse()

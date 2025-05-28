@@ -11,10 +11,4 @@
     /// </summary>
     /// <returns>An implementation of <see cref="IDecision"/> representing the NPC's next action.</returns>
     public IDecision Decide();
-
-    /// <summary>
-    /// Returns the name of the NPC.
-    /// </summary>
-    /// <returns>The name of the NPC.</returns>
-    public string GetNPCName();
 }
