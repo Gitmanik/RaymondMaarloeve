@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['n_5fctx_0',['n_ctx',['../class_load_model_d_t_o.html#a5d765b1e728ba7f650e765eb013920fa',1,'LoadModelDTO']]],
+  ['n_5fgpu_5flayers_1',['n_gpu_layers',['../class_load_model_d_t_o.html#a603ac9b8c8944b57c7d7cbe267cbdd84',1,'LoadModelDTO']]],
+  ['n_5fparts_2',['n_parts',['../class_load_model_d_t_o.html#a7d481047a5957414c76f03dd31712048',1,'LoadModelDTO']]],
+  ['name_3',['Name',['../class_model_config.html#afd54d6a5400735064a2e47afecd49d0d',1,'ModelConfig']]],
+  ['need_4',['need',['../class_need_d_t_o.html#a4f9ee771e75d9f1ebc7fceb0b06bb225',1,'NeedDTO']]],
+  ['needdto_5',['NeedDTO',['../class_need_d_t_o.html',1,'']]],
+  ['needdto_2ecs_6',['NeedDTO.cs',['../_need_d_t_o_8cs.html',1,'']]],
+  ['needs_7',['needs',['../class_idle_d_t_o.html#a0954540122d99b48435b4a342581782c',1,'IdleDTO']]],
+  ['neighbors_8',['Neighbors',['../class_tile.html#a000a9fecfe867f1bc84447c399dfe32e',1,'Tile']]],
+  ['nightsky_9',['nightSky',['../class_day_night_cycle.html#a816c4c58400c9cc914dd0a2e472e96b6',1,'DayNightCycle']]],
+  ['none_10',['None',['../class_building_data.html#afc07932823f7b925d75c838070aa4556a6adf97f83acf6453d4a6a4b1070f3754',1,'BuildingData']]],
+  ['normaloffset_11',['normalOffset',['../class_camera_follow.html#a8666f72acc61b0a2c99138761b364c7a',1,'CameraFollow']]],
+  ['npc_12',['Npc',['../_game_manager_8cs.html#a332d19768cba462eba3a35c0f65ff8ae',1,'GameManager.cs']]],
+  ['npc_13',['NPC',['../_game_manager_8cs.html#a654beedc2ecd87c2d6a4581fcb06a414',1,'NPC():&#160;GameManager.cs'],['../class_n_p_c.html',1,'NPC']]],
+  ['npc_2ecs_14',['NPC.cs',['../_n_p_c_8cs.html',1,'']]],
+  ['npcconfig_15',['NpcConfig',['../class_npc_config.html',1,'']]],
+  ['npcconfig_2ecs_16',['NpcConfig.cs',['../_npc_config_8cs.html',1,'']]],
+  ['npcconversationdecision_17',['NPCConversationDecision',['../class_n_p_c_conversation_decision.html',1,'']]],
+  ['npcconversationdecision_2ecs_18',['NPCConversationDecision.cs',['../_n_p_c_conversation_decision_8cs.html',1,'']]],
+  ['npccount_19',['npcCount',['../class_game_manager.html#a41f1361690282cc0c41ef815f50bc34e',1,'GameManager']]],
+  ['npcname_20',['NpcName',['../class_n_p_c.html#a0d742bb06873712cf0c72f663fda6cab',1,'NPC']]],
+  ['npcprefabs_21',['npcPrefabs',['../class_game_manager.html#a0523461b9deabfad2744a47ba13c409d',1,'GameManager']]],
+  ['npcs_22',['Npcs',['../class_game_config.html#aeb1561002c13b588618fce225702efc8',1,'GameConfig']]],
+  ['npcs_23',['npcs',['../class_game_manager.html#aa95c1de6ccfe5a73aa74108640c4667d',1,'GameManager']]]
+];

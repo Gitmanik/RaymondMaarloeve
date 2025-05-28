@@ -1,0 +1,16 @@
+var searchData=
+[
+  ['n_5fctx_0',['n_ctx',['../class_load_model_d_t_o.html#a5d765b1e728ba7f650e765eb013920fa',1,'LoadModelDTO']]],
+  ['n_5fgpu_5flayers_1',['n_gpu_layers',['../class_load_model_d_t_o.html#a603ac9b8c8944b57c7d7cbe267cbdd84',1,'LoadModelDTO']]],
+  ['n_5fparts_2',['n_parts',['../class_load_model_d_t_o.html#a7d481047a5957414c76f03dd31712048',1,'LoadModelDTO']]],
+  ['name_3',['Name',['../class_model_config.html#afd54d6a5400735064a2e47afecd49d0d',1,'ModelConfig']]],
+  ['need_4',['need',['../class_need_d_t_o.html#a4f9ee771e75d9f1ebc7fceb0b06bb225',1,'NeedDTO']]],
+  ['needs_5',['needs',['../class_idle_d_t_o.html#a0954540122d99b48435b4a342581782c',1,'IdleDTO']]],
+  ['neighbors_6',['Neighbors',['../class_tile.html#a000a9fecfe867f1bc84447c399dfe32e',1,'Tile']]],
+  ['nightsky_7',['nightSky',['../class_day_night_cycle.html#a816c4c58400c9cc914dd0a2e472e96b6',1,'DayNightCycle']]],
+  ['normaloffset_8',['normalOffset',['../class_camera_follow.html#a8666f72acc61b0a2c99138761b364c7a',1,'CameraFollow']]],
+  ['npccount_9',['npcCount',['../class_game_manager.html#a41f1361690282cc0c41ef815f50bc34e',1,'GameManager']]],
+  ['npcprefabs_10',['npcPrefabs',['../class_game_manager.html#a0523461b9deabfad2744a47ba13c409d',1,'GameManager']]],
+  ['npcs_11',['Npcs',['../class_game_config.html#aeb1561002c13b588618fce225702efc8',1,'GameConfig']]],
+  ['npcs_12',['npcs',['../class_game_manager.html#aa95c1de6ccfe5a73aa74108640c4667d',1,'GameManager']]]
+];
