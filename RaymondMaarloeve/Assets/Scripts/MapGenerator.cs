@@ -489,6 +489,7 @@ public class Tile
     public GameObject Building;
     public bool IsBuilding = false;
     public bool IsPath = false;
+    public bool IsPartOfBuilding = false;
 }
 
 [Serializable]
