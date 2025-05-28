@@ -16,7 +16,10 @@ public class MapGenerator : MonoBehaviour
     public int mapWidthInTiles = 10, mapLengthInTiles = 10;
     [Range(0f, 1f)]
     public float buildingsDensity = 0.2f;
-    public bool markTiles = false; 
+    public bool markTiles = false;
+
+    private List<Tile> allTiles = new();
+
 
     Tile[,] tiles;
 
@@ -60,16 +63,25 @@ public class MapGenerator : MonoBehaviour
         buildingsMainTile = new List<Tile>();
         spawnedBuildings = new List<GameObject>();
 
-        // 1) Inicjalizacja kafelków
-        for (int x = 0; x < mapWidthInTiles; x++)
-            for (int z = 0; z < mapLengthInTiles; z++)
-                tiles[x, z] = new Tile();
+        InitializeTiles();
+        SpawnBuildings();
 
-        // 2) Ustawienie pozycji, sąsiadów i ewentualny spawn budynków
+        PathGenerator.GeneratePaths(tiles, buildingsMainTile, terrain);
+        if (markTiles)
+            MarkTiles();
+
+        surface.BuildNavMesh();
+    }
+
+    void InitializeTiles()
+    {
+        allTiles.Clear();
+        tiles = new Tile[mapWidthInTiles, mapLengthInTiles];
+
         for (int x = 0; x < mapWidthInTiles; x++)
             for (int z = 0; z < mapLengthInTiles; z++)
             {
-                var tile = tiles[x, z];
+                var tile = new Tile();
                 tile.GridPosition = new Vector2Int(x, z);
                 tile.TileCenter = new Vector2(
                     transform.position.x - mapWidth / 2 + x * tileSize + tileSize / 2f,
@@ -79,47 +91,32 @@ public class MapGenerator : MonoBehaviour
                     transform.position.x - mapWidth / 2 + x * tileSize + tileSize,
                     transform.position.z - mapLength / 2 + z * tileSize + tileSize / 2f);
 
+                tiles[x, z] = tile;
+                allTiles.Add(tile);
+            }
+
+        // przypisz sąsiadów
+        for (int x = 0; x < mapWidthInTiles; x++)
+            for (int z = 0; z < mapLengthInTiles; z++)
+            {
+                var tile = tiles[x, z];
                 var neighbours = new List<Tile>();
                 if (x > 0) neighbours.Add(tiles[x - 1, z]);
                 if (z > 0) neighbours.Add(tiles[x, z - 1]);
                 if (x < mapWidthInTiles - 1) neighbours.Add(tiles[x + 1, z]);
                 if (z < mapLengthInTiles - 1) neighbours.Add(tiles[x, z + 1]);
                 tile.Neighbors = neighbours.ToArray();
+            }
+    }
 
-                // spawn budynku z prawdopodobieństwem buildingsDensity
-                if (Random.value <= buildingsDensity)
-                {
-                    var prefab = PickBuilding();
-                    if (prefab != null)
-                    {
-                        Vector3 pos = new Vector3(
-                            transform.position.x - mapWidth / 2 + x * tileSize + tileSize / 2f,
-                            0,
-                            transform.position.z - mapLength / 2 + z * tileSize + tileSize / 2f);
 
-                        var go = Instantiate(prefab, pos, Quaternion.identity, terrain.transform);
-                        spawnedBuildings.Add(go);
-                        tile.IsBuilding = true;
-                        tile.Building = go;
-                        var buildingData = go.GetComponent<BuildingData>();
 
-                        if (buildingData != null)
-                        {
-                            buildingData.HisTile = tile;
 
-                        }
 
-                        buildingTiles.Add(tile);
 
-                    }
-                }
             }
 
-        // 3) Wyznaczanie i rysowanie ścieżek w osobnym managerze
-        PathGenerator.GeneratePaths(tiles, buildingTiles, terrain);
-        if (markTiles)
         {
-            MarkTiles();
         }
 
         Debug.Log($"Zaznaczono tile zajęte przez mury (AssignOccupiedTiles) – {count} obiektów.");
@@ -287,7 +284,6 @@ public class MapGenerator : MonoBehaviour
         data.SetAlphamaps(0, 0, alphas);
     }
 
-
     private void SetAlphaSafe(float[,,] alphas, int x, int z, int layer, int layersCount)
     {
         if (z < 0 || z >= alphas.GetLength(0) || x < 0 || x >= alphas.GetLength(1))
@@ -299,7 +295,14 @@ public class MapGenerator : MonoBehaviour
         alphas[z, x, layer] = 1f;
     }
 
-
+    void Shuffle<T>(List<T> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            int j = Random.Range(i, list.Count);
+            (list[i], list[j]) = (list[j], list[i]);
+        }
+    }
 
     [ContextMenu("Debuguj tile'e w konsoli")]
     public void DebugTilesInConsole()
