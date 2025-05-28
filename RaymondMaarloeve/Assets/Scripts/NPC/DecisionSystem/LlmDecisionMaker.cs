@@ -10,11 +10,20 @@ public class LlmDecisionMaker : IDecisionSystem
 
     private IdleDTO idleDto = null;
 
+    /// <summary>
+    /// Sets up the decision-making system with the provided NPC.
+    /// </summary>
+    /// <param name="npc">The NPC that will use this decision-making system.</param>
+
     public void Setup(NPC npc)
     {
         this.npc = npc;
     }
 
+    /// <summary>
+    /// Decides the NPC's next action based on the current state and LLM responses.
+    /// </summary>
+    /// <returns>An implementation of <see cref="IDecision"/> representing the NPC's next action.</returns>
     public IDecision Decide()
     {
       if (!GameManager.Instance.LlmServerReady)
@@ -32,11 +41,19 @@ public class LlmDecisionMaker : IDecisionSystem
         return new WaitForLLMDecision();
       }
     }
+
+    /// <summary>
+    /// Returns the name of the NPC.
+    /// </summary>
+    /// <returns>The name of the NPC.</returns>
     public string GetNPCName()
     {
         return npc.NpcName;
     }
 
+    /// <summary>
+    /// Requests a response from the LLMServer to determine the NPC's next action.
+    /// </summary>
     private void RequestResponse()
     {
       var currentConversation = new List<Message>();
@@ -73,6 +90,11 @@ public class LlmDecisionMaker : IDecisionSystem
       );
     }
 
+    /// <summary>
+    /// Parses the decision received from the LLM and maps it to an appropriate NPC action.
+    /// </summary>
+    /// <param name="chatResponseDto">The response from the LLM.</param>
+    /// <returns>An implementation of <see cref="IDecision"/> representing the parsed action.</returns>
     private IDecision ParseDecision(ChatResponseDTO chatResponseDto)
     {
       Debug.Log($"Idle response, content: ({chatResponseDto.response})");
@@ -103,6 +125,10 @@ public class LlmDecisionMaker : IDecisionSystem
       return new IdleDecision();
     }
     
+    /// <summary>
+    /// Logs an error in case of a failure during the chat process with the LLM.
+    /// </summary>
+    /// <param name="error">The error message.</param>
     private void OnChatError(string error)
     {
       Debug.LogError($"Idle error: {error}");

@@ -4,11 +4,19 @@ public class RandomDecisionMaker : IDecisionSystem
 {
     private NPC npc;
 
+    /// <summary>
+    /// Sets up the decision-making system with the provided NPC.
+    /// </summary>
+    /// <param name="npc">The NPC that will use this decision-making system.</param>
     public void Setup(NPC npc)
     {
         this.npc = npc;
     }
 
+    /// <summary>
+    /// Randomly selects the NPC's next action.
+    /// </summary>
+    /// <returns>An implementation of <see cref="IDecision"/> representing the NPC's next action.</returns>
     public IDecision Decide()
     {
         int decision = Random.Range(0, 7);
@@ -36,13 +44,12 @@ public class RandomDecisionMaker : IDecisionSystem
         }
     }
 
+    /// <summary>
+    /// Returns the name of the NPC.
+    /// </summary>
+    /// <returns>The name of the NPC.</returns>
     public string GetNPCName()
     {
         return "Random NPC name";
-    }
-
-    public NPC GetNPC()
-    {
-        return npc;
     }
 }
