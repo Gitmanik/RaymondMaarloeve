@@ -26,7 +26,7 @@ public class MapGenerator : MonoBehaviour
     public List<BuildingSetup> buildings = new();
     public List<GameObject> spawnedBuildings = new();
     public List<WallsSetup> walls = new();
-    private int WallsMargin = 10;
+    public int WallsMargin = 10;
     private GameObject wallsRoot;
 
 

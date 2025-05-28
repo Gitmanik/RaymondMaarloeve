@@ -2119,10 +2119,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   surface: {fileID: 1438901265}
   terrain: {fileID: 1438901263}
-  tileSize: 10
-  mapWidthInTiles: 10
-  mapLengthInTiles: 10
-  buildingsDensity: 0.2
+  tileSize: 2
+  mapWidthInTiles: 50
+  mapLengthInTiles: 50
+  buildingsDensity: 0.01
   markTiles: 0
   buildings:
   - prefab: {fileID: 5083285615235793076, guid: 147ab689729ac2e49b82aac972788668, type: 3}
@@ -2132,7 +2132,7 @@ MonoBehaviour:
     currentCount: 0
   - prefab: {fileID: 6108394813680385468, guid: 655e06dc9db1cb746b7da3e9dacba6e0, type: 3}
     weight: 1
-    maxCount: 0
+    maxCount: 3
     occurenceRadius: 1
     currentCount: 0
   - prefab: {fileID: 4128734955017319067, guid: d1afe98c64fbce847b4bb993ad9a349f, type: 3}
@@ -2185,29 +2185,29 @@ MonoBehaviour:
     maxCount: 2
     occurenceRadius: 1
     currentCount: 0
-  - prefab: {fileID: 2474794511101599434, guid: f645657df6336a144a7219968c013495, type: 3}
+  - prefab: {fileID: 2947193073734775164, guid: f28fae13da993fa44953d9b72c0b6288, type: 3}
     weight: 1
-    maxCount: 0
+    maxCount: 2
     occurenceRadius: 1
     currentCount: 0
-  - prefab: {fileID: 2474794511101599434, guid: f645657df6336a144a7219968c013495, type: 3}
+  - prefab: {fileID: 9076066520565368922, guid: 9feeb359872346d46a93a437fa23dec0, type: 3}
     weight: 1
-    maxCount: 0
+    maxCount: 2
     occurenceRadius: 1
     currentCount: 0
-  - prefab: {fileID: 2474794511101599434, guid: f645657df6336a144a7219968c013495, type: 3}
+  - prefab: {fileID: 6321675038682766091, guid: 32e7411cf4536a2448a5e08ed4d65803, type: 3}
     weight: 1
-    maxCount: 0
+    maxCount: 2
     occurenceRadius: 1
     currentCount: 0
-  - prefab: {fileID: 2474794511101599434, guid: f645657df6336a144a7219968c013495, type: 3}
+  - prefab: {fileID: 2541090667959201412, guid: 2d192c23efa758343835c3e5beb37de5, type: 3}
     weight: 1
-    maxCount: 0
+    maxCount: 2
     occurenceRadius: 1
     currentCount: 0
-  - prefab: {fileID: 2474794511101599434, guid: f645657df6336a144a7219968c013495, type: 3}
+  - prefab: {fileID: 3328772052583191664, guid: e53528e8f0fd65c4ba751060ebe7692c, type: 3}
     weight: 1
-    maxCount: 0
+    maxCount: 2
     occurenceRadius: 1
     currentCount: 0
   - prefab: {fileID: 3728591857030765963, guid: 6e79b7f28fea3d942b0217dfb8bd61d1, type: 3}
@@ -2215,9 +2215,9 @@ MonoBehaviour:
     maxCount: 2
     occurenceRadius: 1
     currentCount: 0
-  - prefab: {fileID: 2474794511101599434, guid: f645657df6336a144a7219968c013495, type: 3}
+  - prefab: {fileID: 1550031638748586619, guid: a4cf166534ac2c7428c43af71e4681db, type: 3}
     weight: 1
-    maxCount: 0
+    maxCount: 2
     occurenceRadius: 1
     currentCount: 0
   - prefab: {fileID: 6142094437250674325, guid: a828088f1f3df0a4cb946b2fa7ccefdd, type: 3}
@@ -2257,7 +2257,7 @@ MonoBehaviour:
     currentCount: 0
   - prefab: {fileID: 4129131243301403221, guid: a4b495b59ef41cb43b275bc7b05d189b, type: 3}
     weight: 1
-    maxCount: 2
+    maxCount: 0
     occurenceRadius: 1
     currentCount: 0
   - prefab: {fileID: 5578297198179012650, guid: b7c4333d750769449a5ff8f830fb542f, type: 3}
@@ -2265,9 +2265,9 @@ MonoBehaviour:
     maxCount: 2
     occurenceRadius: 1
     currentCount: 0
-  - prefab: {fileID: 3342396214730747672, guid: 3b7847c4f5f787847aa2fbbc47a29320, type: 3}
+  - prefab: {fileID: 2522367905711487196, guid: 075f577d6d9908f4083efac6ff6c4278, type: 3}
     weight: 1
-    maxCount: 0
+    maxCount: 2
     occurenceRadius: 1
     currentCount: 0
   - prefab: {fileID: 374984482186983294, guid: ddbde3774204fd946834ddbe89fba364, type: 3}
@@ -2276,6 +2276,10 @@ MonoBehaviour:
     occurenceRadius: 1
     currentCount: 0
   spawnedBuildings: []
+  walls:
+  - prefab: {fileID: 7202088873049624162, guid: cc79016811cfe34479bcd12091bdb83a, type: 3}
+  - prefab: {fileID: 6398382561017800961, guid: a890c3f1e1d4f8a49b39902f66ed38af, type: 3}
+  - prefab: {fileID: 4001755167029688240, guid: a737893b4dbaebe4eb1dcc9409b99044, type: 3}
   mapWidth: 0
   mapLength: 0
 --- !u!114 &1294622899
