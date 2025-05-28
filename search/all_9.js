@@ -19,9 +19,8 @@ var searchData=
   ['getcurrentenvironment_16',['GetCurrentEnvironment',['../class_n_p_c.html#a8db4f7bc313dd8dc7bb6ef46cbbf456f',1,'NPC']]],
   ['getdecisionsystem_17',['GetDecisionSystem',['../class_n_p_c.html#a09a8839a2883d5a685d7a0752c7f9cd6',1,'NPC']]],
   ['getentityid_18',['GetEntityID',['../class_game_manager.html#a7148ad990dacf2866cb8229ce5fd67ed',1,'GameManager']]],
-  ['getnpcname_19',['GetNPCName',['../interface_i_decision_system.html#ac634a8f939442145b33449662864739f',1,'IDecisionSystem.GetNPCName()'],['../class_llm_decision_maker.html#a6acac78b6656bb14c128b0e936d7fb1b',1,'LlmDecisionMaker.GetNPCName()'],['../class_random_decision_maker.html#a5fcd0832c9a2f1e91db04ff08d4703b2',1,'RandomDecisionMaker.GetNPCName()']]],
-  ['getwaterdecision_20',['GetWaterDecision',['../class_get_water_decision.html',1,'']]],
-  ['getwaterdecision_2ecs_21',['GetWaterDecision.cs',['../_get_water_decision_8cs.html',1,'']]],
-  ['gravity_22',['gravity',['../class_player_controller.html#a0a8e0eb9de4ccc5bd5f4cc5b44469b01',1,'PlayerController']]],
-  ['gridposition_23',['GridPosition',['../class_tile.html#aea7349aaf7cefe25268e05d40c356a48',1,'Tile']]]
+  ['getwaterdecision_19',['GetWaterDecision',['../class_get_water_decision.html',1,'']]],
+  ['getwaterdecision_2ecs_20',['GetWaterDecision.cs',['../_get_water_decision_8cs.html',1,'']]],
+  ['gravity_21',['gravity',['../class_player_controller.html#a0a8e0eb9de4ccc5bd5f4cc5b44469b01',1,'PlayerController']]],
+  ['gridposition_22',['GridPosition',['../class_tile.html#aea7349aaf7cefe25268e05d40c356a48',1,'Tile']]]
 ];

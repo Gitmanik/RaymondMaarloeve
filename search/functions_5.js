@@ -8,6 +8,5 @@ var searchData=
   ['getcurrentdecision_5',['GetCurrentDecision',['../class_n_p_c.html#a8c575d0e01fe56a1e356a9a6b042d44e',1,'NPC']]],
   ['getcurrentenvironment_6',['GetCurrentEnvironment',['../class_n_p_c.html#a8db4f7bc313dd8dc7bb6ef46cbbf456f',1,'NPC']]],
   ['getdecisionsystem_7',['GetDecisionSystem',['../class_n_p_c.html#a09a8839a2883d5a685d7a0752c7f9cd6',1,'NPC']]],
-  ['getentityid_8',['GetEntityID',['../class_game_manager.html#a7148ad990dacf2866cb8229ce5fd67ed',1,'GameManager']]],
-  ['getnpcname_9',['GetNPCName',['../interface_i_decision_system.html#ac634a8f939442145b33449662864739f',1,'IDecisionSystem.GetNPCName()'],['../class_llm_decision_maker.html#a6acac78b6656bb14c128b0e936d7fb1b',1,'LlmDecisionMaker.GetNPCName()'],['../class_random_decision_maker.html#a5fcd0832c9a2f1e91db04ff08d4703b2',1,'RandomDecisionMaker.GetNPCName()']]]
+  ['getentityid_8',['GetEntityID',['../class_game_manager.html#a7148ad990dacf2866cb8229ce5fd67ed',1,'GameManager']]]
 ];
