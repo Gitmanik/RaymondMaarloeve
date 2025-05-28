@@ -115,7 +115,6 @@ public class MapGenerator : MonoBehaviour
         if (markTiles)
         {
             MarkTiles();
-
         }
 
         // 4) Budowa NavMesh dla całej mapy
@@ -144,7 +143,6 @@ public class MapGenerator : MonoBehaviour
         return null;
     }
 
-
     public GameObject GetBuilding(HashSet<BuildingData.BuildingType> allowedTypes)
     {
         List<GameObject> buildings = new List<GameObject>();
@@ -167,34 +165,89 @@ public class MapGenerator : MonoBehaviour
 
 
     private void MarkTiles()
-    // Narysuj kropki na budynkach (taką samą grubością jak ścieżki)
     {
         var data = terrain.terrainData;
         var tPos = terrain.transform.position;
+
         int w = data.alphamapWidth;
         int h = data.alphamapHeight;
         int layers = data.alphamapLayers;
         var alphas = data.GetAlphamaps(0, 0, w, h);
 
-        float radius = 1.0f; // Taka sama jak szerokość ścieżki
-        float mapRad = (radius / data.size.x) * w; // Skalowanie promienia
+        float terrainWidth = data.size.x;
+        float terrainHeight = data.size.z;
+
+        int thickness = 1; // obwódka 2px
+
+        int tilePixelW = Mathf.RoundToInt((tileSize / terrainWidth) * w);
+        int tilePixelH = Mathf.RoundToInt((tileSize / terrainHeight) * h);
 
         foreach (var tile in tiles)
         {
-            if (tile != null && tile.IsBuilding == false)
+            if (tile != null && !tile.IsBuilding && !tile.IsPartOfBuilding)
             {
                 Vector2 center = tile.TileCenter;
 
-                int mapZ = (int)(((center.x - tPos.x) / data.size.x) * w);
-                int mapX = (int)(((center.y - tPos.z) / data.size.z) * h);
+                int mapX = Mathf.RoundToInt(((center.x - tPos.x) / terrainWidth) * w);
+                int mapZ = Mathf.RoundToInt(((center.y - tPos.z) / terrainHeight) * h);
 
-                // Maluj na trzeciej warstwie
-                PathGenerator.PaintCircle(alphas, mapX, mapZ, mapRad, 2, layers);
+                int startX = mapX - tilePixelW / 2;
+                int endX = startX + tilePixelW - 1;
+
+                int startZ = mapZ - tilePixelH / 2;
+                int endZ = startZ + tilePixelH - 1;
+
+                for (int x = startX; x <= endX; x++)
+                {
+                    for (int t = 0; t < thickness; t++)
+                    {
+                        SetAlphaSafe(alphas, x, startZ + t, 2, layers); // góra
+                        SetAlphaSafe(alphas, x, endZ - t, 2, layers);   // dół
+                    }
+                }
+
+                for (int z = startZ; z <= endZ; z++)
+                {
+                    for (int t = 0; t < thickness; t++)
+                    {
+                        SetAlphaSafe(alphas, startX + t, z, 2, layers); // lewa
+                        SetAlphaSafe(alphas, endX - t, z, 2, layers);   // prawa
+                    }
+                }
             }
         }
 
         data.SetAlphamaps(0, 0, alphas);
     }
+
+
+    private void SetAlphaSafe(float[,,] alphas, int x, int z, int layer, int layersCount)
+    {
+        if (z < 0 || z >= alphas.GetLength(0) || x < 0 || x >= alphas.GetLength(1))
+            return;
+
+        for (int i = 0; i < layersCount; i++)
+            alphas[z, x, i] = 0f;
+
+        alphas[z, x, layer] = 1f;
+    }
+
+
+
+    [ContextMenu("Debuguj tile'e w konsoli")]
+    public void DebugTilesInConsole()
+    {
+        for (int z = mapLengthInTiles - 1; z >= 0; z--) // od góry, żeby było jak mapa
+        {
+            string row = "";
+            for (int x = 0; x < mapWidthInTiles; x++)
+            {
+                row += tiles[x, z].IsBuilding ? "[X]" : "[ ]";
+            }
+            Debug.Log($"Rząd Z={z}: {row}");
+        }
+    }
+
 }
 
 // Klasa Tile i Building pozostają bez zmian
