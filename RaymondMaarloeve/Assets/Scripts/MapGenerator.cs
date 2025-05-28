@@ -22,6 +22,9 @@ public class MapGenerator : MonoBehaviour
 
     public List<BuildingSetup> buildings = new();
     public List<GameObject> spawnedBuildings = new();
+    public List<WallsSetup> walls = new();
+    private int WallsMargin = 10;
+    private GameObject wallsRoot;
 
     private List<Tile> buildingTiles;
 
@@ -117,8 +120,71 @@ public class MapGenerator : MonoBehaviour
             MarkTiles();
         }
 
-        // 4) Budowa NavMesh dla całej mapy
-        surface.BuildNavMesh();
+        Debug.Log($"Zaznaczono tile zajęte przez mury (AssignOccupiedTiles) – {count} obiektów.");
+    }
+
+
+
+    void SpawnBuildings()
+    {
+        var shuffled = new List<Tile>(allTiles);
+        Shuffle(shuffled);
+
+        int buildingsPlaced = 0;
+        int minimumBuildings = 6;
+
+        foreach (var tile in shuffled)
+        {
+            float currentDensity = buildingsPlaced < minimumBuildings ? 1f : buildingsDensity;
+
+            if (Random.value > currentDensity)
+                continue;
+
+            Vector2Int gridPos = tile.GridPosition;
+            
+            if (gridPos.x < WallsMargin || gridPos.y < WallsMargin || gridPos.x >= mapWidthInTiles - WallsMargin || gridPos.y >= mapLengthInTiles - WallsMargin)
+                continue;
+
+            if (tile.IsBuilding || tile.IsPartOfBuilding)
+                continue;
+
+            var prefab = PickBuilding();
+            if (prefab == null)
+                continue;
+
+            // Losowa rotacja
+            int[] angles = { 0, 90, 180, 270 };
+            int randomAngle = angles[Random.Range(0, angles.Length)];
+            Quaternion rotation = Quaternion.Euler(0, randomAngle, 0);
+
+            Vector3 pos3 = new Vector3(tile.TileCenter.x, 0, tile.TileCenter.y);
+            pos3.y = terrain.SampleHeight(pos3) + terrain.transform.position.y;
+
+            // Instancjonowanie z rotacją
+            var go = Instantiate(prefab, pos3, rotation, terrain.transform);
+            var buildingData = go.GetComponent<BuildingData>();
+            if (buildingData == null)
+            {
+                Destroy(go);
+                continue;
+            }
+
+            bool success = buildingData.AssignOccupiedTiles(tileSize, tiles);
+            if (!success)
+            {
+                Destroy(go);
+                continue;
+            }
+
+            spawnedBuildings.Add(go);
+            tile.IsBuilding = true;
+            tile.Building = go;
+            buildingsMainTile.Add(tile);
+
+            buildingsPlaced++;
+        }
+
+        Debug.Log($"Zbudowano {buildingsPlaced} budynków.");
     }
 
     private GameObject PickBuilding()
@@ -162,7 +228,6 @@ public class MapGenerator : MonoBehaviour
 
         return chosenBuilding;
     }
-
 
     private void MarkTiles()
     {
@@ -272,4 +337,10 @@ public class BuildingSetup
     public int occurenceRadius = 5;
 
     [HideInInspector] public int currentCount = 0;
+}
+[Serializable]
+public class WallsSetup
+{
+    public GameObject prefab;
+
 }
