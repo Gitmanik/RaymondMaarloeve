@@ -25,6 +25,7 @@
 var NAVTREE =
 [
   [ "Raymond Maarloeve", "index.html", [
+    [ "Raymond Maarloeve sp. z o.o.", "index.html", "index" ],
     [ "Todo List", "todo.html", null ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],

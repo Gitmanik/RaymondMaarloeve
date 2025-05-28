@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Raymond Maarloeve: Main Page</title>
+<title>Raymond Maarloeve: Raymond Maarloeve sp. z o.o.</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,10 +90,131 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 </div>
 </div>
 
-<div class="header">
-  <div class="headertitle"><div class="title">Raymond Maarloeve Documentation</div></div>
+<div><div class="header">
+  <div class="headertitle"><div class="title">Raymond Maarloeve sp. z o.o. </div></div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><p><a class="anchor" id="md_README"></a> </p><table class="doxtable">
+<tr>
+<td><img src="Documents/Screenshots/Game.png" alt="Screenshot" width="600" class="inline"/>  </td><td><img src="Documents/Screenshots/GameInteraction.png" alt="Screenshot" width="600" class="inline"/>   </td></tr>
+</table>
+<h1><a class="anchor" id="autotoc_md1"></a>
+Introduction</h1>
+<h2><a class="anchor" id="autotoc_md2"></a>
+Description</h2>
+<p>The project we are working on is a computer game in which artificial intelligence (AI) plays a key role. Its main feature is a dynamic world where non-player characters (NPCs) have their own personalities, daily schedules, and the ability to react to player actions. Thanks to AI, each gameplay session is unique, and <a class="el" href="class_n_p_c.html">NPC</a> behavior influences both the storyline and the player's decisions.</p>
+<p>What sets this game apart is the lack of traditional, rigid scripting for events. Instead, the game world develops organically, and interactions between NPCs and the player determine the course of the detective investigation, which is the central element of the gameplay. Procedurally generated environments and complex <a class="el" href="class_n_p_c.html">NPC</a> decision-making systems make each game session a unique experience.</p>
+<h2><a class="anchor" id="autotoc_md3"></a>
+Technology Stack</h2>
+<ul>
+<li><b>Game Engine:</b> Unity 6 (6000.0.38f1) + C#</li>
+<li><b>Artificial Intelligence:</b> Large Language Model (LLM), pathfinding with NavMesh</li>
+<li><b>Graphics:</b><ul>
+<li><a href="https://kenney.nl/assets/fantasy-ui-borders">Kenney Fantasy UI</a></li>
+<li><a href="https://free-game-assets.itch.io/free-medieval-3d-people-low-poly-pack">Free Medieval 3D People Low Poly Pack</a></li>
+<li><a href="https://opengameart.org/content/cc0-terrain-textures">CC0 Terrain Textures</a></li>
+<li>Free assets (<a href="https://itch.io/game-assets/free/tag-isometric">Itch.io Free Assets</a>)</li>
+</ul>
+</li>
+<li><b>Target Platform</b>: Currently developed for <em><b>Windows</b></em>. Linux support is a potential goal for future development stages.</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md4"></a>
+Team</h2>
+<ul>
+<li><b>Leader:</b> Cyprian Zasada</li>
+<li><b>Deputy Leader:</b> Marek Nijakowski</li>
+<li><b>Team Members:</b><ul>
+<li>Paweł Reich</li>
+<li>Paweł Dolak</li>
+<li>Maciej Pitucha</li>
+<li>Maciej Włudarski</li>
+<li>Karol Rzepiński</li>
+<li>Kamil Włodarczyk</li>
+<li>Łukasz Jastrzębski</li>
+<li>Michał Eisler</li>
+<li>Łukasz Czarzasty</li>
+</ul>
+</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md6"></a>
+Assumptions</h1>
+<h2><a class="anchor" id="autotoc_md7"></a>
+Gameplay</h2>
+<ul>
+<li><b>Game Objective:</b> The player takes on the role of a detective investigating a murder case in a small <a class="el" href="class_n_p_c.html">NPC</a> community. The investigation is based on analyzing clues and conversing with AI-controlled NPCs. In the end, the player reconstructs the sequence of events, determining their success or failure.</li>
+<li><b>Success Metrics:</b><ul>
+<li>The game allows free world exploration and interactions with NPCs.</li>
+<li>There are at least two sources of clues (e.g., <a class="el" href="class_n_p_c.html">NPC</a> conversations + physical evidence).</li>
+<li>The player can present their theory in the game's finale through an interactive sequence-building system.</li>
+</ul>
+</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md8"></a>
+NPC Characters</h2>
+<ul>
+<li><b>Behavior:</b> NPCs have unique personalities, daily schedules, and the ability to dynamically react to player actions.</li>
+<li><b>Success Metrics:</b><ul>
+<li>Minimum number of NPCs: 6, target: 10.</li>
+<li>NPCs generate responses and make decisions using LLM.</li>
+<li>NPCs can dynamically change their routes in response to player interactions (eventually, also in response to interactions with other NPCs).</li>
+</ul>
+</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md9"></a>
+Map</h2>
+<ul>
+<li><b>Appearance:</b> Each <a class="el" href="class_n_p_c.html">NPC</a> in the game has their own home, and their placement is procedurally generated.</li>
+</ul>
+<hr  />
+<h1><a class="anchor" id="autotoc_md11"></a>
+Execution</h1>
+<h2><a class="anchor" id="autotoc_md12"></a>
+Task Distribution</h2>
+<h3><a class="anchor" id="autotoc_md13"></a>
+Unity:</h3>
+<ul>
+<li>Paweł Reich</li>
+<li>Marek Nijakowski</li>
+<li>Paweł Dolak</li>
+</ul>
+<h3><a class="anchor" id="autotoc_md14"></a>
+LLM:</h3>
+<ul>
+<li>Maciej Pitucha</li>
+<li>Maciej Włudarski</li>
+<li>Karol Rzepiński</li>
+<li>Kamil Włodarczyk</li>
+<li>Łukasz Jastrzębski</li>
+<li>Michał Eisler</li>
+<li>Łukasz Czarzasty</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md15"></a>
+Milestones</h2>
+<h3><a class="anchor" id="autotoc_md16"></a>
+1st Milestone - Game Prototype (without LLM)</h3>
+<ul>
+<li>A game base exists where characters move around.</li>
+<li><a class="el" href="class_n_p_c.html">NPC</a> actions are taken randomly or follow predefined patterns.</li>
+</ul>
+<h3><a class="anchor" id="autotoc_md17"></a>
+2nd Milestone - LLM Integration with Unity</h3>
+<ul>
+<li>A day and night system is introduced.</li>
+<li>The dataset contains 50% of the intended prompts.</li>
+</ul>
+<h3><a class="anchor" id="autotoc_md18"></a>
+3rd Milestone - Final Touches</h3>
+<ul>
+<li>Main menu</li>
+<li>Soundtrack</li>
+<li>Credits</li>
+<li>Fine-tuning of the LLM model completed.</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md19"></a>
+Task Schedule</h2>
+<p>📌 <a href="https://docs.google.com/spreadsheets/d/1uFGMCmiO6wAubyI_MKR1ynXz4QdD-30tejBS1lcy7w8/edit?usp=sharing">Gantt Schedule (polish language)</a> </p>
+</div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
