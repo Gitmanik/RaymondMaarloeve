@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 9632e3d06ba93f5428e0c659d1023531
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - miniGamePanel: {instanceID: 0}
+  - poolPanel: {instanceID: 0}
+  - sequencePanel: {instanceID: 0}
+  - historyBlockPrefab: {instanceID: 0}
+  - submitButton: {instanceID: 0}
+  - cancelButton: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Game Manager starting");
         Instance = this;
+
         
         gameConfig = GameConfig.LoadGameConfig(Path.Combine(Application.dataPath, "game_config.json"));
         

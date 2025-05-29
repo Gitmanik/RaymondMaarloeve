@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class DayNightCycle : MonoBehaviour
 {
-    [Header("Time Settings")]
+    public static DayNightCycle Instance { get; private set; }
+
+
     [Range(0, 24)] public float timeOfDay;
     public float dayDurationInMinutes = 1f; // 1 minuta = 24h
 
@@ -15,20 +17,20 @@ public class DayNightCycle : MonoBehaviour
     public float minSunIntensity = 0f;
 
     [Header("Skyboxes")]
-    public Material daySky;    // materia³ z shaderem Skybox/Cubemap lub Panoramic
-    public Material nightSky;  // materia³ na noc
+    public Material daySky;    // materiaÂ³ z shaderem Skybox/Cubemap lub Panoramic
+    public Material nightSky;  // materiaÂ³ na noc
 
     [Header("Exposure Settings")]
-    public float maxExposure = 1.3f;  // jasnoœæ w ci¹gu dnia
-    public float minExposure = 0.3f;  // ciemnoœæ w nocy
+    public float maxExposure = 1.3f;  // jasnoÅ“Ã¦ w ciÂ¹gu dnia
+    public float minExposure = 0.3f;  // ciemnoÅ“Ã¦ w nocy
 
     [Header("Skybox Rotation")]
-    [Tooltip("Stopnie obrotu skyboxu na sekundê")]
+    [Tooltip("Stopnie obrotu skyboxu na sekundÃª")]
     public float skyboxRotationSpeed = 1f;
 
     void Start()
     {
-        // Ustaw pocz¹tkowy skybox i UI
+        // Ustaw poczÂ¹tkowy skybox i UI
         RenderSettings.skybox = daySky;
         if (DayBoxManager.Instance != null)
             DayBoxManager.Instance.UpdateDayText(currentDay);
@@ -46,7 +48,7 @@ public class DayNightCycle : MonoBehaviour
                 DayBoxManager.Instance.UpdateDayText(currentDay);
         }
 
-        // 2) Obrót s³oñca + intensywnoœæ
+        // 2) ObrÃ³t sÂ³oÃ±ca + intensywnoÅ“Ã¦
         UpdateSun(timeOfDay);
 
         // 3) Skybox + ekspozycja
@@ -59,11 +61,11 @@ public class DayNightCycle : MonoBehaviour
 
     void UpdateSun(float hour)
     {
-        // Obrót s³oñca: od -90° (wschód) do +270° (zachód)
+        // ObrÃ³t sÂ³oÃ±ca: od -90Â° (wschÃ³d) do +270Â° (zachÃ³d)
         float sunAngle = (hour / 24f) * 360f - 90f;
         directionalLight.transform.rotation = Quaternion.Euler(sunAngle, 170f, 0f);
 
-        // Intensywnoœæ: 0 noc¹, max w po³udnie
+        // IntensywnoÅ“Ã¦: 0 nocÂ¹, max w poÂ³udnie
         float normalized = Mathf.Clamp01(Mathf.Cos((hour / 24f - 0.25f) * 2f * Mathf.PI) * -1f);
         directionalLight.intensity = Mathf.Lerp(minSunIntensity, maxSunIntensity, normalized);
     }
@@ -71,11 +73,11 @@ public class DayNightCycle : MonoBehaviour
     void UpdateSkybox(float hour)
     {
         float t = hour / 24f;
-        // Wybór skyboxu: dzieñ do po³owy dnia, noc po po³owie
+        // WybÃ³r skyboxu: dzieÃ± do poÂ³owy dnia, noc po poÂ³owie
         Material target = (t < 0.5f) ? daySky : nightSky;
         RenderSettings.skybox = target;
 
-        // Ekspozycja: roœnie od œwitu do po³udnia, potem maleje
+        // Ekspozycja: roÅ“nie od Å“witu do poÂ³udnia, potem maleje
         float exposureT = (t < 0.5f) ? (t * 2f) : (2f - t * 2f);
         float exp = Mathf.Lerp(minExposure, maxExposure, exposureT);
         target.SetFloat("_Exposure", exp);
@@ -84,7 +86,7 @@ public class DayNightCycle : MonoBehaviour
         float rot = (Time.time * skyboxRotationSpeed) % 360f;
         target.SetFloat("_Rotation", rot);
 
-        // Odœwie¿ globalne GI, by zmiany ekspozycji by³y widoczne
+        // OdÅ“wieÂ¿ globalne GI, by zmiany ekspozycji byÂ³y widoczne
         DynamicGI.UpdateEnvironment();
     }
 
@@ -92,4 +94,10 @@ public class DayNightCycle : MonoBehaviour
     {
         return currentDay;
     }
+    void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
+
 }
