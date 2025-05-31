@@ -213,7 +213,7 @@ public static class PathGenerator
             if (cur == goal) break;
             foreach (var nb in cur.Neighbors)
             {
-                if (nb == null || nb.IsBuilding || prev.ContainsKey(nb))
+                if (nb == null || nb.IsBuilding /*|| nb.IsPartOfBuilding*/ || prev.ContainsKey(nb))
                     continue;
                 prev[nb] = cur;
                 queue.Enqueue(nb);
@@ -292,9 +292,9 @@ public static class PathGenerator
         //    - jeśli front modelu == +X, offset = -90
         //    - jeśli front modelu == -Z, offset = 180
         //    - jeśli front modelu == -X, offset = +90
-        float angleOffset = -90f;
-        Quaternion offset = Quaternion.Euler(0, angleOffset, 0);
+        //float angleOffset = -90f;
+        //Quaternion offset = Quaternion.Euler(0, angleOffset, 0);
+        //building.transform.rotation = lookRot;// * offset;
 
-        building.transform.rotation = lookRot * offset;
     }
 }

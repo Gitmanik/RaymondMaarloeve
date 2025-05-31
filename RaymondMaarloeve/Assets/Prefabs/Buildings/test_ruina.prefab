@@ -84,7 +84,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HisNPC: {fileID: 0}
-  HisType: 7
+  HisType: 13
 --- !u!64 &40773747911313732
 MeshCollider:
   m_ObjectHideFlags: 0
