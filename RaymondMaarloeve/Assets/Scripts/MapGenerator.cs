@@ -183,12 +183,12 @@ public class MapGenerator : MonoBehaviour
         // Południe
         Vector3 southStart = new Vector3(tiles[2, 0].TileCenter.x, 0, tiles[2, 0].TileCenter.y);
         southStart.y = terrain.SampleHeight(southStart) + terrain.transform.position.y;
-        SpawnWallLineWithGate(southStart, Vector3.right, mapWidth, segmentLength, Quaternion.identity, wallPrefab, gatePrefab);
+        SpawnWallLine(southStart, Vector3.right, mapWidth, segmentLength, Quaternion.identity, wallPrefab);
 
         // Północ
         Vector3 northStart = new Vector3(tiles[2, mapLengthInTiles - 1].TileCenter.x, 0, tiles[2, mapLengthInTiles - 1].TileCenter.y);
         northStart.y = terrain.SampleHeight(northStart) + terrain.transform.position.y;
-        SpawnWallLine(northStart, Vector3.right, mapWidth, segmentLength, Quaternion.identity, wallPrefab);
+        SpawnWallLineWithGate(northStart, Vector3.right, mapWidth, segmentLength, Quaternion.Euler(0, 180, 0), wallPrefab, gatePrefab);
 
         // Zachód
         Vector3 westStart = new Vector3(tiles[0, 0].TileCenter.x, 0, tiles[0, 0].TileCenter.y);
@@ -249,6 +249,7 @@ public class MapGenerator : MonoBehaviour
             if (i == gateIndex)
             {
                 pos -= direction * 2f; // 🔧 twardy offset tylko dla bramy
+                pos += direction * 2f; // twardy offset tylko dla bramy
             }
             Instantiate(prefabToUse, pos, rotation, wallsRoot.transform);
         }

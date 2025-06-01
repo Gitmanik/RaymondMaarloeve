@@ -581,6 +581,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 0
+--- !u!1 &341254425 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5676725852435064086, guid: f1cd53ea223a5cf43bf282c3a34b494c, type: 3}
+  m_PrefabInstance: {fileID: 1738852691}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &427952137
 GameObject:
   m_ObjectHideFlags: 0
@@ -2041,6 +2046,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7a77b12dd6bc29f8bebb7f7f4e17154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 341254425}
   npcCount: 6
   npcPrefabs:
   - {fileID: 1668834221483606419, guid: 363a0160b72821de083880c20963240f, type: 3}
