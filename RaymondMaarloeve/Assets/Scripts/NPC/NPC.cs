@@ -38,6 +38,17 @@ public class NPC : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        StartCoroutine(ScanRoutine());
+    }
+
+    // 10 seconds scan routine
+    private System.Collections.IEnumerator ScanRoutine()
+    {
+        while (true)
+        {
+            ScanRadius();
+            yield return new WaitForSeconds(10f);
+        }
     }
 
     public void Setup(IDecisionSystem decisionSystem, string modelId, string name, string systemPrompt)
@@ -88,7 +99,7 @@ public class NPC : MonoBehaviour
 
     public IDecision GetCurrentDecision() => currentDecision;
     public IDecisionSystem GetDecisionSystem() => decisionSystem;
-    
+
     void Update()
     {
         if (animator != null && agent != null)
@@ -102,7 +113,8 @@ public class NPC : MonoBehaviour
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, lookTarget.eulerAngles.y - 180, transform.eulerAngles.z);
             currentDecision = null;
             agent.ResetPath();
-        } else
+        }
+        else
 
         if (currentDecision == null || !currentDecision.Tick())
         {
@@ -111,14 +123,32 @@ public class NPC : MonoBehaviour
             currentDecision.Setup(decisionSystem, this);
             Debug.Log($"New decision: {currentDecision}");
         }
-        
+
         Hunger += Time.deltaTime * 0.5f;
         Thirst += Time.deltaTime * 0.5f;
+        
+    }
+
+    void ScanRadius()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5f);
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.CompareTag("NPC"))
+            {
+                NPC npc = hitCollider.GetComponent<NPC>();
+                if (npc != null && npc != this)
+                {
+                    Debug.Log($"{NpcName} detected {npc.NpcName} at {hitCollider.transform.position}, he is doing {npc.currentDecision}");
+                    // You can add logic here to interact with the detected NPC
+                }
+            }
+        }
     }
 
     public void LookAt(Transform targetTransform)
     {
-        Debug.Log($"{NpcName} Looking at {(targetTransform == null ? "null" :  targetTransform.name)}");
+        Debug.Log($"{NpcName} Looking at {(targetTransform == null ? "null" : targetTransform.name)}");
         if (targetTransform != null)
         {
             oldLookTarget = transform.eulerAngles;
@@ -145,4 +175,4 @@ public class NPC : MonoBehaviour
             new CurrentEnvironmentDTO("Watch birds scatter in the market (buy goods)", 2)
         };
     }
-} 
+}
