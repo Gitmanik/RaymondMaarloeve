@@ -1,4 +1,4 @@
-﻿// PathManager.cs
+﻿// PathGenerator.cs
 
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,20 +32,37 @@ public static class PathGenerator
     /// </summary>
     public static void GeneratePaths(Tile[,] tiles, List<Tile> buildingTiles, Terrain terrain)
     {
-        int n = buildingTiles.Count;
-        if (n < 2) return;  // za mało budynków
+        // === KROK 1: Znalezienie punktów połączeń (najbliższych kafelków przy wejściu) ===
+        List<Tile> connectionTiles = new List<Tile>();
 
-        // 1) Obliczanie macierzy odległości Manhattan
+        foreach (var buildingTile in buildingTiles)
+        {
+            Tile entryTile = GetEntranceNeighbor(buildingTile, tiles);
+            if (entryTile != null)
+            {
+                connectionTiles.Add(entryTile);
+            }
+            else
+            {
+                Debug.LogWarning($"Nie znaleziono wejścia dla budynku: {buildingTile.Building?.name}");
+            }
+        }
+
+        int n = connectionTiles.Count;
+        if (n < 2) return;  // za mało punktów do łączenia
+
+        // === KROK 2: Obliczanie odległości między punktami wejściowymi ===
         float[,] d = new float[n, n];
         Tile[,] bestStartTile = new Tile[n, n];
         Tile[,] bestGoalTile = new Tile[n, n];
 
         for (int i = 0; i < n; i++)
         {
-            var startTile = buildingTiles[i];
             for (int j = 0; j < n; j++)
             {
-                var endTile = buildingTiles[j];
+                var startTile = connectionTiles[i];
+                var endTile = connectionTiles[j];
+
                 if (i == j)
                 {
                     d[i, j] = 0f;
@@ -54,41 +71,20 @@ public static class PathGenerator
                     continue;
                 }
 
-                float bestDist = float.MaxValue;
-                Tile bp = null, bq = null;
+                float dist = Mathf.Abs(startTile.TileCenter.x - endTile.TileCenter.x)
+                           + Mathf.Abs(startTile.TileCenter.y - endTile.TileCenter.y);
 
-                foreach (var p in startTile.Neighbors)
-                {
-                    if (p == null || p.IsBuilding) continue;
-                    foreach (var q in endTile.Neighbors)
-                    {
-                        if (q == null || q.IsBuilding) continue;
-
-                        float dist = Mathf.Abs(p.TileCenter.x - q.TileCenter.x)
-                                   + Mathf.Abs(p.TileCenter.y - q.TileCenter.y);
-                        if (dist < bestDist)
-                        {
-                            bestDist = dist;
-                            bp = p;
-                            bq = q;
-                        }
-                    }
-                }
-
-                if (bestDist == float.MaxValue)
-                    bestDist = float.MaxValue / 2f;
-
-                d[i, j] = bestDist;
-                bestStartTile[i, j] = bp;
-                bestGoalTile[i, j] = bq;
+                d[i, j] = dist;
+                bestStartTile[i, j] = startTile;
+                bestGoalTile[i, j] = endTile;
             }
         }
 
-        // 2) Nearest-Neighbor + Two-Opt
+        // === KROK 3: Optymalizacja kolejności odwiedzania punktów ===
         var nnPath = NearestNeighbor(d, n);
         var optPath = TwoOpt(nnPath, d);
 
-        // 3) Budowa pełnej ścieżki (scalanie segmentów)
+        // === KROK 4: Budowanie pełnej ścieżki ===
         foreach (var t in tiles) t.IsPath = false;
         var fullPath = new List<Tile>();
         Tile lastTile = null;
@@ -107,12 +103,9 @@ public static class PathGenerator
             fullPath.AddRange(segment);
             lastTile = fullPath[fullPath.Count - 1];
             foreach (var t in segment) t.IsPath = true;
-
         }
 
-
-
-        // 4) Rysowanie ścieżek
+        // === KROK 5: Rysowanie ścieżek i ustawianie wejść ===
         foreach (var t in tiles)
         {
             if (t.IsBuilding)
@@ -128,16 +121,52 @@ public static class PathGenerator
                     }
                 }
             }
+
             if (t.IsPath)
             {
                 foreach (var nb in t.Neighbors)
                 {
                     if (nb != null && nb.IsPath)
-                        PaintPath(terrain, t.TileCenter, nb.TileCenter, 1.2f, 1);
+                    {
+                        PaintPath(terrain, t.TileCenter, nb.TileCenter, 2.0f, 1);
+                    }
                 }
             }
         }
     }
+    private static Tile GetEntranceNeighbor(Tile buildingTile, Tile[,] tiles)
+    {
+        if (buildingTile.Building == null)
+            return null;
+
+        Transform entrance = buildingTile.Building.transform.Find("Entrance");
+        if (entrance == null)
+        {
+            Debug.LogWarning($"Brak 'entrance' w budynku: {buildingTile.Building.name}");
+            return null;
+        }
+
+        Vector3 entranceWorldPos = entrance.position;
+        float minDist = float.MaxValue;
+        Tile closest = null;
+
+        foreach (var tile in tiles)
+        {
+            if (tile == null || tile.IsPartOfBuilding) continue;
+
+            Vector3 tileWorldPos = new Vector3(tile.TileCenter.x, entranceWorldPos.y, tile.TileCenter.y);
+            float dist = Vector3.SqrMagnitude(entranceWorldPos - tileWorldPos);
+
+            if (dist < minDist)
+            {
+                minDist = dist;
+                closest = tile;
+            }
+        }
+
+        return closest;
+    }
+
 
     private static List<int> NearestNeighbor(float[,] d, int n)
     {
