@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &1196980111961835407
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 3dce3d2d4e3cabb45878773b337e4072, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.3278294
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3dce3d2d4e3cabb45878773b337e4072, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.00000045275004
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3dce3d2d4e3cabb45878773b337e4072, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -17.639673
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3dce3d2d4e3cabb45878773b337e4072, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3dce3d2d4e3cabb45878773b337e4072, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3dce3d2d4e3cabb45878773b337e4072, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3dce3d2d4e3cabb45878773b337e4072, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3dce3d2d4e3cabb45878773b337e4072, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3dce3d2d4e3cabb45878773b337e4072, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 3dce3d2d4e3cabb45878773b337e4072, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3dce3d2d4e3cabb45878773b337e4072, type: 3}
+      propertyPath: m_Name
+      value: Tree_temp_climate_007
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3dce3d2d4e3cabb45878773b337e4072, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8333126890265323378}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3dce3d2d4e3cabb45878773b337e4072, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8182929287915350058}
+  m_SourcePrefab: {fileID: 100100000, guid: 3dce3d2d4e3cabb45878773b337e4072, type: 3}
+--- !u!1 &2044052314510883550 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 3dce3d2d4e3cabb45878773b337e4072, type: 3}
+  m_PrefabInstance: {fileID: 1196980111961835407}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &8333126890265323378
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044052314510883550}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1638241643754745985, guid: 3dce3d2d4e3cabb45878773b337e4072, type: 3}
+--- !u!208 &8182929287915350058
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044052314510883550}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.4580001, y: 1.485, z: 2.9220002}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.078, y: 0.091000006, z: 2.9220002}
+  m_TimeToStationary: 0.5

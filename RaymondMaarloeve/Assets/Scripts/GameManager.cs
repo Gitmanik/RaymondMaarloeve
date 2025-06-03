@@ -8,13 +8,14 @@ using Random = UnityEngine.Random;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    
+
+    public GameObject player;
+
     public int npcCount = 6;
     public GameObject[] npcPrefabs;
     
     private int entityIDCounter = 0;
     public int GetEntityID() => ++entityIDCounter;
-    
     public List<NPC> npcs = new List<NPC>();
     [HideInInspector] public bool LlmServerReady = false;
     
@@ -105,6 +106,31 @@ public class GameManager : MonoBehaviour
             buildingData.HisNPC = npcComponent;
 
             npcs.Add(npcComponent);
+
+            //Player spawn
+            // Znajdź _minnor_gates_02(Clone) w WallsRoot
+            GameObject wallsRoot = GameObject.Find("WallsRoot");
+
+            Transform gates = wallsRoot.transform.Find("_minnor_gates_02(Clone)");
+            if (gates == null)
+            {
+                Debug.LogError("Nie znaleziono bramy (_minnor_gates_02(Clone))!");
+                return;
+            }
+
+            // Znajdź Entrance w _minnor_gates_02(Clone)
+            Transform entrance = gates.Find("Entrance");
+            if (entrance == null)
+            {
+                Debug.LogError("Nie znaleziono Entrance!");
+                return;
+            }
+
+            // Ustaw gracza w pozycji Entrance
+            player.transform.position = entrance.position + entrance.forward * 3.0f;
+            player.transform.rotation = entrance.rotation; // opcjonalnie, jeśli chcesz żeby był od razu dobrze obrócony
+
+            Debug.Log("Player ustawiony na spawn point Entrance.");
         }
     }
 
