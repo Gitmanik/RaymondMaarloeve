@@ -2107,52 +2107,42 @@ MonoBehaviour:
   - prefab: {fileID: 5083285615235793076, guid: 147ab689729ac2e49b82aac972788668, type: 3}
     weight: 1
     maxCount: 1
-    occurenceRadius: 1
     currentCount: 0
   - prefab: {fileID: 6108394813680385468, guid: 655e06dc9db1cb746b7da3e9dacba6e0, type: 3}
     weight: 1
     maxCount: 1
-    occurenceRadius: 1
     currentCount: 0
   - prefab: {fileID: 4128734955017319067, guid: d1afe98c64fbce847b4bb993ad9a349f, type: 3}
     weight: 0.5
     maxCount: 1
-    occurenceRadius: 1
     currentCount: 0
   - prefab: {fileID: 1869102301479979069, guid: 6f8f8f50cef4e5672ace240d64134866, type: 3}
     weight: 0.5
     maxCount: 2
-    occurenceRadius: 1
     currentCount: 0
   - prefab: {fileID: 9012655438019880852, guid: dd61dcfce8cdfb1b9b2e09368a5c9e67, type: 3}
     weight: 0.5
     maxCount: 2
-    occurenceRadius: 1
     currentCount: 0
   - prefab: {fileID: 206528979659577565, guid: cc6934e2e20fab840a439cc2178719de, type: 3}
     weight: 1
     maxCount: 1
-    occurenceRadius: 1
     currentCount: 0
   - prefab: {fileID: 8097970678501141546, guid: 2728991a092826047ac869844385d4fe, type: 3}
     weight: 0.5
     maxCount: 2
-    occurenceRadius: 1
     currentCount: 0
   - prefab: {fileID: 5809783869429004467, guid: 6c440fd867dc25c43b3eac01ed5171fa, type: 3}
     weight: 1
     maxCount: 1
-    occurenceRadius: 1
     currentCount: 0
   - prefab: {fileID: 2378057268553226593, guid: e52c8f8704c3b9d44b660c2c75d98192, type: 3}
     weight: 0.2
     maxCount: 2
-    occurenceRadius: 1
     currentCount: 0
   - prefab: {fileID: 489591695903564298, guid: cc6d52fdd67e37739b5d6a53fb8d7af7, type: 3}
     weight: 0.5
     maxCount: 2
-    occurenceRadius: 1
     currentCount: 0
   spawnedBuildings: []
   walls:
@@ -2160,6 +2150,11 @@ MonoBehaviour:
   - prefab: {fileID: 6398382561017800961, guid: a890c3f1e1d4f8a49b39902f66ed38af, type: 3}
   - prefab: {fileID: 4001755167029688240, guid: a737893b4dbaebe4eb1dcc9409b99044, type: 3}
   WallsMargin: 3
+  decorations:
+  - prefab: {fileID: 6611334141065096312, guid: ecbfea977636f8d4b8d083e997d197fa, type: 3}
+    weight: 0.21
+    maxCount: 7
+    currentCount: 0
   mapWidth: 0
   mapLength: 0
 --- !u!114 &1294622899

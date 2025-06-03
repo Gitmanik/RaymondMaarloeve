@@ -29,6 +29,8 @@ public class MapGenerator : MonoBehaviour
     public int WallsMargin = 10;
     private GameObject wallsRoot;
 
+    public List<BuildingSetup> decorations = new();
+
 
     public List<Tile> buildingsMainTile;
 
@@ -66,6 +68,7 @@ public class MapGenerator : MonoBehaviour
         InitializeTiles();
         SpawnWalls();
         SpawnBuildings();
+        SpawnDecorations();
 
         PathGenerator.GeneratePaths(tiles, buildingsMainTile, terrain);
         if (markTiles)
@@ -248,7 +251,6 @@ public class MapGenerator : MonoBehaviour
 
             if (i == gateIndex)
             {
-                pos -= direction * 2f; // 🔧 twardy offset tylko dla bramy
                 pos += direction * 2f; // twardy offset tylko dla bramy
             }
             Instantiate(prefabToUse, pos, rotation, wallsRoot.transform);
@@ -306,7 +308,7 @@ public class MapGenerator : MonoBehaviour
             if (tile.IsBuilding || tile.IsPartOfBuilding)
                 continue;
 
-            var prefab = PickBuilding();
+            var prefab = PickPrefab(buildings);
             if (prefab == null)
                 continue;
 
@@ -345,27 +347,7 @@ public class MapGenerator : MonoBehaviour
         Debug.Log($"Zbudowano {buildingsPlaced} budynków.");
     }
 
-    private GameObject PickBuilding()
-    {
-        var available = buildings.FindAll(b => b.currentCount < b.maxCount);
-        if (available.Count == 0) return null;
-
-        float totalWeight = 0f;
-        foreach (var b in available) totalWeight += b.weight;
-
-        float rnd = Random.value * totalWeight;
-        float cum = 0f;
-        foreach (var b in available)
-        {
-            cum += b.weight;
-            if (rnd <= cum)
-            {
-                b.currentCount++;
-                return b.prefab;
-            }
-        }
-        return null;
-    }
+    
 
     public GameObject GetBuilding(HashSet<BuildingData.BuildingType> allowedTypes)
     {
@@ -387,6 +369,30 @@ public class MapGenerator : MonoBehaviour
         return chosenBuilding;
     }
 
+    void SpawnDecorations()
+    {
+        var shuffled = new List<Tile>(allTiles);
+        Shuffle(shuffled);
+        int decorationsPlaced = 0;
+        foreach (var tile in shuffled)
+        {
+            if (tile.IsBuilding || tile.IsPartOfBuilding || tile.IsPath)
+                continue;
+            float currentDensity = decorations.Count > 0 ? decorations[0].weight : 0.1f;
+            if (Random.value > currentDensity)
+                continue;
+            var prefab = PickPrefab(decorations);
+            if (prefab == null)
+                continue;
+            Vector3 pos3 = new Vector3(tile.TileCenter.x, 0, tile.TileCenter.y);
+            pos3.y = terrain.SampleHeight(pos3) + terrain.transform.position.y;
+            var go = Instantiate(prefab, pos3, Quaternion.identity, terrain.transform);
+            tile.IsPath = true;
+            tile.TileObject = go;
+            decorationsPlaced++;
+        }
+        Debug.Log($"Zbudowano {decorationsPlaced} dekoracji.");
+    }
     private void MarkTiles()
     {
         var data = terrain.terrainData;
@@ -454,7 +460,29 @@ public class MapGenerator : MonoBehaviour
         alphas[z, x, layer] = 1f;
     }
 
-    void Shuffle<T>(List<T> list)
+    private GameObject PickPrefab(List<BuildingSetup> prefabList)
+    {
+        var available = prefabList.FindAll(b => b.currentCount < b.maxCount);
+        if (available.Count == 0) return null;
+
+        float totalWeight = 0f;
+        foreach (var b in available) totalWeight += b.weight;
+
+        float rnd = Random.value * totalWeight;
+        float cum = 0f;
+        foreach (var b in available)
+        {
+            cum += b.weight;
+            if (rnd <= cum)
+            {
+                b.currentCount++;
+                return b.prefab;
+            }
+        }
+        return null;
+    }
+
+    private void Shuffle<T>(List<T> list)
     {
         for (int i = 0; i < list.Count; i++)
         {
@@ -499,13 +527,10 @@ public class BuildingSetup
     public GameObject prefab;
     [Range(0f, 1f)] public float weight = 0.1f;
     public int maxCount = 3;
-    public int occurenceRadius = 5;
-
     [HideInInspector] public int currentCount = 0;
 }
 [Serializable]
 public class WallsSetup
 {
     public GameObject prefab;
-
 }
