@@ -29,11 +29,14 @@ public class NPC : MonoBehaviour
     public int EntityID { get; private set; }
 
     private List<NPC> visibleNpcs = new List<NPC>();
-    private float visionUpdateCooldown = 0.2f;
+    private float visionUpdateCooldown = 1f;
     private float visionTimer = 0f;
 
-    private float viewRadius = 7f;
-    private float viewAngle = 120f;
+    private float viewRadius = 4f;
+    private float viewAngle = 90f;
+
+    private Dictionary<int, string> lastObservedActions = new Dictionary<int, string>();
+
 
     public void Awake()
     {
@@ -151,11 +154,31 @@ public class NPC : MonoBehaviour
                     Vector3 dirToTarget = (npc.transform.position - transform.position).normalized;
                     if (Vector3.Angle(transform.forward, dirToTarget) < viewAngle / 2f)
                     {
-                        visibleNpcs.Add(npc);
+                        if (!visibleNpcs.Contains(npc))
+                        {
+                            string currentAction = npc.currentDecision?.ToString() ?? "Idle";
+
+                            // Check if we have already observed this NPC doing the same action
+                            if (!lastObservedActions.ContainsKey(npc.EntityID) || lastObservedActions[npc.EntityID] != currentAction)
+                            {
+                                lastObservedActions[npc.EntityID] = currentAction;
+
+                                // ObtainedMemories.Add(new ObtainedMemoryDTO
+                                // {
+                                //     memory = $"Saw {npc.NpcName} doing {currentAction} at {npc.transform.position}",
+                                //     weight = UnityEngine.Random.Range(10, 25)
+                                // });
+
+                                Debug.Log($"{NpcName} immediately observed {npc.NpcName} doing {currentAction}");
+                            }
+                            visibleNpcs.Add(npc);
+                        }
                     }
                 }
             }
         }
+
+
     }
 
     void OnNpcActionObserved(NpcActionEvent e)
@@ -165,13 +188,14 @@ public class NPC : MonoBehaviour
         var observedNpc = visibleNpcs.Find(npc => npc.EntityID == e.SourceId);
         if (observedNpc != null)
         {
+            lastObservedActions[observedNpc.EntityID] = observedNpc.currentDecision?.ToString() ?? "Idle";
             // ObtainedMemories.Add(new ObtainedMemoryDTO
             // {
             //     memory = $"Saw {observedNpc.NpcName} doing {e.Action} at {e.Position}",
             //     weight = UnityEngine.Random.Range(10, 25)
             // });
 
-            Debug.Log($"{NpcName} remembers: {observedNpc.NpcName} was doing {e.Action}.");
+            Debug.Log($"{NpcName} observed {observedNpc.NpcName} doing {e.Action}.");
         }
     }
 
@@ -206,11 +230,24 @@ public class NPC : MonoBehaviour
             new CurrentEnvironmentDTO("Watch birds scatter in the market (buy goods)", 2)
         };
     }
+
+    void LateUpdate()
+    {
+        // Debug lines for vision cone
+        Vector3 leftBoundary = Quaternion.Euler(0, -viewAngle / 2, 0) * transform.forward;
+        Vector3 rightBoundary = Quaternion.Euler(0, viewAngle / 2, 0) * transform.forward;
+
+        Debug.DrawLine(transform.position, transform.position + leftBoundary * viewRadius, Color.cyan);
+        Debug.DrawLine(transform.position, transform.position + rightBoundary * viewRadius, Color.cyan);
+
+        Debug.DrawLine(transform.position, transform.position + transform.forward * viewRadius, Color.yellow);
+    }
     
     public void OnDestroy()
     {
         NpcEventBus.OnNpcAction -= OnNpcActionObserved;
     }
+
 }
 
 public class NpcActionEvent
