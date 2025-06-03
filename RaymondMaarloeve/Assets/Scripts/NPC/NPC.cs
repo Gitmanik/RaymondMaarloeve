@@ -7,7 +7,7 @@ public class NPC : MonoBehaviour
 {
     private Transform lookTarget;
     private Vector3 oldLookTarget;
-    
+
     private IDecision currentDecision;
     private IDecisionSystem decisionSystem;
     public NavMeshAgent agent;
@@ -15,18 +15,25 @@ public class NPC : MonoBehaviour
     //public string npcName = "Unnamed NPC";
     public GameObject HisBuilding = null;
     private Animator animator;
-    
+
     public string SystemPrompt { get; private set; } = null;
     public string ModelID { get; private set; } = null;
     public string NpcName { get; private set; } = null;
-    
+
     public List<ObtainedMemoryDTO> ObtainedMemories { get; private set; } = new List<ObtainedMemoryDTO>();
-    
+
     public float Hunger = 0f;
     public float Thirst = 0f;
 
     public float speed = 3f;
     public int EntityID { get; private set; }
+
+    private List<NPC> visibleNpcs = new List<NPC>();
+    private float visionUpdateCooldown = 0.2f;
+    private float visionTimer = 0f;
+
+    private float viewRadius = 7f;
+    private float viewAngle = 120f;
 
     public void Awake()
     {
@@ -34,21 +41,11 @@ public class NPC : MonoBehaviour
 
         animator = GetComponent<Animator>();
 
+        NpcEventBus.OnNpcAction += OnNpcActionObserved;
     }
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        StartCoroutine(ScanRoutine());
-    }
-
-    // 10 seconds scan routine
-    private System.Collections.IEnumerator ScanRoutine()
-    {
-        while (true)
-        {
-            ScanRadius();
-            yield return new WaitForSeconds(10f);
-        }
     }
 
     public void Setup(IDecisionSystem decisionSystem, string modelId, string name, string systemPrompt)
@@ -59,7 +56,7 @@ public class NPC : MonoBehaviour
         ModelID = modelId;
         SystemPrompt = systemPrompt;
         NpcName = name;
-        
+
         name = "NPC: " + NpcName;
 
         // TODO: Make this dynamic.
@@ -122,16 +119,28 @@ public class NPC : MonoBehaviour
             currentDecision = decisionSystem.Decide();
             currentDecision.Setup(decisionSystem, this);
             Debug.Log($"New decision: {currentDecision}");
+            NpcEventBus.Publish(new NpcActionEvent(
+                sourceId: EntityID,
+                action: currentDecision?.ToString() ?? "Idle",
+                position: transform.position
+            ));
         }
 
         Hunger += Time.deltaTime * 0.5f;
         Thirst += Time.deltaTime * 0.5f;
-        
+
+        visionTimer += Time.deltaTime;
+        if (visionTimer >= visionUpdateCooldown)
+        {
+            UpdateVision();
+            visionTimer = 0f;
+        }
     }
 
-    void ScanRadius()
+    void UpdateVision()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5f);
+        visibleNpcs.Clear();
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, viewRadius);
         foreach (var hitCollider in hitColliders)
         {
             if (hitCollider.CompareTag("NPC"))
@@ -139,12 +148,34 @@ public class NPC : MonoBehaviour
                 NPC npc = hitCollider.GetComponent<NPC>();
                 if (npc != null && npc != this)
                 {
-                    Debug.Log($"{NpcName} detected {npc.NpcName} at {hitCollider.transform.position}, he is doing {npc.currentDecision}");
-                    // You can add logic here to interact with the detected NPC
+                    Vector3 dirToTarget = (npc.transform.position - transform.position).normalized;
+                    if (Vector3.Angle(transform.forward, dirToTarget) < viewAngle / 2f)
+                    {
+                        visibleNpcs.Add(npc);
+                    }
                 }
             }
         }
     }
+
+    void OnNpcActionObserved(NpcActionEvent e)
+    {
+        if (e.SourceId == EntityID) return; // dont observe own actions
+
+        var observedNpc = visibleNpcs.Find(npc => npc.EntityID == e.SourceId);
+        if (observedNpc != null)
+        {
+            // ObtainedMemories.Add(new ObtainedMemoryDTO
+            // {
+            //     memory = $"Saw {observedNpc.NpcName} doing {e.Action} at {e.Position}",
+            //     weight = UnityEngine.Random.Range(10, 25)
+            // });
+
+            Debug.Log($"{NpcName} remembers: {observedNpc.NpcName} was doing {e.Action}.");
+        }
+    }
+
+
 
     public void LookAt(Transform targetTransform)
     {
@@ -174,5 +205,36 @@ public class NPC : MonoBehaviour
             new CurrentEnvironmentDTO("Trace the burned symbol on his ring (walk)", 1),
             new CurrentEnvironmentDTO("Watch birds scatter in the market (buy goods)", 2)
         };
+    }
+    
+    public void OnDestroy()
+    {
+        NpcEventBus.OnNpcAction -= OnNpcActionObserved;
+    }
+}
+
+public class NpcActionEvent
+{
+    public int SourceId;
+    public string Action;
+    public Vector3 Position;
+    public float Timestamp;
+    
+    public NpcActionEvent(int sourceId, string action, Vector3 position)
+    {
+        SourceId = sourceId;
+        Action = action;
+        Position = position;
+        Timestamp = Time.time;
+    }
+}
+
+public static class NpcEventBus
+{
+    public static event Action<NpcActionEvent> OnNpcAction;
+
+    public static void Publish(NpcActionEvent e)
+    {
+        OnNpcAction?.Invoke(e);
     }
 }
