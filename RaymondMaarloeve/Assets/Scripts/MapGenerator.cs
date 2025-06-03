@@ -386,7 +386,12 @@ public class MapGenerator : MonoBehaviour
                 continue;
             Vector3 pos3 = new Vector3(tile.TileCenter.x, 0, tile.TileCenter.y);
             pos3.y = terrain.SampleHeight(pos3) + terrain.transform.position.y;
-            var go = Instantiate(prefab, pos3, Quaternion.identity, terrain.transform);
+            // Losowa rotacja
+            int[] angles = { 0, 90, 180, 270 };
+            int randomAngle = angles[Random.Range(0, angles.Length)];
+            Quaternion rotation = Quaternion.Euler(-90, randomAngle, 0);    //-90 bo mam assety obrócone i nie chce mi się tego poprawiać
+
+            var go = Instantiate(prefab, pos3, rotation, terrain.transform);
             tile.IsPath = true;
             tile.TileObject = go;
             decorationsPlaced++;
