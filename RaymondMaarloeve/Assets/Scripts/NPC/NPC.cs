@@ -138,40 +138,6 @@ public class NPC : MonoBehaviour
         NpcName = name;
 
         name = "NPC: " + NpcName;
-
-        // TODO: Make this dynamic.
-        ObtainedMemories = new List<ObtainedMemoryDTO>() {
-            new ObtainedMemoryDTO
-            {
-                memory = "A child asked what the sigil on my ring was. I told him it meant 'nothing'.",
-                weight = 21
-            },
-            new ObtainedMemoryDTO
-            {
-                memory = "A merchant mentioned my house name, then spat. I didn’t blink.",
-                weight = 20
-            },
-            new ObtainedMemoryDTO
-            {
-                memory = "Saw my old banner being used to wrap fish. I said nothing. But I watched.",
-                weight = 23
-            },
-            new ObtainedMemoryDTO
-            {
-                memory = "Heard someone say I should’ve been executed too. He’s not wrong.",
-                weight = 22
-            },
-            new ObtainedMemoryDTO
-            {
-                memory = "A drunken man bowed to me by mistake. For a moment, I let him.",
-                weight = 18
-            },
-            new ObtainedMemoryDTO
-            {
-                memory = "Someone asked if I’d return home. I said ‘Home is gone.’",
-                weight = 19
-            }
-        };
     }
 
     /// <summary>
@@ -256,11 +222,11 @@ public class NPC : MonoBehaviour
                             {
                                 lastObservedActions[npc.EntityID] = currentAction;
 
-                                // ObtainedMemories.Add(new ObtainedMemoryDTO
-                                // {
-                                //     memory = $"Saw {npc.NpcName} doing {currentAction} at {npc.transform.position}",
-                                //     weight = UnityEngine.Random.Range(10, 25)
-                                // });
+                                ObtainedMemories.Add(new ObtainedMemoryDTO
+                                {
+                                    memory = $"Saw {npc.NpcName} doing {currentAction} at {npc.transform.position}",
+                                    weight = UnityEngine.Random.Range(10, 25)
+                                });
 
                                 Debug.Log($"{NpcName} immediately observed {npc.NpcName} doing {currentAction}");
                             }
@@ -288,11 +254,11 @@ public class NPC : MonoBehaviour
         if (observedNpc != null)
         {
             lastObservedActions[observedNpc.EntityID] = observedNpc.currentDecision?.ToString() ?? "Idle";
-            // ObtainedMemories.Add(new ObtainedMemoryDTO
-            // {
-            //     memory = $"Saw {observedNpc.NpcName} doing {e.Action} at {e.Position}",
-            //     weight = UnityEngine.Random.Range(10, 25)
-            // });
+            ObtainedMemories.Add(new ObtainedMemoryDTO
+            {
+                memory = $"Saw {observedNpc.NpcName} doing {e.Action} at {e.Position}",
+                weight = UnityEngine.Random.Range(10, 25)
+            });
 
             Debug.Log($"{NpcName} observed {observedNpc.NpcName} doing {e.Action}.");
         }
