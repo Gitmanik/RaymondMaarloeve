@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -123,5 +124,66 @@ public class LlmDecisionMaker : IDecisionSystem
     private void OnChatError(string error)
     {
       Debug.LogError($"Idle error: {error}");
+    }
+
+    public void CalculateRelevance(string newMemory, Action<int> relevanceFunc)
+    {
+      string prompt = @"
+You are a memory analysis model in a mystery narrative game.
+Your task is to assign a Relevance score (1–10) to a newly obtained memory.
+
+Definitions:
+""core_memories"": Permanent, unchanging truths or world context. Always available.
+""obtained_memories"": Episodic memories discovered over time
+
+Relevance (last value in the weight triplet) measures how strongly the new memory connects to the central mystery and existing information. It is not a measure of importance in isolation — that is covered by the Importance score.
+
+Instructions:
+
+1. Carefully analyze the new_memory.
+2. Compare its content with:
+   - core_memories
+   - obtained_memories
+3. If the new memory connects directly or indirectly to one or more existing memories or core truths (same symbols, items, locations, actions, or implications), assign a higher Relevance.
+   - Strong connections (shared specific items, rituals, locations, etc.): Relevance 7–10.
+   - Moderate thematic or suggestive links: Relevance 4–6.
+   - Weak or no clear links to existing data: Relevance 1–3.
+
+If the new_memory clearly connects to one or more obtained_memories, increase the Relevance of those memories accordingly.
+
+Updated Relevance values must never exceed 10.
+
+Output format must be **EXACTLY AND ONLY** an integer. Do not explain your reasoning. Do not include anything else.
+";
+      
+      var currentConversation = new List<Message>();
+        
+      var dto = new CalculateRelevanceDTO();
+      dto.core_memories = npc.SystemPrompt.Split('.').ToList().ConvertAll(x => x.Trim());
+      dto.obtained_memories = npc.ObtainedMemories;
+      dto.new_memory = newMemory;
+      
+      var dtoJson = JsonUtility.ToJson(dto);
+      
+      currentConversation.Add(new Message { role = "system", content = prompt});
+      currentConversation.Add(new Message { role = "user", content = dtoJson});
+      
+      Debug.Log($"Calculating relevance:\n{dtoJson}");
+      
+      LlmManager.Instance.Chat(
+        npc.ModelID,
+        currentConversation,
+        (response) =>
+        {
+          Debug.Log($"Relevance response: '{response.response}'");
+          int relevance = 5;
+          if (!int.TryParse(response.response, out relevance))
+            Debug.LogWarning($"Wrong relevance response: '{response.response}'");
+          relevanceFunc(relevance);
+        },
+        OnChatError
+      );
+      
+      
     }
 }

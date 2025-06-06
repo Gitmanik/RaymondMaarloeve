@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using Random = UnityEngine.Random;
 
 public class RandomDecisionMaker : IDecisionSystem
 {
@@ -42,5 +43,10 @@ public class RandomDecisionMaker : IDecisionSystem
             default:
                 return new IdleDecision();
         }
+    }
+
+    public void CalculateRelevance(string newMemory, Action<int> relevanceFunc)
+    {
+        relevanceFunc.Invoke(Random.Range(0, 10));
     }
 }
