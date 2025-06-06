@@ -12,6 +12,8 @@ public class BuyGoodsDecision : IDecision
     public float buyingDuration = 4f;
     private float buyingTimer = 0f;
 
+    public string PrettyName => "buying goods";
+    
     public void Setup(IDecisionSystem system, NPC npc)
     {
         this.npc = npc;

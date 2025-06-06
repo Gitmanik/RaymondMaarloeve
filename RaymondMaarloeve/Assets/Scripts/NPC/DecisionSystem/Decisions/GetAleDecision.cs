@@ -12,6 +12,8 @@ public class GetAleDecision : IDecision
     public float drinkingDuration = 5f;
     private float drinkingTimer = 0f;
 
+    public string PrettyName => "getting ale";
+
     public void Setup(IDecisionSystem system, NPC npc)
     {
         this.npc = npc;

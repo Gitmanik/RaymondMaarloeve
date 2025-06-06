@@ -178,7 +178,7 @@ public class NPC : MonoBehaviour
             Debug.Log($"New decision: {currentDecision}");
             NpcEventBus.Publish(new NpcActionEvent(
                 sourceId: EntityID,
-                action: currentDecision?.ToString() ?? "Idle",
+                action: currentDecision?.PrettyName ?? IdleDecision.RandomPrettyName,
                 position: transform.position
             ));
         }
@@ -215,7 +215,7 @@ public class NPC : MonoBehaviour
                     {
                         if (!visibleNpcs.Contains(npc))
                         {
-                            string currentAction = npc.currentDecision?.ToString() ?? "Idle";
+                            string currentAction = npc.currentDecision?.PrettyName ?? IdleDecision.RandomPrettyName;
 
                             // Check if we have already observed this NPC doing the same action
                             if (!lastObservedActions.ContainsKey(npc.EntityID) || lastObservedActions[npc.EntityID] != currentAction)

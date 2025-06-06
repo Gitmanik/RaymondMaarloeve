@@ -12,6 +12,8 @@ public class GetWaterDecision : IDecision
     public float waterCollectionDuration = 4f;
     private float waterCollectionTimer = 0f;
 
+    public string PrettyName => "going to get water";
+    
     public void Setup(IDecisionSystem system, NPC npc)
     {
         this.npc = npc;

@@ -7,6 +7,8 @@ public class WalkDecision : IDecision
     private bool finished = false;
     public float wanderRadius = 20f;
 
+    public string PrettyName => "walking";
+    
     public void Setup(IDecisionSystem system, NPC npc)
     {
         this.npc = npc;

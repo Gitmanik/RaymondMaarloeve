@@ -12,6 +12,8 @@ public class PrayDecision : IDecision
     public float prayerDuration = 5f;
     private float prayerTimer = 0f;
 
+    public string PrettyName => "praying";
+    
     public void Setup(IDecisionSystem system, NPC npc)
     {
         this.npc = npc;

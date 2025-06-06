@@ -1,9 +1,28 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class IdleDecision : IDecision
 {
     private float idleStart;
     private float idleTime = -1f;
+
+    public static readonly List<string> RandomIdleNames = new List<string>()
+    {
+        "loitering",
+        "lazing",
+        "lingering",
+        "dawdling",
+        "dallying",
+        "resting",
+        "hanging around",
+        "vegetating",
+        "malingering",
+        "chilling",
+        "biding time",
+        "stalling"
+    };
+    public static string RandomPrettyName => RandomIdleNames[Random.Range(0, RandomIdleNames.Count)];
+    public string PrettyName => RandomPrettyName;
 
     public IdleDecision(float idleTime)
     {
