@@ -253,8 +253,8 @@ public class NPC : MonoBehaviour
         var observedNpc = visibleNpcs.Find(npc => npc.EntityID == e.SourceId);
         if (observedNpc != null)
         {
-            lastObservedActions[observedNpc.EntityID] = observedNpc.currentDecision?.ToString() ?? "Idle";
             ObtainedMemories.Add(new ObtainedMemoryDTO
+            lastObservedActions[observedNpc.EntityID] = e.Action;
             {
                 memory = $"Saw {observedNpc.NpcName} doing {e.Action} at {e.Position}",
                 weight = UnityEngine.Random.Range(10, 25)
