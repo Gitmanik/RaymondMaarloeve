@@ -222,13 +222,18 @@ public class NPC : MonoBehaviour
                             {
                                 lastObservedActions[npc.EntityID] = currentAction;
 
-                                ObtainedMemories.Add(new ObtainedMemoryDTO
+                                string newMemory = $"Saw {npc.NpcName} doing {currentAction}"; //TODO add hour
+            
+                                decisionSystem.CalculateRelevance(newMemory, relevance =>
                                 {
-                                    memory = $"Saw {npc.NpcName} doing {currentAction} at {npc.transform.position}",
-                                    weight = UnityEngine.Random.Range(10, 25)
+                                    ObtainedMemories.Add(new ObtainedMemoryDTO
+                                    {
+                                        memory = newMemory,
+                                        weight = relevance + 5 + 10, // TODO: Hard-coded importance = 5, recency = 10
+                                    });
+                                    Debug.Log($"{NpcName} immediately observed {npc.NpcName} doing {currentAction}. Assigned relevance value: {relevance}");
                                 });
-
-                                Debug.Log($"{NpcName} immediately observed {npc.NpcName} doing {currentAction}");
+                                
                             }
                             visibleNpcs.Add(npc);
                         }
@@ -253,14 +258,20 @@ public class NPC : MonoBehaviour
         var observedNpc = visibleNpcs.Find(npc => npc.EntityID == e.SourceId);
         if (observedNpc != null)
         {
-            ObtainedMemories.Add(new ObtainedMemoryDTO
             lastObservedActions[observedNpc.EntityID] = e.Action;
-            {
-                memory = $"Saw {observedNpc.NpcName} doing {e.Action} at {e.Position}",
-                weight = UnityEngine.Random.Range(10, 25)
-            });
 
-            Debug.Log($"{NpcName} observed {observedNpc.NpcName} doing {e.Action}.");
+            string newMemory = $"Saw {observedNpc.NpcName} doing {e.Action}"; //TODO add hour
+            
+            decisionSystem.CalculateRelevance(newMemory, relevance =>
+            {
+                ObtainedMemories.Add(new ObtainedMemoryDTO
+                {
+                    memory = newMemory,
+                    weight = relevance + 5 + 10, // TODO: Hard-coded importance = 5, recency = 10
+                });
+
+                Debug.Log($"{NpcName} observed {observedNpc.NpcName} doing {e.Action}. Assigned relevance value: {relevance}");
+            });
         }
     }
 
