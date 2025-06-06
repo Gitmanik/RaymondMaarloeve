@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using TMPro;
 
 [RequireComponent(typeof(CanvasGroup))]
-public class HistoryBlockDrag : MonoBehaviour,
-    IBeginDragHandler, IDragHandler, IEndDragHandler
+public class HistoryBlockDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    CanvasGroup canvasGroup;
-    RectTransform rect;
-    Transform startParent;
-    Vector2 startPosition;
-    Canvas rootCanvas;
+    private CanvasGroup canvasGroup;
+    private RectTransform rect;
+    private Transform originalParent;
+    private Vector2 originalPosition;
+    private Canvas rootCanvas;
 
     void Awake()
     {
@@ -20,8 +20,8 @@ public class HistoryBlockDrag : MonoBehaviour,
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        startParent = transform.parent;
-        startPosition = rect.anchoredPosition;
+        originalParent = transform.parent;
+        originalPosition = rect.anchoredPosition;
         transform.SetParent(rootCanvas.transform);
         canvasGroup.blocksRaycasts = false;
     }
@@ -35,8 +35,8 @@ public class HistoryBlockDrag : MonoBehaviour,
     {
         if (transform.parent == rootCanvas.transform)
         {
-            transform.SetParent(startParent);
-            rect.anchoredPosition = startPosition;
+            transform.SetParent(originalParent);
+            rect.anchoredPosition = originalPosition;
         }
         canvasGroup.blocksRaycasts = true;
     }
