@@ -10,7 +10,10 @@ var dir_ed46394dee2e54595d33d9052673dcbb =
     [ "DayNightCycle.cs", "_day_night_cycle_8cs.html", "_day_night_cycle_8cs" ],
     [ "DialogBoxManager.cs", "_dialog_box_manager_8cs.html", "_dialog_box_manager_8cs" ],
     [ "GameManager.cs", "_game_manager_8cs.html", "_game_manager_8cs" ],
+    [ "HistoryBlockDrag.cs", "_history_block_drag_8cs.html", "_history_block_drag_8cs" ],
     [ "MapGenerator.cs", "_map_generator_8cs.html", "_map_generator_8cs" ],
+    [ "MiniGameManager.cs", "_mini_game_manager_8cs.html", "_mini_game_manager_8cs" ],
     [ "PathGenerator.cs", "_path_generator_8cs.html", null ],
-    [ "PlayerController.cs", "_player_controller_8cs.html", "_player_controller_8cs" ]
+    [ "PlayerController.cs", "_player_controller_8cs.html", "_player_controller_8cs" ],
+    [ "SlotDropHandler.cs", "_slot_drop_handler_8cs.html", "_slot_drop_handler_8cs" ]
 ];

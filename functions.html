@@ -135,6 +135,7 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 
 <h3><a id="index_e" name="index_e"></a>- e -</h3><ul>
 <li>EndInteraction()&#160;:&#160;<a class="el" href="class_player_controller.html#a77e1247e81d849cb7288b0f8caf2a471">PlayerController</a></li>
+<li>EndMiniGame()&#160;:&#160;<a class="el" href="class_mini_game_manager.html#ae1af73f86577262ce91266a2463dcda9">MiniGameManager</a></li>
 <li>EntityID&#160;:&#160;<a class="el" href="class_n_p_c.html#ad8cf37a7e909f0ec492792f00cfaddc8">NPC</a></li>
 </ul>
 
@@ -178,7 +179,7 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 
 <h3><a id="index_i" name="index_i"></a>- i -</h3><ul>
 <li>Id&#160;:&#160;<a class="el" href="class_model_config.html#ae145521bd1f92882eb048db12cc4c522">ModelConfig</a>, <a class="el" href="class_npc_config.html#ae9b1f25f2ebf7a2d09de3c5baeb2a957">NpcConfig</a></li>
-<li>Instance&#160;:&#160;<a class="el" href="class_camera_follow.html#a3925ad6664c644f424efa59e1df14f84">CameraFollow</a>, <a class="el" href="class_day_box_manager.html#a47cb7a5bdb41f5ff3cde6423f9c535b5">DayBoxManager</a>, <a class="el" href="class_dialog_box_manager.html#abf79672fd5db7eb0c17359904c3cba7d">DialogBoxManager</a>, <a class="el" href="class_game_manager.html#ad3e717f4fb0f378b969f4457de81f23e">GameManager</a>, <a class="el" href="class_llm_manager.html#a7b05153ac2c55c7747c382971bdb50ac">LlmManager</a>, <a class="el" href="class_map_generator.html#ae14a62313a5f5d9490ab617851a69f94">MapGenerator</a>, <a class="el" href="class_player_controller.html#a9bec1b62de6e46a4cd2bcb332da2b7b5">PlayerController</a></li>
+<li>Instance&#160;:&#160;<a class="el" href="class_camera_follow.html#a3925ad6664c644f424efa59e1df14f84">CameraFollow</a>, <a class="el" href="class_day_box_manager.html#a47cb7a5bdb41f5ff3cde6423f9c535b5">DayBoxManager</a>, <a class="el" href="class_day_night_cycle.html#a30451c310193793b81820ff2ba37b9b4">DayNightCycle</a>, <a class="el" href="class_dialog_box_manager.html#abf79672fd5db7eb0c17359904c3cba7d">DialogBoxManager</a>, <a class="el" href="class_game_manager.html#ad3e717f4fb0f378b969f4457de81f23e">GameManager</a>, <a class="el" href="class_llm_manager.html#a7b05153ac2c55c7747c382971bdb50ac">LlmManager</a>, <a class="el" href="class_map_generator.html#ae14a62313a5f5d9490ab617851a69f94">MapGenerator</a>, <a class="el" href="class_mini_game_manager.html#a628d5c97ba392c26794ed9726566899b">MiniGameManager</a>, <a class="el" href="class_player_controller.html#a9bec1b62de6e46a4cd2bcb332da2b7b5">PlayerController</a></li>
 <li>interactionOffset&#160;:&#160;<a class="el" href="class_camera_follow.html#a8c4a1d87efb3c27c0ac00061fcab67ba">CameraFollow</a></li>
 <li>interactionRotation&#160;:&#160;<a class="el" href="class_camera_follow.html#a499d39cf54707eb903dcd3d5e72d39c4">CameraFollow</a></li>
 <li>InteractWithNPC()&#160;:&#160;<a class="el" href="class_game_manager.html#aea7cf74dda8edcca1844bcba62141eb7">GameManager</a></li>
@@ -220,6 +221,7 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 <li>Models&#160;:&#160;<a class="el" href="class_game_config.html#a50f229e7279e6c98c707e3f27bcc49f7">GameConfig</a></li>
 <li>models&#160;:&#160;<a class="el" href="class_status_d_t_o.html#a9f20e9f9f185f0e72d52183135baf17f">StatusDTO</a></li>
 <li>moveSpeed&#160;:&#160;<a class="el" href="class_player_controller.html#abb12e85ca1b12efdbc8684bff2e19c4c">PlayerController</a></li>
+<li>murdererNPC&#160;:&#160;<a class="el" href="class_game_manager.html#a73f17991a064054726b6a7329d3df58e">GameManager</a></li>
 </ul>
 
 
@@ -245,6 +247,10 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 <li>obtained_memories&#160;:&#160;<a class="el" href="class_idle_d_t_o.html#a230ad807c9f89ec9f4126d8b7fcf7ad3">IdleDTO</a></li>
 <li>ObtainedMemories&#160;:&#160;<a class="el" href="class_n_p_c.html#ae8ea617b211990a0af4cc52c4108c1f2">NPC</a></li>
 <li>occurenceRadius&#160;:&#160;<a class="el" href="class_building_setup.html#a03049f058365ab87e10cb03bda0e9a0c">BuildingSetup</a></li>
+<li>OnBeginDrag()&#160;:&#160;<a class="el" href="class_history_block_drag.html#ab4abd0dc2472bc3b4db4545a4a5af2dc">HistoryBlockDrag</a></li>
+<li>OnDrag()&#160;:&#160;<a class="el" href="class_history_block_drag.html#a0a28dd35ead7d248ac96dad78cf8c92e">HistoryBlockDrag</a></li>
+<li>OnDrop()&#160;:&#160;<a class="el" href="class_slot_drop_handler.html#aa0441a594bd54fe6dce0e498f2921167">SlotDropHandler</a></li>
+<li>OnEndDrag()&#160;:&#160;<a class="el" href="class_history_block_drag.html#a8df576215dee6f8cc4cf8509e4074b9d">HistoryBlockDrag</a></li>
 </ul>
 
 
@@ -278,6 +284,7 @@ $(document).ready(function(){initNavTree('functions.html',''); initResizable(); 
 <li>spawnedBuildings&#160;:&#160;<a class="el" href="class_map_generator.html#ac139d2902fbce9237436dc2683f2c942">MapGenerator</a></li>
 <li>speed&#160;:&#160;<a class="el" href="class_n_p_c.html#a1ff4c824759ae05a03c0d1a10e14c626">NPC</a></li>
 <li>StartInteraction()&#160;:&#160;<a class="el" href="class_player_controller.html#a6be26eccca2cb2a979c44fdedf25c77d">PlayerController</a></li>
+<li>StartMiniGame()&#160;:&#160;<a class="el" href="class_mini_game_manager.html#a1e255e95cc354ebfa1751652939005c1">MiniGameManager</a></li>
 <li>Status()&#160;:&#160;<a class="el" href="class_llm_manager.html#a97f29d33ad99c68a6f8ef018e80b6136">LlmManager</a></li>
 <li>StatusCommand()&#160;:&#160;<a class="el" href="class_llm_manager.html#a1f7fceaa5bb77313bdf91fd4cd7fe476">LlmManager</a></li>
 <li>stopped_action&#160;:&#160;<a class="el" href="class_idle_d_t_o.html#a1a852aa5f2f7fae60be1469312c2c161">IdleDTO</a></li>

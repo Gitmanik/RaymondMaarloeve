@@ -19,5 +19,6 @@ var searchData=
   ['modelid_16',['ModelId',['../class_npc_config.html#a2f36713fcac38941687a5e4af55a6f9d',1,'NpcConfig']]],
   ['models_17',['Models',['../class_game_config.html#a50f229e7279e6c98c707e3f27bcc49f7',1,'GameConfig']]],
   ['models_18',['models',['../class_status_d_t_o.html#a9f20e9f9f185f0e72d52183135baf17f',1,'StatusDTO']]],
-  ['movespeed_19',['moveSpeed',['../class_player_controller.html#abb12e85ca1b12efdbc8684bff2e19c4c',1,'PlayerController']]]
+  ['movespeed_19',['moveSpeed',['../class_player_controller.html#abb12e85ca1b12efdbc8684bff2e19c4c',1,'PlayerController']]],
+  ['murderernpc_20',['murdererNPC',['../class_game_manager.html#a73f17991a064054726b6a7329d3df58e',1,'GameManager']]]
 ];

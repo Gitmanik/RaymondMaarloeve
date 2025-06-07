@@ -5,6 +5,9 @@ var hierarchy =
     [ "ChatResponseDTO", "class_chat_response_d_t_o.html", null ],
     [ "CurrentEnvironmentDTO", "class_current_environment_d_t_o.html", null ],
     [ "GameConfig", "class_game_config.html", null ],
+    [ "IBeginDragHandler", null, [
+      [ "HistoryBlockDrag", "class_history_block_drag.html", null ]
+    ] ],
     [ "IDecision", "interface_i_decision.html", [
       [ "BuyGoodsDecision", "class_buy_goods_decision.html", null ],
       [ "GetAleDecision", "class_get_ale_decision.html", null ],
@@ -23,6 +26,15 @@ var hierarchy =
     ] ],
     [ "IdleDTO", "class_idle_d_t_o.html", null ],
     [ "IdleResponseDTO", "class_idle_response_d_t_o.html", null ],
+    [ "IDragHandler", null, [
+      [ "HistoryBlockDrag", "class_history_block_drag.html", null ]
+    ] ],
+    [ "IDropHandler", null, [
+      [ "SlotDropHandler", "class_slot_drop_handler.html", null ]
+    ] ],
+    [ "IEndDragHandler", null, [
+      [ "HistoryBlockDrag", "class_history_block_drag.html", null ]
+    ] ],
     [ "LoadModelDTO", "class_load_model_d_t_o.html", null ],
     [ "Message", "class_message.html", null ],
     [ "MessageDTO", "class_message_d_t_o.html", null ],
@@ -35,10 +47,13 @@ var hierarchy =
       [ "DayNightCycle", "class_day_night_cycle.html", null ],
       [ "DialogBoxManager", "class_dialog_box_manager.html", null ],
       [ "GameManager", "class_game_manager.html", null ],
+      [ "HistoryBlockDrag", "class_history_block_drag.html", null ],
       [ "LlmManager", "class_llm_manager.html", null ],
       [ "MapGenerator", "class_map_generator.html", null ],
+      [ "MiniGameManager", "class_mini_game_manager.html", null ],
       [ "NPC", "class_n_p_c.html", null ],
-      [ "PlayerController", "class_player_controller.html", null ]
+      [ "PlayerController", "class_player_controller.html", null ],
+      [ "SlotDropHandler", "class_slot_drop_handler.html", null ]
     ] ],
     [ "NeedDTO", "class_need_d_t_o.html", null ],
     [ "NpcConfig", "class_npc_config.html", null ],
