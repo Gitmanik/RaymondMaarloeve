@@ -17,7 +17,9 @@ public class GameManager : MonoBehaviour
     
     public List<NPC> npcs = new List<NPC>();
     [HideInInspector] public bool LlmServerReady = false;
-    
+
+    public NPC murdererNPC;
+
     public GameConfig gameConfig { get; private set; }
 
     [SerializeField] private GameObject uiGameObject;
@@ -107,6 +109,9 @@ public class GameManager : MonoBehaviour
 
             npcs.Add(npcComponent);
         }
+
+        murdererNPC = npcs[Random.Range(0, npcs.Count)];
+
     }
 
     // Update is called once per frame

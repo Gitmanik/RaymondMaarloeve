@@ -8,26 +8,21 @@ public class MiniGameManager : MonoBehaviour
 {
     public static MiniGameManager Instance;
 
-    [Header("UI Panels")]
     [SerializeField] private GameObject miniGamePanel;
     [SerializeField] private Transform poolPanel;
     [SerializeField] private Transform sequencePanel;
-
-    [Header("Prefab")]
+    [SerializeField] private TMP_Dropdown suspectDropdown;
     [SerializeField] private GameObject historyBlockPrefab;
-
-    [Header("Buttons")]
     [SerializeField] private Button submitButton;
     [SerializeField] private Button cancelButton;
-
-    [Header("Six Blocks (in correct order)")]
+    [SerializeField] private TextMeshProUGUI resultText;
+    [SerializeField] private string murderDescription;
     [SerializeField] private string[] blockTexts = new string[6];
-
-    [Header("Trigger Settings")]
     [SerializeField] private int triggerDay = 3;
 
     private List<string> correctBlocksOrder;
     private bool hasTriggered = false;
+    private bool resultShown = false;
 
     void Awake()
     {
@@ -37,17 +32,10 @@ public class MiniGameManager : MonoBehaviour
 
     void Start()
     {
-        if (miniGamePanel == null) Debug.LogError("[MiniGameManager] miniGamePanel is not assigned!");
-        if (poolPanel == null) Debug.LogError("[MiniGameManager] poolPanel is not assigned!");
-        if (sequencePanel == null) Debug.LogError("[MiniGameManager] sequencePanel is not assigned!");
-        if (historyBlockPrefab == null) Debug.LogError("[MiniGameManager] historyBlockPrefab is not assigned!");
-        if (submitButton == null) Debug.LogError("[MiniGameManager] submitButton is not assigned!");
-        if (cancelButton == null) Debug.LogError("[MiniGameManager] cancelButton is not assigned!");
-        if (blockTexts == null || blockTexts.Length != 6) Debug.LogError("[MiniGameManager] blockTexts must have length 6!");
-
         miniGamePanel.SetActive(false);
+        resultText.gameObject.SetActive(false);
         submitButton.onClick.AddListener(OnSubmit);
-        cancelButton.onClick.AddListener(OnCancel);
+        cancelButton.onClick.AddListener(EndMiniGame);
     }
 
     void Update()
@@ -55,79 +43,74 @@ public class MiniGameManager : MonoBehaviour
         if (hasTriggered) return;
         if (DayNightCycle.Instance == null) return;
 
-        int currentDay = DayNightCycle.Instance.GetCurrentDay();
-        ///Debug.Log($"[MiniGameManager] Update – day={currentDay}, hasTriggered={hasTriggered}");
-
-        if (currentDay >= triggerDay)
+        if (DayNightCycle.Instance.GetCurrentDay() >= triggerDay)
         {
             hasTriggered = true;
-            Debug.Log($"[MiniGameManager] Day {currentDay} >= {triggerDay} → StartMiniGame()");
             StartMiniGame();
         }
     }
 
     public void StartMiniGame()
     {
-        Debug.Log("[MiniGameManager] ▶ StartMiniGame()");
         miniGamePanel.SetActive(true);
+        resultText.gameObject.SetActive(false);
+        resultShown = false;
+        submitButton.GetComponentInChildren<TextMeshProUGUI>().text = "Submit";
+        PopulateSuspects();
         GenerateBlocks();
+    }
+
+    private void PopulateSuspects()
+    {
+        suspectDropdown.ClearOptions();
+        var names = GameManager.Instance.npcs
+            .Select(n => n.gameObject.name)
+            .ToList();
+        suspectDropdown.AddOptions(names);
+        suspectDropdown.RefreshShownValue();
     }
 
     private void GenerateBlocks()
     {
-        Debug.Log($"[MiniGameManager] ▶ GenerateBlocks() – blockTexts.Length = {blockTexts.Length}");
-        for (int i = 0; i < blockTexts.Length; i++)
-            Debug.Log($"   blockTexts[{i}] = '{blockTexts[i]}'");
-
         foreach (Transform c in poolPanel) Destroy(c.gameObject);
         foreach (Transform c in sequencePanel) Destroy(c.gameObject);
 
-        correctBlocksOrder = new List<string>(blockTexts);
-
-        List<string> shuffled = new List<string>(blockTexts);
+        correctBlocksOrder = blockTexts.ToList();
+        var shuffled = blockTexts.ToList();
         shuffled.Shuffle();
 
-        Debug.Log($"[MiniGameManager] ▶ GenerateBlocks() – after Shuffle, Count = {shuffled.Count}");
         foreach (var txt in shuffled)
-            Debug.Log($"   shuffled element = '{txt}'");
-
-        if (historyBlockPrefab.GetComponentInChildren<TextMeshProUGUI>() == null)
-            Debug.LogError("[MiniGameManager] Prefab is missing TextMeshProUGUI in a child!");
-
-        foreach (string txt in shuffled)
         {
-            GameObject go = Instantiate(historyBlockPrefab, poolPanel);
+            var go = Instantiate(historyBlockPrefab, poolPanel);
             var tmp = go.GetComponentInChildren<TextMeshProUGUI>();
             if (tmp != null) tmp.text = txt;
-            else Debug.LogError("[MiniGameManager] Instantiated prefab is missing TextMeshProUGUI in a child!");
         }
-
-        Debug.Log($"[MiniGameManager] ▶ poolPanel.childCount = {poolPanel.childCount}");
     }
 
     private void OnSubmit()
     {
-        List<string> playerOrder = sequencePanel.Cast<Transform>()
+        if (resultShown)
+        {
+            EndMiniGame();
+            return;
+        }
+
+        var playerOrder = sequencePanel.Cast<Transform>()
             .Select(t => t.GetComponentInChildren<TextMeshProUGUI>().text)
             .ToList();
-
-        Debug.Log("[MiniGameManager]  OnSubmit() – player arranged sequence:");
-        playerOrder.ForEach(s => Debug.Log($"   '{s}'"));
-
         bool sequenceCorrect = playerOrder.SequenceEqual(correctBlocksOrder);
 
-        if (sequenceCorrect)
-            Debug.Log("[MiniGameManager]  Correct sequence!");
+        string chosen = suspectDropdown.options[suspectDropdown.value].text;
+        bool suspectCorrect = chosen == GameManager.Instance.murdererNPC.gameObject.name;
+
+        resultShown = true;
+        submitButton.GetComponentInChildren<TextMeshProUGUI>().text = "Close";
+        resultText.gameObject.SetActive(true);
+
+        if (sequenceCorrect && suspectCorrect)
+            resultText.text = "Congratulations Raymond! You solved the case.";
         else
-            Debug.Log("[MiniGameManager]  Incorrect sequence!");
-
-        EndMiniGame();
-    }
-
-    private void OnCancel()
-    {
-        Debug.Log("[MiniGameManager]  OnCancel() – minigame canceled");
-        EndMiniGame();
+            resultText.text = $"The murderer was {GameManager.Instance.murdererNPC.gameObject.name}. {murderDescription}";
     }
 
     public void EndMiniGame()
