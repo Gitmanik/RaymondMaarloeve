@@ -3,10 +3,9 @@
     public bool Ready = false;
     
     public string PrettyName => IdleDecision.RandomPrettyName;
-    
-    public void Setup(IDecisionSystem system, NPC npc)
-    {
-    }
+    public string DebugInfo() => "waiting for LLM Decision";
+
+    public void Start() {}
 
     public bool Tick()
     {

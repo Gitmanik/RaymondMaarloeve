@@ -23,18 +23,21 @@ public class IdleDecision : IDecision
     };
     public static string RandomPrettyName => RandomIdleNames[Random.Range(0, RandomIdleNames.Count)];
     public string PrettyName => RandomPrettyName;
+    public string DebugInfo() => $"idling for another {idleStart + idleTime - Time.time} seconds";
 
     public IdleDecision(float idleTime)
     {
         this.idleTime = idleTime;
     }
-    public IdleDecision() {}
+
+    public IdleDecision()
+    {
+        this.idleTime = Random.Range(0f, 15f);
+    }
     
-    public void Setup(IDecisionSystem system, NPC npc)
+    public void Start()
     {
         idleStart = Time.time;
-        if (idleTime < 0)
-            idleTime = Random.Range(0f, 15f);
     }
 
     public bool Tick()

@@ -1,6 +1,7 @@
 ﻿public interface IDecision
 {
-    public void Setup(IDecisionSystem system, NPC npc);
+    public void Start();
     public bool Tick();
     public string PrettyName { get; }
+    public string DebugInfo();
 }

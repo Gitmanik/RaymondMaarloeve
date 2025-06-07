@@ -174,8 +174,8 @@ public class NPC : MonoBehaviour
         {
             Debug.Log($"{NpcName}: Current decision finished");
             currentDecision = decisionSystem.Decide();
-            currentDecision.Setup(decisionSystem, this);
-            Debug.Log($"New decision: {currentDecision}");
+            currentDecision.Start();
+            Debug.Log($"New decision: {currentDecision.DebugInfo()}");
             NpcEventBus.Publish(new NpcActionEvent(
                 sourceId: EntityID,
                 action: currentDecision?.PrettyName ?? IdleDecision.RandomPrettyName,
@@ -302,18 +302,50 @@ public class NPC : MonoBehaviour
     /// <summary>
     /// Returns a list of possible environment descriptions for the NPC.
     /// </summary>
-    /// <returns>List of CurrentEnvironmentDTO objects describing the environment.</returns>
-    public List<CurrentEnvironmentDTO> GetCurrentEnvironment()
+    /// <returns>List of CurrentEnvironment objects describing the environment.</returns>
+    public List<CurrentEnvironment> GetCurrentEnvironment()
     {
-        //TODO: Make this dynamic.
-        return new List<CurrentEnvironmentDTO>()
+        List<CurrentEnvironment> environments = new List<CurrentEnvironment>();
+        
+        foreach (var buildingGO in MapGenerator.Instance.spawnedBuildings)
         {
-            new CurrentEnvironmentDTO("Stand by the chapel steps, unmoving (pray)", 2),
-            new CurrentEnvironmentDTO("Sit upright beneath a broken statue (walk)", 1),
-            new CurrentEnvironmentDTO("Gaze at the river without blinking (idle)", 3),
-            new CurrentEnvironmentDTO("Walk slowly through the square without speaking (walk)", 2),
-            new CurrentEnvironmentDTO("Trace the burned symbol on his ring (walk)", 1),
-        };
+            var buildingData = buildingGO.GetComponent<BuildingData>();
+            if (buildingData == null)
+            {
+                Debug.LogWarning($"{buildingGO.name} has no building data but it was spawned by MapGenerator");
+                continue;
+            }
+
+            switch (buildingData.HisType)
+            {
+                case BuildingData.BuildingType.None:
+                    break;
+                case BuildingData.BuildingType.House:
+                    break;
+                case BuildingData.BuildingType.Church:
+                    environments.Add(new CurrentEnvironment(new PrayDecision(buildingGO, this), buildingGO));
+                    break;
+                case BuildingData.BuildingType.Well:
+                    environments.Add(new CurrentEnvironment(new GetWaterDecision(buildingGO, this), buildingGO));
+                    break;
+                case BuildingData.BuildingType.Blacksmith:
+                    break;
+                case BuildingData.BuildingType.Tavern:
+                    environments.Add(new CurrentEnvironment(new GetAleDecision(buildingGO, this), buildingGO));
+                    break;
+                case BuildingData.BuildingType.Scaffold:
+                    break;
+                case BuildingData.BuildingType.Other:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        environments.Add(new CurrentEnvironment(new IdleDecision(), null));
+        environments.Add(new CurrentEnvironment(new WalkDecision(this), null));
+        
+        return environments;
     }
 
     /// <summary>

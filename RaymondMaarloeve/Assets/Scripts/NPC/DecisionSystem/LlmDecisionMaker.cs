@@ -9,7 +9,7 @@ public class LlmDecisionMaker : IDecisionSystem
     
     private ChatResponseDTO waitingResponse = null;
 
-    private IdleDTO idleDto = null;
+    private List<CurrentEnvironment> currentEnvironment;
 
     /// <summary>
     /// Sets up the decision-making system with the provided NPC.
@@ -59,16 +59,18 @@ public class LlmDecisionMaker : IDecisionSystem
         new NeedDTO { need = "thirst", weight = (int) npc.Thirst }
       };
       dto.stopped_action = "";
-      dto.current_environment = npc.GetCurrentEnvironment();
+
+      currentEnvironment = npc.GetCurrentEnvironment();
+      List<CurrentEnvironmentDTO> currentEnvironmentDtos = currentEnvironment.ConvertAll(x => x.ToDTO(npc));
+      dto.current_environment = currentEnvironmentDtos;
+      
       dto.obtained_memories = npc.ObtainedMemories;
       
-      idleDto = dto;
-
       var content = JsonUtility.ToJson(dto);
       currentConversation.Add(new Message { role = "system", content = content});
       
       // TODO: Read options from key -> Decision system
-      currentConversation.Add(new Message { role = "user", content = $"What should {npc.NpcName} do now? Choose from CurrentEnvironment. Respond ONLY with the action index."});
+      currentConversation.Add(new Message { role = "user", content = $"What should {npc.NpcName} do now? Choose from CurrentEnvironment. Respond ONLY with the action index (1-{dto.current_environment.Count})."});
       
       LlmManager.Instance.Chat(
         npc.ModelID,
@@ -96,23 +98,16 @@ public class LlmDecisionMaker : IDecisionSystem
         Debug.LogError($"Idle response, invalid response: {chatResponseDto.response}");
         return new IdleDecision();
       }
-      
-      var action = idleDto.current_environment[response - 1].action;
-      
-      Debug.Log($"Idle response, action: {action}");
 
-      if (action.Contains("idle"))
+      if (response < 0 || response > currentEnvironment.Count)
+      {
+        Debug.LogError($"Idle response, invalid response: {chatResponseDto.response}");
         return new IdleDecision();
-      if (action.Contains("walk"))
-        return new WalkDecision();
-      if (action.Contains("get water"))
-        return new GetWaterDecision();
-      if (action.Contains("pray"))
-        return new PrayDecision();
-      if (action.Contains("get ale"))
-        return new GetAleDecision();
+      }
       
-      return new IdleDecision();
+      var action = currentEnvironment[response - 1];
+
+      return action.decision;
     }
     
     /// <summary>
@@ -124,6 +119,11 @@ public class LlmDecisionMaker : IDecisionSystem
       Debug.LogError($"Idle error: {error}");
     }
 
+    /// <summary>
+    /// Requests a relevance value from the NPC's LLM model.
+    /// </summary>
+    /// <param name="newMemory">New obtained memory to consider</param>
+    /// <param name="relevanceFunc">Delegate which will be called when the value is calculated.</param>
     public void CalculateRelevance(string newMemory, Action<int> relevanceFunc)
     {
       string prompt = @"
