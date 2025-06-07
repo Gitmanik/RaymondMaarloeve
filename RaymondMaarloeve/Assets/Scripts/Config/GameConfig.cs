@@ -13,8 +13,10 @@ public class GameConfig
     public int GameWindowHeight; 
     public List<ModelConfig> Models; 
     public List<NpcConfig> Npcs;
+
+    public int NarratorModelId;
     
-    private GameConfig() {}
+    private GameConfig() { }
     
     public static GameConfig LoadGameConfig(string configPath)
     {   
@@ -55,7 +57,8 @@ public class GameConfig
                 new NpcConfig { Id = 5, ModelId = -1 },
                 new NpcConfig { Id = 6, ModelId = -1 },
                 new NpcConfig { Id = 7, ModelId = -1 },
-            }
+            },
+            NarratorModelId = -1
         };
 
         return gameConfig;
