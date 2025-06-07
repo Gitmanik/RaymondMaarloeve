@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour
             
             if (string.IsNullOrEmpty(npcModelPath)) {
                 Debug.LogError($"Model path not found for NPC with ID {npcConfig.ModelId}");
-                npcComponent.Setup(new RandomDecisionMaker(), null, $"Npc-{npcConfig.Id}", tmpSystemPrompt
+                npcComponent.Setup(new NullDecisionSystem(), null, $"Npc-{npcConfig.Id}", tmpSystemPrompt
                     );
             }
             else {
