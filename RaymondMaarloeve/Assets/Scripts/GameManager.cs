@@ -118,9 +118,14 @@ public class GameManager : MonoBehaviour
                 int modelsToLoad = gameConfig.Models.Count;
                 Debug.Log($"GameManager: Starting to load {modelsToLoad} models");
 
-                
+                var usedModelIds = new HashSet<int>(
+                gameConfig.Npcs.Select(npc => npc.ModelId)
+                .Concat(new[] { gameConfig.NarratorModelId })
+                );
 
-                foreach (var model in gameConfig.Models)
+                var usedModels = gameConfig.Models.Where(model => usedModelIds.Contains(model.Id)).ToList();
+
+                foreach (var model in usedModels)
                 {
                     Debug.Log($"GameManager: Loading model {model.Id}");
                     LlmManager.Instance.LoadModel(model.Id.ToString(), model.Path, (dto) =>
