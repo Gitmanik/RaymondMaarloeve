@@ -41,7 +41,7 @@ public class GameConfig
         gameConfig = new GameConfig
         {
             Revision = 1,
-            LlmServerApi = "127.0.0.1/5000",
+            LlmServerApi = "http://127.0.0.1:5000/",
             FullScreen = false,
             GameWindowWidth = 1920,
             GameWindowHeight = 1080,
