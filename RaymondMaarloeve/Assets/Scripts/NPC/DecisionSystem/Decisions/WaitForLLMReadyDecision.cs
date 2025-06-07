@@ -1,8 +1,9 @@
 public class WaitForLLMReadyDecision : IDecision
 {
-    public void Setup(IDecisionSystem system, NPC npc)
-    {
-    }
+    public string PrettyName => IdleDecision.RandomPrettyName;
+    public string DebugInfo() => "waiting for LLMServer";
+
+    public void Start() {}
 
     public bool Tick()
     {

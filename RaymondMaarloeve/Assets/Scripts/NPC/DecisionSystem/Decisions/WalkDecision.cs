@@ -6,13 +6,22 @@ public class WalkDecision : IDecision
     private NPC npc;
     private bool finished = false;
     public float wanderRadius = 20f;
+    private Vector3 destination;
 
-    public void Setup(IDecisionSystem system, NPC npc)
+    public string PrettyName => "walking";
+    public string DebugInfo() => $"walking to {destination}";
+
+    public WalkDecision(NPC npc)
     {
         this.npc = npc;
         SelectNewDestination();
     }
 
+    public void Start()
+    {
+        npc.agent.SetDestination(destination);
+    }
+    
     public bool Tick()
     {
         if (!npc.agent.pathPending && npc.agent.remainingDistance < 0.5f)
@@ -24,20 +33,21 @@ public class WalkDecision : IDecision
 
     void SelectNewDestination()
     {
-        Debug.Log(npc.NpcName + ": Choosing new destination!");
-
-        Vector3 randomDirection = Random.insideUnitSphere * wanderRadius;
-        randomDirection.y = 0f;
-        randomDirection += npc.transform.position;
-
-        if (NavMesh.SamplePosition(randomDirection, out NavMeshHit hit, wanderRadius, NavMesh.AllAreas))
+        while (true)
         {
-            npc.agent.SetDestination(hit.position);
-            Debug.Log(npc.NpcName + ": New destination: " + hit.position);
-        }
-        else
-        {
-            Debug.LogWarning(npc.NpcName + ": Not found point on NavMesh!");
+            Vector3 randomDirection = Random.insideUnitSphere * wanderRadius;
+            randomDirection.y = 0f;
+            randomDirection += npc.transform.position;
+
+            if (NavMesh.SamplePosition(randomDirection, out NavMeshHit hit, wanderRadius, NavMesh.AllAreas))
+            {
+                destination = hit.position;
+                break;
+            }
+            else
+            {
+                Debug.LogWarning(npc.NpcName + ": Not found point on NavMesh!");
+            }
         }
     }
 }

@@ -1,66 +1,16 @@
 using UnityEngine;
-using UnityEngine.AI;
 
-public class GetAleDecision : IDecision
+public class GetAleDecision : VisitBuildingDecision
 {
-    private NPC npc;
-    private bool finished = false;
-    private bool reachedTavern = false;
-    private Vector3 destination;
-    private float stoppingDistance = 0.5f;
-
-    public float drinkingDuration = 5f;
-    private float drinkingTimer = 0f;
-
-    public void Setup(IDecisionSystem system, NPC npc)
+    public GetAleDecision(GameObject buildingGO, NPC npc) : base(buildingGO, npc)
     {
-        this.npc = npc;
-
-        GameObject tavernObj = GameObject.Find("tavern(Clone)");
-        if (tavernObj != null)
-        {
-            Vector3 tavernPosition = tavernObj.transform.position;
-            if (NavMesh.SamplePosition(tavernPosition, out NavMeshHit hit, 10f, NavMesh.AllAreas))
-            {
-                destination = hit.position;
-                npc.agent.SetDestination(destination);
-                Debug.Log(npc.NpcName + ": Going to the tavern: " + destination);
-            }
-            else
-            {
-                Debug.LogWarning(npc.NpcName + ": NavMesh point for the tavern not found!");
-                finished = true;
-            }
-        }
-        else
-        {
-            Debug.LogWarning(npc.NpcName + ": Tavern object not found!");
-            finished = true;
-        }
     }
 
-    public bool Tick()
+    protected override float StoppingDistance => 0.5f;
+    protected override float WaitDuration => 5f;
+    public override string PrettyName => "getting ale";
+    protected override void OnFinished()
     {
-        if (finished)
-            return false;
-
-        if (!reachedTavern)
-        {
-            if (!npc.agent.pathPending && npc.agent.remainingDistance < stoppingDistance)
-            {
-                reachedTavern = true;
-            }
-            return true;
-        }
-        else
-        {
-            drinkingTimer += Time.deltaTime;
-            if (drinkingTimer >= drinkingDuration)
-            {
-                npc.Thirst = 0f;
-                finished = true;
-            }
-            return !finished;
-        }
+        npc.Thirst = 0f;
     }
 }

@@ -1,4 +1,6 @@
-﻿public interface IDecisionSystem
+﻿using System;
+
+public interface IDecisionSystem
 {
     /// <summary>
     /// Sets up the decision-making system with the provided NPC.
@@ -11,4 +13,6 @@
     /// </summary>
     /// <returns>An implementation of <see cref="IDecision"/> representing the NPC's next action.</returns>
     public IDecision Decide();
+
+    public void CalculateRelevance(string newMemory, Action<int> relevanceFunc);
 }
