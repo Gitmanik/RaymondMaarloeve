@@ -115,8 +115,6 @@ public class GameManager : MonoBehaviour
             if (isConnected)
             {
                 Debug.Log("GameManager: Connected to LLM Server");
-                int modelsToLoad = gameConfig.Models.Count;
-                Debug.Log($"GameManager: Starting to load {modelsToLoad} models");
 
                 var usedModelIds = new HashSet<int>(
                 gameConfig.Npcs.Select(npc => npc.ModelId)
@@ -124,6 +122,10 @@ public class GameManager : MonoBehaviour
                 );
 
                 var usedModels = gameConfig.Models.Where(model => usedModelIds.Contains(model.Id)).ToList();
+
+                int modelsToLoad = usedModels.Count;
+                Debug.Log($"GameManager: Starting to load {modelsToLoad} models");
+
 
                 foreach (var model in usedModels)
                 {
