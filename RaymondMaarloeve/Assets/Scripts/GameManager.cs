@@ -4,6 +4,7 @@ using System.Linq;
 using Gitmanik.Console;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,49 +25,24 @@ public class GameManager : MonoBehaviour
     
 
     
-    void Start()
+    IEnumerator Start()
     {
         Debug.Log("GameManager: Start initialization");
         Instance = this;
-        
+
         gameConfig = GameConfig.LoadGameConfig(Path.Combine(Application.dataPath, "game_config.json"));
         Debug.Log("GameManager: Config loaded");
-        
+
         Screen.SetResolution(gameConfig.GameWindowWidth, gameConfig.GameWindowHeight, gameConfig.FullScreen);
         Application.targetFrameRate = 60;
-        
+
         LlmManager.Instance.Setup(gameConfig.LlmServerApi);
         Debug.Log("GameManager: LLM Setup started");
-        LlmManager.Instance.Connect(x =>
-        {
-            if (x)
-            {
-                Debug.Log("GameManager: Connected to LLM Server");
-                int modelsToLoad = gameConfig.Models.Count;
-                Debug.Log($"GameManager: Starting to load {modelsToLoad} models");
-                
-                foreach (var model in gameConfig.Models)
-                {
-                    Debug.Log($"GameManager: Loading model {model.Id}");
-                    LlmManager.Instance.LoadModel(model.Id.ToString(), model.Path, (dto) =>
-                    {
-                        modelsToLoad--;
-                        Debug.Log($"GameManager: Models left to load: {modelsToLoad}");
-                        if (modelsToLoad == 0)
-                        {
-                            LlmServerReady = true;
-                            Debug.Log("GameManager: All models loaded, LlmServerReady = TRUE");
-                        }
-                        LlmManager.Instance.GenericComplete(dto);
-                    }, Debug.LogError);
-                }
-            }
-            else
-            {
-                Debug.LogError("GameManager: Failed to connect to LLM Server");
-            }
-        });
-        
+
+        // Wait for LLM connection and model loading
+        yield return StartCoroutine(WaitForLlmConnection());
+
+
         MapGenerator.Instance.GenerateMap();
         // LlmServerReady = true;
         List<GameObject> npcPrefabsList = npcPrefabs.ToList();
@@ -117,6 +93,57 @@ public class GameManager : MonoBehaviour
             npcs.Add(npcComponent);
         }
         
+    }
+
+    IEnumerator WaitForLlmConnection()
+    {
+        while (true)
+        {
+            bool isConnected = false;
+            bool callbackCalled = false;
+
+            LlmManager.Instance.Connect(result =>
+            {
+                isConnected = result;
+                callbackCalled = true;
+            });
+
+            // Wait for the callback to be called
+            while (!callbackCalled)
+                yield return null;
+
+            if (isConnected)
+            {
+                Debug.Log("GameManager: Connected to LLM Server");
+                int modelsToLoad = gameConfig.Models.Count;
+                Debug.Log($"GameManager: Starting to load {modelsToLoad} models");
+
+                
+
+                foreach (var model in gameConfig.Models)
+                {
+                    Debug.Log($"GameManager: Loading model {model.Id}");
+                    LlmManager.Instance.LoadModel(model.Id.ToString(), model.Path, (dto) =>
+                    {
+                        modelsToLoad--;
+                        Debug.Log($"GameManager: Models left to load: {modelsToLoad}");
+                        if (modelsToLoad == 0)
+                        {
+                            LlmServerReady = true;
+                            Debug.Log("GameManager: All models loaded, LlmServerReady = TRUE");
+                        }
+                        LlmManager.Instance.GenericComplete(dto);
+                    }, Debug.LogError);
+                }
+                // Exit the loop after successful connection and model loading
+                break;
+            }
+            else
+            {
+                Debug.LogError("GameManager: Failed to connect to LLM Server. Retrying in 5 seconds...");
+                yield return new WaitForSeconds(5f);
+            }
+        }
     }
 
     // Update is called once per frame
