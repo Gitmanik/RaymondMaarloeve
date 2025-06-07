@@ -20,7 +20,7 @@ public class RandomDecisionMaker : IDecisionSystem
     /// <returns>An implementation of <see cref="IDecision"/> representing the NPC's next action.</returns>
     public IDecision Decide()
     {
-        int decision = Random.Range(0, 6);
+        int decision = Random.Range(0, 5);
 
         switch (decision)
         {
@@ -29,12 +29,10 @@ public class RandomDecisionMaker : IDecisionSystem
             case 1:
                 return new WalkDecision();
             case 2:
-                return new BuyGoodsDecision();
-            case 3:
                 return new GetWaterDecision();
-            case 4:
+            case 3:
                 return new PrayDecision();
-            case 5:
+            case 4:
                 return new GetAleDecision();
             default:
                 return new IdleDecision();

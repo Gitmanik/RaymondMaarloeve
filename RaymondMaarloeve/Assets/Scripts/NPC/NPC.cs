@@ -313,7 +313,6 @@ public class NPC : MonoBehaviour
             new CurrentEnvironmentDTO("Gaze at the river without blinking (idle)", 3),
             new CurrentEnvironmentDTO("Walk slowly through the square without speaking (walk)", 2),
             new CurrentEnvironmentDTO("Trace the burned symbol on his ring (walk)", 1),
-            new CurrentEnvironmentDTO("Watch birds scatter in the market (buy goods)", 2)
         };
     }
 

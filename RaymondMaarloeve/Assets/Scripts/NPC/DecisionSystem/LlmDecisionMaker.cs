@@ -105,8 +105,6 @@ public class LlmDecisionMaker : IDecisionSystem
         return new IdleDecision();
       if (action.Contains("walk"))
         return new WalkDecision();
-      if (action.Contains("buy goods"))
-        return new PrayDecision(); // TODO: Change to BuyGoodsDecision when Market building is added
       if (action.Contains("get water"))
         return new GetWaterDecision();
       if (action.Contains("pray"))
