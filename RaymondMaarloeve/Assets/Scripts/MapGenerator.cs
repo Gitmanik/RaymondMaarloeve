@@ -9,6 +9,7 @@ using Random = UnityEngine.Random;
 public class MapGenerator : MonoBehaviour
 {
     public static MapGenerator Instance { get; private set; }
+    public bool IsMapGenerated { get; private set; } = false;
 
     public NavMeshSurface surface;
     public Terrain terrain;
@@ -32,8 +33,10 @@ public class MapGenerator : MonoBehaviour
     
     void Awake()
     {
+        Debug.Log("MapGenerator: Awake started");
         Instance = this;
         tiles = new Tile[mapWidthInTiles, mapLengthInTiles];
+        Debug.Log($"MapGenerator: Initialized tiles array [{mapWidthInTiles}x{mapLengthInTiles}]");
 
         PathGenerator.ClearMap(terrain);
 
@@ -50,9 +53,11 @@ public class MapGenerator : MonoBehaviour
 
     public void GenerateMap()
     {
-        Debug.Log("Generating map");
+        Debug.Log("MapGenerator: Starting map generation");
         mapWidth = tileSize * mapWidthInTiles;
         mapLength = tileSize * mapLengthInTiles;
+        Debug.Log($"MapGenerator: Map size: {mapWidth}x{mapLength}");
+
         buildingTiles = new List<Tile>();
 
         // 1) Inicjalizacja kafelków
@@ -110,16 +115,24 @@ public class MapGenerator : MonoBehaviour
                 }
             }
 
+        Debug.Log($"MapGenerator: Generated {buildingTiles.Count} buildings");
+        
         // 3) Wyznaczanie i rysowanie ścieżek w osobnym managerze
         PathGenerator.GeneratePaths(tiles, buildingTiles, terrain);
+        Debug.Log("MapGenerator: Paths generated");
+        
         if (markTiles)
         {
             MarkTiles();
-
+            Debug.Log("MapGenerator: Tiles marked");
         }
+
 
         // 4) Budowa NavMesh dla całej mapy
         surface.BuildNavMesh();
+        Debug.Log("MapGenerator: NavMesh built");
+        IsMapGenerated = true;
+        Debug.Log("MapGenerator: Map generated, IsMapGenerated = TRUE");
     }
 
     private GameObject PickBuilding()

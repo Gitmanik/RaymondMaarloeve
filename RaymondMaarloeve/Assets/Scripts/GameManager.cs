@@ -22,49 +22,59 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject uiGameObject;
     
-    void Awake()
-    {
-        uiGameObject.SetActive(true);
-    }
+
     
     void Start()
     {
-        Debug.Log("Game Manager starting");
+        Debug.Log("GameManager: Start initialization");
         Instance = this;
         
         gameConfig = GameConfig.LoadGameConfig(Path.Combine(Application.dataPath, "game_config.json"));
+        Debug.Log("GameManager: Config loaded");
         
         Screen.SetResolution(gameConfig.GameWindowWidth, gameConfig.GameWindowHeight, gameConfig.FullScreen);
         Application.targetFrameRate = 60;
         
         LlmManager.Instance.Setup(gameConfig.LlmServerApi);
+        Debug.Log("GameManager: LLM Setup started");
         LlmManager.Instance.Connect(x =>
         {
             if (x)
             {
-                Debug.Log("Connected to LLM Server");
+                Debug.Log("GameManager: Connected to LLM Server");
                 int modelsToLoad = gameConfig.Models.Count;
+                Debug.Log($"GameManager: Starting to load {modelsToLoad} models");
                 
                 foreach (var model in gameConfig.Models)
+                {
+                    Debug.Log($"GameManager: Loading model {model.Id}");
                     LlmManager.Instance.LoadModel(model.Id.ToString(), model.Path, (dto) =>
                     {
                         modelsToLoad--;
+                        Debug.Log($"GameManager: Models left to load: {modelsToLoad}");
                         if (modelsToLoad == 0)
+                        {
                             LlmServerReady = true;
+                            Debug.Log("GameManager: All models loaded, LlmServerReady = TRUE");
+                        }
                         LlmManager.Instance.GenericComplete(dto);
                     }, Debug.LogError);
+                }
             }
             else
             {
-                Debug.LogError("Failed to connect to LLM Server");
+                Debug.LogError("GameManager: Failed to connect to LLM Server");
             }
         });
         
         MapGenerator.Instance.GenerateMap();
-        
+        // LlmServerReady = true;
         List<GameObject> npcPrefabsList = npcPrefabs.ToList();
-        
-        
+
+        if (LlmServerReady && MapGenerator.Instance.IsMapGenerated)
+        {
+            uiGameObject.SetActive(true);
+        }
 
         foreach (var npcConfig in gameConfig.Npcs)
         {
@@ -106,6 +116,7 @@ public class GameManager : MonoBehaviour
 
             npcs.Add(npcComponent);
         }
+        
     }
 
     // Update is called once per frame
