@@ -56,7 +56,7 @@ public class MiniGameManager : MonoBehaviour
         if (DayNightCycle.Instance == null) return;
 
         int currentDay = DayNightCycle.Instance.GetCurrentDay();
-        Debug.Log($"[MiniGameManager] Update – day={currentDay}, hasTriggered={hasTriggered}");
+        ///Debug.Log($"[MiniGameManager] Update – day={currentDay}, hasTriggered={hasTriggered}");
 
         if (currentDay >= triggerDay)
         {

@@ -2903,12 +2903,12 @@ MonoBehaviour:
   submitButton: {fileID: 166442101}
   cancelButton: {fileID: 1435796869}
   blockTexts:
-  - 0 Culprit lost his job and went bankrupt.
-  - 1 While attending the mass he saw the golden grail.
-  - 2 Culprit bribed the priest to get the keys to the church.
-  - 3 He waited until midnight to break into the church and steal the grail.
-  - 4 While attempting the theft he was seen by the guard.
-  - 5 Culprit killed the guard and got away.
+  - Culprit lost his job and went bankrupt.
+  - While attending the mass he saw the golden grail.
+  - Culprit bribed the priest to get the keys to the church.
+  - He waited until midnight to break into the church and steal the grail.
+  - While attempting the theft he was seen by the guard.
+  - Culprit killed the guard and got away.
   triggerDay: 3
 --- !u!1 &1321225839
 GameObject:
@@ -3859,8 +3859,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 152.24385}
-  m_SizeDelta: {x: 1100, y: 201.5123}
+  m_AnchoredPosition: {x: 0, y: 152.24384}
+  m_SizeDelta: {x: 1100, y: 201.51233}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1660015708
 MonoBehaviour:
@@ -3929,7 +3929,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 4
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
@@ -4940,7 +4940,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 4
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
