@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     
-    public int npcCount = 6;
     public GameObject[] npcPrefabs;
     
     private int entityIDCounter = 0;
