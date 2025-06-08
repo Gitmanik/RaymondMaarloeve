@@ -1,8 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Responsible for spawning all walls, towers, and gates around the map perimeter.
+/// Handles prefab assignment, tile marking, and visual placement logic.
+/// </summary>
 public class WallSpawner
 {
+    // Wall configuration data
     private readonly List<WallsSetup> walls;
     private readonly Terrain terrain;
     private readonly int tileSize;
@@ -15,7 +20,9 @@ public class WallSpawner
 
     private GameObject gate;
 
-
+    /// <summary>
+    /// Initializes a new instance of the WallSpawner class.
+    /// </summary>
     public WallSpawner(List<WallsSetup> walls, Terrain terrain, int tileSize, int mapWidthInTiles, int mapLengthInTiles)
     {
         this.walls = walls;
@@ -25,12 +32,15 @@ public class WallSpawner
         this.mapLengthInTiles = mapLengthInTiles;
     }
 
+    /// <summary>
+    /// Spawns walls, towers, and a gate around the edges of the map.
+    /// </summary>
     public GameObject SpawnWalls(Tile[,] tiles)
     {
         IdentifyWallPrefabs();
         if (wallPrefab == null || towerPrefab == null || gatePrefab == null)
         {
-            Debug.LogWarning("Brakuje prefabów (Wall/Tower/Gate)");
+            Debug.LogWarning("Missing prefabs for Wall, Tower, or Gate.");
             return null;
         }
 
@@ -44,61 +54,56 @@ public class WallSpawner
         float mapWidth = tileSize * mapWidthInTiles;
         float mapLength = tileSize * mapLengthInTiles;
 
-        // Towers at corners
+        // Spawn towers at each map corner
         PlaceBuildingAtTile(tiles[0, 0], towerPrefab, wallsRoot, Quaternion.identity);
         PlaceBuildingAtTile(tiles[mapWidthInTiles - 1, 0], towerPrefab, wallsRoot, Quaternion.identity);
         PlaceBuildingAtTile(tiles[0, mapLengthInTiles - 1], towerPrefab, wallsRoot, Quaternion.identity);
         PlaceBuildingAtTile(tiles[mapWidthInTiles - 1, mapLengthInTiles - 1], towerPrefab, wallsRoot, Quaternion.identity);
 
-        //Gate
+        // Spawn central gate at top middle
         gate = PlaceBuildingAtTile(tiles[mapWidthInTiles / 2, mapLengthInTiles - 1], gatePrefab, wallsRoot, Quaternion.Euler(0, 180, 0));
         Renderer gateRenderer = gate.GetComponentInChildren<Renderer>();
-
         Bounds gateBounds = gateRenderer.bounds;
+        Vector3 gateLeft = new Vector3(gateBounds.min.x, gateBounds.center.y, gateBounds.center.z);
+        Vector3 gateRight = new Vector3(gateBounds.max.x, gateBounds.center.y, gateBounds.center.z);
 
-        Vector3 gateLeft = new Vector3(gateBounds.min.x, gateBounds.center.y, gateBounds.center.z);   // Lewy bok (min.x)
-        Vector3 gateRight = new Vector3(gateBounds.max.x, gateBounds.center.y, gateBounds.center.z);  // Prawy bok (max.x)
-
-
-
-        // North Wall (with gate)
+        // Spawn wall segments on either side of the gate
         GameObject northWall = new GameObject("NorthWall");
         northWall.transform.parent = wallsRoot.transform;
-        //Vector3 northStart = ToWorld(tiles[1, mapLengthInTiles - 1].TileCenter);
-        SpawnWallLine(gateRight, Vector3.right, (mapWidth - gateBounds.size.x) / 2 , segmentLength, Quaternion.Euler(0, 180, 0), wallPrefab, northWall);
+        SpawnWallLine(gateRight, Vector3.right, (mapWidth - gateBounds.size.x) / 2, segmentLength, Quaternion.Euler(0, 180, 0), wallPrefab, northWall);
         SpawnWallLine(gateLeft, Vector3.left, mapWidth / 2, segmentLength, Quaternion.identity, wallPrefab, northWall);
 
-
-        // South Wall
+        // South wall
         GameObject southWall = new GameObject("SouthWall");
         southWall.transform.parent = wallsRoot.transform;
         Vector3 southStart = ToWorld(tiles[2, 0].TileCenter);
         SpawnWallLine(southStart, Vector3.right, mapWidth, segmentLength, Quaternion.identity, wallPrefab, southWall);
 
-        // West Wall
+        // West wall
         GameObject westWall = new GameObject("WestWall");
         westWall.transform.parent = wallsRoot.transform;
         Vector3 westStart = ToWorld(tiles[0, 0].TileCenter);
         SpawnWallLine(westStart, Vector3.forward, mapLength, segmentLength, Quaternion.Euler(0, 90, 0), wallPrefab, westWall);
 
-        // East Wall
+        // East wall
         GameObject eastWall = new GameObject("EastWall");
         eastWall.transform.parent = wallsRoot.transform;
         Vector3 eastStart = ToWorld(tiles[mapWidthInTiles - 1, 1].TileCenter);
         SpawnWallLine(eastStart, Vector3.forward, mapLength, segmentLength, Quaternion.Euler(0, 270, 0), wallPrefab, eastWall);
 
-        
-
+        // Mark tiles occupied by wall elements
         AssignWallTileOccupation(wallsRoot, tiles);
         return wallsRoot;
     }
 
+    /// <summary>
+    /// Marks tiles occupied by wall-related objects (walls, gates, towers).
+    /// </summary>
     private void AssignWallTileOccupation(GameObject wallsRoot, Tile[,] tiles)
     {
         int count = 0;
         foreach (Transform child in wallsRoot.transform)
         {
-            // 1. SprawdŸ czy sam 'child' ma BuildingData
             var bd = child.GetComponent<BuildingData>();
             if (bd != null)
             {
@@ -116,7 +121,6 @@ public class WallSpawner
                 }
             }
 
-            // 2. Potem sprawdŸ dzieci (jeœli istniej¹)
             foreach (Transform wallPart in child)
             {
                 var buildingData = wallPart.GetComponent<BuildingData>();
@@ -137,9 +141,12 @@ public class WallSpawner
             }
         }
 
-        Debug.Log($"Zaznaczono tile zajête przez mury (AssignOccupiedTiles) – {count} obiektów.");
+        Debug.Log($"Marked wall tiles (AssignOccupiedTiles) – {count} objects total.");
     }
 
+    /// <summary>
+    /// Selects the wall, tower, and gate prefabs from the provided wall list.
+    /// </summary>
     private void IdentifyWallPrefabs()
     {
         foreach (var wall in walls)
@@ -165,18 +172,25 @@ public class WallSpawner
         }
     }
 
+    /// <summary>
+    /// Estimates the length of a single wall segment based on its Renderer bounds.
+    /// </summary>
     private float GetSegmentLength(GameObject go)
     {
         var renderer = go.GetComponentInChildren<Renderer>();
         if (renderer == null)
         {
-            Debug.LogError("Prefab nie ma Renderera.");
+            Debug.LogError("Prefab has no Renderer.");
             return tileSize;
         }
+
         Vector3 size = renderer.bounds.size;
         return Mathf.Max(size.x, size.z);
     }
 
+    /// <summary>
+    /// Converts tile center coordinates to world-space position on terrain.
+    /// </summary>
     private Vector3 ToWorld(Vector2 tileCenter)
     {
         Vector3 pos = new(tileCenter.x, 0, tileCenter.y);
@@ -184,6 +198,9 @@ public class WallSpawner
         return pos;
     }
 
+    /// <summary>
+    /// Spawns a line of wall segments in a given direction from a start point.
+    /// </summary>
     private void SpawnWallLine(Vector3 origin, Vector3 direction, float totalLength, float segmentLength, Quaternion rotation, GameObject prefab, GameObject parent)
     {
         int count = Mathf.FloorToInt(totalLength / segmentLength);
@@ -195,13 +212,15 @@ public class WallSpawner
         }
     }
 
+    /// <summary>
+    /// Instantiates a building prefab at a given tile's position and marks the tile as occupied.
+    /// </summary>
     private GameObject PlaceBuildingAtTile(Tile tile, GameObject prefab, GameObject parent, Quaternion rotation)
     {
         Vector3 pos = ToWorld(tile.TileCenter);
         GameObject go = Object.Instantiate(prefab, pos, rotation, parent.transform);
         tile.IsPartOfBuilding = true;
         tile.Building = go;
-
         return go;
     }
 }

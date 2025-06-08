@@ -1,17 +1,19 @@
-﻿// Zawiera: generowanie mapy z podziałem na osobne klasy do murów, budynków i dekoracji
-
-using System;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.AI;
 using Unity.AI.Navigation;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
+/// <summary>
+/// Generates the map with separated responsibilities for buildings, walls, and decorations.
+/// Handles terrain resizing, tile initialization, structure placement, and NavMesh generation.
+/// </summary>
 public class MapGenerator : MonoBehaviour
 {
+    /// <summary> Singleton instance of the map generator. </summary>
     public static MapGenerator Instance { get; private set; }
 
-    [Header("Podstawowe dane mapy")]
+    [Header("Base Map Configuration")]
     public NavMeshSurface surface;
     public Terrain terrain;
     public int tileSize = 10;
@@ -20,7 +22,7 @@ public class MapGenerator : MonoBehaviour
     public bool markTiles = false;
     public int WallsMargin = 10;
 
-    [Header("Prefabrykaty")]
+    [Header("Prefabs")]
     public List<BuildingSetup> buildings = new();
     public List<WallsSetup> walls = new();
     public List<BuildingSetup> decorations = new();
@@ -33,6 +35,9 @@ public class MapGenerator : MonoBehaviour
     [HideInInspector] public List<GameObject> spawnedBuildings;
     [HideInInspector] public int mapWidth, mapLength;
 
+    /// <summary>
+    /// Initializes terrain and tile grid during object creation.
+    /// </summary>
     void Awake()
     {
         Instance = this;
@@ -47,6 +52,9 @@ public class MapGenerator : MonoBehaviour
         terrain.transform.position = transform.position - centerOffset;
     }
 
+    /// <summary>
+    /// Entry point for generating the entire map.
+    /// </summary>
     public void GenerateMap()
     {
         mapWidth = tileSize * mapWidthInTiles;
@@ -78,6 +86,9 @@ public class MapGenerator : MonoBehaviour
         surface.BuildNavMesh();
     }
 
+    /// <summary>
+    /// Initializes tile data including center positions and neighbors.
+    /// </summary>
     void InitializeTiles()
     {
         allTiles.Clear();
@@ -117,7 +128,9 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-    //Funkcja wyboru budynku dla NPC
+    /// <summary>
+    /// Returns a building GameObject that matches one of the allowed types and is not yet assigned to an NPC.
+    /// </summary>
     public GameObject GetBuilding(HashSet<BuildingData.BuildingType> allowedTypes)
     {
         var options = spawnedBuildings.FindAll(go => {
@@ -127,6 +140,9 @@ public class MapGenerator : MonoBehaviour
         return options.Count > 0 ? options[Random.Range(0, options.Count)] : null;
     }
 
+    /// <summary>
+    /// Paints borders of non-building tiles with a debug texture layer.
+    /// </summary>
     private void MarkTiles()
     {
         var data = terrain.terrainData;
@@ -160,28 +176,27 @@ public class MapGenerator : MonoBehaviour
                 int endZ = startZ + tilePixelH - 1;
 
                 for (int x = startX; x <= endX; x++)
-                {
                     for (int t = 0; t < thickness; t++)
                     {
                         SetAlphaSafe(alphas, x, startZ + t, 2, layers);
                         SetAlphaSafe(alphas, x, endZ - t, 2, layers);
                     }
-                }
 
                 for (int z = startZ; z <= endZ; z++)
-                {
                     for (int t = 0; t < thickness; t++)
                     {
                         SetAlphaSafe(alphas, startX + t, z, 2, layers);
                         SetAlphaSafe(alphas, endX - t, z, 2, layers);
                     }
-                }
             }
         }
 
         data.SetAlphamaps(0, 0, alphas);
     }
 
+    /// <summary>
+    /// Safely paints a specific texture layer on the alpha map.
+    /// </summary>
     private void SetAlphaSafe(float[,,] alphas, int x, int z, int layer, int layersCount)
     {
         if (z < 0 || z >= alphas.GetLength(0) || x < 0 || x >= alphas.GetLength(1))
@@ -193,7 +208,10 @@ public class MapGenerator : MonoBehaviour
         alphas[z, x, layer] = 1f;
     }
 
-    [ContextMenu("Debuguj tile'e w konsoli")]
+    /// <summary>
+    /// Logs all tile states to the console for debugging purposes.
+    /// </summary>
+    [ContextMenu("Log tile states to console")]
     public void DebugTilesInConsole()
     {
         for (int z = mapLengthInTiles - 1; z >= 0; z--)
@@ -203,34 +221,70 @@ public class MapGenerator : MonoBehaviour
             {
                 row += tiles[x, z].IsBuilding ? "[X]" : "[ ]";
             }
-            Debug.Log($"Rząd Z={z}: {row}");
+            Debug.Log($"Row Z={z}: {row}");
         }
     }
 }
 
+/// <summary>
+/// Represents a single grid unit (tile) on the generated map.
+/// Stores position, state flags, and neighbor references.
+/// </summary>
 public class Tile
 {
+    /// <summary> Grid coordinates (X,Z) of the tile. </summary>
     public Vector2Int GridPosition;
+
+    /// <summary> Center position of the tile in world coordinates (X,Z). </summary>
     public Vector2 TileCenter;
+
+    /// <summary> Center position of the tile's front side in world coordinates (used for wall placement). </summary>
     public Vector2 FrontWallCenter;
+
+    /// <summary> Neighboring tiles (up to 4 directions). </summary>
     public Tile[] Neighbors = new Tile[0];
+
+    /// <summary> The GameObject (building) occupying this tile, if any. </summary>
     public GameObject Building;
+
+    /// <summary> Indicates if this tile is the central tile for a building. </summary>
     public bool IsBuilding = false;
-    public bool IsPath = false;
+
+    /// <summary> Indicates if this tile is part of any building's footprint. </summary>
     public bool IsPartOfBuilding = false;
+
+    /// <summary> Indicates if this tile is part of a path. </summary>
+    public bool IsPath = false;
 }
 
+/// <summary>
+/// Serializable structure representing a building prefab and its generation parameters.
+/// Used by MapGenerator during procedural placement.
+/// </summary>
 [Serializable]
 public class BuildingSetup
 {
+    /// <summary> The prefab GameObject to instantiate as a building. </summary>
     public GameObject prefab;
-    [Range(0f, 1f)] public float weight = 0.1f;
+
+    /// <summary> Probability weight for this building to be selected during placement (0–1). </summary>
+    [Range(0f, 1f)]
+    public float weight = 0.1f;
+
+    /// <summary> Maximum number of times this building can appear on the map. </summary>
     public int maxCount = 3;
-    [HideInInspector] public int currentCount = 0;
+
+    /// <summary> Tracks how many times this building has already been placed. </summary>
+    [HideInInspector]
+    public int currentCount = 0;
 }
 
+/// <summary>
+/// Serializable wrapper for a wall prefab. Used by WallSpawner to build perimeter walls.
+/// </summary>
 [Serializable]
 public class WallsSetup
 {
+    /// <summary> The prefab GameObject to instantiate as a wall segment. </summary>
     public GameObject prefab;
 }

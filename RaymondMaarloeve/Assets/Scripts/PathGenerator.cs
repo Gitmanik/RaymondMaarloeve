@@ -1,10 +1,15 @@
-﻿// PathGenerator.cs
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Generates paths between buildings and paints them on the terrain.
+/// Uses heuristic optimization for path order and simple BFS for pathfinding.
+/// </summary>
 public static class PathGenerator
 {
+    /// <summary>
+    /// Clears the terrain texture to the default state (layer 0).
+    /// </summary>
     public static void ClearMap(Terrain terrain)
     {
         var data = terrain.terrainData;
@@ -12,29 +17,24 @@ public static class PathGenerator
         int h = data.alphamapHeight;
         int layers = data.alphamapLayers;
 
-        // Utworzenie nowej tablicy [w,h,layers]
         float[,,] alphas = new float[w, h, layers];
-
         for (int x = 0; x < w; x++)
         {
             for (int y = 0; y < h; y++)
             {
-                alphas[x, y, 0] = 1f;      // pierwsza warstwa
-                                           // pozostałe warstwy (1..layers-1) już są 0
+                alphas[x, y, 0] = 1f;
             }
         }
 
-        // Nadpisanie całego terenu
         data.SetAlphamaps(0, 0, alphas);
     }
+
     /// <summary>
-    /// Wyznacza trasy między buildingTiles i maluje je na terrain.
+    /// Generates paths between building tiles and paints them on the terrain.
     /// </summary>
     public static void GeneratePaths(Tile[,] tiles, List<Tile> buildingTiles, Terrain terrain)
     {
-        // === KROK 1: Znalezienie punktów połączeń (najbliższych kafelków przy wejściu) ===
-        List<Tile> connectionTiles = new List<Tile>();
-
+        List<Tile> connectionTiles = new();
         foreach (var buildingTile in buildingTiles)
         {
             Tile entryTile = GetEntranceNeighbor(buildingTile, tiles);
@@ -44,14 +44,13 @@ public static class PathGenerator
             }
             else
             {
-                Debug.LogWarning($"Nie znaleziono wejścia dla budynku: {buildingTile.Building?.name}");
+                Debug.LogWarning($"No entrance found for building: {buildingTile.Building?.name}");
             }
         }
 
         int n = connectionTiles.Count;
-        if (n < 2) return;  // za mało punktów do łączenia
+        if (n < 2) return;
 
-        // === KROK 2: Obliczanie odległości między punktami wejściowymi ===
         float[,] d = new float[n, n];
         Tile[,] bestStartTile = new Tile[n, n];
         Tile[,] bestGoalTile = new Tile[n, n];
@@ -80,12 +79,11 @@ public static class PathGenerator
             }
         }
 
-        // === KROK 3: Optymalizacja kolejności odwiedzania punktów ===
         var nnPath = NearestNeighbor(d, n);
         var optPath = TwoOpt(nnPath, d);
 
-        // === KROK 4: Budowanie pełnej ścieżki ===
         foreach (var t in tiles) t.IsPath = false;
+
         var fullPath = new List<Tile>();
         Tile lastTile = null;
 
@@ -101,11 +99,10 @@ public static class PathGenerator
             if (k > 0) segment.RemoveAt(0);
 
             fullPath.AddRange(segment);
-            lastTile = fullPath[fullPath.Count - 1];
+            lastTile = fullPath[^1];
             foreach (var t in segment) t.IsPath = true;
         }
 
-        // === KROK 5: Rysowanie ścieżek i ustawianie wejść ===
         foreach (var t in tiles)
         {
             if (t.IsBuilding)
@@ -134,6 +131,7 @@ public static class PathGenerator
             }
         }
     }
+
     private static Tile GetEntranceNeighbor(Tile buildingTile, Tile[,] tiles)
     {
         if (buildingTile.Building == null)
@@ -142,7 +140,7 @@ public static class PathGenerator
         Transform entrance = buildingTile.Building.transform.Find("Entrance");
         if (entrance == null)
         {
-            Debug.LogWarning($"Brak 'entrance' w budynku: {buildingTile.Building.name}");
+            Debug.LogWarning($"No 'Entrance' child found in building: {buildingTile.Building.name}");
             return null;
         }
 
@@ -154,7 +152,7 @@ public static class PathGenerator
         {
             if (tile == null || tile.IsPartOfBuilding) continue;
 
-            Vector3 tileWorldPos = new Vector3(tile.TileCenter.x, entranceWorldPos.y, tile.TileCenter.y);
+            Vector3 tileWorldPos = new(tile.TileCenter.x, entranceWorldPos.y, tile.TileCenter.y);
             float dist = Vector3.SqrMagnitude(entranceWorldPos - tileWorldPos);
 
             if (dist < minDist)
@@ -166,7 +164,6 @@ public static class PathGenerator
 
         return closest;
     }
-
 
     private static List<int> NearestNeighbor(float[,] d, int n)
     {
@@ -251,6 +248,7 @@ public static class PathGenerator
 
         var path = new List<Tile>();
         if (!prev.ContainsKey(goal)) return path;
+
         var node = goal;
         while (true)
         {
@@ -280,7 +278,6 @@ public static class PathGenerator
             float t = i / (float)steps;
             Vector2 pt = Vector2.Lerp(start, end, t);
 
-            // odbicie X↔Z, jak w oryginalnym skrypcie
             int mapZ = (int)(((pt.x - tPos.x) / data.size.x) * w);
             int mapX = (int)(((pt.y - tPos.z) / data.size.z) * h);
 
@@ -294,16 +291,21 @@ public static class PathGenerator
     {
         int r = Mathf.CeilToInt(rad);
         for (int dz = -r; dz <= r; dz++)
+        {
             for (int dx = -r; dx <= r; dx++)
             {
                 int px = cx + dx;
                 int pz = cz + dz;
                 if (px < 0 || pz < 0 || px >= alphas.GetLength(0) || pz >= alphas.GetLength(1)) continue;
                 if (dx * dx + dz * dz <= rad * rad)
+                {
                     for (int l = 0; l < lt; l++)
                         alphas[px, pz, l] = (l == li) ? 1f : 0f;
+                }
             }
+        }
     }
+
     private static void RotateBuilding(GameObject building, Vector2 from, Vector2 to)
     {
         float yPos = building.transform.position.y;
@@ -313,17 +315,9 @@ public static class PathGenerator
         Vector3 dir = (posTo - posFrom).normalized;
         if (dir.sqrMagnitude < 0.001f) return;
 
-        // 3) LookRotation
         Quaternion lookRot = Quaternion.LookRotation(dir, Vector3.up);
 
-        // 4) Offset zależny od orientacji modelu
-        //    - jeśli front modelu == +Z, offset = 0
-        //    - jeśli front modelu == +X, offset = -90
-        //    - jeśli front modelu == -Z, offset = 180
-        //    - jeśli front modelu == -X, offset = +90
-        //float angleOffset = -90f;
-        //Quaternion offset = Quaternion.Euler(0, angleOffset, 0);
-        //building.transform.rotation = lookRot;// * offset;
-
+        // Apply rotation (adjust if front of model is not +Z)
+        building.transform.rotation = lookRot;
     }
 }

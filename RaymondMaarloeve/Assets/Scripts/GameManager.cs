@@ -5,67 +5,84 @@ using Gitmanik.Console;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+/// <summary>
+/// Core manager controlling game setup, NPC initialization, and LLM connection.
+/// </summary>
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    [Header("Main Player")]
     public GameObject player;
 
+    [Header("NPCs")]
     public int npcCount = 6;
     public GameObject[] npcPrefabs;
-    
-    private int entityIDCounter = 0;
-    public int GetEntityID() => ++entityIDCounter;
     public List<NPC> npcs = new List<NPC>();
+
+    [Header("LLM Setup")]
     [HideInInspector] public bool LlmServerReady = false;
-    
+
+    [Header("Game UI")]
+    [SerializeField] private GameObject uiGameObject;
+
     public GameConfig gameConfig { get; private set; }
 
-    [SerializeField] private GameObject uiGameObject;
-    
-    void Awake()
+    private int entityIDCounter = 0;
+    public int GetEntityID() => ++entityIDCounter;
+
+    private void Awake()
     {
         uiGameObject.SetActive(true);
     }
-    
-    void Start()
+
+    private void Start()
     {
-        Debug.Log("Game Manager starting");
+        Debug.Log("📦 Game Manager starting");
         Instance = this;
-        
+
+        // Load config
         gameConfig = GameConfig.LoadGameConfig(Path.Combine(Application.dataPath, "game_config.json"));
-        
         Screen.SetResolution(gameConfig.GameWindowWidth, gameConfig.GameWindowHeight, gameConfig.FullScreen);
         Application.targetFrameRate = 60;
-        
+
+        // Connect to LLM Server
         LlmManager.Instance.Setup(gameConfig.LlmServerApi);
-        LlmManager.Instance.Connect(x =>
+        LlmManager.Instance.Connect(success =>
         {
-            if (x)
+            if (success)
             {
-                Debug.Log("Connected to LLM Server");
+                Debug.Log("✅ Connected to LLM Server");
                 int modelsToLoad = gameConfig.Models.Count;
-                
+
                 foreach (var model in gameConfig.Models)
-                    LlmManager.Instance.LoadModel(model.Id.ToString(), model.Path, (dto) =>
+                {
+                    LlmManager.Instance.LoadModel(model.Id.ToString(), model.Path, dto =>
                     {
                         modelsToLoad--;
                         if (modelsToLoad == 0)
                             LlmServerReady = true;
                         LlmManager.Instance.GenericComplete(dto);
                     }, Debug.LogError);
+                }
             }
             else
             {
-                Debug.LogError("Failed to connect to LLM Server");
+                Debug.LogError("❌ Failed to connect to LLM Server");
             }
         });
-        
+
         MapGenerator.Instance.GenerateMap();
-        
-        List<GameObject> npcPrefabsList = npcPrefabs.ToList();
-        
-        
+        SpawnNPCs();
+        PlacePlayerAtEntrance();
+    }
+
+    /// <summary>
+    /// Spawns and sets up all NPCs from the game config.
+    /// </summary>
+    private void SpawnNPCs()
+    {
+        var npcPrefabsList = npcPrefabs.ToList();
 
         foreach (var npcConfig in gameConfig.Npcs)
         {
@@ -77,100 +94,115 @@ public class GameManager : MonoBehaviour
 
             string npcModelPath = gameConfig.Models.FirstOrDefault(m => m.Id == npcConfig.ModelId)?.Path;
             int npcVariant = Random.Range(0, npcPrefabsList.Count);
-            
+
             GameObject newNpc = Instantiate(npcPrefabsList[npcVariant], npcPosition, Quaternion.identity);
             npcPrefabsList.RemoveAt(npcVariant);
-            var npcComponent = newNpc.GetComponent<NPC>(); 
 
-            var tmpSystemPrompt =
-                "Your name is Wilfred von Rabenstein. You are a fallen knight, a drunkard, and a man whose name was once spoken with reverence, now drowned in ale and regret. You are 42 years old. You are undesirable in most places, yet your blade still holds value for those desperate enough to hire a ruined man. It is past midnight. You are slumped against the wall of a rundown tavern, the rain mixing with the stale stench of cheap wine on your cloak. You know the filth of the city—the beggars, the whores, the men who whisper in shadows. You drink every night until the world blurs, until the past feels like a dream. You speak with the slurred grace of a man who once addressed kings but now bargains for pennies.";
-            
-            if (string.IsNullOrEmpty(npcModelPath)) {
-                Debug.LogError($"Model path not found for NPC with ID {npcConfig.ModelId}");
-                npcComponent.Setup(new RandomDecisionMaker(), null, $"Npc-{npcConfig.Id}", tmpSystemPrompt
-                    );
+            var npcComponent = newNpc.GetComponent<NPC>();
+
+            string systemPrompt =
+                "Your name is Wilfred von Rabenstein. You are a fallen knight, a drunkard, and a man whose name was once spoken with reverence, now drowned in ale and regret. [...]";
+
+            if (string.IsNullOrEmpty(npcModelPath))
+            {
+                Debug.LogError($"🚫 Model path not found for NPC with ID {npcConfig.ModelId}");
+                npcComponent.Setup(new RandomDecisionMaker(), null, $"Npc-{npcConfig.Id}", systemPrompt);
             }
-            else {
-                Debug.Log($"NPC {npcConfig.Id} Model Path: {npcModelPath}");
-                npcComponent.Setup(new LlmDecisionMaker(), npcConfig.ModelId.ToString(), $"Npc-{npcConfig.Id}", tmpSystemPrompt);
+            else
+            {
+                Debug.Log($"📦 NPC {npcConfig.Id} Model Path: {npcModelPath}");
+                npcComponent.Setup(new LlmDecisionMaker(), npcConfig.ModelId.ToString(), $"Npc-{npcConfig.Id}", systemPrompt);
             }
-            HashSet<BuildingData.BuildingType> allowedTypes = new HashSet<BuildingData.BuildingType>()
+
+            // Assign building to NPC
+            HashSet<BuildingData.BuildingType> allowedTypes = new()
             {
                 BuildingData.BuildingType.House,
                 BuildingData.BuildingType.Tavern,
                 BuildingData.BuildingType.Blacksmith,
                 BuildingData.BuildingType.Church
             };
+
             npcComponent.HisBuilding = MapGenerator.Instance.GetBuilding(allowedTypes);
-            var buildingData = npcComponent.HisBuilding.GetComponent<BuildingData>();
-            buildingData.HisNPC = npcComponent;
+            npcComponent.HisBuilding.GetComponent<BuildingData>().HisNPC = npcComponent;
 
             npcs.Add(npcComponent);
-
-            //Player spawn
-            GameObject wallsRoot = GameObject.Find("WallsRoot");
-
-            Transform gates = null;
-
-            foreach (Transform child in wallsRoot.transform)
-            {
-                if (child.name == "GATE(Clone)")
-                {
-                    gates = child;
-                    break;
-                }
-            }
-            if (gates == null)
-            {
-                Debug.LogError("Nie znaleziono bramy (Gate(Clone))!");
-                return;
-            }
-
-            // Znajdź Entrance w _minnor_gates_02(Clone)
-            Transform entrance = gates.Find("PlayerSpawner");
-            if (entrance == null)
-            {
-                Debug.LogError("Nie znaleziono PlayerSpawner!");
-                return;
-            }
-
-            // Ustaw gracza w pozycji Entrance
-            player.transform.position = entrance.position;
-            player.transform.rotation = entrance.rotation;
-
-            Debug.Log("Player ustawiony na spawn point Entrance.");
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// Places the player object at the spawn point (Gate > PlayerSpawner).
+    /// </summary>
+    private void PlacePlayerAtEntrance()
     {
-        if (Input.GetKeyDown(KeyCode.F12)){
-            string folderPath = "Assets/Screenshots/"; 
-    
-            if (!System.IO.Directory.Exists(folderPath))
-                System.IO.Directory.CreateDirectory(folderPath);
-            
-            var screenshotName =
-                                    "Screenshot_" +
-                                    System.DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss") +
-                                    ".png";
-            ScreenCapture.CaptureScreenshot(System.IO.Path.Combine(folderPath, screenshotName));
-            Debug.Log(folderPath + screenshotName);
+        GameObject wallsRoot = GameObject.Find("WallsRoot");
+        if (wallsRoot == null)
+        {
+            Debug.LogError("❌ WallsRoot not found!");
+            return;
         }
+
+        Transform gate = null;
+        foreach (Transform child in wallsRoot.transform)
+        {
+            if (child.name == "GATE(Clone)")
+            {
+                gate = child;
+                break;
+            }
+        }
+
+        if (gate == null)
+        {
+            Debug.LogError("❌ Gate (GATE(Clone)) not found!");
+            return;
+        }
+
+        Transform entrance = gate.Find("PlayerSpawner");
+        if (entrance == null)
+        {
+            Debug.LogError("❌ PlayerSpawner not found!");
+            return;
+        }
+
+        player.transform.position = entrance.position;
+        player.transform.rotation = entrance.rotation;
+
+        Debug.Log("✅ Player placed at Entrance.");
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F12))
+        {
+            string folderPath = "Assets/Screenshots/";
+            if (!Directory.Exists(folderPath))
+                Directory.CreateDirectory(folderPath);
+
+            string screenshotName = "Screenshot_" + System.DateTime.Now.ToString("dd-MM-yyyy-HH-mm-ss") + ".png";
+            ScreenCapture.CaptureScreenshot(Path.Combine(folderPath, screenshotName));
+            Debug.Log($"📸 Screenshot saved to: {folderPath + screenshotName}");
+        }
+
         if (Input.GetKeyDown(KeyCode.BackQuote))
         {
             GitmanikConsole.singleton.ToggleConsole();
         }
     }
 
+    #region Developer Console Commands
+
     [ConsoleCommand("npcs", "List all npcs")]
     public static bool ListAllNpcs()
     {
-        string x = "NPCs:\n";
-        foreach (var npc in GameManager.Instance.npcs)
-            x += $"{npc.EntityID} Pos: {npc.transform.position} , Name: ({npc.NpcName}) System: ({npc.GetDecisionSystem()}, {npc.GetCurrentDecision()}), Hunger: {npc.Hunger}, Thirst: {npc.Thirst}\n";
-        Debug.Log(x);
+        string output = "NPCs:\n";
+        foreach (var npc in Instance.npcs)
+        {
+            output += $"🧍 ID: {npc.EntityID}, Pos: {npc.transform.position}, Name: {npc.NpcName}, " +
+                      $"System: {npc.GetDecisionSystem()}, Decision: {npc.GetCurrentDecision()}, " +
+                      $"Hunger: {npc.Hunger}, Thirst: {npc.Thirst}\n";
+        }
+        Debug.Log(output);
         return true;
     }
 
@@ -179,11 +211,11 @@ public class GameManager : MonoBehaviour
     {
         if (!int.TryParse(par1, out var id))
             return false;
-        
+
         var npc = Instance.npcs.Find(x => x.EntityID == id);
         if (npc == null)
             return false;
-        
+
         PlayerController.Instance.transform.position = npc.transform.position;
         return true;
     }
@@ -193,12 +225,14 @@ public class GameManager : MonoBehaviour
     {
         if (!int.TryParse(par1, out var id))
             return false;
-        
+
         var npc = Instance.npcs.Find(x => x.EntityID == id);
         if (npc == null)
             return false;
-        
+
         PlayerController.Instance.StartInteraction(npc);
         return true;
     }
+
+    #endregion
 }
