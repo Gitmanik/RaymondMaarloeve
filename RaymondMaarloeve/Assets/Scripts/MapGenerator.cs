@@ -113,18 +113,6 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-    void MarkWallTiles()
-    {
-        int count = 0;
-        foreach (Transform child in wallsRoot.transform)
-        {
-            var buildingData = child.GetComponent<BuildingData>();
-            if (buildingData == null) continue;
-            bool success = buildingData.AssignOccupiedTiles(tileSize, tiles);
-            if (success) count++;
-        }
-        Debug.Log($"Zaznaczono tile zajęte przez mury (AssignOccupiedTiles) – {count} obiektów.");
-    }
     //Funkcja wyboru budynku dla NPC
     public GameObject GetBuilding(HashSet<BuildingData.BuildingType> allowedTypes)
     {
