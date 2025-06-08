@@ -6,13 +6,14 @@ public class BuildingData : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public Tile HisMainTile = null;
     public NPC HisNPC = null;
+    public Vector2Int HisMainTileGridPosition = new Vector2Int(-1, -1); // <- grid position of the main tile
     [SerializeField] public BuildingType HisType = BuildingType.None;
 
     //public int WidthInTiles = 1; //{ get; private set; }
     //public int LengthInTiles = 1; //{ get; private set; }
 
     public List<Tile> HisTiles = new(); // <- trzymamy referencje do tile’i, które budynek zajmuje
-
+    public int HisTileCount = 0;
     public enum BuildingType
     {
         None,
@@ -57,12 +58,11 @@ public class BuildingData : MonoBehaviour
         int endX = Mathf.FloorToInt((max.x - MapGenerator.Instance.transform.position.x + MapGenerator.Instance.mapWidth / 2f) / tileSize);
         int startZ = Mathf.FloorToInt((min.z - MapGenerator.Instance.transform.position.z + MapGenerator.Instance.mapLength / 2f) / tileSize);
         int endZ = Mathf.FloorToInt((max.z - MapGenerator.Instance.transform.position.z + MapGenerator.Instance.mapLength / 2f) / tileSize);
-
         // 1️ Sprawdź kolizję przed oznaczaniem
         for (int x = startX; x <= endX; x++)
             for (int z = startZ; z <= endZ; z++)
             {
-                if (x < 0 || z < 0 || x >= tiles.GetLength(0) || z >= tiles.GetLength(1))
+                if (x < 0 || z < 0 ||  x >= tiles.GetLength(0) || z >= tiles.GetLength(1))
                     return false;
 
                 if (tiles[x, z].IsPartOfBuilding)
@@ -77,6 +77,7 @@ public class BuildingData : MonoBehaviour
                 tile.IsPartOfBuilding = true;
                 tile.Building = gameObject;
                 HisTiles.Add(tile);
+                HisTileCount++;
             }
 
         // 3️ Wyznacz main tile – jeśli nie Wall ani Gate
@@ -97,6 +98,7 @@ public class BuildingData : MonoBehaviour
             }
 
             HisMainTile = closest;
+            HisMainTileGridPosition = new Vector2Int(HisMainTile.GridPosition.x, HisMainTile.GridPosition.y);
             MapGenerator.Instance.buildingsMainTile.Add(HisMainTile);
         }
 
