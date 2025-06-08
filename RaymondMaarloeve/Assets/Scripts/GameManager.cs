@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
     
     public List<NPC> npcs = new List<NPC>();
     [HideInInspector] public bool LlmServerReady = false;
+    [HideInInspector] public bool HistoryGenerated = false;
 
     public NPC murdererNPC;
 
@@ -44,6 +46,7 @@ public class GameManager : MonoBehaviour
         // Wait for LLM connection and model loading
         yield return StartCoroutine(WaitForLlmConnection());
 
+        yield return StartCoroutine(GenerateHistory());
 
         MapGenerator.Instance.GenerateMap();
         
@@ -168,6 +171,71 @@ public class GameManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Generates history using Narrator LLM Model.
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator GenerateHistory()
+    {
+        // List<string> archetypes = gameConfig.Models.FindAll(x => x.Id != gameConfig.NarratorModelId).
+        //     ConvertAll(x => x.Name.Substring(0,x.Name.IndexOf('.')));
+        List<string> archetypes = new List<string>()
+        {
+            "delusional", "guard", "helpful man", "alcoholic", "ribald man", "seductive woman", "fallen noble"
+        };
+        List<string> archetypes2 = new List<string>(archetypes.Take(gameConfig.Npcs.Count));
+        //gameConfig.Npcs.ConvertAll(x => gameConfig.Models[x.ModelId].Name)
+        string prompt = $"Generate a JSON object that contains a short story in a dark medieval village setting involving exactly {gameConfig.Npcs.Count} people. " +
+                        $"Each person must have a unique personality type selected from the following list:\n\n[{string.Join(',', archetypes)}]\n\n" +
+                        $"The story must describe a mysterious death or crime, creating tension and uncertainty. " +
+                        $"The tone should be dark and immersive, using sensory details like time of day, weather, fear, and silence. " +
+                        $"The story must be no longer than 200 words.\n\n" +
+                        $"Use only the following five locations:\n\n" +
+                        $"Each character's house\n\nThe church\n\nThe well\n\n" +
+                        $"Only mention the houses of characters who are actually part of the story. " +
+                        $"Do not invent new locations or mention houses of people not included in the story.\n\n" +
+                        $"After the story, include personal info about each character as separate JSON objects.\n\n" +
+                        $"Characters:{string.Join('\n', archetypes2)}\n\n" +
+                        $"Output the result as valid JSON and ONLY JSON in the following structure:\n" +
+                        $"{{\n\"story\": \"A short story (max 200 words) that meets all the above criteria.\"," +
+                        $"\n\"characters\": " +
+                            $"[\n{{\n\"name\": \"Full name\"," +
+                            $"\n\"archetype\": \"one of the {archetypes.Count} archetypes\"," +
+                            $"\n\"age\": integer," +
+                            $"\n\"description\": \"You are a [short personality description matching the archetype]. " +
+                                $"You are [age] years old. " +
+                                $"[Describe what you're doing, where you are, and the time/weather]. " +
+                                $"Mention who you like or dislike in the village and one habit or routine you have.\"\n" +
+                            $"}}," +
+                        $"\n{{...}}," +
+                        $"\n{{...}}\n" +
+                        $"]\n}}";
+        
+        List<Message> messages = new List<Message>();
+        messages.Add(new Message { role =  "user", content = prompt});
+        
+        bool callbackCalled = false;
+
+        string resp = null;
+        
+        LlmManager.Instance.Chat(gameConfig.NarratorModelId.ToString(), messages, result =>
+        {
+            callbackCalled = true;
+            resp = result.response;
+        }, (error) =>
+        {
+            Debug.LogError($"GameManager: GenerateHistory error: {error}");
+        });
+        
+        // Wait for the callback to be called
+        while (!callbackCalled)
+            yield return null;
+        
+        Debug.Log($"GameManager: Generate history complete:\n{resp}");
+        UnityEditor.EditorApplication.isPlaying = false;
+        HistoryGenerated = true;
+    }
+    
     // Update is called once per frame
     void Update()
     {
