@@ -2101,7 +2101,7 @@ MonoBehaviour:
   tileSize: 2
   mapWidthInTiles: 50
   mapLengthInTiles: 50
-  buildingsDensity: 0.4
+  buildingsDensity: 0.8
   markTiles: 0
   buildings:
   - prefab: {fileID: 5083285615235793076, guid: 147ab689729ac2e49b82aac972788668, type: 3}
