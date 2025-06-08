@@ -6,8 +6,11 @@ using UnityEngine;
 /// </summary>
 public class DayNightCycle : MonoBehaviour
 {
-    /// <summary>Current time of day (0–24).</summary>
+    /// <summary>Current time of day .</summary>
     [Header("Time Settings")]
+    public static DayNightCycle Instance { get; private set; }
+
+
     [Range(0, 24)] public float timeOfDay;
 
     /// <summary>Duration of one full in-game day in real-world minutes.</summary>
@@ -43,7 +46,7 @@ public class DayNightCycle : MonoBehaviour
 
     /// <summary>Speed of skybox rotation in degrees per second.</summary>
     [Header("Skybox Rotation")]
-    [Tooltip("Stopnie obrotu skyboxu na sekundê")]
+    [Tooltip("Stopnie obrotu skyboxu na sekundÃª")]
     public float skyboxRotationSpeed = 1f;
 
     /// <summary>
@@ -117,4 +120,10 @@ public class DayNightCycle : MonoBehaviour
     {
         return currentDay;
     }
+    void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
+
 }

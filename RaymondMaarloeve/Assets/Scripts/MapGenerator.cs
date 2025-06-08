@@ -12,6 +12,7 @@ public class MapGenerator : MonoBehaviour
 {
     /// <summary> Singleton instance of the map generator. </summary>
     public static MapGenerator Instance { get; private set; }
+    public bool IsMapGenerated { get; private set; } = false;
 
     [Header("Base Map Configuration")]
     public NavMeshSurface surface;
@@ -40,8 +41,10 @@ public class MapGenerator : MonoBehaviour
     /// </summary>
     void Awake()
     {
+        Debug.Log("MapGenerator: Awake started");
         Instance = this;
         tiles = new Tile[mapWidthInTiles, mapLengthInTiles];
+        Debug.Log($"MapGenerator: Initialized tiles array [{mapWidthInTiles}x{mapLengthInTiles}]");
 
         PathGenerator.ClearMap(terrain);
 
@@ -57,10 +60,12 @@ public class MapGenerator : MonoBehaviour
     /// </summary>
     public void GenerateMap()
     {
+        Debug.Log("MapGenerator: Starting map generation");
         mapWidth = tileSize * mapWidthInTiles;
         mapLength = tileSize * mapLengthInTiles;
-        buildingsMainTile = new();
-        spawnedBuildings = new();
+        Debug.Log($"MapGenerator: Map size: {mapWidth}x{mapLength}");
+
+        buildingTiles = new List<Tile>();
 
         InitializeTiles();
 
