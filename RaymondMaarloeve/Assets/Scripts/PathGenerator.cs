@@ -242,7 +242,7 @@ public static class PathGenerator
             if (cur == goal) break;
             foreach (var nb in cur.Neighbors)
             {
-                if (nb == null || nb.IsBuilding /*|| nb.IsPartOfBuilding*/ || prev.ContainsKey(nb))
+                if (nb == null || nb.IsBuilding || nb.IsPartOfBuilding || prev.ContainsKey(nb))
                     continue;
                 prev[nb] = cur;
                 queue.Enqueue(nb);
