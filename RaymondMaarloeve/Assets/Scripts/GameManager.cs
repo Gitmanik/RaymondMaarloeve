@@ -128,7 +128,7 @@ public class GameManager : MonoBehaviour
 
             // Ustaw gracza w pozycji Entrance
             player.transform.position = entrance.position + entrance.forward * 3.0f;
-            player.transform.rotation = entrance.rotation; // opcjonalnie, jeśli chcesz żeby był od razu dobrze obrócony
+            player.transform.rotation = entrance.rotation;
 
             Debug.Log("Player ustawiony na spawn point Entrance.");
         }
