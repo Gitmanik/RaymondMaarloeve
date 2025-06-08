@@ -3615,7 +3615,7 @@ MonoBehaviour:
   - He waited until midnight to break into the church and steal the grail.
   - While attempting the theft he was seen by the guard.
   - Culprit killed the guard and got away.
-  triggerDay: 3
+  triggerDay: 1
 --- !u!1 &1310063284
 GameObject:
   m_ObjectHideFlags: 0

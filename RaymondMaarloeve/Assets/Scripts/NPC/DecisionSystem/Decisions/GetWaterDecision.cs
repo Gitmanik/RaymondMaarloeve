@@ -1,17 +1,33 @@
+/**
+ * @file GetWaterDecision.cs
+ * @brief Guides an NPC to fetch water from a well and refill its thirst meter.
+ */
+
 using UnityEngine;
 using UnityEngine.AI;
 
+/**
+ * @class GetWaterDecision
+ * @brief Moves the NPC to the nearest well, waits to collect water, then resets thirst.
+ * 
+ * Implements the IDecision interface.
+ */
 public class GetWaterDecision : IDecision
 {
-    private NPC npc;
-    private bool finished = false;
-    private bool reachedWell = false;
-    private Vector3 destination;
-    private float stoppingDistance = 0.5f;
+    private NPC npc;                        /**< The NPC performing this action. */
+    private bool finished = false;         /**< Whether the action is complete. */
+    private bool reachedWell = false;      /**< Whether the NPC has arrived at the well. */
+    private Vector3 destination;           /**< Target position at the well. */
+    private float stoppingDistance = 0.5f; /**< How close the agent must get to be "at" the well. */
 
-    public float waterCollectionDuration = 4f;
-    private float waterCollectionTimer = 0f;
+    public float waterCollectionDuration = 4f; /**< How long drinking takes. */
+    private float waterCollectionTimer = 0f;    /**< Internal timer for drinking. */
 
+    /**
+     * @brief Prepares the NPC to go fetch water.
+     * @param system The decision system invoking this decision (unused).
+     * @param npc The NPC that will move to the well.
+     */
     public void Setup(IDecisionSystem system, NPC npc)
     {
         this.npc = npc;
@@ -24,25 +40,28 @@ public class GetWaterDecision : IDecision
             {
                 destination = hit.position;
                 npc.agent.SetDestination(destination);
-                Debug.Log(npc.NpcName + ": Going to the well to get water: " + destination);
+                Debug.Log($"{npc.NpcName}: Going to the well to get water at {destination}");
             }
             else
             {
-                Debug.LogWarning(npc.NpcName + ": NavMesh point for the well not found!");
+                Debug.LogWarning($"{npc.NpcName}: NavMesh sample for well not found");
                 finished = true;
             }
         }
         else
         {
-            Debug.LogWarning(npc.NpcName + ": Well object not found!");
+            Debug.LogWarning($"{npc.NpcName}: Well object not found");
             finished = true;
         }
     }
 
+    /**
+     * @brief Called every frame to progress the water-fetching action.
+     * @returns True if still processing; false when finished.
+     */
     public bool Tick()
     {
-        if (finished)
-            return false;
+        if (finished) return false;
 
         if (!reachedWell)
         {

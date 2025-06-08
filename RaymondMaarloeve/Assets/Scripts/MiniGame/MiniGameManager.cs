@@ -1,35 +1,62 @@
-﻿using UnityEngine;
+﻿/**
+ * @file MiniGameManager.cs
+ * @brief Manages the mini-game logic: showing the panel, generating history blocks, handling suspect selection, and evaluating the result.
+ */
+
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 
+/**
+ * @class MiniGameManager
+ * @brief Singleton responsible for controlling the flow of the mini-game.
+ */
 public class MiniGameManager : MonoBehaviour
 {
+    /** @brief Singleton instance. */
     public static MiniGameManager Instance;
 
+    /** @brief The UI panel for the mini-game. */
     [SerializeField] private GameObject miniGamePanel;
+    /** @brief Container for the pool of available blocks. */
     [SerializeField] private Transform poolPanel;
+    /** @brief Container for the blocks arranged by the player. */
     [SerializeField] private Transform sequencePanel;
+    /** @brief Dropdown listing suspects. */
     [SerializeField] private TMP_Dropdown suspectDropdown;
+    /** @brief Prefab for a history block. */
     [SerializeField] private GameObject historyBlockPrefab;
+    /** @brief Button to submit the solution. */
     [SerializeField] private Button submitButton;
+    /** @brief Button to cancel the mini-game. */
     [SerializeField] private Button cancelButton;
+    /** @brief Text field to display the result. */
     [SerializeField] private TextMeshProUGUI resultText;
+    /** @brief Description of the crime shown on failure. */
     [SerializeField] private string murderDescription;
+    /** @brief Array of block texts in the correct order. */
     [SerializeField] private string[] blockTexts = new string[6];
+    /** @brief The day of the cycle on which the mini-game is triggered. */
     [SerializeField] private int triggerDay = 3;
 
     private List<string> correctBlocksOrder;
     private bool hasTriggered = false;
     private bool resultShown = false;
 
+    /**
+     * @brief Unity Awake — initializes the singleton.
+     */
     void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
     }
 
+    /**
+     * @brief Unity Start — sets up the UI and listeners.
+     */
     void Start()
     {
         miniGamePanel.SetActive(false);
@@ -38,6 +65,9 @@ public class MiniGameManager : MonoBehaviour
         cancelButton.onClick.AddListener(EndMiniGame);
     }
 
+    /**
+     * @brief Unity Update — checks if the trigger day has been reached.
+     */
     void Update()
     {
         if (hasTriggered) return;
@@ -50,6 +80,9 @@ public class MiniGameManager : MonoBehaviour
         }
     }
 
+    /**
+     * @brief Launches the mini-game panel and initializes content.
+     */
     public void StartMiniGame()
     {
         miniGamePanel.SetActive(true);
@@ -60,6 +93,9 @@ public class MiniGameManager : MonoBehaviour
         GenerateBlocks();
     }
 
+    /**
+     * @brief Populates the suspect dropdown with NPC names.
+     */
     private void PopulateSuspects()
     {
         suspectDropdown.ClearOptions();
@@ -70,6 +106,9 @@ public class MiniGameManager : MonoBehaviour
         suspectDropdown.RefreshShownValue();
     }
 
+    /**
+     * @brief Generates history blocks: stores the correct order and shuffles them into the pool.
+     */
     private void GenerateBlocks()
     {
         foreach (Transform c in poolPanel) Destroy(c.gameObject);
@@ -87,6 +126,10 @@ public class MiniGameManager : MonoBehaviour
         }
     }
 
+    /**
+     * @brief Handles the Submit/Close button click.
+     * @details Checks the sequence and chosen suspect, then shows the result or closes the mini-game.
+     */
     private void OnSubmit()
     {
         if (resultShown)
@@ -113,14 +156,26 @@ public class MiniGameManager : MonoBehaviour
             resultText.text = $"The murderer was {GameManager.Instance.murdererNPC.gameObject.name}. {murderDescription}";
     }
 
+    /**
+     * @brief Closes the mini-game panel.
+     */
     public void EndMiniGame()
     {
         miniGamePanel.SetActive(false);
     }
 }
 
+/**
+ * @class ListExtensions
+ * @brief Extension methods for lists, including shuffle.
+ */
 public static class ListExtensions
 {
+    /**
+     * @brief Shuffles the list using the Fisher–Yates algorithm.
+     * @tparam T The element type.
+     * @param list The list to shuffle.
+     */
     public static void Shuffle<T>(this IList<T> list)
     {
         var rng = new System.Random();

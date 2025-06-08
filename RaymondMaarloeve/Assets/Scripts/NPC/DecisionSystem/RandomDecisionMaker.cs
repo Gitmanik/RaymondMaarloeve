@@ -1,25 +1,37 @@
-﻿using UnityEngine;
+﻿/**
+ * @file RandomDecisionMaker.cs
+ * @brief Implements a decision system that picks a random action for an NPC.
+ */
 
+using UnityEngine;
+
+/**
+ * @class RandomDecisionMaker
+ * @brief Chooses an NPC's next action at random from a set of available decisions.
+ * 
+ * Implements the IDecisionSystem interface.
+ */
 public class RandomDecisionMaker : IDecisionSystem
 {
+    /** @brief Reference to the NPC using this system. */
     private NPC npc;
 
-    /// <summary>
-    /// Sets up the decision-making system with the provided NPC.
-    /// </summary>
-    /// <param name="npc">The NPC that will use this decision-making system.</param>
+    /**
+     * @brief Initializes the decision system with the given NPC.
+     * @param npc The NPC that will use this decision-maker.
+     */
     public void Setup(NPC npc)
     {
         this.npc = npc;
     }
 
-    /// <summary>
-    /// Randomly selects the NPC's next action.
-    /// </summary>
-    /// <returns>An implementation of <see cref="IDecision"/> representing the NPC's next action.</returns>
+    /**
+     * @brief Selects and returns a random decision for the NPC.
+     * @returns An object implementing IDecision representing the chosen action.
+     */
     public IDecision Decide()
     {
-        int decision = Random.Range(0, 7);
+        int decision = Random.Range(0, 8);  // 0–7 inclusive
 
         switch (decision)
         {
