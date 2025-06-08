@@ -56,9 +56,8 @@ public class MapGenerator : MonoBehaviour
 
         InitializeTiles();
 
-        var wallHandler = new WallSpawner(walls, terrain, tileSize, mapWidthInTiles, mapLengthInTiles);
-        wallsRoot = wallHandler.SpawnWalls(tiles);
-        //MarkWallTiles();
+        var wallSpawner = new WallSpawner(walls, terrain, tileSize, mapWidthInTiles, mapLengthInTiles);
+        wallsRoot = wallSpawner.SpawnWalls(tiles);
 
         var buildingSpawner = new BuildingSpawner(terrain, tileSize, mapWidthInTiles, mapLengthInTiles, WallsMargin);
         spawnedBuildings = buildingSpawner.SpawnBuildings(tiles, allTiles, buildings);
