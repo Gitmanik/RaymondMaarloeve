@@ -166,8 +166,6 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        murdererNPC = npcs[Random.Range(0, npcs.Count)];
-
     }
 
     // Update is called once per frame
