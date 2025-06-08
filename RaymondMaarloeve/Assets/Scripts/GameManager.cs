@@ -185,31 +185,35 @@ public class GameManager : MonoBehaviour
         };
         List<string> archetypes2 = new List<string>(archetypes.Take(gameConfig.Npcs.Count));
         //gameConfig.Npcs.ConvertAll(x => gameConfig.Models[x.ModelId].Name)
-        string prompt = $"Generate a JSON object that contains a short story in a dark medieval village setting involving exactly {gameConfig.Npcs.Count} people. " +
-                        $"Each person must have a unique personality type selected from the following list:\n\n[{string.Join(',', archetypes)}]\n\n" +
-                        $"The story must describe a mysterious death or crime, creating tension and uncertainty. " +
-                        $"The tone should be dark and immersive, using sensory details like time of day, weather, fear, and silence. " +
-                        $"The story must be no longer than 200 words.\n\n" +
-                        $"Use only the following five locations:\n\n" +
-                        $"Each character's house\n\nThe church\n\nThe well\n\n" +
-                        $"Only mention the houses of characters who are actually part of the story. " +
-                        $"Do not invent new locations or mention houses of people not included in the story.\n\n" +
-                        $"After the story, include personal info about each character as separate JSON objects.\n\n" +
-                        $"Characters:{string.Join('\n', archetypes2)}\n\n" +
-                        $"Output the result as valid JSON and ONLY JSON in the following structure:\n" +
-                        $"{{\n\"story\": \"A short story (max 200 words) that meets all the above criteria.\"," +
-                        $"\n\"characters\": " +
-                            $"[\n{{\n\"name\": \"Full name\"," +
-                            $"\n\"archetype\": \"one of the {archetypes.Count} archetypes\"," +
-                            $"\n\"age\": integer," +
-                            $"\n\"description\": \"You are a [short personality description matching the archetype]. " +
-                                $"You are [age] years old. " +
-                                $"[Describe what you're doing, where you are, and the time/weather]. " +
-                                $"Mention who you like or dislike in the village and one habit or routine you have.\"\n" +
-                            $"}}," +
-                        $"\n{{...}}," +
-                        $"\n{{...}}\n" +
-                        $"]\n}}";
+        string prompt = $"You are a writer. " +
+                        $"Write ONLY a VALID JSON object with body specified below with two parts:\n\n" +
+                        $"A short dark story (maximum 200 words) set in a medieval village. " +
+                        $"The story must include a mysterious death or crime. " +
+                        $"Use a dark tone with sensory details (like time of day, weather, fear, silence). " +
+                        $"Use only the following five locations:\nThe church\nThe well\n" +
+                        $"The house of each character in the story (Do not use any other places.)\n" +
+                        $"Include exactly {gameConfig.Npcs.Count} game characters, each with one of these personality types:\n" +
+                        $"[{string.Join(',', archetypes)}]\n\n" +
+                        $"Make sure that each of the {gameConfig.Npcs.Count} characters is part of the story. " +
+                        $"Do not invent other characters. " +
+                        $"Describe a mysterious situation with tension and uncertainty.\n\n" +
+                        $"A list of the **{gameConfig.Npcs.Count}** characters with this information for each:\n" +
+                            $"name (you choose)\n" +
+                            $"archetype (one of the four used)\n" +
+                            $"age (an integer)\n" +
+                            $"description (about who they are, their personality, what they are doing during the story, how they feel, who they like or dislike, and one habit or routine they have)\n" +
+                            $"Use this format for your output:\n\n" +
+                            $"{{\n" +
+                                $"\"story\": \"Your short story goes here.\",\n" +
+                                $"\"characters\": [\n" +
+                                    $"{{\n\"name\": \"Full name\",\n" +
+                                    $"\"archetype\": \"delusional\",\n" +
+                                    $"\"age\": 52,\n" +
+                                    $"\"description\": \"You are a delusional man. You are 52 years old. [Add more details here.]\"\n" +
+                                    $"}}," +
+                                $"\n...\n]" +
+                            $"\n}}\n" +
+                            $"Rememeber to NOT write a comma after description as it is an end of the child JSON object.";
         
         List<Message> messages = new List<Message>();
         messages.Add(new Message { role =  "user", content = prompt});
@@ -230,8 +234,15 @@ public class GameManager : MonoBehaviour
         // Wait for the callback to be called
         while (!callbackCalled)
             yield return null;
+
+        resp = resp.Substring(resp.IndexOf('{'));
+        resp = resp.Substring(0, resp.LastIndexOf('}') + 1);
         
-        Debug.Log($"GameManager: Generate history complete:\n{resp}");
+        var generatedHistory = JsonUtility.FromJson<GeneratedHistoryDTO>(resp);
+        
+        Debug.Log($"GameManager: Generate history complete:\n{generatedHistory}");
+        
+        
         UnityEditor.EditorApplication.isPlaying = false;
         HistoryGenerated = true;
     }
