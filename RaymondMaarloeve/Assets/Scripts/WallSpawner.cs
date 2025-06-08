@@ -58,7 +58,55 @@ public class WallSpawner
         PlaceTowerAtTile(tiles[0, mapLengthInTiles - 1], towerPrefab, wallsRoot);
         PlaceTowerAtTile(tiles[mapWidthInTiles - 1, mapLengthInTiles - 1], towerPrefab, wallsRoot);
 
+        AssignWallTileOccupation(wallsRoot, tiles);
         return wallsRoot;
+    }
+
+    private void AssignWallTileOccupation(GameObject wallsRoot, Tile[,] tiles)
+    {
+        int count = 0;
+        foreach (Transform child in wallsRoot.transform)
+        {
+            // 1. Sprawd� czy sam 'child' ma BuildingData
+            var bd = child.GetComponent<BuildingData>();
+            if (bd != null)
+            {
+                if (bd.HisType == BuildingData.BuildingType.Wall ||
+                    bd.HisType == BuildingData.BuildingType.Gate ||
+                    bd.HisType == BuildingData.BuildingType.Tower)
+                {
+                    bd.AssignWallTilesForcefully(tileSize, tiles);
+                    count++;
+                }
+                else
+                {
+                    bool success = bd.AssignOccupiedTiles(tileSize, tiles);
+                    if (success) count++;
+                }
+            }
+
+            // 2. Potem sprawd� dzieci (je�li istniej�)
+            foreach (Transform wallPart in child)
+            {
+                var buildingData = wallPart.GetComponent<BuildingData>();
+                if (buildingData == null) continue;
+
+                if (buildingData.HisType == BuildingData.BuildingType.Wall ||
+                    buildingData.HisType == BuildingData.BuildingType.Gate ||
+                    buildingData.HisType == BuildingData.BuildingType.Tower)
+                {
+                    buildingData.AssignWallTilesForcefully(tileSize, tiles);
+                    count++;
+                }
+                else
+                {
+                    bool success = buildingData.AssignOccupiedTiles(tileSize, tiles);
+                    if (success) count++;
+                }
+            }
+        }
+
+        Debug.Log($"Zaznaczono tile zaj�te przez mury (AssignOccupiedTiles) � {count} obiekt�w.");
     }
 
     private void IdentifyWallPrefabs()

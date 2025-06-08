@@ -103,4 +103,60 @@ public class BuildingData : MonoBehaviour
         return true;
     }
 
+    public void AssignWallTilesForcefully(float tileSize, Tile[,] tiles)
+    {
+        Renderer[] renderers = GetComponentsInChildren<Renderer>();
+
+        if (renderers.Length == 0) return;
+
+        Bounds combinedBounds = renderers[0].bounds;
+        for (int i = 1; i < renderers.Length; i++)
+            combinedBounds.Encapsulate(renderers[i].bounds);
+        //Debug.LogWarning($"{name} bounds size = {combinedBounds.size}, tileSize = {tileSize}");
+
+
+        Vector3 min = combinedBounds.min;
+        Vector3 max = combinedBounds.max;
+        int startX = Mathf.FloorToInt((min.x - MapGenerator.Instance.transform.position.x + MapGenerator.Instance.mapWidth / 2f) / tileSize);
+        int endX = Mathf.FloorToInt((max.x - MapGenerator.Instance.transform.position.x + MapGenerator.Instance.mapWidth / 2f) / tileSize);
+        int startZ = Mathf.FloorToInt((min.z - MapGenerator.Instance.transform.position.z + MapGenerator.Instance.mapLength / 2f) / tileSize);
+        int endZ = Mathf.FloorToInt((max.z - MapGenerator.Instance.transform.position.z + MapGenerator.Instance.mapLength / 2f) / tileSize);
+
+
+        startX = Mathf.Max(0, startX);
+        startZ = Mathf.Max(0, startZ);
+        endX = Mathf.Min(tiles.GetLength(0) - 1, endX);
+        endZ = Mathf.Min(tiles.GetLength(1) - 1, endZ);
+
+        for (int x = startX; x <= endX; x++)
+            for (int z = startZ; z <= endZ; z++)
+            {
+                Tile tile = tiles[x, z];
+                tile.IsPartOfBuilding = true;
+                tile.Building = gameObject;
+                HisTiles.Add(tile);
+                HisTileCount++;
+            }
+        if (HisType == BuildingType.Gate)
+        {
+            Vector3 center = combinedBounds.center;
+            Tile closest = null;
+            float minDist = float.MaxValue;
+            foreach (var tile in HisTiles)
+            {
+                Vector3 tilePos = new Vector3(tile.TileCenter.x, 0, tile.TileCenter.y);
+                float dist = Vector3.Distance(tilePos, center);
+                if (dist < minDist)
+                {
+                    minDist = dist;
+                    closest = tile;
+                }
+            }
+
+            HisMainTile = closest;
+            HisMainTileGridPosition = new Vector2Int(HisMainTile.GridPosition.x, HisMainTile.GridPosition.y);
+            MapGenerator.Instance.buildingsMainTile.Add(HisMainTile);
+        }
+    }
+
 }
