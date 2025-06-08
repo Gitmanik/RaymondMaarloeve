@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using Gitmanik.Console;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 using System.Collections;
 
@@ -71,6 +72,7 @@ public class GameManager : MonoBehaviour
             int npcVariant = Random.Range(0, npcPrefabsList.Count);
 
             GameObject newNpc = Instantiate(npcPrefabsList[npcVariant], npcPosition, Quaternion.identity);
+            SceneManager.MoveGameObjectToScene(newNpc, SceneManager.GetSceneByName("Game"));
             npcPrefabsList.RemoveAt(npcVariant);
             var npcComponent = newNpc.GetComponent<NPC>();
 
