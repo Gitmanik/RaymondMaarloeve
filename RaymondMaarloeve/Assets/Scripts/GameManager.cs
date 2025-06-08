@@ -51,6 +51,13 @@ public class GameManager : MonoBehaviour
         {
             uiGameObject.SetActive(true);
         }
+        else
+        {
+            Debug.LogError(LlmServerReady ? "Game Manger: Map not generated yet." : "LLM Server not ready.");
+        }
+
+            
+        Debug.Log("Game Manager: " + gameConfig.Npcs.Count + " NPCs to spawn");
 
         foreach (var npcConfig in gameConfig.Npcs)
         {
@@ -62,21 +69,23 @@ public class GameManager : MonoBehaviour
 
             string npcModelPath = gameConfig.Models.FirstOrDefault(m => m.Id == npcConfig.ModelId)?.Path;
             int npcVariant = Random.Range(0, npcPrefabsList.Count);
-            
+
             GameObject newNpc = Instantiate(npcPrefabsList[npcVariant], npcPosition, Quaternion.identity);
             npcPrefabsList.RemoveAt(npcVariant);
-            var npcComponent = newNpc.GetComponent<NPC>(); 
+            var npcComponent = newNpc.GetComponent<NPC>();
 
             var tmpSystemPrompt =
                 "Your name is Wilfred von Rabenstein. You are a fallen knight, a drunkard, and a man whose name was once spoken with reverence, now drowned in ale and regret. You are 42 years old. You are undesirable in most places, yet your blade still holds value for those desperate enough to hire a ruined man. It is past midnight. You are slumped against the wall of a rundown tavern, the rain mixing with the stale stench of cheap wine on your cloak. You know the filth of the city—the beggars, the whores, the men who whisper in shadows. You drink every night until the world blurs, until the past feels like a dream. You speak with the slurred grace of a man who once addressed kings but now bargains for pennies.";
-            
-            if (string.IsNullOrEmpty(npcModelPath)) {
-                Debug.LogError($"Model path not found for NPC with ID {npcConfig.ModelId}");
+
+            if (string.IsNullOrEmpty(npcModelPath))
+            {
+                Debug.LogError($"Game Manager: Model path not found for NPC with ID {npcConfig.ModelId}");
                 npcComponent.Setup(new RandomDecisionMaker(), null, $"Npc-{npcConfig.Id}", tmpSystemPrompt
                     );
             }
-            else {
-                Debug.Log($"NPC {npcConfig.Id} Model Path: {npcModelPath}");
+            else
+            {
+                Debug.Log($"Game Manager: NPC {npcConfig.Id} Model Path: {npcModelPath}");
                 npcComponent.Setup(new LlmDecisionMaker(), npcConfig.ModelId.ToString(), $"Npc-{npcConfig.Id}", tmpSystemPrompt);
             }
             HashSet<BuildingData.BuildingType> allowedTypes = new HashSet<BuildingData.BuildingType>()
@@ -124,25 +133,26 @@ public class GameManager : MonoBehaviour
                 var usedModels = gameConfig.Models.Where(model => usedModelIds.Contains(model.Id)).ToList();
 
                 int modelsToLoad = usedModels.Count;
-                Debug.Log($"GameManager: Starting to load {modelsToLoad} models");
+                bool[] loaded = new bool[modelsToLoad];
 
-
-                foreach (var model in usedModels)
+                for (int i = 0; i < usedModels.Count; i++)
                 {
-                    Debug.Log($"GameManager: Loading model {model.Id}");
+                    Debug.Log($"GameManager: Loading model number {i+1} from path {usedModels[i].Path}");
+                    int idx = i;
+                    var model = usedModels[i];
                     LlmManager.Instance.LoadModel(model.Id.ToString(), model.Path, (dto) =>
                     {
-                        modelsToLoad--;
-                        Debug.Log($"GameManager: Models left to load: {modelsToLoad}");
-                        if (modelsToLoad == 0)
-                        {
-                            LlmServerReady = true;
-                            Debug.Log("GameManager: All models loaded, LlmServerReady = TRUE");
-                        }
+                        loaded[idx] = true;
                         LlmManager.Instance.GenericComplete(dto);
                     }, Debug.LogError);
                 }
-                // Exit the loop after successful connection and model loading
+
+                // Wait until all models are loaded
+                while (loaded.Any(l => !l))
+                    yield return null;
+
+                LlmServerReady = true;
+                Debug.Log("GameManager: All models loaded, LlmServerReady = TRUE");
                 break;
             }
             else
