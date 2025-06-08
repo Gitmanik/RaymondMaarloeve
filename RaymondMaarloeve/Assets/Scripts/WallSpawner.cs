@@ -41,18 +41,31 @@ public class WallSpawner
         float mapWidth = tileSize * mapWidthInTiles;
         float mapLength = tileSize * mapLengthInTiles;
 
+        // South Wall
+        GameObject southWall = new GameObject("SouthWall");
+        southWall.transform.parent = wallsRoot.transform;
         Vector3 southStart = ToWorld(tiles[2, 0].TileCenter);
-        SpawnWallLine(southStart, Vector3.right, mapWidth, segmentLength, Quaternion.identity, wallPrefab, wallsRoot);
+        SpawnWallLine(southStart, Vector3.right, mapWidth, segmentLength, Quaternion.identity, wallPrefab, southWall);
 
-        Vector3 northStart = ToWorld(tiles[2, mapLengthInTiles - 1].TileCenter);
-        SpawnWallLineWithGate(northStart, Vector3.right, mapWidth, segmentLength, Quaternion.Euler(0, 180, 0), wallPrefab, gatePrefab, wallsRoot);
+        // North Wall (with gate)
+        GameObject northWall = new GameObject("NorthWall");
+        northWall.transform.parent = wallsRoot.transform;
+        Vector3 northStart = ToWorld(tiles[1, mapLengthInTiles - 1].TileCenter);
+        SpawnWallLineWithGate(northStart, Vector3.right, mapWidth, segmentLength, Quaternion.Euler(0, 180, 0), wallPrefab, gatePrefab, northWall);
 
+        // West Wall
+        GameObject westWall = new GameObject("WestWall");
+        westWall.transform.parent = wallsRoot.transform;
         Vector3 westStart = ToWorld(tiles[0, 0].TileCenter);
-        SpawnWallLine(westStart, Vector3.forward, mapLength, segmentLength, Quaternion.Euler(0, 90, 0), wallPrefab, wallsRoot);
+        SpawnWallLine(westStart, Vector3.forward, mapLength, segmentLength, Quaternion.Euler(0, 90, 0), wallPrefab, westWall);
 
-        Vector3 eastStart = ToWorld(tiles[mapWidthInTiles - 1, 0].TileCenter);
-        SpawnWallLine(eastStart, Vector3.forward, mapLength, segmentLength, Quaternion.Euler(0, 90, 0), wallPrefab, wallsRoot);
+        // East Wall
+        GameObject eastWall = new GameObject("EastWall");
+        eastWall.transform.parent = wallsRoot.transform;
+        Vector3 eastStart = ToWorld(tiles[mapWidthInTiles - 1, 1].TileCenter);
+        SpawnWallLine(eastStart, Vector3.forward, mapLength, segmentLength, Quaternion.Euler(0, 270, 0), wallPrefab, eastWall);
 
+        // Towers at corners
         PlaceTowerAtTile(tiles[0, 0], towerPrefab, wallsRoot);
         PlaceTowerAtTile(tiles[mapWidthInTiles - 1, 0], towerPrefab, wallsRoot);
         PlaceTowerAtTile(tiles[0, mapLengthInTiles - 1], towerPrefab, wallsRoot);
@@ -67,7 +80,7 @@ public class WallSpawner
         int count = 0;
         foreach (Transform child in wallsRoot.transform)
         {
-            // 1. Sprawdï¿½ czy sam 'child' ma BuildingData
+            // 1. SprawdŸ czy sam 'child' ma BuildingData
             var bd = child.GetComponent<BuildingData>();
             if (bd != null)
             {
@@ -85,7 +98,7 @@ public class WallSpawner
                 }
             }
 
-            // 2. Potem sprawdï¿½ dzieci (jeï¿½li istniejï¿½)
+            // 2. Potem sprawdŸ dzieci (jeœli istniej¹)
             foreach (Transform wallPart in child)
             {
                 var buildingData = wallPart.GetComponent<BuildingData>();
@@ -106,7 +119,7 @@ public class WallSpawner
             }
         }
 
-        Debug.Log($"Zaznaczono tile zajï¿½te przez mury (AssignOccupiedTiles) ï¿½ {count} obiektï¿½w.");
+        Debug.Log($"Zaznaczono tile zajête przez mury (AssignOccupiedTiles) – {count} obiektów.");
     }
 
     private void IdentifyWallPrefabs()
