@@ -108,6 +108,12 @@ public class GameManager : MonoBehaviour
         murdererNPC = npcs[Random.Range(0, npcs.Count)];
     }
 
+    /// <summary>
+    /// Coroutine that waits for a successful connection to the LLM server,
+    /// registers all models used in the game, and sets the LlmServerReady flag when done.
+    /// If the connection fails, it retries every 5 seconds.
+    /// </summary>
+    /// <returns>IEnumerator for coroutine execution.</returns>
     IEnumerator WaitForLlmConnection()
     {
         while (true)
