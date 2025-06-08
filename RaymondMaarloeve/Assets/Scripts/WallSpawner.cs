@@ -13,6 +13,9 @@ public class WallSpawner
     private GameObject towerPrefab;
     private GameObject gatePrefab;
 
+    private GameObject gate;
+
+
     public WallSpawner(List<WallsSetup> walls, Terrain terrain, int tileSize, int mapWidthInTiles, int mapLengthInTiles)
     {
         this.walls = walls;
@@ -41,17 +44,36 @@ public class WallSpawner
         float mapWidth = tileSize * mapWidthInTiles;
         float mapLength = tileSize * mapLengthInTiles;
 
+        // Towers at corners
+        PlaceBuildingAtTile(tiles[0, 0], towerPrefab, wallsRoot, Quaternion.identity);
+        PlaceBuildingAtTile(tiles[mapWidthInTiles - 1, 0], towerPrefab, wallsRoot, Quaternion.identity);
+        PlaceBuildingAtTile(tiles[0, mapLengthInTiles - 1], towerPrefab, wallsRoot, Quaternion.identity);
+        PlaceBuildingAtTile(tiles[mapWidthInTiles - 1, mapLengthInTiles - 1], towerPrefab, wallsRoot, Quaternion.identity);
+
+        //Gate
+        gate = PlaceBuildingAtTile(tiles[mapWidthInTiles / 2, mapLengthInTiles - 1], gatePrefab, wallsRoot, Quaternion.Euler(0, 180, 0));
+        Renderer gateRenderer = gate.GetComponentInChildren<Renderer>();
+
+        Bounds gateBounds = gateRenderer.bounds;
+
+        Vector3 gateLeft = new Vector3(gateBounds.min.x, gateBounds.center.y, gateBounds.center.z);   // Lewy bok (min.x)
+        Vector3 gateRight = new Vector3(gateBounds.max.x, gateBounds.center.y, gateBounds.center.z);  // Prawy bok (max.x)
+
+
+
+        // North Wall (with gate)
+        GameObject northWall = new GameObject("NorthWall");
+        northWall.transform.parent = wallsRoot.transform;
+        //Vector3 northStart = ToWorld(tiles[1, mapLengthInTiles - 1].TileCenter);
+        SpawnWallLine(gateRight, Vector3.right, (mapWidth - gateBounds.size.x) / 2 , segmentLength, Quaternion.Euler(0, 180, 0), wallPrefab, northWall);
+        SpawnWallLine(gateLeft, Vector3.left, mapWidth / 2, segmentLength, Quaternion.identity, wallPrefab, northWall);
+
+
         // South Wall
         GameObject southWall = new GameObject("SouthWall");
         southWall.transform.parent = wallsRoot.transform;
         Vector3 southStart = ToWorld(tiles[2, 0].TileCenter);
         SpawnWallLine(southStart, Vector3.right, mapWidth, segmentLength, Quaternion.identity, wallPrefab, southWall);
-
-        // North Wall (with gate)
-        GameObject northWall = new GameObject("NorthWall");
-        northWall.transform.parent = wallsRoot.transform;
-        Vector3 northStart = ToWorld(tiles[1, mapLengthInTiles - 1].TileCenter);
-        SpawnWallLineWithGate(northStart, Vector3.right, mapWidth, segmentLength, Quaternion.Euler(0, 180, 0), wallPrefab, gatePrefab, northWall);
 
         // West Wall
         GameObject westWall = new GameObject("WestWall");
@@ -65,11 +87,7 @@ public class WallSpawner
         Vector3 eastStart = ToWorld(tiles[mapWidthInTiles - 1, 1].TileCenter);
         SpawnWallLine(eastStart, Vector3.forward, mapLength, segmentLength, Quaternion.Euler(0, 270, 0), wallPrefab, eastWall);
 
-        // Towers at corners
-        PlaceTowerAtTile(tiles[0, 0], towerPrefab, wallsRoot);
-        PlaceTowerAtTile(tiles[mapWidthInTiles - 1, 0], towerPrefab, wallsRoot);
-        PlaceTowerAtTile(tiles[0, mapLengthInTiles - 1], towerPrefab, wallsRoot);
-        PlaceTowerAtTile(tiles[mapWidthInTiles - 1, mapLengthInTiles - 1], towerPrefab, wallsRoot);
+        
 
         AssignWallTileOccupation(wallsRoot, tiles);
         return wallsRoot;
@@ -177,28 +195,13 @@ public class WallSpawner
         }
     }
 
-    private void SpawnWallLineWithGate(Vector3 origin, Vector3 direction, float totalLength, float segmentLength, Quaternion rotation, GameObject wallPrefab, GameObject gatePrefab, GameObject parent)
-    {
-        int count = Mathf.FloorToInt(totalLength / segmentLength);
-        int gateIndex = count / 2;
-
-        for (int i = 0; i < count; i++)
-        {
-            Vector3 pos = origin + direction * segmentLength * i;
-            pos.y = terrain.SampleHeight(pos) + terrain.transform.position.y;
-
-            GameObject prefabToUse = (i == gateIndex) ? gatePrefab : wallPrefab;
-            if (i == gateIndex) pos += direction * 2f;
-
-            Object.Instantiate(prefabToUse, pos, rotation, parent.transform);
-        }
-    }
-
-    private void PlaceTowerAtTile(Tile tile, GameObject prefab, GameObject parent)
+    private GameObject PlaceBuildingAtTile(Tile tile, GameObject prefab, GameObject parent, Quaternion rotation)
     {
         Vector3 pos = ToWorld(tile.TileCenter);
-        GameObject go = Object.Instantiate(prefab, pos, Quaternion.identity, parent.transform);
+        GameObject go = Object.Instantiate(prefab, pos, rotation, parent.transform);
         tile.IsPartOfBuilding = true;
         tile.Building = go;
+
+        return go;
     }
 }

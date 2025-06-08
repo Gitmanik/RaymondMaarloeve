@@ -112,35 +112,30 @@ public class GameManager : MonoBehaviour
 
             Transform gates = null;
 
-            foreach (Transform wallSide in wallsRoot.transform)
+            foreach (Transform child in wallsRoot.transform)
             {
-                foreach (Transform child in wallSide)
+                if (child.name == "GATE(Clone)")
                 {
-                    if (child.name == "_minnor_gates_02(Clone)")
-                    {
-                        gates = child;
-                        break;
-                    }
-                }
-                if (gates != null)
+                    gates = child;
                     break;
+                }
             }
             if (gates == null)
             {
-                Debug.LogError("Nie znaleziono bramy (_minnor_gates_02(Clone))!");
+                Debug.LogError("Nie znaleziono bramy (Gate(Clone))!");
                 return;
             }
 
             // Znajdź Entrance w _minnor_gates_02(Clone)
-            Transform entrance = gates.Find("Entrance");
+            Transform entrance = gates.Find("PlayerSpawner");
             if (entrance == null)
             {
-                Debug.LogError("Nie znaleziono Entrance!");
+                Debug.LogError("Nie znaleziono PlayerSpawner!");
                 return;
             }
 
             // Ustaw gracza w pozycji Entrance
-            player.transform.position = entrance.position + entrance.forward * 3.0f;
+            player.transform.position = entrance.position;
             player.transform.rotation = entrance.rotation;
 
             Debug.Log("Player ustawiony na spawn point Entrance.");
