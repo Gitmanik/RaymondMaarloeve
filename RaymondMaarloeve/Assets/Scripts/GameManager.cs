@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     
-    public int npcCount = 6;
     public GameObject[] npcPrefabs;
     
     private int entityIDCounter = 0;
@@ -19,7 +18,9 @@ public class GameManager : MonoBehaviour
     
     public List<NPC> npcs = new List<NPC>();
     [HideInInspector] public bool LlmServerReady = false;
-    
+
+    public NPC murdererNPC;
+
     public GameConfig gameConfig { get; private set; }
 
     [SerializeField] private GameObject uiGameObject;
@@ -45,7 +46,7 @@ public class GameManager : MonoBehaviour
 
 
         MapGenerator.Instance.GenerateMap();
-        // LlmServerReady = true;
+        
         List<GameObject> npcPrefabsList = npcPrefabs.ToList();
 
         if (LlmServerReady && MapGenerator.Instance.IsMapGenerated)
@@ -70,7 +71,7 @@ public class GameManager : MonoBehaviour
 
             string npcModelPath = gameConfig.Models.FirstOrDefault(m => m.Id == npcConfig.ModelId)?.Path;
             int npcVariant = Random.Range(0, npcPrefabsList.Count);
-
+            
             GameObject newNpc = Instantiate(npcPrefabsList[npcVariant], npcPosition, Quaternion.identity);
             SceneManager.MoveGameObjectToScene(newNpc, SceneManager.GetSceneByName("Game"));
             npcPrefabsList.RemoveAt(npcVariant);
@@ -81,9 +82,9 @@ public class GameManager : MonoBehaviour
 
             if (string.IsNullOrEmpty(npcModelPath))
             {
-                Debug.LogError($"Game Manager: Model path not found for NPC with ID {npcConfig.ModelId}");
-                npcComponent.Setup(new RandomDecisionMaker(), null, $"Npc-{npcConfig.Id}", tmpSystemPrompt
-                    );
+                Debug.LogError($"Model path not found for NPC with ID {npcConfig.ModelId}");
+                npcComponent.Setup(new NullDecisionSystem(), null, $"Npc-{npcConfig.Id}", tmpSystemPrompt
+                );
             }
             else
             {
@@ -104,6 +105,7 @@ public class GameManager : MonoBehaviour
             npcs.Add(npcComponent);
         }
         
+        murdererNPC = npcs[Random.Range(0, npcs.Count)];
     }
 
     IEnumerator WaitForLlmConnection()
@@ -163,6 +165,9 @@ public class GameManager : MonoBehaviour
                 yield return new WaitForSeconds(5f);
             }
         }
+
+        murdererNPC = npcs[Random.Range(0, npcs.Count)];
+
     }
 
     // Update is called once per frame
@@ -192,7 +197,7 @@ public class GameManager : MonoBehaviour
     {
         string x = "NPCs:\n";
         foreach (var npc in GameManager.Instance.npcs)
-            x += $"{npc.EntityID} Pos: {npc.transform.position} , Name: ({npc.NpcName}) System: ({npc.GetDecisionSystem()}, {npc.GetCurrentDecision()}), Hunger: {npc.Hunger}, Thirst: {npc.Thirst}\n";
+            x += $"{npc.EntityID} Pos: {npc.transform.position} , Name: ({npc.NpcName}) System: ({npc.GetDecisionSystem()}: {npc.GetCurrentDecision().PrettyName}), Hunger: {npc.Hunger}, Thirst: {npc.Thirst}\nObtained Memories:{string.Join("\n", npc.ObtainedMemories)}\nSystem Prompt: {npc.SystemPrompt}\n";
         Debug.Log(x);
         return true;
     }
