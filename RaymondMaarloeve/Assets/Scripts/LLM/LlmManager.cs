@@ -140,6 +140,17 @@ public class LlmManager : MonoBehaviour
         
         QueuePostRequest<MessageDTO, UnloadModelRequestDTO>("unload", data, onComplete, onError);
     }
+
+    public void Register(string modelID, string path, Action<MessageDTO> onComplete, Action<string> onError)
+    {
+        var data = new RegisterDTO()
+        {
+            model_id = modelID,
+            model_path = path,
+        };
+        
+        QueuePostRequest<MessageDTO, RegisterDTO>("register", data, onComplete, onError);
+    }
     
     public void Chat(string modelID, List<Message> messages, Action<ChatResponseDTO> onComplete, Action<string> onError)
     {
