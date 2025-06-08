@@ -40,7 +40,8 @@ public class DecorationSpawner
 
             var go = Object.Instantiate(prefab, pos3, rotation, terrain.transform);
             tile.IsPath = true;
-            tile.TileObject = go;
+            tile.Building = go;
+
 
             decorationsPlaced++;
         }
