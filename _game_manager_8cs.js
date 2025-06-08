@@ -7,6 +7,5 @@ var _game_manager_8cs =
     [ "Hunger", "_game_manager_8cs.html#ad6ad59b9cfe6c626827c8d40c3ac459b", null ],
     [ "ModelpathnotfoundforNPCwithI", "_game_manager_8cs.html#a0b58d89a8c475f62b9799c4008af316c", null ],
     [ "Npc", "_game_manager_8cs.html#a332d19768cba462eba3a35c0f65ff8ae", null ],
-    [ "NPC", "_game_manager_8cs.html#a654beedc2ecd87c2d6a4581fcb06a414", null ],
     [ "Thirst", "_game_manager_8cs.html#a4b641c965b9da093ac9d24fd6c035804", null ]
 ];

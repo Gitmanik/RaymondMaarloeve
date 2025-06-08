@@ -12,5 +12,6 @@ var class_map_generator =
     [ "spawnedBuildings", "class_map_generator.html#ac139d2902fbce9237436dc2683f2c942", null ],
     [ "surface", "class_map_generator.html#a6661513b196383432c4b555faddd4940", null ],
     [ "terrain", "class_map_generator.html#ac7e22359747a78a850bb55e4b8eba59a", null ],
-    [ "tileSize", "class_map_generator.html#a3d7ab069c28c46278e56e93d616eac27", null ]
+    [ "tileSize", "class_map_generator.html#a3d7ab069c28c46278e56e93d616eac27", null ],
+    [ "IsMapGenerated", "class_map_generator.html#a0ad2f3599e56990433e0ff00a7b5263f", null ]
 ];

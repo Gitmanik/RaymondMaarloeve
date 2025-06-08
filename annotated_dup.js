@@ -24,6 +24,7 @@ var annotated_dup =
     [ "IdleResponseDTO", "class_idle_response_d_t_o.html", "class_idle_response_d_t_o" ],
     [ "LlmDecisionMaker", "class_llm_decision_maker.html", "class_llm_decision_maker" ],
     [ "LlmManager", "class_llm_manager.html", "class_llm_manager" ],
+    [ "LoadingScene", "class_loading_scene.html", null ],
     [ "LoadModelDTO", "class_load_model_d_t_o.html", "class_load_model_d_t_o" ],
     [ "MapGenerator", "class_map_generator.html", "class_map_generator" ],
     [ "Message", "class_message.html", "class_message" ],

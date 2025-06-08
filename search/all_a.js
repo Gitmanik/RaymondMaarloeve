@@ -20,5 +20,6 @@ var searchData=
   ['invalidresponse_17',['invalidresponse',['../_llm_decision_maker_8cs.html#a96c46a119bdd4e827ad7065a98663d82',1,'LlmDecisionMaker.cs']]],
   ['isbuilding_18',['IsBuilding',['../class_tile.html#a10507d64269a71aba70c8bad814201a9',1,'Tile']]],
   ['isconnected_19',['IsConnected',['../class_llm_manager.html#a91bc2cf70b9c9f62ba5d7890e6292223',1,'LlmManager']]],
-  ['ispath_20',['IsPath',['../class_tile.html#af83411d40165370c275d923e5410812f',1,'Tile']]]
+  ['ismapgenerated_20',['IsMapGenerated',['../class_map_generator.html#a0ad2f3599e56990433e0ff00a7b5263f',1,'MapGenerator']]],
+  ['ispath_21',['IsPath',['../class_tile.html#af83411d40165370c275d923e5410812f',1,'Tile']]]
 ];
