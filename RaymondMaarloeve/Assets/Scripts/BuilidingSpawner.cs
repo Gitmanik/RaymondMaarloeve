@@ -19,13 +19,12 @@ public class BuildingSpawner
         this.wallsMargin = wallsMargin;
     }
 
-    public List<GameObject> SpawnBuildings(Tile[,] tiles, List<Tile> allTiles, List<BuildingSetup> buildings, out List<Tile> mainTiles)
+    public List<GameObject> SpawnBuildings(Tile[,] tiles, List<Tile> allTiles, List<BuildingSetup> buildings)
     {
         var spawnedBuildings = new List<GameObject>();
         var shuffled = new List<Tile>(allTiles);
         Shuffle(shuffled);
 
-        mainTiles = new List<Tile>();
         int buildingsPlaced = 0;
         int minimumBuildings = 6;
 
@@ -72,7 +71,6 @@ public class BuildingSpawner
             spawnedBuildings.Add(go);
             tile.IsBuilding = true;
             tile.Building = go;
-            mainTiles.Add(tile);
 
             buildingsPlaced++;
         }
