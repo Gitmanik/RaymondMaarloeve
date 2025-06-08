@@ -29,9 +29,6 @@ public class BuildingSpawner
     /// <summary>
     /// Attempts to spawn buildings on tiles that are unoccupied and within boundaries.
     /// </summary>
-    /// <param name="tiles">2D tile grid of the map.</param>
-    /// <param name="allTiles">Flattened list of all tiles.</param>
-    /// <param name="buildings">Available building prefab configurations.</param>
     /// <returns>List of successfully spawned building GameObjects.</returns>
     public List<GameObject> SpawnBuildings(Tile[,] tiles, List<Tile> allTiles, List<BuildingSetup> buildings)
     {
