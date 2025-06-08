@@ -2102,7 +2102,8 @@ MonoBehaviour:
   mapWidthInTiles: 50
   mapLengthInTiles: 50
   buildingsDensity: 0.8
-  markTiles: 0
+  markTiles: 1
+  WallsMargin: 3
   buildings:
   - prefab: {fileID: 5083285615235793076, guid: 147ab689729ac2e49b82aac972788668, type: 3}
     weight: 1
@@ -2144,12 +2145,10 @@ MonoBehaviour:
     weight: 0.5
     maxCount: 2
     currentCount: 0
-  spawnedBuildings: []
   walls:
   - prefab: {fileID: 7202088873049624162, guid: cc79016811cfe34479bcd12091bdb83a, type: 3}
   - prefab: {fileID: 6398382561017800961, guid: a890c3f1e1d4f8a49b39902f66ed38af, type: 3}
   - prefab: {fileID: 4001755167029688240, guid: a737893b4dbaebe4eb1dcc9409b99044, type: 3}
-  WallsMargin: 3
   decorations:
   - prefab: {fileID: 3045040967433266602, guid: 04383b4e2e99718428159531b28b1c67, type: 3}
     weight: 0.2
@@ -2175,6 +2174,7 @@ MonoBehaviour:
     weight: 0.2
     maxCount: 3
     currentCount: 0
+  spawnedBuildings: []
   mapWidth: 0
   mapLength: 0
 --- !u!114 &1294622899

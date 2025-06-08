@@ -81,7 +81,7 @@ public class BuildingData : MonoBehaviour
             }
 
         // 3️ Wyznacz main tile – jeśli nie Wall ani Gate
-        if (HisType != BuildingType.Wall && HisType != BuildingType.Gate && HisType != BuildingType.Tower)
+        if (HisType != BuildingType.Wall /*&& HisType != BuildingType.Gate*/ && HisType != BuildingType.Tower)
         {
             Vector3 center = combinedBounds.center;
             Tile closest = null;
