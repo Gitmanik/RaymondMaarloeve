@@ -108,10 +108,23 @@ public class GameManager : MonoBehaviour
             npcs.Add(npcComponent);
 
             //Player spawn
-            // Znajdź _minnor_gates_02(Clone) w WallsRoot
             GameObject wallsRoot = GameObject.Find("WallsRoot");
 
-            Transform gates = wallsRoot.transform.Find("_minnor_gates_02(Clone)");
+            Transform gates = null;
+
+            foreach (Transform wallSide in wallsRoot.transform)
+            {
+                foreach (Transform child in wallSide)
+                {
+                    if (child.name == "_minnor_gates_02(Clone)")
+                    {
+                        gates = child;
+                        break;
+                    }
+                }
+                if (gates != null)
+                    break;
+            }
             if (gates == null)
             {
                 Debug.LogError("Nie znaleziono bramy (_minnor_gates_02(Clone))!");
