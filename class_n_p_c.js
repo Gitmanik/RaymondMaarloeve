@@ -2,9 +2,10 @@ var class_n_p_c =
 [
     [ "Awake", "class_n_p_c.html#a53072000e96e4843481d0c2df9f79c56", null ],
     [ "GetCurrentDecision", "class_n_p_c.html#a8c575d0e01fe56a1e356a9a6b042d44e", null ],
-    [ "GetCurrentEnvironment", "class_n_p_c.html#a8db4f7bc313dd8dc7bb6ef46cbbf456f", null ],
+    [ "GetCurrentEnvironment", "class_n_p_c.html#a1b2d243c5bf16a6bd8464a6ad5d154c6", null ],
     [ "GetDecisionSystem", "class_n_p_c.html#a09a8839a2883d5a685d7a0752c7f9cd6", null ],
     [ "LookAt", "class_n_p_c.html#a0078f5eaa3f92ce03b6d68989312eef1", null ],
+    [ "OnDestroy", "class_n_p_c.html#a0c6632a7759e6d1a979095f6a0820dad", null ],
     [ "Setup", "class_n_p_c.html#a7e822e678bd83bfe3aaf43f0855826f2", null ],
     [ "agent", "class_n_p_c.html#a8b21044a35e6b231ed328d3350c4ad3b", null ],
     [ "HisBuilding", "class_n_p_c.html#a74d744278c22deaebac035cdcf2bb099", null ],

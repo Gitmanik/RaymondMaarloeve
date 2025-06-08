@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['_5binstance_20initializer_5d_0',['[instance initializer]',['../_game_manager_8cs.html#a2e1de2edfa40556d0b49929dd0149a84',1,'GameManager.cs']]]
+  ['awake_0',['Awake',['../class_n_p_c.html#a53072000e96e4843481d0c2df9f79c56',1,'NPC']]]
 ];

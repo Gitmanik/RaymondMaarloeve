@@ -1,6 +1,8 @@
 var class_get_ale_decision =
 [
-    [ "Setup", "class_get_ale_decision.html#ae497c4cc955706194675ad3f0adf37a4", null ],
-    [ "Tick", "class_get_ale_decision.html#accdee32f57de2132f31e6366c5e0bf06", null ],
-    [ "drinkingDuration", "class_get_ale_decision.html#a0898cc4823e42c2557a62a88b4a14d66", null ]
+    [ "GetAleDecision", "class_get_ale_decision.html#a0c986360f993b26824011202e1e23170", null ],
+    [ "OnFinished", "class_get_ale_decision.html#abf1d10d74c5461defe1c7b835acadadd", null ],
+    [ "PrettyName", "class_get_ale_decision.html#a445eb163570e9600da3af841bd68ce0c", null ],
+    [ "StoppingDistance", "class_get_ale_decision.html#ae61592db9cecab35c761aa20f15da166", null ],
+    [ "WaitDuration", "class_get_ale_decision.html#a2f864063a08036c004cf8ff385182fcb", null ]
 ];

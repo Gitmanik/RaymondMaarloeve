@@ -93,6 +93,7 @@ $(document).ready(function(){initNavTree('interface_i_decision.html',''); initRe
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#properties">Properties</a> &#124;
 <a href="interface_i_decision-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">IDecision Interface Reference</div></div>
 </div><!--header-->
@@ -100,39 +101,54 @@ $(document).ready(function(){initNavTree('interface_i_decision.html',''); initRe
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a681b537b8c67bf71bdcc4d1f70b7216f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_decision.html#a681b537b8c67bf71bdcc4d1f70b7216f">Setup</a> (<a class="el" href="interface_i_decision_system.html">IDecisionSystem</a> system, <a class="el" href="class_n_p_c.html">NPC</a> npc)</td></tr>
-<tr class="separator:a681b537b8c67bf71bdcc4d1f70b7216f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a434ed6530bf6a2f54229a8ded0121363"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_decision.html#a434ed6530bf6a2f54229a8ded0121363">Start</a> ()</td></tr>
+<tr class="separator:a434ed6530bf6a2f54229a8ded0121363"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace09880f10d7cc8eb66ef205f3b20163"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_decision.html#ace09880f10d7cc8eb66ef205f3b20163">Tick</a> ()</td></tr>
 <tr class="separator:ace09880f10d7cc8eb66ef205f3b20163"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae090e91b36d6dab9bca309ef32a2d507"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_decision.html#ae090e91b36d6dab9bca309ef32a2d507">DebugInfo</a> ()</td></tr>
+<tr class="separator:ae090e91b36d6dab9bca309ef32a2d507"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
+Properties</h2></td></tr>
+<tr class="memitem:a3154ad5b52d373285b78c065a2d6d4da"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_decision.html#a3154ad5b52d373285b78c065a2d6d4da">PrettyName</a><code> [get]</code></td></tr>
+<tr class="separator:a3154ad5b52d373285b78c065a2d6d4da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a681b537b8c67bf71bdcc4d1f70b7216f" name="a681b537b8c67bf71bdcc4d1f70b7216f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a681b537b8c67bf71bdcc4d1f70b7216f">&#9670;&#160;</a></span>Setup()</h2>
+<a id="ae090e91b36d6dab9bca309ef32a2d507" name="ae090e91b36d6dab9bca309ef32a2d507"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae090e91b36d6dab9bca309ef32a2d507">&#9670;&#160;</a></span>DebugInfo()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void IDecision.Setup </td>
+          <td class="memname">string IDecision.DebugInfo </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="interface_i_decision_system.html">IDecisionSystem</a>&#160;</td>
-          <td class="paramname"><em>system</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_n_p_c.html">NPC</a>&#160;</td>
-          <td class="paramname"><em>npc</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="class_buy_goods_decision.html#af83b705569503046f2b3edac44996711">BuyGoodsDecision</a>, <a class="el" href="class_get_ale_decision.html#ae497c4cc955706194675ad3f0adf37a4">GetAleDecision</a>, <a class="el" href="class_get_water_decision.html#aff3a099175f6e367bfa9cbb9f59deb05">GetWaterDecision</a>, <a class="el" href="class_idle_decision.html#a6855444d5e9e9276d1457c0b9e2d4981">IdleDecision</a>, <a class="el" href="class_n_p_c_conversation_decision.html#a738c177882c79511d20b8f76a724aab0">NPCConversationDecision</a>, <a class="el" href="class_player_conversation_decision.html#a671e60f6c126e7317440d2ce9c0ddd40">PlayerConversationDecision</a>, <a class="el" href="class_pray_decision.html#abef469c023c21532eb14f76463836539">PrayDecision</a>, <a class="el" href="class_wait_for_l_l_m_decision.html#ae191bfa20a45d6c013631165df511303">WaitForLLMDecision</a>, <a class="el" href="class_wait_for_l_l_m_ready_decision.html#abcc18e5b14f8a69d0d2a02cfe5c9c869">WaitForLLMReadyDecision</a>, and <a class="el" href="class_walk_decision.html#a8732f67963029cd10044a355093fbd1f">WalkDecision</a>.</p>
+<p>Implemented in <a class="el" href="class_idle_decision.html#afbd018886aa03e7115989bbe5a5293b8">IdleDecision</a>, <a class="el" href="class_visit_building_decision.html#ad0319d02e8f7aad4f401ee067aee5d90">VisitBuildingDecision</a>, <a class="el" href="class_wait_for_l_l_m_decision.html#ad3d218489ec637b811bb5c231040090a">WaitForLLMDecision</a>, <a class="el" href="class_wait_for_l_l_m_ready_decision.html#ada824c6aa8c20765d2880f4a2d45d71c">WaitForLLMReadyDecision</a>, and <a class="el" href="class_walk_decision.html#a0a70b208d7c4fedb482db75300090224">WalkDecision</a>.</p>
+
+</div>
+</div>
+<a id="a434ed6530bf6a2f54229a8ded0121363" name="a434ed6530bf6a2f54229a8ded0121363"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a434ed6530bf6a2f54229a8ded0121363">&#9670;&#160;</a></span>Start()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IDecision.Start </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="class_idle_decision.html#aa9103fbd04d50e2129e809385d0ec3cd">IdleDecision</a>, <a class="el" href="class_visit_building_decision.html#ad025cb24daa19a6e5fd0952b8fadf121">VisitBuildingDecision</a>, <a class="el" href="class_wait_for_l_l_m_decision.html#aa84917d0c26e77fda71267b9e29b3a05">WaitForLLMDecision</a>, <a class="el" href="class_wait_for_l_l_m_ready_decision.html#a17cc832c0d2e25863a71414509eafb01">WaitForLLMReadyDecision</a>, and <a class="el" href="class_walk_decision.html#a1684c261d89bf252ef84b2e7d939d0eb">WalkDecision</a>.</p>
 
 </div>
 </div>
@@ -151,7 +167,32 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="class_buy_goods_decision.html#a7f9c2be3d52e942007dbc45ae2129fd4">BuyGoodsDecision</a>, <a class="el" href="class_get_ale_decision.html#accdee32f57de2132f31e6366c5e0bf06">GetAleDecision</a>, <a class="el" href="class_get_water_decision.html#a13ebeb5e66d6b1e0969ab1246125854f">GetWaterDecision</a>, <a class="el" href="class_idle_decision.html#a8270b96ec9dcf299d734f0d7828c439e">IdleDecision</a>, <a class="el" href="class_n_p_c_conversation_decision.html#a03da9f23b38d055ff7df7ef3b68e6c10">NPCConversationDecision</a>, <a class="el" href="class_player_conversation_decision.html#ae30abfd4a13e843bc37dfe29744da1d4">PlayerConversationDecision</a>, <a class="el" href="class_pray_decision.html#a7dd260d1ab79704a5c2857d236fea6bd">PrayDecision</a>, <a class="el" href="class_wait_for_l_l_m_decision.html#aec23e74dd7f5d699daab3fa1310afa10">WaitForLLMDecision</a>, <a class="el" href="class_wait_for_l_l_m_ready_decision.html#ac1148403267c49959216401b5bd4a985">WaitForLLMReadyDecision</a>, and <a class="el" href="class_walk_decision.html#a636c0195d74136988d8fed32ca16a2b9">WalkDecision</a>.</p>
+<p>Implemented in <a class="el" href="class_idle_decision.html#a8270b96ec9dcf299d734f0d7828c439e">IdleDecision</a>, <a class="el" href="class_visit_building_decision.html#a6d01ec1e6fc4eb6b3135e9e25844d560">VisitBuildingDecision</a>, <a class="el" href="class_wait_for_l_l_m_decision.html#aec23e74dd7f5d699daab3fa1310afa10">WaitForLLMDecision</a>, <a class="el" href="class_wait_for_l_l_m_ready_decision.html#ac1148403267c49959216401b5bd4a985">WaitForLLMReadyDecision</a>, and <a class="el" href="class_walk_decision.html#a636c0195d74136988d8fed32ca16a2b9">WalkDecision</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Property Documentation</h2>
+<a id="a3154ad5b52d373285b78c065a2d6d4da" name="a3154ad5b52d373285b78c065a2d6d4da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3154ad5b52d373285b78c065a2d6d4da">&#9670;&#160;</a></span>PrettyName</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">string IDecision.PrettyName</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="class_get_ale_decision.html#a445eb163570e9600da3af841bd68ce0c">GetAleDecision</a>, <a class="el" href="class_get_water_decision.html#a86e979d1cf1badd9a900565b422e92ac">GetWaterDecision</a>, <a class="el" href="class_idle_decision.html#a0d444359075d6535accaff3e98965888">IdleDecision</a>, <a class="el" href="class_pray_decision.html#ac32f6e143e2aa4b21ff5dabdc265b0bb">PrayDecision</a>, <a class="el" href="class_visit_building_decision.html#a2de1426411fd4e5014823df8cba903dc">VisitBuildingDecision</a>, <a class="el" href="class_wait_for_l_l_m_decision.html#a8980d3adbf4f11af53a5b5f42d953df8">WaitForLLMDecision</a>, <a class="el" href="class_wait_for_l_l_m_ready_decision.html#a72ea6e7ab3574915eff171e3319458b2">WaitForLLMReadyDecision</a>, and <a class="el" href="class_walk_decision.html#afb9ff84907b5f7df54742ae1c1c468a2">WalkDecision</a>.</p>
 
 </div>
 </div>

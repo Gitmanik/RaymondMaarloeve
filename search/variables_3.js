@@ -2,6 +2,5 @@ var searchData=
 [
   ['building_0',['Building',['../class_tile.html#a6712f73c592440da39980c2db355ba54',1,'Tile']]],
   ['buildings_1',['buildings',['../class_map_generator.html#a75c3915379b35396d54169fbe1db8e96',1,'MapGenerator']]],
-  ['buildingsdensity_2',['buildingsDensity',['../class_map_generator.html#a5bce0ff4dd9cf601f74b2ec76ff37f4b',1,'MapGenerator']]],
-  ['buyingduration_3',['buyingDuration',['../class_buy_goods_decision.html#a224501b97cd0ff7be2b340c50553cd80',1,'BuyGoodsDecision']]]
+  ['buildingsdensity_2',['buildingsDensity',['../class_map_generator.html#a5bce0ff4dd9cf601f74b2ec76ff37f4b',1,'MapGenerator']]]
 ];

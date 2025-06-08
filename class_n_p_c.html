@@ -99,49 +99,73 @@ $(document).ready(function(){initNavTree('class_n_p_c.html',''); initResizable()
   <div class="headertitle"><div class="title">NPC Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Represents a Non-Player Character (<a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>) in the game world. Handles decision making, vision, memory, and interaction logic for the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>.  
+ <a href="class_n_p_c.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a53072000e96e4843481d0c2df9f79c56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_p_c.html#a53072000e96e4843481d0c2df9f79c56">Awake</a> ()</td></tr>
+<tr class="memdesc:a53072000e96e4843481d0c2df9f79c56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>, sets up the entity ID, animator, and subscribes to the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> event bus.  <br /></td></tr>
 <tr class="separator:a53072000e96e4843481d0c2df9f79c56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e822e678bd83bfe3aaf43f0855826f2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_p_c.html#a7e822e678bd83bfe3aaf43f0855826f2">Setup</a> (<a class="el" href="interface_i_decision_system.html">IDecisionSystem</a> decisionSystem, string modelId, string name, string systemPrompt)</td></tr>
+<tr class="memdesc:a7e822e678bd83bfe3aaf43f0855826f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>'s decision system, model, name, and system prompt. Initializes default memories.  <br /></td></tr>
 <tr class="separator:a7e822e678bd83bfe3aaf43f0855826f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c575d0e01fe56a1e356a9a6b042d44e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="interface_i_decision.html">IDecision</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_p_c.html#a8c575d0e01fe56a1e356a9a6b042d44e">GetCurrentDecision</a> ()</td></tr>
+<tr class="memdesc:a8c575d0e01fe56a1e356a9a6b042d44e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current decision being executed by the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>.  <br /></td></tr>
 <tr class="separator:a8c575d0e01fe56a1e356a9a6b042d44e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a09a8839a2883d5a685d7a0752c7f9cd6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="interface_i_decision_system.html">IDecisionSystem</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_p_c.html#a09a8839a2883d5a685d7a0752c7f9cd6">GetDecisionSystem</a> ()</td></tr>
+<tr class="memdesc:a09a8839a2883d5a685d7a0752c7f9cd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the decision system used by the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>.  <br /></td></tr>
 <tr class="separator:a09a8839a2883d5a685d7a0752c7f9cd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0078f5eaa3f92ce03b6d68989312eef1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_p_c.html#a0078f5eaa3f92ce03b6d68989312eef1">LookAt</a> (Transform targetTransform)</td></tr>
+<tr class="memdesc:a0078f5eaa3f92ce03b6d68989312eef1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Makes the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> look at a specified target transform. Updates the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>'s rotation to face the target. If the target is null, resets the rotation to the previous value. Logs the action for debugging purposes.  <br /></td></tr>
 <tr class="separator:a0078f5eaa3f92ce03b6d68989312eef1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8db4f7bc313dd8dc7bb6ef46cbbf456f"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_current_environment_d_t_o.html">CurrentEnvironmentDTO</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_p_c.html#a8db4f7bc313dd8dc7bb6ef46cbbf456f">GetCurrentEnvironment</a> ()</td></tr>
-<tr class="separator:a8db4f7bc313dd8dc7bb6ef46cbbf456f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b2d243c5bf16a6bd8464a6ad5d154c6"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_current_environment.html">CurrentEnvironment</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_p_c.html#a1b2d243c5bf16a6bd8464a6ad5d154c6">GetCurrentEnvironment</a> ()</td></tr>
+<tr class="memdesc:a1b2d243c5bf16a6bd8464a6ad5d154c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a list of possible environment descriptions for the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>.  <br /></td></tr>
+<tr class="separator:a1b2d243c5bf16a6bd8464a6ad5d154c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c6632a7759e6d1a979095f6a0820dad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_p_c.html#a0c6632a7759e6d1a979095f6a0820dad">OnDestroy</a> ()</td></tr>
+<tr class="memdesc:a0c6632a7759e6d1a979095f6a0820dad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unsubscribes from the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> event bus when the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> is destroyed.  <br /></td></tr>
+<tr class="separator:a0c6632a7759e6d1a979095f6a0820dad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a8b21044a35e6b231ed328d3350c4ad3b"><td class="memItemLeft" align="right" valign="top">NavMeshAgent&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_p_c.html#a8b21044a35e6b231ed328d3350c4ad3b">agent</a></td></tr>
+<tr class="memdesc:a8b21044a35e6b231ed328d3350c4ad3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The NavMeshAgent component for navigation.  <br /></td></tr>
 <tr class="separator:a8b21044a35e6b231ed328d3350c4ad3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74d744278c22deaebac035cdcf2bb099"><td class="memItemLeft" align="right" valign="top">GameObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_p_c.html#a74d744278c22deaebac035cdcf2bb099">HisBuilding</a> = null</td></tr>
+<tr class="memdesc:a74d744278c22deaebac035cdcf2bb099"><td class="mdescLeft">&#160;</td><td class="mdescRight">The building associated with this <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>.  <br /></td></tr>
 <tr class="separator:a74d744278c22deaebac035cdcf2bb099"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a719104a230907490f98e0d936cf896f5"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_p_c.html#a719104a230907490f98e0d936cf896f5">Hunger</a> = 0f</td></tr>
+<tr class="memdesc:a719104a230907490f98e0d936cf896f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">The hunger level of the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>.  <br /></td></tr>
 <tr class="separator:a719104a230907490f98e0d936cf896f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a09f61f1f9ce04df9d4eb13570cf934ea"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_p_c.html#a09f61f1f9ce04df9d4eb13570cf934ea">Thirst</a> = 0f</td></tr>
+<tr class="memdesc:a09f61f1f9ce04df9d4eb13570cf934ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">The thirst level of the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>.  <br /></td></tr>
 <tr class="separator:a09f61f1f9ce04df9d4eb13570cf934ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ff4c824759ae05a03c0d1a10e14c626"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_p_c.html#a1ff4c824759ae05a03c0d1a10e14c626">speed</a> = 3f</td></tr>
+<tr class="memdesc:a1ff4c824759ae05a03c0d1a10e14c626"><td class="mdescLeft">&#160;</td><td class="mdescRight">The movement speed of the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>.  <br /></td></tr>
 <tr class="separator:a1ff4c824759ae05a03c0d1a10e14c626"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
 Properties</h2></td></tr>
 <tr class="memitem:a2716030f2a6a1b7716f907720f501dc3"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_p_c.html#a2716030f2a6a1b7716f907720f501dc3">SystemPrompt</a> = null<code> [get]</code></td></tr>
+<tr class="memdesc:a2716030f2a6a1b7716f907720f501dc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">The system prompt used for LLM-based decision making.  <br /></td></tr>
 <tr class="separator:a2716030f2a6a1b7716f907720f501dc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af0303bd88886d0417f54719bb4895265"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_p_c.html#af0303bd88886d0417f54719bb4895265">ModelID</a> = null<code> [get]</code></td></tr>
+<tr class="memdesc:af0303bd88886d0417f54719bb4895265"><td class="mdescLeft">&#160;</td><td class="mdescRight">The model ID used for LLM-based decision making.  <br /></td></tr>
 <tr class="separator:af0303bd88886d0417f54719bb4895265"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d742bb06873712cf0c72f663fda6cab"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_p_c.html#a0d742bb06873712cf0c72f663fda6cab">NpcName</a> = null<code> [get]</code></td></tr>
+<tr class="memdesc:a0d742bb06873712cf0c72f663fda6cab"><td class="mdescLeft">&#160;</td><td class="mdescRight">The name of the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>.  <br /></td></tr>
 <tr class="separator:a0d742bb06873712cf0c72f663fda6cab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8ea617b211990a0af4cc52c4108c1f2"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_obtained_memory_d_t_o.html">ObtainedMemoryDTO</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_p_c.html#ae8ea617b211990a0af4cc52c4108c1f2">ObtainedMemories</a> = new List&lt;<a class="el" href="class_obtained_memory_d_t_o.html">ObtainedMemoryDTO</a>&gt;()<code> [get]</code></td></tr>
+<tr class="memdesc:ae8ea617b211990a0af4cc52c4108c1f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The list of memories obtained by the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>.  <br /></td></tr>
 <tr class="separator:ae8ea617b211990a0af4cc52c4108c1f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad8cf37a7e909f0ec492792f00cfaddc8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_n_p_c.html#ad8cf37a7e909f0ec492792f00cfaddc8">EntityID</a><code> [get]</code></td></tr>
+<tr class="memdesc:ad8cf37a7e909f0ec492792f00cfaddc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">The unique entity ID of the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>.  <br /></td></tr>
 <tr class="separator:ad8cf37a7e909f0ec492792f00cfaddc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents a Non-Player Character (<a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>) in the game world. Handles decision making, vision, memory, and interaction logic for the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a53072000e96e4843481d0c2df9f79c56" name="a53072000e96e4843481d0c2df9f79c56"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a53072000e96e4843481d0c2df9f79c56">&#9670;&#160;</a></span>Awake()</h2>
 
@@ -156,6 +180,8 @@ Properties</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Initializes the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>, sets up the entity ID, animator, and subscribes to the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> event bus. </p>
 
 </div>
 </div>
@@ -174,23 +200,28 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Gets the current decision being executed by the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>. </p>
+<dl class="section return"><dt>Returns</dt><dd>The current decision.</dd></dl>
+
 </div>
 </div>
-<a id="a8db4f7bc313dd8dc7bb6ef46cbbf456f" name="a8db4f7bc313dd8dc7bb6ef46cbbf456f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8db4f7bc313dd8dc7bb6ef46cbbf456f">&#9670;&#160;</a></span>GetCurrentEnvironment()</h2>
+<a id="a1b2d243c5bf16a6bd8464a6ad5d154c6" name="a1b2d243c5bf16a6bd8464a6ad5d154c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b2d243c5bf16a6bd8464a6ad5d154c6">&#9670;&#160;</a></span>GetCurrentEnvironment()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">List&lt; <a class="el" href="class_current_environment_d_t_o.html">CurrentEnvironmentDTO</a> &gt; NPC.GetCurrentEnvironment </td>
+          <td class="memname">List&lt; <a class="el" href="class_current_environment.html">CurrentEnvironment</a> &gt; NPC.GetCurrentEnvironment </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000006">Todo:</a></b></dt><dd>: Make this dynamic. </dd></dl>
+
+<p>Returns a list of possible environment descriptions for the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>. </p>
+<dl class="section return"><dt>Returns</dt><dd>List of <a class="el" href="class_current_environment.html">CurrentEnvironment</a> objects describing the environment.</dd></dl>
 
 </div>
 </div>
@@ -209,6 +240,9 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Gets the decision system used by the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>. </p>
+<dl class="section return"><dt>Returns</dt><dd>The decision system.</dd></dl>
+
 </div>
 </div>
 <a id="a0078f5eaa3f92ce03b6d68989312eef1" name="a0078f5eaa3f92ce03b6d68989312eef1"></a>
@@ -226,6 +260,33 @@ Properties</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Makes the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> look at a specified target transform. Updates the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>'s rotation to face the target. If the target is null, resets the rotation to the previous value. Logs the action for debugging purposes. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">targetTransform</td><td>The transform of the target to look at. If null, the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> resets its rotation.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a0c6632a7759e6d1a979095f6a0820dad" name="a0c6632a7759e6d1a979095f6a0820dad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c6632a7759e6d1a979095f6a0820dad">&#9670;&#160;</a></span>OnDestroy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void NPC.OnDestroy </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Unsubscribes from the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> event bus when the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> is destroyed. </p>
 
 </div>
 </div>
@@ -266,7 +327,17 @@ Properties</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo:</a></b></dt><dd>: Make this dynamic. </dd></dl>
+
+<p>Sets up the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>'s decision system, model, name, and system prompt. Initializes default memories. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">decisionSystem</td><td>The decision system to use.</td></tr>
+    <tr><td class="paramname">modelId</td><td>The model ID for LLM-based decision making.</td></tr>
+    <tr><td class="paramname">name</td><td>The name of the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>.</td></tr>
+    <tr><td class="paramname">systemPrompt</td><td>The system prompt for LLM-based decision making.</td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -283,6 +354,8 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>The NavMeshAgent component for navigation. </p>
+
 </div>
 </div>
 <a id="a74d744278c22deaebac035cdcf2bb099" name="a74d744278c22deaebac035cdcf2bb099"></a>
@@ -296,6 +369,8 @@ Properties</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>The building associated with this <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>. </p>
 
 </div>
 </div>
@@ -311,6 +386,8 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>The hunger level of the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>. </p>
+
 </div>
 </div>
 <a id="a1ff4c824759ae05a03c0d1a10e14c626" name="a1ff4c824759ae05a03c0d1a10e14c626"></a>
@@ -325,6 +402,8 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>The movement speed of the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>. </p>
+
 </div>
 </div>
 <a id="a09f61f1f9ce04df9d4eb13570cf934ea" name="a09f61f1f9ce04df9d4eb13570cf934ea"></a>
@@ -338,6 +417,8 @@ Properties</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>The thirst level of the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>. </p>
 
 </div>
 </div>
@@ -362,6 +443,8 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>The unique entity ID of the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>. </p>
+
 </div>
 </div>
 <a id="af0303bd88886d0417f54719bb4895265" name="af0303bd88886d0417f54719bb4895265"></a>
@@ -383,6 +466,8 @@ Properties</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>The model ID used for LLM-based decision making. </p>
 
 </div>
 </div>
@@ -406,6 +491,8 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>The name of the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>. </p>
+
 </div>
 </div>
 <a id="ae8ea617b211990a0af4cc52c4108c1f2" name="ae8ea617b211990a0af4cc52c4108c1f2"></a>
@@ -428,6 +515,8 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>The list of memories obtained by the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>. </p>
+
 </div>
 </div>
 <a id="a2716030f2a6a1b7716f907720f501dc3" name="a2716030f2a6a1b7716f907720f501dc3"></a>
@@ -449,6 +538,8 @@ Properties</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>The system prompt used for LLM-based decision making. </p>
 
 </div>
 </div>

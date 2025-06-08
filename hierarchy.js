@@ -1,28 +1,29 @@
 var hierarchy =
 [
     [ "BuildingSetup", "class_building_setup.html", null ],
+    [ "CalculateRelevanceDTO", "class_calculate_relevance_d_t_o.html", null ],
     [ "ChatRequestDTO", "class_chat_request_d_t_o.html", null ],
     [ "ChatResponseDTO", "class_chat_response_d_t_o.html", null ],
+    [ "CurrentEnvironment", "class_current_environment.html", null ],
     [ "CurrentEnvironmentDTO", "class_current_environment_d_t_o.html", null ],
     [ "GameConfig", "class_game_config.html", null ],
     [ "IBeginDragHandler", null, [
       [ "HistoryBlockDrag", "class_history_block_drag.html", null ]
     ] ],
     [ "IDecision", "interface_i_decision.html", [
-      [ "BuyGoodsDecision", "class_buy_goods_decision.html", null ],
-      [ "GetAleDecision", "class_get_ale_decision.html", null ],
-      [ "GetWaterDecision", "class_get_water_decision.html", null ],
       [ "IdleDecision", "class_idle_decision.html", null ],
-      [ "NPCConversationDecision", "class_n_p_c_conversation_decision.html", null ],
-      [ "PlayerConversationDecision", "class_player_conversation_decision.html", null ],
-      [ "PrayDecision", "class_pray_decision.html", null ],
+      [ "VisitBuildingDecision", "class_visit_building_decision.html", [
+        [ "GetAleDecision", "class_get_ale_decision.html", null ],
+        [ "GetWaterDecision", "class_get_water_decision.html", null ],
+        [ "PrayDecision", "class_pray_decision.html", null ]
+      ] ],
       [ "WaitForLLMDecision", "class_wait_for_l_l_m_decision.html", null ],
       [ "WaitForLLMReadyDecision", "class_wait_for_l_l_m_ready_decision.html", null ],
       [ "WalkDecision", "class_walk_decision.html", null ]
     ] ],
     [ "IDecisionSystem", "interface_i_decision_system.html", [
       [ "LlmDecisionMaker", "class_llm_decision_maker.html", null ],
-      [ "RandomDecisionMaker", "class_random_decision_maker.html", null ]
+      [ "NullDecisionSystem", "class_null_decision_system.html", null ]
     ] ],
     [ "IdleDTO", "class_idle_d_t_o.html", null ],
     [ "IdleResponseDTO", "class_idle_response_d_t_o.html", null ],
@@ -56,6 +57,7 @@ var hierarchy =
       [ "SlotDropHandler", "class_slot_drop_handler.html", null ]
     ] ],
     [ "NeedDTO", "class_need_d_t_o.html", null ],
+    [ "NpcActionEvent", "class_npc_action_event.html", null ],
     [ "NpcConfig", "class_npc_config.html", null ],
     [ "ObtainedMemoryDTO", "class_obtained_memory_d_t_o.html", null ],
     [ "StatusDTO", "class_status_d_t_o.html", null ],

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['queuepostrequest_3c_20t_2c_20trequest_20_3e_0',['QueuePostRequest&lt; T, TRequest &gt;',['../class_llm_manager.html#ab01e3d68c849cf97482350a5bc52fd49',1,'LlmManager']]]
+  ['praydecision_0',['PrayDecision',['../class_pray_decision.html#ac4c87129ee3d0bcaaa08662a1209f0ba',1,'PrayDecision']]]
 ];
