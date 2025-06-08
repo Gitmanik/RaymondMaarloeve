@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError(LlmServerReady ? "Game Manger: Map not generated yet." : "LLM Server not ready.");
+            Debug.LogError(LlmServerReady ? "Game Manager: Map not generated yet." : "LLM Server not ready.");
         }
 
             
