@@ -62,13 +62,15 @@ public class MapGenerator : MonoBehaviour
         var buildingSpawner = new BuildingSpawner(terrain, tileSize, mapWidthInTiles, mapLengthInTiles, WallsMargin);
         spawnedBuildings = buildingSpawner.SpawnBuildings(tiles, allTiles, buildings);
 
+        PathGenerator.GeneratePaths(tiles, buildingsMainTile, terrain);
+
         var decorationSpawner = new DecorationSpawner(terrain, tileSize);
         decorationSpawner.SpawnDecorations(tiles, allTiles, decorations);
+
         foreach (var tile in buildingsMainTile)
         {
             Debug.LogWarning($"{tile.Building.name} building tile at {tile.GridPosition}");
         }
-        PathGenerator.GeneratePaths(tiles, buildingsMainTile, terrain);
 
         if (markTiles)
             MarkTiles();
