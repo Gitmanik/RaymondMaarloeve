@@ -1,66 +1,16 @@
 using UnityEngine;
-using UnityEngine.AI;
 
-public class GetWaterDecision : IDecision
+public class GetWaterDecision : VisitBuildingDecision
 {
-    private NPC npc;
-    private bool finished = false;
-    private bool reachedWell = false;
-    private Vector3 destination;
-    private float stoppingDistance = 0.5f;
-
-    public float waterCollectionDuration = 4f;
-    private float waterCollectionTimer = 0f;
-
-    public void Setup(IDecisionSystem system, NPC npc)
+    public GetWaterDecision(GameObject buildingGO, NPC npc) : base(buildingGO, npc)
     {
-        this.npc = npc;
-
-        GameObject wellObj = GameObject.Find("well(Clone)");
-        if (wellObj != null)
-        {
-            Vector3 wellPosition = wellObj.transform.position;
-            if (NavMesh.SamplePosition(wellPosition, out NavMeshHit hit, 10f, NavMesh.AllAreas))
-            {
-                destination = hit.position;
-                npc.agent.SetDestination(destination);
-                Debug.Log(npc.NpcName + ": Going to the well to get water: " + destination);
-            }
-            else
-            {
-                Debug.LogWarning(npc.NpcName + ": NavMesh point for the well not found!");
-                finished = true;
-            }
-        }
-        else
-        {
-            Debug.LogWarning(npc.NpcName + ": Well object not found!");
-            finished = true;
-        }
     }
 
-    public bool Tick()
+    protected override float StoppingDistance => 0.5f;
+    protected override float WaitDuration => 4f;
+    public override string PrettyName => "going to get water";
+    protected override void OnFinished()
     {
-        if (finished)
-            return false;
-
-        if (!reachedWell)
-        {
-            if (!npc.agent.pathPending && npc.agent.remainingDistance < stoppingDistance)
-            {
-                reachedWell = true;
-            }
-            return true;
-        }
-        else
-        {
-            waterCollectionTimer += Time.deltaTime;
-            if (waterCollectionTimer >= waterCollectionDuration)
-            {
-                npc.Thirst = 0f;
-                finished = true;
-            }
-            return !finished;
-        }
+        npc.Thirst = 0f;
     }
 }
