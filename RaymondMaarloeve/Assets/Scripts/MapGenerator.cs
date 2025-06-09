@@ -10,6 +10,7 @@ using Random = UnityEngine.Random;
 public class MapGenerator : MonoBehaviour
 {
     public static MapGenerator Instance { get; private set; }
+    public bool IsMapGenerated { get; private set; } = false;
 
     [Header("Podstawowe dane mapy")]
     public NavMeshSurface surface;
@@ -35,8 +36,10 @@ public class MapGenerator : MonoBehaviour
 
     void Awake()
     {
+        Debug.Log("MapGenerator: Awake started");
         Instance = this;
         tiles = new Tile[mapWidthInTiles, mapLengthInTiles];
+        Debug.Log($"MapGenerator: Initialized tiles array [{mapWidthInTiles}x{mapLengthInTiles}]");
 
         PathGenerator.ClearMap(terrain);
 
@@ -76,6 +79,8 @@ public class MapGenerator : MonoBehaviour
             MarkTiles();
 
         surface.BuildNavMesh();
+        IsMapGenerated = true;
+        Debug.Log("MapGenerator: Map generated, IsMapGenerated = TRUE");
     }
 
     void InitializeTiles()

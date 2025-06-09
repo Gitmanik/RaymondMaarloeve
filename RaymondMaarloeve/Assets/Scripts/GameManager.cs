@@ -3,69 +3,62 @@ using System.IO;
 using System.Linq;
 using Gitmanik.Console;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-
-    public GameObject player;
-
-    public int npcCount = 6;
+    
     public GameObject[] npcPrefabs;
     
     private int entityIDCounter = 0;
     public int GetEntityID() => ++entityIDCounter;
     public List<NPC> npcs = new List<NPC>();
     [HideInInspector] public bool LlmServerReady = false;
-    
+
+    public NPC murdererNPC;
+
     public GameConfig gameConfig { get; private set; }
 
     [SerializeField] private GameObject uiGameObject;
     
-    void Awake()
-    {
-        uiGameObject.SetActive(true);
-    }
+
     
-    void Start()
+    IEnumerator Start()
     {
-        Debug.Log("Game Manager starting");
+        Debug.Log("GameManager: Start initialization");
         Instance = this;
-        
+
         gameConfig = GameConfig.LoadGameConfig(Path.Combine(Application.dataPath, "game_config.json"));
-        
+        Debug.Log("GameManager: Config loaded");
+
         Screen.SetResolution(gameConfig.GameWindowWidth, gameConfig.GameWindowHeight, gameConfig.FullScreen);
         Application.targetFrameRate = 60;
-        
+
         LlmManager.Instance.Setup(gameConfig.LlmServerApi);
-        LlmManager.Instance.Connect(x =>
-        {
-            if (x)
-            {
-                Debug.Log("Connected to LLM Server");
-                int modelsToLoad = gameConfig.Models.Count;
-                
-                foreach (var model in gameConfig.Models)
-                    LlmManager.Instance.LoadModel(model.Id.ToString(), model.Path, (dto) =>
-                    {
-                        modelsToLoad--;
-                        if (modelsToLoad == 0)
-                            LlmServerReady = true;
-                        LlmManager.Instance.GenericComplete(dto);
-                    }, Debug.LogError);
-            }
-            else
-            {
-                Debug.LogError("Failed to connect to LLM Server");
-            }
-        });
-        
+        Debug.Log("GameManager: LLM Setup started");
+
+        // Wait for LLM connection and model loading
+        yield return StartCoroutine(WaitForLlmConnection());
+
+
         MapGenerator.Instance.GenerateMap();
         
         List<GameObject> npcPrefabsList = npcPrefabs.ToList();
-        
-        
+
+        if (LlmServerReady && MapGenerator.Instance.IsMapGenerated)
+        {
+            uiGameObject.SetActive(true);
+        }
+        else
+        {
+            Debug.LogError(LlmServerReady ? "Game Manager: Map not generated yet." : "LLM Server not ready.");
+        }
+
+            
+        Debug.Log("Game Manager: " + gameConfig.Npcs.Count + " NPCs to spawn");
 
         foreach (var npcConfig in gameConfig.Npcs)
         {
@@ -79,19 +72,22 @@ public class GameManager : MonoBehaviour
             int npcVariant = Random.Range(0, npcPrefabsList.Count);
             
             GameObject newNpc = Instantiate(npcPrefabsList[npcVariant], npcPosition, Quaternion.identity);
+            SceneManager.MoveGameObjectToScene(newNpc, SceneManager.GetSceneByName("Game"));
             npcPrefabsList.RemoveAt(npcVariant);
-            var npcComponent = newNpc.GetComponent<NPC>(); 
+            var npcComponent = newNpc.GetComponent<NPC>();
 
             var tmpSystemPrompt =
                 "Your name is Wilfred von Rabenstein. You are a fallen knight, a drunkard, and a man whose name was once spoken with reverence, now drowned in ale and regret. You are 42 years old. You are undesirable in most places, yet your blade still holds value for those desperate enough to hire a ruined man. It is past midnight. You are slumped against the wall of a rundown tavern, the rain mixing with the stale stench of cheap wine on your cloak. You know the filth of the city—the beggars, the whores, the men who whisper in shadows. You drink every night until the world blurs, until the past feels like a dream. You speak with the slurred grace of a man who once addressed kings but now bargains for pennies.";
-            
-            if (string.IsNullOrEmpty(npcModelPath)) {
+
+            if (string.IsNullOrEmpty(npcModelPath))
+            {
                 Debug.LogError($"Model path not found for NPC with ID {npcConfig.ModelId}");
-                npcComponent.Setup(new RandomDecisionMaker(), null, $"Npc-{npcConfig.Id}", tmpSystemPrompt
-                    );
+                npcComponent.Setup(new NullDecisionSystem(), null, $"Npc-{npcConfig.Id}", tmpSystemPrompt
+                );
             }
-            else {
-                Debug.Log($"NPC {npcConfig.Id} Model Path: {npcModelPath}");
+            else
+            {
+                Debug.Log($"Game Manager: NPC {npcConfig.Id} Model Path: {npcModelPath}");
                 npcComponent.Setup(new LlmDecisionMaker(), npcConfig.ModelId.ToString(), $"Npc-{npcConfig.Id}", tmpSystemPrompt);
             }
             HashSet<BuildingData.BuildingType> allowedTypes = new HashSet<BuildingData.BuildingType>()
@@ -135,11 +131,82 @@ public class GameManager : MonoBehaviour
             }
 
             // Ustaw gracza w pozycji Entrance
-            player.transform.position = entrance.position;
-            player.transform.rotation = entrance.rotation;
+            PlyerController.Instance.gameObject.transform.position = entrance.position;
+            PlyerController.Instance.gameObject.transform.rotation = entrance.rotation;
 
             Debug.Log("Player ustawiony na spawn point Entrance.");
         }
+        
+        murdererNPC = npcs[Random.Range(0, npcs.Count)];
+    }
+
+    /// <summary>
+    /// Coroutine that waits for a successful connection to the LLM server,
+    /// registers all models used in the game, and sets the LlmServerReady flag when done.
+    /// If the connection fails, it retries every 5 seconds.
+    /// </summary>
+    /// <returns>IEnumerator for coroutine execution.</returns>
+    IEnumerator WaitForLlmConnection()
+    {
+        while (true)
+        {
+            bool isConnected = false;
+            bool callbackCalled = false;
+
+            LlmManager.Instance.Connect(result =>
+            {
+                isConnected = result;
+                callbackCalled = true;
+            });
+
+            // Wait for the callback to be called
+            while (!callbackCalled)
+                yield return null;
+
+            if (isConnected)
+            {
+                Debug.Log("GameManager: Connected to LLM Server");
+
+                var usedModelIds = new HashSet<int>(
+                    gameConfig.Npcs.Select(npc => npc.ModelId)
+                    .Concat(new[] { gameConfig.NarratorModelId })
+                );
+
+                var usedModels = gameConfig.Models.Where(model => usedModelIds.Contains(model.Id)).ToList();
+
+                // Register all models that are used in the game
+                int modelsToRegister = usedModels.Count;
+                bool[] registered = new bool[modelsToRegister];
+
+                for (int i = 0; i < usedModels.Count; i++)
+                {
+                    Debug.Log($"GameManager: Registering model number {i+1} from path {usedModels[i].Path}");
+                    int idx = i;
+                    var model = usedModels[i];
+                    LlmManager.Instance.Register(model.Id.ToString(), model.Path, (dto) =>
+                    {
+                        registered[idx] = true;
+                        LlmManager.Instance.GenericComplete(dto);
+                    }, Debug.LogError);
+                }
+
+                // Wait until all models are registered
+                while (registered.Any(r => !r))
+                    yield return null;
+
+                Debug.Log("GameManager: All models registered, proceeding to load...");
+
+                LlmServerReady = true;
+                Debug.Log("GameManager: All models registered, LlmServerReady = TRUE");
+                break;
+            }
+            else
+            {
+                Debug.LogError("GameManager: Failed to connect to LLM Server. Retrying in 5 seconds...");
+                yield return new WaitForSeconds(5f);
+            }
+        }
+
     }
 
     // Update is called once per frame
@@ -169,7 +236,7 @@ public class GameManager : MonoBehaviour
     {
         string x = "NPCs:\n";
         foreach (var npc in GameManager.Instance.npcs)
-            x += $"{npc.EntityID} Pos: {npc.transform.position} , Name: ({npc.NpcName}) System: ({npc.GetDecisionSystem()}, {npc.GetCurrentDecision()}), Hunger: {npc.Hunger}, Thirst: {npc.Thirst}\n";
+            x += $"{npc.EntityID} Pos: {npc.transform.position} , Name: ({npc.NpcName}) System: ({npc.GetDecisionSystem()}: {npc.GetCurrentDecision().PrettyName}), Hunger: {npc.Hunger}, Thirst: {npc.Thirst}\nObtained Memories:{string.Join("\n", npc.ObtainedMemories)}\nSystem Prompt: {npc.SystemPrompt}\n";
         Debug.Log(x);
         return true;
     }
