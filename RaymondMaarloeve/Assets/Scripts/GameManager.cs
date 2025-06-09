@@ -312,14 +312,11 @@ public class GameManager : MonoBehaviour
     private IEnumerator ConvertHistoryToBlocks()
     {
         string prompt = $"You will read a short story and extract the six most important factual events. " +
-                        $"Then, generate two false sentences that do not occur in the story. " +
-                        $"Return your output strictly as a JSON object with two keys:\n\n" +
+                        $"Then, generate two false sentences that do not occur in the story, but are believable. " +
+                        $"JSON Object structure:\n\n" +
                         $"\"key_events\" — an array of exactly six short English sentences, each stating a concrete, factual event that actually appears in the story.\n" +
                         $"\"false_events\" — an array of exactly two short English sentences that are believable but clearly did not happen in the story.\n" +
-                        $"Do not include any notes, explanation, comments, or prose. Use only concise, fact-based language.\n\n" +
-                        $"Here is the story:\n" +
-                        $"\"{generatedHistory.story}\"\n\n" +
-                        $"Your response must be ONLY this EXACT CORRENT JSON object:\n" +
+                        $"Your response must be ONLY this EXACT CORRECT JSON object:\n" +
                             $"{{\n\"key_events\": [\n" +
                                 $"\"Event 1 here.\",\n" +
                                 $"\"Event 2 here.\",\n" +
@@ -333,7 +330,8 @@ public class GameManager : MonoBehaviour
                                 $"\"False event 2 here.\"\n" +
                             $"]\n}}";
         List<Message> messages = new List<Message>();
-        messages.Add(new Message { role =  "user", content = prompt});
+        messages.Add(new Message { role =  "system", content = prompt});
+        messages.Add(new Message { role =    "user", content = generatedHistory.story});
         
         while (true)
         {
@@ -348,7 +346,7 @@ public class GameManager : MonoBehaviour
             {
                 Debug.LogError($"GameManager: ConvertHistoryToBlocks error: {error}");
                 callbackCalled = true;
-            });
+            }, 0.95f, 0.5f);
         
             // Wait for the callback to be called
             while (!callbackCalled)
