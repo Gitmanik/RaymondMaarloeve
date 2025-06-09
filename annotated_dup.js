@@ -1,5 +1,8 @@
 var annotated_dup =
 [
+    [ "YourNamespace", "namespace_your_namespace.html", [
+      [ "SlotDropHandler", "class_your_namespace_1_1_slot_drop_handler.html", "class_your_namespace_1_1_slot_drop_handler" ]
+    ] ],
     [ "BuildInfoUI", "class_build_info_u_i.html", null ],
     [ "BuildingData", "class_building_data.html", "class_building_data" ],
     [ "BuildingSetup", "class_building_setup.html", "class_building_setup" ],
@@ -16,6 +19,7 @@ var annotated_dup =
     [ "GameManager", "class_game_manager.html", "class_game_manager" ],
     [ "GetAleDecision", "class_get_ale_decision.html", "class_get_ale_decision" ],
     [ "GetWaterDecision", "class_get_water_decision.html", "class_get_water_decision" ],
+    [ "HistoryBlock", "class_history_block.html", "class_history_block" ],
     [ "HistoryBlockDrag", "class_history_block_drag.html", "class_history_block_drag" ],
     [ "IDecision", "interface_i_decision.html", "interface_i_decision" ],
     [ "IDecisionSystem", "interface_i_decision_system.html", "interface_i_decision_system" ],
@@ -40,7 +44,6 @@ var annotated_dup =
     [ "PlayerController", "class_player_controller.html", "class_player_controller" ],
     [ "PrayDecision", "class_pray_decision.html", "class_pray_decision" ],
     [ "RegisterDTO", "class_register_d_t_o.html", "class_register_d_t_o" ],
-    [ "SlotDropHandler", "class_slot_drop_handler.html", "class_slot_drop_handler" ],
     [ "StatusDTO", "class_status_d_t_o.html", "class_status_d_t_o" ],
     [ "Tile", "class_tile.html", "class_tile" ],
     [ "UnloadModelRequestDTO", "class_unload_model_request_d_t_o.html", "class_unload_model_request_d_t_o" ],

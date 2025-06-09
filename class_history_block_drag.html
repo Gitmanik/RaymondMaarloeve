@@ -101,10 +101,13 @@ $(document).ready(function(){initNavTree('class_history_block_drag.html',''); in
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ab4abd0dc2472bc3b4db4545a4a5af2dc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_history_block_drag.html#ab4abd0dc2472bc3b4db4545a4a5af2dc">OnBeginDrag</a> (PointerEventData eventData)</td></tr>
+<tr class="memdesc:ab4abd0dc2472bc3b4db4545a4a5af2dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called by the EventSystem when a drag operation starts on this block. Records the original parent and position, re‐parents to the root canvas, and disables raycast blocking so drop targets can receive events.  <br /></td></tr>
 <tr class="separator:ab4abd0dc2472bc3b4db4545a4a5af2dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a28dd35ead7d248ac96dad78cf8c92e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_history_block_drag.html#a0a28dd35ead7d248ac96dad78cf8c92e">OnDrag</a> (PointerEventData eventData)</td></tr>
+<tr class="memdesc:a0a28dd35ead7d248ac96dad78cf8c92e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called by the EventSystem on each drag update. Moves the block by the pointer delta, accounting for canvas scale.  <br /></td></tr>
 <tr class="separator:a0a28dd35ead7d248ac96dad78cf8c92e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8df576215dee6f8cc4cf8509e4074b9d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_history_block_drag.html#a8df576215dee6f8cc4cf8509e4074b9d">OnEndDrag</a> (PointerEventData eventData)</td></tr>
+<tr class="memdesc:a8df576215dee6f8cc4cf8509e4074b9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called by the EventSystem when the drag operation ends. If the block hasn't been reparented by a drop handler, it returns to its original parent and position. Raycast blocking is re‐enabled.  <br /></td></tr>
 <tr class="separator:a8df576215dee6f8cc4cf8509e4074b9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -124,6 +127,14 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Called by the EventSystem when a drag operation starts on this block. Records the original parent and position, re‐parents to the root canvas, and disables raycast blocking so drop targets can receive events. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">eventData</td><td>Pointer event data containing information about the drag. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a0a28dd35ead7d248ac96dad78cf8c92e" name="a0a28dd35ead7d248ac96dad78cf8c92e"></a>
@@ -141,6 +152,14 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Called by the EventSystem on each drag update. Moves the block by the pointer delta, accounting for canvas scale. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">eventData</td><td>Pointer event data containing the delta movement. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -160,10 +179,18 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Called by the EventSystem when the drag operation ends. If the block hasn't been reparented by a drop handler, it returns to its original parent and position. Raycast blocking is re‐enabled. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">eventData</td><td>Pointer event data for the end of the drag. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>RaymondMaarloeve/Assets/Scripts/<a class="el" href="_history_block_drag_8cs.html">HistoryBlockDrag.cs</a></li>
+<li>RaymondMaarloeve/Assets/Scripts/MiniGame/<a class="el" href="_history_block_drag_8cs.html">HistoryBlockDrag.cs</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -13,6 +13,6 @@ var searchData=
   ['normaloffset_10',['normalOffset',['../class_camera_follow.html#a8666f72acc61b0a2c99138761b364c7a',1,'CameraFollow']]],
   ['npc_11',['npc',['../class_visit_building_decision.html#ae6f1758be2f83dc0ef0b8fd281531e8f',1,'VisitBuildingDecision']]],
   ['npcprefabs_12',['npcPrefabs',['../class_game_manager.html#a0523461b9deabfad2744a47ba13c409d',1,'GameManager']]],
-  ['npcs_13',['Npcs',['../class_game_config.html#aeb1561002c13b588618fce225702efc8',1,'GameConfig']]],
-  ['npcs_14',['npcs',['../class_game_manager.html#aa95c1de6ccfe5a73aa74108640c4667d',1,'GameManager']]]
+  ['npcs_13',['npcs',['../class_game_manager.html#aa95c1de6ccfe5a73aa74108640c4667d',1,'GameManager']]],
+  ['npcs_14',['Npcs',['../class_game_config.html#aeb1561002c13b588618fce225702efc8',1,'GameConfig']]]
 ];

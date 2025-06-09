@@ -7,5 +7,6 @@ var searchData=
   ['interactionrotation_4',['interactionRotation',['../class_camera_follow.html#a499d39cf54707eb903dcd3d5e72d39c4',1,'CameraFollow']]],
   ['invalidresponse_5',['invalidresponse',['../_llm_decision_maker_8cs.html#a96c46a119bdd4e827ad7065a98663d82',1,'LlmDecisionMaker.cs']]],
   ['isbuilding_6',['IsBuilding',['../class_tile.html#a10507d64269a71aba70c8bad814201a9',1,'Tile']]],
-  ['ispath_7',['IsPath',['../class_tile.html#af83411d40165370c275d923e5410812f',1,'Tile']]]
+  ['ispath_7',['IsPath',['../class_tile.html#af83411d40165370c275d923e5410812f',1,'Tile']]],
+  ['isreal_8',['isReal',['../class_history_block.html#af085d02ca6012132bbc00f2419e24def',1,'HistoryBlock']]]
 ];

@@ -31,7 +31,7 @@ var hierarchy =
       [ "HistoryBlockDrag", "class_history_block_drag.html", null ]
     ] ],
     [ "IDropHandler", null, [
-      [ "SlotDropHandler", "class_slot_drop_handler.html", null ]
+      [ "YourNamespace.SlotDropHandler", "class_your_namespace_1_1_slot_drop_handler.html", null ]
     ] ],
     [ "IEndDragHandler", null, [
       [ "HistoryBlockDrag", "class_history_block_drag.html", null ]
@@ -48,6 +48,7 @@ var hierarchy =
       [ "DayNightCycle", "class_day_night_cycle.html", null ],
       [ "DialogBoxManager", "class_dialog_box_manager.html", null ],
       [ "GameManager", "class_game_manager.html", null ],
+      [ "HistoryBlock", "class_history_block.html", null ],
       [ "HistoryBlockDrag", "class_history_block_drag.html", null ],
       [ "LlmManager", "class_llm_manager.html", null ],
       [ "LoadingScene", "class_loading_scene.html", null ],
@@ -55,7 +56,7 @@ var hierarchy =
       [ "MiniGameManager", "class_mini_game_manager.html", null ],
       [ "NPC", "class_n_p_c.html", null ],
       [ "PlayerController", "class_player_controller.html", null ],
-      [ "SlotDropHandler", "class_slot_drop_handler.html", null ]
+      [ "YourNamespace.SlotDropHandler", "class_your_namespace_1_1_slot_drop_handler.html", null ]
     ] ],
     [ "NeedDTO", "class_need_d_t_o.html", null ],
     [ "NpcActionEvent", "class_npc_action_event.html", null ],

@@ -27,6 +27,9 @@ var NAVTREE =
   [ "Raymond Maarloeve", "index.html", [
     [ "Raymond Maarloeve sp. z o.o.", "index.html", "index" ],
     [ "Todo List", "todo.html", null ],
+    [ "Packages", "namespaces.html", [
+      [ "Package List", "namespaces.html", "namespaces_dup" ]
+    ] ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
@@ -54,7 +57,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_build_info_u_i_8cs.html",
-"class_n_p_c.html#ae8ea617b211990a0af4cc52c4108c1f2"
+"class_n_p_c.html#a8b21044a35e6b231ed328d3350c4ad3b"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
