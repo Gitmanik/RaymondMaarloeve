@@ -4405,13 +4405,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1640100407}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7babe079bb7fed4c9236a11a9087327, type: 3}
+  m_Script: {fileID: 11500000, guid: 64e6588e5165a344cbdbf17a1b0d222f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   graphicsDropdown: {fileID: 1665968062}
   fullscreenDropdown: {fileID: 930946956}
   masterVolumeSlider: {fileID: 774663386}
   musicVolumeSlider: {fileID: 1745826453}
+  gameSceneName: Game
+  mainMenuSceneName: MainMenu
+  settingsSceneName: Settings
 --- !u!1 &1665968060
 GameObject:
   m_ObjectHideFlags: 0

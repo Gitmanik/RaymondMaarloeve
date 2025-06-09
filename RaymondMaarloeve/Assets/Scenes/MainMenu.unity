@@ -542,7 +542,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 452118122}
-        m_TargetAssemblyTypeName: RunGameScript, Assembly-CSharp
+        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
         m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
@@ -600,9 +600,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 452118117}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ecd8dc6831089f489e495a91a6c6df2, type: 3}
+  m_Script: {fileID: 11500000, guid: 64e6588e5165a344cbdbf17a1b0d222f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  graphicsDropdown: {fileID: 0}
+  fullscreenDropdown: {fileID: 0}
+  masterVolumeSlider: {fileID: 0}
+  musicVolumeSlider: {fileID: 0}
+  gameSceneName: Game
+  mainMenuSceneName: MainMenu
+  settingsSceneName: Settings
 --- !u!114 &452118124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -954,8 +961,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1083568649}
-        m_TargetAssemblyTypeName: QuitGame, Assembly-CSharp
-        m_MethodName: Quit
+        m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
+        m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1012,9 +1019,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1083568644}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 372ae08ff17da294b8cfc47ad3a13c55, type: 3}
+  m_Script: {fileID: 11500000, guid: 64e6588e5165a344cbdbf17a1b0d222f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  graphicsDropdown: {fileID: 0}
+  fullscreenDropdown: {fileID: 0}
+  masterVolumeSlider: {fileID: 0}
+  musicVolumeSlider: {fileID: 0}
+  gameSceneName: Game
+  mainMenuSceneName: MainMenu
+  settingsSceneName: Settings
 --- !u!114 &1083568650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1299,9 +1313,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1650396237}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41e7b0ccb72e51d4e81ca9660a8aa3d7, type: 3}
+  m_Script: {fileID: 11500000, guid: 64e6588e5165a344cbdbf17a1b0d222f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  graphicsDropdown: {fileID: 0}
+  fullscreenDropdown: {fileID: 0}
+  masterVolumeSlider: {fileID: 0}
+  musicVolumeSlider: {fileID: 0}
+  gameSceneName: Game
+  mainMenuSceneName: MainMenu
+  settingsSceneName: Settings
 --- !u!114 &1650396243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1334,6 +1355,7 @@ GameObject:
   - component: {fileID: 1814982434}
   - component: {fileID: 1814982433}
   - component: {fileID: 1814982432}
+  - component: {fileID: 1814982436}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1425,6 +1447,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1814982436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1814982431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64e6588e5165a344cbdbf17a1b0d222f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  graphicsDropdown: {fileID: 0}
+  fullscreenDropdown: {fileID: 0}
+  masterVolumeSlider: {fileID: 0}
+  musicVolumeSlider: {fileID: 0}
+  gameSceneName: Game
+  mainMenuSceneName: MainMenu
+  settingsSceneName: Settings
 --- !u!1 &2053551806
 GameObject:
   m_ObjectHideFlags: 0
