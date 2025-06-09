@@ -117,6 +117,17 @@ public class MiniGameManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Sets up MiniGame blocks with given blocks  
+    /// </summary>
+    /// <param name="trueBlocks">List of true story blocks</param>
+    /// <param name="fakeBlocks">List of false story blocks</param>
+    public void Setup(List<string> trueBlocks, List<string> fakeBlocks)
+    {
+        realBlockTexts = trueBlocks.ToArray();
+        fakeBlockTexts = fakeBlocks.ToArray();
+    }
+    
+    /// <summary>
     /// Opens the mini‐game panel, hides the result text, populates suspects, and generates blocks.
     /// </summary>
     public void StartMiniGame()
