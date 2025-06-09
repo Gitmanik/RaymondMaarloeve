@@ -266,7 +266,7 @@ public class GameManager : MonoBehaviour
             {
                 Debug.LogError($"GameManager: GenerateHistory error: {error}");
                 callbackCalled = true;
-            });
+            }, 0.95f, 0.5f);
         
             // Wait for the callback to be called
             while (!callbackCalled)
