@@ -12,6 +12,7 @@ var dir_ed46394dee2e54595d33d9052673dcbb =
     [ "DialogBoxManager.cs", "_dialog_box_manager_8cs.html", "_dialog_box_manager_8cs" ],
     [ "GameManager.cs", "_game_manager_8cs.html", "_game_manager_8cs" ],
     [ "LoadingScene.cs", "_loading_scene_8cs.html", "_loading_scene_8cs" ],
+    [ "MainMenuManager.cs", "_main_menu_manager_8cs.html", "_main_menu_manager_8cs" ],
     [ "MapGenerator.cs", "_map_generator_8cs.html", "_map_generator_8cs" ],
     [ "PathGenerator.cs", "_path_generator_8cs.html", null ],
     [ "PlayerController.cs", "_player_controller_8cs.html", "_player_controller_8cs" ]

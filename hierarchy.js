@@ -52,6 +52,7 @@ var hierarchy =
       [ "HistoryBlockDrag", "class_history_block_drag.html", null ],
       [ "LlmManager", "class_llm_manager.html", null ],
       [ "LoadingScene", "class_loading_scene.html", null ],
+      [ "MainMenuManager", "class_main_menu_manager.html", null ],
       [ "MapGenerator", "class_map_generator.html", null ],
       [ "MiniGameManager", "class_mini_game_manager.html", null ],
       [ "NPC", "class_n_p_c.html", null ],

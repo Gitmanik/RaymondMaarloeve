@@ -30,6 +30,7 @@ var annotated_dup =
     [ "LlmManager", "class_llm_manager.html", "class_llm_manager" ],
     [ "LoadingScene", "class_loading_scene.html", null ],
     [ "LoadModelDTO", "class_load_model_d_t_o.html", "class_load_model_d_t_o" ],
+    [ "MainMenuManager", "class_main_menu_manager.html", "class_main_menu_manager" ],
     [ "MapGenerator", "class_map_generator.html", "class_map_generator" ],
     [ "Message", "class_message.html", "class_message" ],
     [ "MessageDTO", "class_message_d_t_o.html", "class_message_d_t_o" ],

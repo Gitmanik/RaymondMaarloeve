@@ -9,7 +9,8 @@ var searchData=
   ['register_6',['Register',['../class_llm_manager.html#aa7eb33076d9bbed1eb8de2504817b0bf',1,'LlmManager']]],
   ['registerdto_7',['RegisterDTO',['../class_register_d_t_o.html',1,'']]],
   ['registerdto_2ecs_8',['RegisterDTO.cs',['../_register_d_t_o_8cs.html',1,'']]],
-  ['response_9',['response',['../class_chat_response_d_t_o.html#a89abc4a4cee0fc6ff1e229cec63c6593',1,'ChatResponseDTO']]],
-  ['revision_10',['Revision',['../class_game_config.html#a14f3670d840a2cee3e3ccc59f0a34d3c',1,'GameConfig']]],
-  ['role_11',['role',['../class_message.html#a14eb12b1a78d6757757ecfcfa883146b',1,'Message']]]
+  ['resettodefaults_9',['ResetToDefaults',['../class_main_menu_manager.html#acb314be7d3e45c104a24c323802f3251',1,'MainMenuManager']]],
+  ['response_10',['response',['../class_chat_response_d_t_o.html#a89abc4a4cee0fc6ff1e229cec63c6593',1,'ChatResponseDTO']]],
+  ['revision_11',['Revision',['../class_game_config.html#a14f3670d840a2cee3e3ccc59f0a34d3c',1,'GameConfig']]],
+  ['role_12',['role',['../class_message.html#a14eb12b1a78d6757757ecfcfa883146b',1,'Message']]]
 ];

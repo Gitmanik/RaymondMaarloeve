@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['debuginfo_0',['DebugInfo',['../interface_i_decision.html#ae090e91b36d6dab9bca309ef32a2d507',1,'IDecision.DebugInfo()'],['../class_idle_decision.html#afbd018886aa03e7115989bbe5a5293b8',1,'IdleDecision.DebugInfo()'],['../class_visit_building_decision.html#ad0319d02e8f7aad4f401ee067aee5d90',1,'VisitBuildingDecision.DebugInfo()'],['../class_wait_for_l_l_m_decision.html#ad3d218489ec637b811bb5c231040090a',1,'WaitForLLMDecision.DebugInfo()'],['../class_wait_for_l_l_m_ready_decision.html#ada824c6aa8c20765d2880f4a2d45d71c',1,'WaitForLLMReadyDecision.DebugInfo()'],['../class_walk_decision.html#a0a70b208d7c4fedb482db75300090224',1,'WalkDecision.DebugInfo()']]],
-  ['decide_1',['Decide',['../interface_i_decision_system.html#ac45e7479d2a6c4f776c464250774143c',1,'IDecisionSystem.Decide()'],['../class_llm_decision_maker.html#a8db905b2318507fcb3f04c098dac96e9',1,'LlmDecisionMaker.Decide()'],['../class_null_decision_system.html#a21d581e76feaf72caa14a0bbd82468f4',1,'NullDecisionSystem.Decide()']]]
+  ['calculaterelevance_0',['CalculateRelevance',['../interface_i_decision_system.html#ad2bbded2ec76d4be316ec26e2cf509c8',1,'IDecisionSystem.CalculateRelevance()'],['../class_llm_decision_maker.html#a7966e7db30b1f4644a25b76b1e7edf5e',1,'LlmDecisionMaker.CalculateRelevance()'],['../class_null_decision_system.html#afe4674ee15f621d59076f76e20b3fd04',1,'NullDecisionSystem.CalculateRelevance()']]],
+  ['chat_1',['Chat',['../class_llm_manager.html#af7323028440445948f87a006b69d0801',1,'LlmManager']]],
+  ['connect_2',['Connect',['../class_llm_manager.html#a16ee38ba51ddab349c04ad0b9bce0630',1,'LlmManager']]],
+  ['currentenvironment_3',['CurrentEnvironment',['../class_current_environment.html#aa1d06a75d40d0048d91c5cc5062c1427',1,'CurrentEnvironment']]],
+  ['currentenvironmentdto_4',['CurrentEnvironmentDTO',['../class_current_environment_d_t_o.html#ad5a91d9b3b9a356ed90ea932658403a8',1,'CurrentEnvironmentDTO']]]
 ];

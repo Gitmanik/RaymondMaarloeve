@@ -10,8 +10,11 @@ var searchData=
   ['loadgameconfig_7',['LoadGameConfig',['../class_game_config.html#a00e6709796c7f4db40d4948b2764276b',1,'GameConfig']]],
   ['loadingscene_8',['LoadingScene',['../class_loading_scene.html',1,'']]],
   ['loadingscene_2ecs_9',['LoadingScene.cs',['../_loading_scene_8cs.html',1,'']]],
-  ['loadmodel_10',['LoadModel',['../class_llm_manager.html#a438d3db971686d8164a476e650af637c',1,'LlmManager']]],
-  ['loadmodeldto_11',['LoadModelDTO',['../class_load_model_d_t_o.html',1,'']]],
-  ['loadmodeldto_2ecs_12',['LoadModelDTO.cs',['../_load_model_d_t_o_8cs.html',1,'']]],
-  ['lookat_13',['LookAt',['../class_n_p_c.html#a0078f5eaa3f92ce03b6d68989312eef1',1,'NPC']]]
+  ['loadingscreenscenename_10',['LoadingscreenSceneName',['../class_main_menu_manager.html#ae4d1d5b4230ab9e9c14bacb245ac08ba',1,'MainMenuManager']]],
+  ['loadmodel_11',['LoadModel',['../class_llm_manager.html#a438d3db971686d8164a476e650af637c',1,'LlmManager']]],
+  ['loadmodeldto_12',['LoadModelDTO',['../class_load_model_d_t_o.html',1,'']]],
+  ['loadmodeldto_2ecs_13',['LoadModelDTO.cs',['../_load_model_d_t_o_8cs.html',1,'']]],
+  ['loadsettings_14',['LoadSettings',['../class_main_menu_manager.html#a7ba5130e5f702a248b1673f701bfc110',1,'MainMenuManager']]],
+  ['loadsettingsscene_15',['LoadSettingsScene',['../class_main_menu_manager.html#ab2ca944e70f592de7f114c150d8fa892',1,'MainMenuManager']]],
+  ['lookat_16',['LookAt',['../class_n_p_c.html#a0078f5eaa3f92ce03b6d68989312eef1',1,'NPC']]]
 ];
