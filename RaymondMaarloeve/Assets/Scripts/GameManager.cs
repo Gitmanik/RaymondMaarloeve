@@ -119,7 +119,7 @@ public class GameManager : MonoBehaviour
             if (gates == null)
             {
                 Debug.LogError("Nie znaleziono bramy (Gate(Clone))!");
-                return;
+                //return;
             }
 
             // Znajdź Entrance w _minnor_gates_02(Clone)
@@ -127,12 +127,12 @@ public class GameManager : MonoBehaviour
             if (entrance == null)
             {
                 Debug.LogError("Nie znaleziono PlayerSpawner!");
-                return;
+                //return;
             }
 
             // Ustaw gracza w pozycji Entrance
-            PlyerController.Instance.gameObject.transform.position = entrance.position;
-            PlyerController.Instance.gameObject.transform.rotation = entrance.rotation;
+            PlayerController.Instance.gameObject.transform.position = entrance.position;
+            PlayerController.Instance.gameObject.transform.rotation = entrance.rotation;
 
             Debug.Log("Player ustawiony na spawn point Entrance.");
         }
