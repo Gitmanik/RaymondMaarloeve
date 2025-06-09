@@ -99,29 +99,40 @@ $(document).ready(function(){initNavTree('class_player_controller.html',''); ini
   <div class="headertitle"><div class="title">PlayerController Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Manages player movement, interaction with NPCs, and state transitions. Handles gravity, animations, and camera behavior during interactions.  
+ <a href="class_player_controller.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a6be26eccca2cb2a979c44fdedf25c77d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player_controller.html#a6be26eccca2cb2a979c44fdedf25c77d">StartInteraction</a> (<a class="el" href="class_n_p_c.html">NPC</a> npc)</td></tr>
+<tr class="memdesc:a6be26eccca2cb2a979c44fdedf25c77d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts interaction with the specified <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>. Adjusts camera and player state for interaction.  <br /></td></tr>
 <tr class="separator:a6be26eccca2cb2a979c44fdedf25c77d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77e1247e81d849cb7288b0f8caf2a471"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player_controller.html#a77e1247e81d849cb7288b0f8caf2a471">EndInteraction</a> ()</td></tr>
+<tr class="memdesc:a77e1247e81d849cb7288b0f8caf2a471"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ends interaction with the currently interacting <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>. Resets camera and player state.  <br /></td></tr>
 <tr class="separator:a77e1247e81d849cb7288b0f8caf2a471"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:abb12e85ca1b12efdbc8684bff2e19c4c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player_controller.html#abb12e85ca1b12efdbc8684bff2e19c4c">moveSpeed</a> = 5f</td></tr>
+<tr class="memdesc:abb12e85ca1b12efdbc8684bff2e19c4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Speed at which the player moves.  <br /></td></tr>
 <tr class="separator:abb12e85ca1b12efdbc8684bff2e19c4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a8e0eb9de4ccc5bd5f4cc5b44469b01"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player_controller.html#a0a8e0eb9de4ccc5bd5f4cc5b44469b01">gravity</a> = 9.81f</td></tr>
+<tr class="memdesc:a0a8e0eb9de4ccc5bd5f4cc5b44469b01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gravity applied to the player.  <br /></td></tr>
 <tr class="separator:a0a8e0eb9de4ccc5bd5f4cc5b44469b01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a45d4ce5921bc176818801e44f3fa0e8a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_n_p_c.html">NPC</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player_controller.html#a45d4ce5921bc176818801e44f3fa0e8a">currentlyInteractingNPC</a> = null</td></tr>
+<tr class="memdesc:a45d4ce5921bc176818801e44f3fa0e8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference to the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> the player is currently interacting with.  <br /></td></tr>
 <tr class="separator:a45d4ce5921bc176818801e44f3fa0e8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:a9bec1b62de6e46a4cd2bcb332da2b7b5"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_player_controller.html">PlayerController</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player_controller.html#a9bec1b62de6e46a4cd2bcb332da2b7b5">Instance</a></td></tr>
+<tr class="memdesc:a9bec1b62de6e46a4cd2bcb332da2b7b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Singleton instance of the <a class="el" href="class_player_controller.html" title="Manages player movement, interaction with NPCs, and state transitions. Handles gravity,...">PlayerController</a> class.  <br /></td></tr>
 <tr class="separator:a9bec1b62de6e46a4cd2bcb332da2b7b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Manages player movement, interaction with NPCs, and state transitions. Handles gravity, animations, and camera behavior during interactions. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a77e1247e81d849cb7288b0f8caf2a471" name="a77e1247e81d849cb7288b0f8caf2a471"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a77e1247e81d849cb7288b0f8caf2a471">&#9670;&#160;</a></span>EndInteraction()</h2>
 
@@ -136,6 +147,8 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Ends interaction with the currently interacting <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>. Resets camera and player state. </p>
 
 </div>
 </div>
@@ -155,6 +168,14 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Starts interaction with the specified <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>. Adjusts camera and player state for interaction. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">npc</td><td>The <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> to interact with.</td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
@@ -170,6 +191,8 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Reference to the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> the player is currently interacting with. </p>
+
 </div>
 </div>
 <a id="a0a8e0eb9de4ccc5bd5f4cc5b44469b01" name="a0a8e0eb9de4ccc5bd5f4cc5b44469b01"></a>
@@ -183,6 +206,8 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Gravity applied to the player. </p>
 
 </div>
 </div>
@@ -206,6 +231,8 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Singleton instance of the <a class="el" href="class_player_controller.html" title="Manages player movement, interaction with NPCs, and state transitions. Handles gravity,...">PlayerController</a> class. </p>
+
 </div>
 </div>
 <a id="abb12e85ca1b12efdbc8684bff2e19c4c" name="abb12e85ca1b12efdbc8684bff2e19c4c"></a>
@@ -219,6 +246,8 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Speed at which the player moves. </p>
 
 </div>
 </div>

@@ -98,20 +98,28 @@ $(document).ready(function(){initNavTree('class_day_box_manager.html',''); initR
   <div class="headertitle"><div class="title">DayBoxManager Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Manages the UI elements for displaying the current day and time in the game. Provides methods to update the day and hour text fields dynamically.  
+ <a href="class_day_box_manager.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a885010a1a4573c25d46b27cbf703cfd7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_day_box_manager.html#a885010a1a4573c25d46b27cbf703cfd7">UpdateHourText</a> (float timeOfDay)</td></tr>
+<tr class="memdesc:a885010a1a4573c25d46b27cbf703cfd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the hour text field based on the given time of day. Formats the time in "HH:MM" format, rounding minutes to the nearest quarter hour.  <br /></td></tr>
 <tr class="separator:a885010a1a4573c25d46b27cbf703cfd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab449710f1981fe2a18a57108dc9acef5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_day_box_manager.html#ab449710f1981fe2a18a57108dc9acef5">UpdateDayText</a> (int currentDay)</td></tr>
+<tr class="memdesc:ab449710f1981fe2a18a57108dc9acef5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the day text field with the given day number.  <br /></td></tr>
 <tr class="separator:ab449710f1981fe2a18a57108dc9acef5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
 Properties</h2></td></tr>
 <tr class="memitem:a47cb7a5bdb41f5ff3cde6423f9c535b5"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_day_box_manager.html">DayBoxManager</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_day_box_manager.html#a47cb7a5bdb41f5ff3cde6423f9c535b5">Instance</a><code> [get]</code></td></tr>
+<tr class="memdesc:a47cb7a5bdb41f5ff3cde6423f9c535b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Singleton instance of the <a class="el" href="class_day_box_manager.html" title="Manages the UI elements for displaying the current day and time in the game. Provides methods to upda...">DayBoxManager</a> class.  <br /></td></tr>
 <tr class="separator:a47cb7a5bdb41f5ff3cde6423f9c535b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Manages the UI elements for displaying the current day and time in the game. Provides methods to update the day and hour text fields dynamically. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ab449710f1981fe2a18a57108dc9acef5" name="ab449710f1981fe2a18a57108dc9acef5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab449710f1981fe2a18a57108dc9acef5">&#9670;&#160;</a></span>UpdateDayText()</h2>
 
@@ -127,6 +135,14 @@ Properties</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Updates the day text field with the given day number. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">currentDay</td><td>The current day number to display.</td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -145,6 +161,14 @@ Properties</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Updates the hour text field based on the given time of day. Formats the time in "HH:MM" format, rounding minutes to the nearest quarter hour. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timeOfDay</td><td>The time of day as a float, where the integer part represents hours and the fractional part represents minutes.</td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -168,6 +192,8 @@ Properties</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Singleton instance of the <a class="el" href="class_day_box_manager.html" title="Manages the UI elements for displaying the current day and time in the game. Provides methods to upda...">DayBoxManager</a> class. </p>
 
 </div>
 </div>

@@ -99,31 +99,43 @@ $(document).ready(function(){initNavTree('class_camera_follow.html',''); initRes
   <div class="headertitle"><div class="title">CameraFollow Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Handles the camera movement and positioning to follow a target. Supports smooth transitions and interaction-specific camera behavior.  
+ <a href="class_camera_follow.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a43e9ca4bdbbbe12bcf40d30528fd435b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_camera_follow.html#a43e9ca4bdbbbe12bcf40d30528fd435b">SetTarget</a> (Transform newTarget, bool interacting)</td></tr>
+<tr class="memdesc:a43e9ca4bdbbbe12bcf40d30528fd435b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the target for the camera to follow and specifies whether interaction mode is active.  <br /></td></tr>
 <tr class="separator:a43e9ca4bdbbbe12bcf40d30528fd435b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a2ef2d3655fd0cb86d18e6324b75c0a59"><td class="memItemLeft" align="right" valign="top">Transform&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_camera_follow.html#a2ef2d3655fd0cb86d18e6324b75c0a59">target</a></td></tr>
+<tr class="memdesc:a2ef2d3655fd0cb86d18e6324b75c0a59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transform of the target the camera should follow.  <br /></td></tr>
 <tr class="separator:a2ef2d3655fd0cb86d18e6324b75c0a59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a924c2f26a261004c89aa63ca0c89d454"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_camera_follow.html#a924c2f26a261004c89aa63ca0c89d454">smoothSpeed</a> = 5f</td></tr>
+<tr class="memdesc:a924c2f26a261004c89aa63ca0c89d454"><td class="mdescLeft">&#160;</td><td class="mdescRight">Speed of the camera's smooth movement.  <br /></td></tr>
 <tr class="separator:a924c2f26a261004c89aa63ca0c89d454"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8666f72acc61b0a2c99138761b364c7a"><td class="memItemLeft" align="right" valign="top">Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_camera_follow.html#a8666f72acc61b0a2c99138761b364c7a">normalOffset</a> = new Vector3(0, -10, 0)</td></tr>
+<tr class="memdesc:a8666f72acc61b0a2c99138761b364c7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Normal position offset of the camera.  <br /></td></tr>
 <tr class="separator:a8666f72acc61b0a2c99138761b364c7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c4a1d87efb3c27c0ac00061fcab67ba"><td class="memItemLeft" align="right" valign="top">Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_camera_follow.html#a8c4a1d87efb3c27c0ac00061fcab67ba">interactionOffset</a> = new Vector3(0, 1.7f, 1.5f)</td></tr>
+<tr class="memdesc:a8c4a1d87efb3c27c0ac00061fcab67ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interaction-specific position offset of the camera.  <br /></td></tr>
 <tr class="separator:a8c4a1d87efb3c27c0ac00061fcab67ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a499d39cf54707eb903dcd3d5e72d39c4"><td class="memItemLeft" align="right" valign="top">Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_camera_follow.html#a499d39cf54707eb903dcd3d5e72d39c4">interactionRotation</a> = new Vector3(0,0,0)</td></tr>
+<tr class="memitem:a499d39cf54707eb903dcd3d5e72d39c4"><td class="memItemLeft" align="right" valign="top">Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_camera_follow.html#a499d39cf54707eb903dcd3d5e72d39c4">interactionRotation</a> = new Vector3(0, 0, 0)</td></tr>
+<tr class="memdesc:a499d39cf54707eb903dcd3d5e72d39c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interaction-specific rotation of the camera.  <br /></td></tr>
 <tr class="separator:a499d39cf54707eb903dcd3d5e72d39c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:a3925ad6664c644f424efa59e1df14f84"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_camera_follow.html">CameraFollow</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_camera_follow.html#a3925ad6664c644f424efa59e1df14f84">Instance</a></td></tr>
+<tr class="memdesc:a3925ad6664c644f424efa59e1df14f84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Singleton instance of the <a class="el" href="class_camera_follow.html" title="Handles the camera movement and positioning to follow a target. Supports smooth transitions and inter...">CameraFollow</a> class.  <br /></td></tr>
 <tr class="separator:a3925ad6664c644f424efa59e1df14f84"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Handles the camera movement and positioning to follow a target. Supports smooth transitions and interaction-specific camera behavior. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a43e9ca4bdbbbe12bcf40d30528fd435b" name="a43e9ca4bdbbbe12bcf40d30528fd435b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a43e9ca4bdbbbe12bcf40d30528fd435b">&#9670;&#160;</a></span>SetTarget()</h2>
 
@@ -150,6 +162,15 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Sets the target for the camera to follow and specifies whether interaction mode is active. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">newTarget</td><td>The new target for the camera.</td></tr>
+    <tr><td class="paramname">interacting</td><td>True if interaction mode is active, false otherwise.</td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
@@ -173,6 +194,8 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Singleton instance of the <a class="el" href="class_camera_follow.html" title="Handles the camera movement and positioning to follow a target. Supports smooth transitions and inter...">CameraFollow</a> class. </p>
+
 </div>
 </div>
 <a id="a8c4a1d87efb3c27c0ac00061fcab67ba" name="a8c4a1d87efb3c27c0ac00061fcab67ba"></a>
@@ -187,6 +210,8 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Interaction-specific position offset of the camera. </p>
+
 </div>
 </div>
 <a id="a499d39cf54707eb903dcd3d5e72d39c4" name="a499d39cf54707eb903dcd3d5e72d39c4"></a>
@@ -196,10 +221,12 @@ Static Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">Vector3 CameraFollow.interactionRotation = new Vector3(0,0,0)</td>
+          <td class="memname">Vector3 CameraFollow.interactionRotation = new Vector3(0, 0, 0)</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Interaction-specific rotation of the camera. </p>
 
 </div>
 </div>
@@ -215,6 +242,8 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Normal position offset of the camera. </p>
+
 </div>
 </div>
 <a id="a924c2f26a261004c89aa63ca0c89d454" name="a924c2f26a261004c89aa63ca0c89d454"></a>
@@ -229,6 +258,8 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Speed of the camera's smooth movement. </p>
+
 </div>
 </div>
 <a id="a2ef2d3655fd0cb86d18e6324b75c0a59" name="a2ef2d3655fd0cb86d18e6324b75c0a59"></a>
@@ -242,6 +273,8 @@ Static Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Transform of the target the camera should follow. </p>
 
 </div>
 </div>
