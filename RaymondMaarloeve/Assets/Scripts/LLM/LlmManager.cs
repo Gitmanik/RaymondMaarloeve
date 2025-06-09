@@ -237,10 +237,10 @@ public class LlmManager : MonoBehaviour
             model_id = modelID,
             messages = messages,
             max_tokens = 4096,
-            f16_kv = true,
+            f16_kv = false,
             n_ctx = 4096,
             n_parts = -1,
-            seed = 42, // TODO: Make it randomized
+            seed = 42,
             n_gpu_layers = -1,
             temperature = temperature, // Default temperature for generation
             top_p = top_p // Default top_p for generation

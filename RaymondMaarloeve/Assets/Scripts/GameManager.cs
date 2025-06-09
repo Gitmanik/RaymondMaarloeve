@@ -281,6 +281,11 @@ public class GameManager : MonoBehaviour
             try
             {
                 generatedHistory = JsonUtility.FromJson<GeneratedHistoryDTO>(strippedResp);
+                if (string.IsNullOrWhiteSpace(generatedHistory.story))
+                {
+                    Debug.LogError($"GameManager: GenerateHistory error: generated history is empty");
+                    continue;
+                }
             }
             catch (Exception e)
             {
