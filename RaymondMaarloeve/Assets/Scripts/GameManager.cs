@@ -24,9 +24,10 @@ public class GameManager : MonoBehaviour
     public GameConfig gameConfig { get; private set; }
 
     [SerializeField] private GameObject uiGameObject;
-    
+    [SerializeField] private AudioSource musicAudioSource;
 
-    
+
+
     IEnumerator Start()
     {
         Debug.Log("GameManager: Start initialization");
@@ -37,6 +38,8 @@ public class GameManager : MonoBehaviour
 
         Screen.SetResolution(gameConfig.GameWindowWidth, gameConfig.GameWindowHeight, gameConfig.FullScreen);
         Application.targetFrameRate = 60;
+
+        ApplySettings();
 
         LlmManager.Instance.Setup(gameConfig.LlmServerApi);
         Debug.Log("GameManager: LLM Setup started");
@@ -108,6 +111,12 @@ public class GameManager : MonoBehaviour
         murdererNPC = npcs[Random.Range(0, npcs.Count)];
     }
 
+    /// <summary>
+    /// Coroutine that waits for a successful connection to the LLM server,
+    /// registers all models used in the game, and sets the LlmServerReady flag when done.
+    /// If the connection fails, it retries every 5 seconds.
+    /// </summary>
+    /// <returns>IEnumerator for coroutine execution.</returns>
     IEnumerator WaitForLlmConnection()
     {
         while (true)
@@ -130,33 +139,36 @@ public class GameManager : MonoBehaviour
                 Debug.Log("GameManager: Connected to LLM Server");
 
                 var usedModelIds = new HashSet<int>(
-                gameConfig.Npcs.Select(npc => npc.ModelId)
-                .Concat(new[] { gameConfig.NarratorModelId })
+                    gameConfig.Npcs.Select(npc => npc.ModelId)
+                    .Concat(new[] { gameConfig.NarratorModelId })
                 );
 
                 var usedModels = gameConfig.Models.Where(model => usedModelIds.Contains(model.Id)).ToList();
 
-                int modelsToLoad = usedModels.Count;
-                bool[] loaded = new bool[modelsToLoad];
+                // Register all models that are used in the game
+                int modelsToRegister = usedModels.Count;
+                bool[] registered = new bool[modelsToRegister];
 
                 for (int i = 0; i < usedModels.Count; i++)
                 {
-                    Debug.Log($"GameManager: Loading model number {i+1} from path {usedModels[i].Path}");
+                    Debug.Log($"GameManager: Registering model number {i+1} from path {usedModels[i].Path}");
                     int idx = i;
                     var model = usedModels[i];
-                    LlmManager.Instance.LoadModel(model.Id.ToString(), model.Path, (dto) =>
+                    LlmManager.Instance.Register(model.Id.ToString(), model.Path, (dto) =>
                     {
-                        loaded[idx] = true;
+                        registered[idx] = true;
                         LlmManager.Instance.GenericComplete(dto);
                     }, Debug.LogError);
                 }
 
-                // Wait until all models are loaded
-                while (loaded.Any(l => !l))
+                // Wait until all models are registered
+                while (registered.Any(r => !r))
                     yield return null;
 
+                Debug.Log("GameManager: All models registered, proceeding to load...");
+
                 LlmServerReady = true;
-                Debug.Log("GameManager: All models loaded, LlmServerReady = TRUE");
+                Debug.Log("GameManager: All models registered, LlmServerReady = TRUE");
                 break;
             }
             else
@@ -188,6 +200,27 @@ public class GameManager : MonoBehaviour
         {
             GitmanikConsole.singleton.ToggleConsole();
         }
+    }
+
+    private void ApplySettings()
+    {
+        // VIDEO
+        int graphicsQuality = PlayerPrefs.GetInt("GraphicsQuality", 2);
+        QualitySettings.SetQualityLevel(graphicsQuality);
+
+        bool isFullscreen = PlayerPrefs.GetInt("Fullscreen", 1) == 1;
+        Screen.fullScreen = isFullscreen;
+
+        // AUDIO
+        float masterVolume = PlayerPrefs.GetFloat("MasterVolume", 1.0f);
+        AudioListener.volume = masterVolume;
+
+        float musicVolume = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
+        if (musicAudioSource != null)
+        {
+            musicAudioSource.volume = musicVolume;
+        }
+
     }
 
     [ConsoleCommand("npcs", "List all npcs")]

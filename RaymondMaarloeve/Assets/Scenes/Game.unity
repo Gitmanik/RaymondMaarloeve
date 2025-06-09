@@ -3020,13 +3020,6 @@ MonoBehaviour:
   cancelButton: {fileID: 1435796869}
   resultText: {fileID: 1821656902}
   murderDescription: 
-  blockTexts:
-  - Culprit lost his job and went bankrupt.
-  - While attending the mass he saw the golden grail.
-  - Culprit bribed the priest to get the keys to the church.
-  - He waited until midnight to break into the church and steal the grail.
-  - While attempting the theft he was seen by the guard.
-  - Culprit killed the guard and got away.
   triggerDay: 3
 --- !u!1 &1310063284
 GameObject:
