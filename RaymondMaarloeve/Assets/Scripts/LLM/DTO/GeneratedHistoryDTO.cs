@@ -38,7 +38,7 @@ public class CharacterDTO
     /// <summary>
     /// LLM Model used by Character 
     /// </summary>
-    public string archetype;
+    public int archetype;
     
     /// <summary>
     /// Age of the Character
@@ -51,8 +51,13 @@ public class CharacterDTO
     public string description;
 
     /// <summary>
+    /// Whether this Character is the murderer
+    /// </summary>
+    public bool murderer;
+
+    /// <summary>
     /// ToString override used for pretty printing
     /// </summary>
     /// <returns>Pretty print of the object containing all information about the Character</returns>
-    public override string ToString() => $"Character: Name: '{name}',\nArchetype: '{archetype}',\nAge: '{age}',\nDescription: '{description}'";
+    public override string ToString() => $"Character: Name: '{name}',\nArchetype: '{archetype}',\nAge: '{age}',\nMurderer: {murderer}\nDescription: '{description}'";
 }

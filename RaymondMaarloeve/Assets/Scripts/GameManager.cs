@@ -181,29 +181,30 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Generates history using Narrator LLM Model.
+    /// Coroutine that generates a story using Narrator LLM Model,
+    /// If the generation fails, it retries automatically.
     /// </summary>
-    /// <returns></returns>
+    /// <returns>IEnumerator for coroutine execution.</returns>
     private IEnumerator GenerateHistory()
     {
-        // List<string> archetypes = gameConfig.Models.FindAll(x => x.Id != gameConfig.NarratorModelId).
-        //     ConvertAll(x => x.Name.Substring(0,x.Name.IndexOf('.')));
-        List<string> archetypes = new List<string>()
-        {
-            "delusional", "guard", "helpful man", "alcoholic", "ribald man", "seductive woman", "fallen noble"
-        };
-        List<string> archetypes2 = new List<string>(archetypes.Take(gameConfig.Npcs.Count));
-        //gameConfig.Npcs.ConvertAll(x => gameConfig.Models[x.ModelId].Name)
-        string prompt = $"You are a writer. " +
-                        $"Write ONLY a VALID JSON object with body specified below with two parts:\n\n" +
+        List<string> archetypes = gameConfig.Models.FindAll(x => x.Id != gameConfig.NarratorModelId).
+            ConvertAll(x => x.Name.Substring(0,x.Name.IndexOf('.')).Replace("_", " "));
+
+        string prompt = $"You are a creative writer. " +
+                        $"Write ONLY a VALID JSON object with body specified below:\n\n" +
                         $"A short dark story (maximum 200 words) set in a medieval village. " +
-                        $"The story must include a mysterious death or crime. " +
-                        $"Use a dark tone with sensory details (like time of day, weather, fear, silence). " +
+                        $"The story must include a mysterious death or murder, but the victim must be a {gameConfig.Npcs.Count + 1} character not listed in the main {gameConfig.Npcs.Count}. " +
+                        $"The {gameConfig.Npcs.Count} characters in the JSON section must all be alive and active during the story." +
+                        $"Use a dark tone with rich sensory details (e.g., rain, silence, fear, time of day).\n" +
                         $"Use only the following five locations:\nThe church\nThe well\n" +
                         $"The house of each character in the story (Do not use any other places.)\n" +
-                        $"Include exactly {gameConfig.Npcs.Count} game characters, each with one of these personality types:\n" +
+                        $"There must be exactly {gameConfig.Npcs.Count} game characters, each with one of these personality types (archetypes):\n" +
                         $"[{string.Join(',', archetypes)}]\n\n" +
-                        $"Make sure that each of the {gameConfig.Npcs.Count} characters is part of the story. " +
+                        $"Randomly select:\n" +
+                        $"One character who is the murderer (they can be guilty directly or indirectly)\n" +
+                        $"One character who is a witness (they saw the murder or something suspicious)\n" +
+                        $"Do not say directly who the murderer or witness is, but include subtle clues through behavior, dialogue, or physical evidence.\n" +
+                        $"The story must be a single paragraph of literary narration, not a list or report.\n" +
                         $"Do not invent other characters. " +
                         $"Describe a mysterious situation with tension and uncertainty.\n\n" +
                         $"A list of the **{gameConfig.Npcs.Count}** characters with this information for each:\n" +
@@ -211,18 +212,20 @@ public class GameManager : MonoBehaviour
                             $"archetype (one of the four used)\n" +
                             $"age (an integer)\n" +
                             $"description (about who they are, their personality, what they are doing during the story, how they feel, who they like or dislike, and one habit or routine they have)\n" +
-                            $"Use this format for your output:\n\n" +
+                            $"murderer (boolean)\n" +
+                            $"Remember to NOT write a comma after description as it is an end of the child JSON object. Remember to output ONLY VALID JSON with structure given above. Remember to not write comma after last objects in list and in object!" +
+                            $"Use this EXACT format for your output:\n\n" +
                             $"{{\n" +
                                 $"\"story\": \"Your short story goes here.\",\n" +
                                 $"\"characters\": [\n" +
                                     $"{{\n\"name\": \"Full name\",\n" +
-                                    $"\"archetype\": \"delusional\",\n" +
+                                    $"\"archetype\": <(1-{archetypes.Count}) index from personality list matching the character>,\n" +
                                     $"\"age\": 52,\n" +
-                                    $"\"description\": \"You are a delusional man. You are 52 years old. [Add more details here.]\"\n" +
+                                    $"\"description\": \"You are a delusional man. You are 52 years old. [Add more details here.]\",\n" +
+                                    $"\"murderer\": false\n" +
                                     $"}}," +
                                 $"\n...\n]" +
-                            $"\n}}\n" +
-                            $"Rememeber to NOT write a comma after description as it is an end of the child JSON object.";
+                            $"\n}}\n";
         
         List<Message> messages = new List<Message>();
         messages.Add(new Message { role =  "user", content = prompt});
@@ -252,7 +255,6 @@ public class GameManager : MonoBehaviour
         Debug.Log($"GameManager: Generate history complete:\n{generatedHistory}");
         
         
-        UnityEditor.EditorApplication.isPlaying = false;
         HistoryGenerated = true;
     }
     
