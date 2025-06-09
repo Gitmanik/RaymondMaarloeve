@@ -2,18 +2,46 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
-using TMPro; // Dodaj na początku pliku
+using TMPro;
 
+/// <summary>
+/// Handles the loading process of a scene, including updating a progress bar and displaying loading messages.
+/// </summary>
 public class LoadingScene : MonoBehaviour
 {
+    /// <summary>
+    /// The name of the scene to load.
+    /// </summary>
     [SerializeField] private string sceneToLoad = "Game";
-    [SerializeField] private Slider progressBar;
-    [SerializeField] private Text progressText;
-    [SerializeField] private TMP_Text loadingStageText; // Zmień typ na TMP_Text
 
+    /// <summary>
+    /// The slider UI element used to display the loading progress.
+    /// </summary>
+    [SerializeField] private Slider progressBar;
+
+    /// <summary>
+    /// The text UI element used to display the percentage of loading progress.
+    /// </summary>
+    [SerializeField] private Text progressText;
+
+    /// <summary>
+    /// The TextMeshPro UI element used to display the current loading stage message.
+    /// </summary>
+    [SerializeField] private TMP_Text loadingStageText;
+
+    /// <summary>
+    /// The target progress value for the progress bar.
+    /// </summary>
     private float targetProgress = 0f;
+
+    /// <summary>
+    /// The speed at which the progress bar fills.
+    /// </summary>
     private float fillSpeed = 1.5f;
 
+    /// <summary>
+    /// Initializes the loading process and sets the progress bar to zero.
+    /// </summary>
     private void Start()
     {
         if (progressBar != null)
@@ -21,6 +49,9 @@ public class LoadingScene : MonoBehaviour
         StartCoroutine(LoadAsyncScene());
     }
 
+    /// <summary>
+    /// Updates the progress bar to gradually fill towards the target progress value.
+    /// </summary>
     private void Update()
     {
         if (progressBar != null)
@@ -34,6 +65,10 @@ public class LoadingScene : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Handles the asynchronous loading of the specified scene, updating the progress bar and displaying loading messages.
+    /// </summary>
+    /// <returns>An IEnumerator for coroutine execution.</returns>
     private IEnumerator LoadAsyncScene()
     {
         UpdateLoadingStage("Starting to load Game scene");
@@ -96,6 +131,10 @@ public class LoadingScene : MonoBehaviour
         SceneManager.UnloadSceneAsync("LoadingScene");
     }
 
+    /// <summary>
+    /// Updates the loading stage message displayed in the UI.
+    /// </summary>
+    /// <param name="message">The message to display.</param>
     private void UpdateLoadingStage(string message)
     {
         Debug.Log($"LoadingScene: {message}");
