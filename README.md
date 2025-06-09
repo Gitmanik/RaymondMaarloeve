@@ -12,10 +12,10 @@
 <table>
 <tr>
 <td>
-<img src="Documents/Screenshots/Conversation.png" alt="Screenshot" width="600"/>
+<img src="Documents/Screenshots/Conversation.jpg" alt="Screenshot" width="600"/>
 </td>
 <td>
-<img src="Documents/Screenshots/LoadingScreen.png" alt="Screenshot" width="600"/>
+<img src="Documents/Screenshots/LoadingScreen.jpg" alt="Screenshot" width="600"/>
 </td>
 </tr>
 </table>
