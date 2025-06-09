@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public bool HistoryGenerated = false;
     
     public GeneratedHistoryDTO generatedHistory;
+    public ConvertHistoryToBlocksDTO storyBlocks;
 
     public NPC murdererNPC;
 
@@ -49,6 +50,7 @@ public class GameManager : MonoBehaviour
         yield return StartCoroutine(GenerateHistory());
 
         yield return StartCoroutine(ConvertHistoryToBlocks());
+        MiniGameManager.Instance.Setup(storyBlocks.key_events, storyBlocks.false_events);
 
         MapGenerator.Instance.GenerateMap();
         
@@ -322,9 +324,9 @@ public class GameManager : MonoBehaviour
         
         Debug.Log($"GameManager: ConvertHistoryToBlocks response:\n{resp}");
         
-        var converted = JsonUtility.FromJson<ConvertHistoryToBlocksDTO>(resp);
+        storyBlocks = JsonUtility.FromJson<ConvertHistoryToBlocksDTO>(resp);
         
-        Debug.Log($"GameManager: ConvertHistoryToBlocks complete:\n{converted}");
+        Debug.Log($"GameManager: ConvertHistoryToBlocks complete:\n{storyBlocks}");
         
         HistoryGenerated = true;
     }
