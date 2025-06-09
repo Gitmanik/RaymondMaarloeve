@@ -200,6 +200,7 @@ public class GameManager : MonoBehaviour
 
     /// <summary>
     /// Coroutine that generates a story using Narrator LLM Model,
+    /// If the generation fails, it retries automatically.
     /// </summary>
     /// <returns>IEnumerator for coroutine execution.</returns>
     private IEnumerator GenerateHistory()
@@ -246,34 +247,50 @@ public class GameManager : MonoBehaviour
         
         List<Message> messages = new List<Message>();
         messages.Add(new Message { role =  "user", content = prompt});
-        
-        bool callbackCalled = false;
 
-        string resp = null;
-        
-        LlmManager.Instance.Chat(gameConfig.NarratorModelId.ToString(), messages, result =>
+        while (true)
         {
-            callbackCalled = true;
-            resp = result.response;
-        }, (error) =>
-        {
-            Debug.LogError($"GameManager: GenerateHistory error: {error}");
-        });
+            bool callbackCalled = false;
+            string resp = null;
         
-        // Wait for the callback to be called
-        while (!callbackCalled)
-            yield return null;
+            LlmManager.Instance.Chat(gameConfig.NarratorModelId.ToString(), messages, result =>
+            {
+                callbackCalled = true;
+                resp = result.response;
+            }, (error) =>
+            {
+                Debug.LogError($"GameManager: GenerateHistory error: {error}");
+                callbackCalled = true;
+            });
+        
+            // Wait for the callback to be called
+            while (!callbackCalled)
+                yield return null;
 
-        resp = resp.Substring(resp.IndexOf('{'));
-        resp = resp.Substring(0, resp.LastIndexOf('}') + 1);
+            if (resp == null)
+                continue;
+            
+            string strippedResp = resp.Substring(resp.IndexOf('{'));
+            strippedResp = strippedResp.Substring(0, strippedResp.LastIndexOf('}') + 1);
+
+            try
+            {
+                generatedHistory = JsonUtility.FromJson<GeneratedHistoryDTO>(strippedResp);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"GameManager: Error parsing generated history output: {e.Message}:\nFull response:{resp}\n\nStripped response:{strippedResp}");
+                continue;
+            }
         
-        generatedHistory = JsonUtility.FromJson<GeneratedHistoryDTO>(resp);
-        
-        Debug.Log($"GameManager: Generate history complete:\n{generatedHistory}");
+            Debug.Log($"GameManager: Generate history complete:\n{generatedHistory}");
+            break;
+        }
     }
 
     /// <summary>
-    /// Coroutine that generates blocks from Story using Narrator LLM Model
+    /// Coroutine that generates blocks from Story using Narrator LLM Model,
+    /// If the generation fails, it retries automatically.
     /// </summary>
     /// <returns>IEnumerator for coroutine execution.</returns>
     private IEnumerator ConvertHistoryToBlocks()
@@ -302,33 +319,47 @@ public class GameManager : MonoBehaviour
         List<Message> messages = new List<Message>();
         messages.Add(new Message { role =  "user", content = prompt});
         
-        bool callbackCalled = false;
-
-        string resp = null;
-        
-        LlmManager.Instance.Chat(gameConfig.NarratorModelId.ToString(), messages, result =>
+        while (true)
         {
-            callbackCalled = true;
-            resp = result.response;
-        }, (error) =>
-        {
-            Debug.LogError($"GameManager: ConvertHistoryToBlocks error: {error}");
-        });
+            bool callbackCalled = false;
+            string resp = null;
         
-        // Wait for the callback to be called
-        while (!callbackCalled)
-            yield return null;
+            LlmManager.Instance.Chat(gameConfig.NarratorModelId.ToString(), messages, result =>
+            {
+                callbackCalled = true;
+                resp = result.response;
+            }, (error) =>
+            {
+                Debug.LogError($"GameManager: ConvertHistoryToBlocks error: {error}");
+                callbackCalled = true;
+            });
+        
+            // Wait for the callback to be called
+            while (!callbackCalled)
+                yield return null;
 
-        resp = resp.Substring(resp.IndexOf('{'));
-        resp = resp.Substring(0, resp.LastIndexOf('}') + 1);
+            if (resp == null)
+                continue;
+
+            string strippedResp = resp.Substring(resp.IndexOf('{'));
+            strippedResp = strippedResp.Substring(0, strippedResp.LastIndexOf('}') + 1);
         
-        Debug.Log($"GameManager: ConvertHistoryToBlocks response:\n{resp}");
+            try
+            {
+                storyBlocks = JsonUtility.FromJson<ConvertHistoryToBlocksDTO>(strippedResp);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"GameManager: Error parsing generated history blocks output: {e.Message}:\nFull response:{resp}\n\nStripped response:{strippedResp}");
+                continue;
+            }
         
-        storyBlocks = JsonUtility.FromJson<ConvertHistoryToBlocksDTO>(resp);
+            Debug.Log($"GameManager: ConvertHistoryToBlocks complete:\n{storyBlocks}");
         
-        Debug.Log($"GameManager: ConvertHistoryToBlocks complete:\n{storyBlocks}");
+            HistoryGenerated = true;
+            break;
+        }
         
-        HistoryGenerated = true;
     }
     
     // Update is called once per frame
