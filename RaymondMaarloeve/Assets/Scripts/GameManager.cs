@@ -286,6 +286,12 @@ public class GameManager : MonoBehaviour
                     Debug.LogError($"GameManager: GenerateHistory error: generated history is empty");
                     continue;
                 }
+
+                if (generatedHistory.characters.All(x => x.murderer == false))
+                {
+                    Debug.LogError($"GameManager: GenerateHistory error: generated history has no murderer!");
+                    continue;
+                }
             }
             catch (Exception e)
             {
