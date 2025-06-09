@@ -61,6 +61,7 @@ var hierarchy =
     [ "NpcActionEvent", "class_npc_action_event.html", null ],
     [ "NpcConfig", "class_npc_config.html", null ],
     [ "ObtainedMemoryDTO", "class_obtained_memory_d_t_o.html", null ],
+    [ "RegisterDTO", "class_register_d_t_o.html", null ],
     [ "StatusDTO", "class_status_d_t_o.html", null ],
     [ "Tile", "class_tile.html", null ],
     [ "UnloadModelRequestDTO", "class_unload_model_request_d_t_o.html", null ]

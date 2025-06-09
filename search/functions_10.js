@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['walkdecision_0',['WalkDecision',['../class_walk_decision.html#a02b54f44d74e1307963b28099cd1980a',1,'WalkDecision']]]
+  ['visitbuildingdecision_0',['VisitBuildingDecision',['../class_visit_building_decision.html#a722c30b144a2c6b55f4b578ff27ec0ff',1,'VisitBuildingDecision']]]
 ];

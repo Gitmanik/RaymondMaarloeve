@@ -39,6 +39,7 @@ var annotated_dup =
     [ "ObtainedMemoryDTO", "class_obtained_memory_d_t_o.html", "class_obtained_memory_d_t_o" ],
     [ "PlayerController", "class_player_controller.html", "class_player_controller" ],
     [ "PrayDecision", "class_pray_decision.html", "class_pray_decision" ],
+    [ "RegisterDTO", "class_register_d_t_o.html", "class_register_d_t_o" ],
     [ "SlotDropHandler", "class_slot_drop_handler.html", "class_slot_drop_handler" ],
     [ "StatusDTO", "class_status_d_t_o.html", "class_status_d_t_o" ],
     [ "Tile", "class_tile.html", "class_tile" ],
