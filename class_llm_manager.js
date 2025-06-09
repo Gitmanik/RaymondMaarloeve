@@ -1,6 +1,6 @@
 var class_llm_manager =
 [
-    [ "Chat", "class_llm_manager.html#a414025c7cda81d36762dc734b90b46c8", null ],
+    [ "Chat", "class_llm_manager.html#af7323028440445948f87a006b69d0801", null ],
     [ "Connect", "class_llm_manager.html#a16ee38ba51ddab349c04ad0b9bce0630", null ],
     [ "GenericComplete", "class_llm_manager.html#a2ef2ce3c8d883f1acb5e7b3783cda61d", null ],
     [ "Get< T >", "class_llm_manager.html#a997ff35fdfcb490cea877b231ed903d9", null ],

@@ -28,8 +28,8 @@ var searchData=
   ['modelid_25',['ModelId',['../class_npc_config.html#a2f36713fcac38941687a5e4af55a6f9d',1,'NpcConfig']]],
   ['modelid_26',['ModelID',['../class_n_p_c.html#af0303bd88886d0417f54719bb4895265',1,'NPC']]],
   ['modelpathnotfoundfornpcwithi_27',['ModelpathnotfoundforNPCwithI',['../_game_manager_8cs.html#a0b58d89a8c475f62b9799c4008af316c',1,'GameManager.cs']]],
-  ['models_28',['Models',['../class_game_config.html#a50f229e7279e6c98c707e3f27bcc49f7',1,'GameConfig']]],
-  ['models_29',['models',['../class_status_d_t_o.html#a9f20e9f9f185f0e72d52183135baf17f',1,'StatusDTO']]],
+  ['models_28',['models',['../class_status_d_t_o.html#a9f20e9f9f185f0e72d52183135baf17f',1,'StatusDTO']]],
+  ['models_29',['Models',['../class_game_config.html#a50f229e7279e6c98c707e3f27bcc49f7',1,'GameConfig']]],
   ['movespeed_30',['moveSpeed',['../class_player_controller.html#abb12e85ca1b12efdbc8684bff2e19c4c',1,'PlayerController']]],
   ['moving_31',['Moving',['../_player_controller_8cs.html#a3c730f37b1b3a893159bada67637fdb1adefe967ad0373b2274fc298f19125ca7',1,'PlayerController.cs']]],
   ['murderernpc_32',['murdererNPC',['../class_game_manager.html#a73f17991a064054726b6a7329d3df58e',1,'GameManager']]]

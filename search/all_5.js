@@ -5,7 +5,7 @@ var searchData=
   ['calculaterelevancedto_2ecs_2',['CalculateRelevanceDTO.cs',['../_calculate_relevance_d_t_o_8cs.html',1,'']]],
   ['camerafollow_3',['CameraFollow',['../class_camera_follow.html',1,'']]],
   ['camerafollow_2ecs_4',['CameraFollow.cs',['../_camera_follow_8cs.html',1,'']]],
-  ['chat_5',['Chat',['../class_llm_manager.html#a414025c7cda81d36762dc734b90b46c8',1,'LlmManager']]],
+  ['chat_5',['Chat',['../class_llm_manager.html#af7323028440445948f87a006b69d0801',1,'LlmManager']]],
   ['chatdto_2ecs_6',['ChatDTO.cs',['../_chat_d_t_o_8cs.html',1,'']]],
   ['chatrequestdto_7',['ChatRequestDTO',['../class_chat_request_d_t_o.html',1,'']]],
   ['chatresponse_8',['Chatresponse',['../_dialog_box_manager_8cs.html#a60a0b9d82d3c484ac4527540f503df4d',1,'DialogBoxManager.cs']]],

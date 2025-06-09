@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['n_5fctx_0',['n_ctx',['../class_load_model_d_t_o.html#a5d765b1e728ba7f650e765eb013920fa',1,'LoadModelDTO']]],
-  ['n_5fgpu_5flayers_1',['n_gpu_layers',['../class_load_model_d_t_o.html#a603ac9b8c8944b57c7d7cbe267cbdd84',1,'LoadModelDTO']]],
-  ['n_5fparts_2',['n_parts',['../class_load_model_d_t_o.html#a7d481047a5957414c76f03dd31712048',1,'LoadModelDTO']]],
+  ['n_5fctx_0',['n_ctx',['../class_load_model_d_t_o.html#a5d765b1e728ba7f650e765eb013920fa',1,'LoadModelDTO.n_ctx()'],['../class_chat_request_d_t_o.html#a18d41429e9046b772e785b27a69fafbe',1,'ChatRequestDTO.n_ctx()']]],
+  ['n_5fgpu_5flayers_1',['n_gpu_layers',['../class_load_model_d_t_o.html#a603ac9b8c8944b57c7d7cbe267cbdd84',1,'LoadModelDTO.n_gpu_layers()'],['../class_chat_request_d_t_o.html#a2568ef6d38858544eef3041cc80ec460',1,'ChatRequestDTO.n_gpu_layers()']]],
+  ['n_5fparts_2',['n_parts',['../class_load_model_d_t_o.html#a7d481047a5957414c76f03dd31712048',1,'LoadModelDTO.n_parts()'],['../class_chat_request_d_t_o.html#abd4ffb4a3f5404f939e7813f2f2459af',1,'ChatRequestDTO.n_parts()']]],
   ['name_3',['Name',['../class_model_config.html#afd54d6a5400735064a2e47afecd49d0d',1,'ModelConfig']]],
   ['narratormodelid_4',['NarratorModelId',['../class_game_config.html#ac92643ce173d395980be574c5b3f51db',1,'GameConfig']]],
   ['need_5',['need',['../class_need_d_t_o.html#a4f9ee771e75d9f1ebc7fceb0b06bb225',1,'NeedDTO']]],
@@ -14,8 +14,8 @@ var searchData=
   ['nightsky_11',['nightSky',['../class_day_night_cycle.html#a816c4c58400c9cc914dd0a2e472e96b6',1,'DayNightCycle']]],
   ['none_12',['None',['../class_building_data.html#afc07932823f7b925d75c838070aa4556a6adf97f83acf6453d4a6a4b1070f3754',1,'BuildingData']]],
   ['normaloffset_13',['normalOffset',['../class_camera_follow.html#a8666f72acc61b0a2c99138761b364c7a',1,'CameraFollow']]],
-  ['npc_14',['Npc',['../_game_manager_8cs.html#a332d19768cba462eba3a35c0f65ff8ae',1,'GameManager.cs']]],
-  ['npc_15',['npc',['../class_visit_building_decision.html#ae6f1758be2f83dc0ef0b8fd281531e8f',1,'VisitBuildingDecision']]],
+  ['npc_14',['npc',['../class_visit_building_decision.html#ae6f1758be2f83dc0ef0b8fd281531e8f',1,'VisitBuildingDecision']]],
+  ['npc_15',['Npc',['../_game_manager_8cs.html#a332d19768cba462eba3a35c0f65ff8ae',1,'GameManager.cs']]],
   ['npc_16',['NPC',['../class_n_p_c.html',1,'']]],
   ['npc_2ecs_17',['NPC.cs',['../_n_p_c_8cs.html',1,'']]],
   ['npcactionevent_18',['NpcActionEvent',['../class_npc_action_event.html',1,'NpcActionEvent'],['../class_npc_action_event.html#acd94c30803eff5eb0d6d6dac0836e3da',1,'NpcActionEvent.NpcActionEvent()']]],

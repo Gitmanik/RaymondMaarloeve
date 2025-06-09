@@ -127,9 +127,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa7eb33076d9bbed1eb8de2504817b0bf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_llm_manager.html#aa7eb33076d9bbed1eb8de2504817b0bf">Register</a> (string modelID, string path, Action&lt; <a class="el" href="class_message_d_t_o.html">MessageDTO</a> &gt; onComplete, Action&lt; string &gt; onError)</td></tr>
 <tr class="memdesc:aa7eb33076d9bbed1eb8de2504817b0bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a model with the LLM server, making it available for loading and inference.  <br /></td></tr>
 <tr class="separator:aa7eb33076d9bbed1eb8de2504817b0bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a414025c7cda81d36762dc734b90b46c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_llm_manager.html#a414025c7cda81d36762dc734b90b46c8">Chat</a> (string modelID, List&lt; <a class="el" href="class_message.html">Message</a> &gt; messages, Action&lt; <a class="el" href="class_chat_response_d_t_o.html">ChatResponseDTO</a> &gt; onComplete, Action&lt; string &gt; onError)</td></tr>
-<tr class="memdesc:a414025c7cda81d36762dc734b90b46c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a chat request to the LLM server using the specified model and message history.  <br /></td></tr>
-<tr class="separator:a414025c7cda81d36762dc734b90b46c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7323028440445948f87a006b69d0801"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_llm_manager.html#af7323028440445948f87a006b69d0801">Chat</a> (string modelID, List&lt; <a class="el" href="class_message.html">Message</a> &gt; messages, Action&lt; <a class="el" href="class_chat_response_d_t_o.html">ChatResponseDTO</a> &gt; onComplete, Action&lt; string &gt; onError, float top_p=0.95f, float temperature=0.8f)</td></tr>
+<tr class="memdesc:af7323028440445948f87a006b69d0801"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a chat request to the LLM server using the specified model and message history.  <br /></td></tr>
+<tr class="separator:af7323028440445948f87a006b69d0801"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a16ee38ba51ddab349c04ad0b9bce0630"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_llm_manager.html#a16ee38ba51ddab349c04ad0b9bce0630">Connect</a> (Action&lt; bool &gt; onComplete)</td></tr>
 <tr class="memdesc:a16ee38ba51ddab349c04ad0b9bce0630"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connects to the LLM server and unloads all currently loaded models.  <br /></td></tr>
 <tr class="separator:a16ee38ba51ddab349c04ad0b9bce0630"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -158,8 +158,8 @@ Properties</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Manages communication with the LLM server, including model registration, loading, unloading, and chat requests. Handles request queuing and ensures only one POST request is processed at a time. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a414025c7cda81d36762dc734b90b46c8" name="a414025c7cda81d36762dc734b90b46c8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a414025c7cda81d36762dc734b90b46c8">&#9670;&#160;</a></span>Chat()</h2>
+<a id="af7323028440445948f87a006b69d0801" name="af7323028440445948f87a006b69d0801"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7323028440445948f87a006b69d0801">&#9670;&#160;</a></span>Chat()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -186,7 +186,19 @@ Properties</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">Action&lt; string &gt;&#160;</td>
-          <td class="paramname"><em>onError</em>&#160;</td>
+          <td class="paramname"><em>onError</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>top_p</em> = <code>0::95f</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>temperature</em> = <code>0::8f</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -206,6 +218,7 @@ Properties</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>: Make it randomized </dd></dl>
 
 </div>
 </div>

@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['n_5fctx_0',['n_ctx',['../class_load_model_d_t_o.html#a5d765b1e728ba7f650e765eb013920fa',1,'LoadModelDTO']]],
-  ['n_5fgpu_5flayers_1',['n_gpu_layers',['../class_load_model_d_t_o.html#a603ac9b8c8944b57c7d7cbe267cbdd84',1,'LoadModelDTO']]],
-  ['n_5fparts_2',['n_parts',['../class_load_model_d_t_o.html#a7d481047a5957414c76f03dd31712048',1,'LoadModelDTO']]],
+  ['n_5fctx_0',['n_ctx',['../class_load_model_d_t_o.html#a5d765b1e728ba7f650e765eb013920fa',1,'LoadModelDTO.n_ctx()'],['../class_chat_request_d_t_o.html#a18d41429e9046b772e785b27a69fafbe',1,'ChatRequestDTO.n_ctx()']]],
+  ['n_5fgpu_5flayers_1',['n_gpu_layers',['../class_chat_request_d_t_o.html#a2568ef6d38858544eef3041cc80ec460',1,'ChatRequestDTO.n_gpu_layers()'],['../class_load_model_d_t_o.html#a603ac9b8c8944b57c7d7cbe267cbdd84',1,'LoadModelDTO.n_gpu_layers()']]],
+  ['n_5fparts_2',['n_parts',['../class_chat_request_d_t_o.html#abd4ffb4a3f5404f939e7813f2f2459af',1,'ChatRequestDTO.n_parts()'],['../class_load_model_d_t_o.html#a7d481047a5957414c76f03dd31712048',1,'LoadModelDTO.n_parts()']]],
   ['name_3',['Name',['../class_model_config.html#afd54d6a5400735064a2e47afecd49d0d',1,'ModelConfig']]],
   ['narratormodelid_4',['NarratorModelId',['../class_game_config.html#ac92643ce173d395980be574c5b3f51db',1,'GameConfig']]],
   ['need_5',['need',['../class_need_d_t_o.html#a4f9ee771e75d9f1ebc7fceb0b06bb225',1,'NeedDTO']]],
