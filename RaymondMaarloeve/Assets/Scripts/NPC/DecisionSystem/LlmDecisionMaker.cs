@@ -3,12 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// Decision-making system for NPCs that uses a Large Language Model (LLM) to determine the next action based on the current environment and NPC state.
+/// This system interacts with the LLMServer to request decisions and processes the responses to guide NPC behavior.
+/// </summary>
 public class LlmDecisionMaker : IDecisionSystem
 {
+    /// <summary>
+    /// The NPC that this decision-making system is associated with.
+    /// </summary>
     private NPC npc;
     
+    /// <summary>
+    /// Represents the response from the LLM that is currently being processed.
+    /// This response contains the NPC's next action as determined by the LLM based on the current environment and NPC state.
+    /// </summary>
     private ChatResponseDTO waitingResponse = null;
 
+    /// <summary>
+    /// Represents the current environment that the NPC is aware of.
+    /// This list is populated with objects that the NPC can interact with or consider when making decisions.
+    /// </summary>
     private List<CurrentEnvironment> currentEnvironment;
 
     /// <summary>

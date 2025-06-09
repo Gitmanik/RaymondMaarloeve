@@ -1,5 +1,8 @@
 ﻿using System;
 
+/// <summary>
+/// Interface for a decision-making system for NPCs.
+/// </summary>
 public interface IDecisionSystem
 {
     /// <summary>
@@ -14,5 +17,10 @@ public interface IDecisionSystem
     /// <returns>An implementation of <see cref="IDecision"/> representing the NPC's next action.</returns>
     public IDecision Decide();
 
+    /// <summary>
+    /// Requests a calculation of relevance from the LLM server based on the current environment and NPC state.
+    /// </summary>
+    /// <param name="newMemory">New obtained memory to process</param>
+    /// <param name="relevanceFunc">Delegate which will be called when the value is calculated.</param>
     public void CalculateRelevance(string newMemory, Action<int> relevanceFunc);
 }
