@@ -7,30 +7,69 @@ public enum PlayerState
     Interacting // Gracz jest w interakcji z NPC
 }
 
-
+/// <summary>
+/// Manages player movement, interaction with NPCs, and state transitions.
+/// Handles gravity, animations, and camera behavior during interactions.
+/// </summary>
 public class PlayerController : MonoBehaviour
 {
+    /// <summary>
+    /// Singleton instance of the PlayerController class.
+    /// </summary>
     public static PlayerController Instance;
 
+    /// <summary>
+    /// Speed at which the player moves.
+    /// </summary>
     public float moveSpeed = 5f;
+    /// <summary>
+    /// Gravity applied to the player.
+    /// </summary>
     public float gravity = 9.81f;
+    /// <summary>
+    /// Reference to the CharacterController component.
+    /// </summary>
     private CharacterController characterController;
+    /// <summary>
+    /// Direction of player movement.
+    /// </summary>
     private Vector3 moveDirection;
 
+    /// <summary>
+    /// Current state of the player (e.g., Moving or Interacting).
+    /// </summary>
     private PlayerState currentState = PlayerState.Moving;
+    /// <summary>
+    /// Transform of the NPC the player is targeting for interaction.
+    /// </summary>
     private Transform targetNPC = null;
+    /// <summary>
+    /// Reference to the player's SkinnedMeshRenderer.
+    /// </summary>
     private SkinnedMeshRenderer characterMesh;
-    
+
+    /// <summary>
+    /// Reference to the NPC the player is currently interacting with.
+    /// </summary>
     public NPC currentlyInteractingNPC = null;
 
+    /// <summary>
+    /// Reference to the Animator component for player animations.
+    /// </summary>
     private Animator animator;
 
 
+    /// <summary>
+    /// Initializes the singleton instance.
+    /// </summary>
     void Awake()
     {
         Instance = this;
     }
 
+    /// <summary>
+    /// Initializes components and sets the camera target to the player.
+    /// </summary>
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -40,6 +79,9 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Updates player movement and interaction logic every frame.
+    /// </summary>
     void Update()
     {
         if (GitmanikConsole.Visible)
@@ -68,6 +110,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Handles player movement, including gravity and animations.
+    /// </summary>
     void HandleMovement()
     {
         float moveX = Input.GetAxisRaw("Horizontal");
@@ -95,6 +140,11 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Starts interaction with the specified NPC.
+    /// Adjusts camera and player state for interaction.
+    /// </summary>
+    /// <param name="npc">The NPC to interact with.</param>
     public void StartInteraction(NPC npc)
     {
         currentState = PlayerState.Interacting;
@@ -124,9 +174,13 @@ public class PlayerController : MonoBehaviour
             Debug.LogError("DialogBoxManager.Instance is NULL!");
         }
 
-        Debug.Log("Rozpoczeto interakcje z NPC: " + npc.name);
+        Debug.Log("Started interaction with: " + npc.name);
     }
 
+    /// <summary>
+    /// Ends interaction with the currently interacting NPC.
+    /// Resets camera and player state.
+    /// </summary>
     public void EndInteraction()
     {
         currentState = PlayerState.Moving;
@@ -153,9 +207,13 @@ public class PlayerController : MonoBehaviour
             Debug.LogError("DialogBoxManager.Instance is NULL!");
         }
 
-        Debug.Log("Zakonczono interakcje");
+        Debug.Log("Ended interaction");
     }
 
+    /// <summary>
+    /// Detects when the player enters the trigger zone of an NPC.
+    /// </summary>
+    /// <param name="other">The collider of the NPC.</param>
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("NPC"))
@@ -164,6 +222,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Detects when the player exits the trigger zone of an NPC.
+    /// </summary>
+    /// <param name="other">The collider of the NPC.</param>
     void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("NPC"))

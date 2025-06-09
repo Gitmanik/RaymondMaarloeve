@@ -6,6 +6,11 @@ public class ChatRequestDTO
 {
     public string model_id;
     public List<Message> messages;
+    public int n_ctx;
+    public bool f16_kv;
+    public int n_parts;
+    public int seed;
+    public int n_gpu_layers;
     public int max_tokens;
     public float temperature;
     public float top_p;

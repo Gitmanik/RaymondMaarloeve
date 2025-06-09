@@ -180,7 +180,7 @@ public class LlmManager : MonoBehaviour
             model_id = modelID,
             model_path = path,
             f16_kv = true,
-            n_ctx = 1024,
+            n_ctx = 4096,
             n_parts = -1,
             seed = 42, // TODO: Make it randomized
             n_gpu_layers = -1,
@@ -230,15 +230,20 @@ public class LlmManager : MonoBehaviour
     /// <param name="messages">List of messages forming the conversation history.</param>
     /// <param name="onComplete">Callback on successful response.</param>
     /// <param name="onError">Callback on error.</param>
-    public void Chat(string modelID, List<Message> messages, Action<ChatResponseDTO> onComplete, Action<string> onError)
+    public void Chat(string modelID, List<Message> messages, Action<ChatResponseDTO> onComplete, Action<string> onError, float top_p = 0.95f, float temperature = 0.8f)
     {
         var data = new ChatRequestDTO()
         {
             model_id = modelID,
             messages = messages,
-            max_tokens = 1500,
-            temperature = 0.5f,
-            top_p = 0.95f,
+            max_tokens = 4096,
+            f16_kv = true,
+            n_ctx = 4096,
+            n_parts = -1,
+            seed = 42, // TODO: Make it randomized
+            n_gpu_layers = -1,
+            temperature = temperature, // Default temperature for generation
+            top_p = top_p // Default top_p for generation
         };
         QueuePostRequest<ChatResponseDTO, ChatRequestDTO>("chat", data, onComplete, onError);
     }
