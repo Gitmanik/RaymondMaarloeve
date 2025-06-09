@@ -57,11 +57,6 @@ public class MiniGameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI resultText;
 
     /// <summary>
-    /// Description of the murder to display on failure.
-    /// </summary>
-    [SerializeField] private string murderDescription;
-
-    /// <summary>
     /// Array of correct (real) text fragments that must be moved by the player.
     /// </summary>
     private string[] realBlockTexts;
@@ -199,7 +194,7 @@ public class MiniGameManager : MonoBehaviour
         if (correctMoved && correctRemaining && suspectCorrect)
             resultText.text = "Well done! You pointed out all real history fragments and identified the murderer.";
         else
-            resultText.text = $"Wrong! The murderer was {realName}. {murderDescription}";
+            resultText.text = $"Wrong! The murderer was {realName}.";
     }
 
     /// <summary>
