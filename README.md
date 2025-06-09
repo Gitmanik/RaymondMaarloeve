@@ -26,6 +26,11 @@
 Full project documentation is available at:  
 🔗 **[https://raymondmaarloeve.github.io/RaymondMaarloeve/](https://raymondmaarloeve.github.io/RaymondMaarloeve/)**  
 
+🔻 **We have added a launcher for the game, available at:**  
+🔗 **[https://github.com/RaymondMaarloeve/RaymondMaarloeveLauncher](https://github.com/RaymondMaarloeve/RaymondMaarloeveLauncher)**  
+All instructions related to the launcher can be found on that page.
+
+
 ### 📄 Description
 The project we are working on is a computer game in which artificial intelligence (AI) plays a key role. Its main feature is a dynamic world where non-player characters (NPCs) have their own personalities, daily schedules, and the ability to react to player actions. Thanks to AI, each gameplay session is unique, and NPC behavior influences both the storyline and the player's decisions.
 
