@@ -21,6 +21,7 @@ public class DialogBoxManager : MonoBehaviour
     [Header("Dialog Box Npc Name Field")]
     [SerializeField] private TMP_Text npcNameText;
 
+
     private bool waitingForNpcDismiss = false;
 
     private void Awake()

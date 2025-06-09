@@ -24,9 +24,10 @@ public class GameManager : MonoBehaviour
     public GameConfig gameConfig { get; private set; }
 
     [SerializeField] private GameObject uiGameObject;
-    
+    [SerializeField] private AudioSource musicAudioSource;
 
-    
+
+
     IEnumerator Start()
     {
         Debug.Log("GameManager: Start initialization");
@@ -37,6 +38,8 @@ public class GameManager : MonoBehaviour
 
         Screen.SetResolution(gameConfig.GameWindowWidth, gameConfig.GameWindowHeight, gameConfig.FullScreen);
         Application.targetFrameRate = 60;
+
+        ApplySettings();
 
         LlmManager.Instance.Setup(gameConfig.LlmServerApi);
         Debug.Log("GameManager: LLM Setup started");
@@ -197,6 +200,27 @@ public class GameManager : MonoBehaviour
         {
             GitmanikConsole.singleton.ToggleConsole();
         }
+    }
+
+    private void ApplySettings()
+    {
+        // VIDEO
+        int graphicsQuality = PlayerPrefs.GetInt("GraphicsQuality", 2);
+        QualitySettings.SetQualityLevel(graphicsQuality);
+
+        bool isFullscreen = PlayerPrefs.GetInt("Fullscreen", 1) == 1;
+        Screen.fullScreen = isFullscreen;
+
+        // AUDIO
+        float masterVolume = PlayerPrefs.GetFloat("MasterVolume", 1.0f);
+        AudioListener.volume = masterVolume;
+
+        float musicVolume = PlayerPrefs.GetFloat("MusicVolume", 1.0f);
+        if (musicAudioSource != null)
+        {
+            musicAudioSource.volume = musicVolume;
+        }
+
     }
 
     [ConsoleCommand("npcs", "List all npcs")]
