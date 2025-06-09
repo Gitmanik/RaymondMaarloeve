@@ -20,14 +20,14 @@ public class GameManager : MonoBehaviour
     public List<NPC> npcs = new List<NPC>();
     [HideInInspector] public bool LlmServerReady = false;
     [HideInInspector] public bool HistoryGenerated = false;
+    
+    public GeneratedHistoryDTO generatedHistory;
 
     public NPC murdererNPC;
 
     public GameConfig gameConfig { get; private set; }
 
     [SerializeField] private GameObject uiGameObject;
-    
-
     
     IEnumerator Start()
     {
@@ -64,6 +64,11 @@ public class GameManager : MonoBehaviour
             
         Debug.Log("Game Manager: " + gameConfig.Npcs.Count + " NPCs to spawn");
 
+        var localGeneratedHistory = generatedHistory;
+        
+        List<string> archetypes = gameConfig.Models.FindAll(x => x.Id != gameConfig.NarratorModelId).
+            ConvertAll(x => x.Name.Substring(0,x.Name.IndexOf('.')).Replace("_", " "));
+        
         foreach (var npcConfig in gameConfig.Npcs)
         {
             Vector3 npcPosition = new Vector3(
@@ -80,20 +85,22 @@ public class GameManager : MonoBehaviour
             npcPrefabsList.RemoveAt(npcVariant);
             var npcComponent = newNpc.GetComponent<NPC>();
 
-            var tmpSystemPrompt =
-                "Your name is Wilfred von Rabenstein. You are a fallen knight, a drunkard, and a man whose name was once spoken with reverence, now drowned in ale and regret. You are 42 years old. You are undesirable in most places, yet your blade still holds value for those desperate enough to hire a ruined man. It is past midnight. You are slumped against the wall of a rundown tavern, the rain mixing with the stale stench of cheap wine on your cloak. You know the filth of the city—the beggars, the whores, the men who whisper in shadows. You drink every night until the world blurs, until the past feels like a dream. You speak with the slurred grace of a man who once addressed kings but now bargains for pennies.";
-
+            var characterDTO =
+                localGeneratedHistory.characters.Find(x => $"{archetypes[x.archetype - 1].Replace(" ", "_")}.gguf" == gameConfig.Models.Find(y => y.Id == npcConfig.ModelId).Name);
+            localGeneratedHistory.characters.Remove(characterDTO);
+            
+            IDecisionSystem system;
             if (string.IsNullOrEmpty(npcModelPath))
             {
                 Debug.LogError($"Model path not found for NPC with ID {npcConfig.ModelId}");
-                npcComponent.Setup(new NullDecisionSystem(), null, $"Npc-{npcConfig.Id}", tmpSystemPrompt
-                );
+                system = new NullDecisionSystem();
             }
             else
             {
-                Debug.Log($"Game Manager: NPC {npcConfig.Id} Model Path: {npcModelPath}");
-                npcComponent.Setup(new LlmDecisionMaker(), npcConfig.ModelId.ToString(), $"Npc-{npcConfig.Id}", tmpSystemPrompt);
+                system = new LlmDecisionMaker();
             }
+            npcComponent.Setup(system, npcConfig.ModelId.ToString(), characterDTO.name, characterDTO.description);
+            
             HashSet<BuildingData.BuildingType> allowedTypes = new HashSet<BuildingData.BuildingType>()
             {
                 BuildingData.BuildingType.House,
@@ -106,9 +113,16 @@ public class GameManager : MonoBehaviour
             buildingData.HisNPC = npcComponent;
 
             npcs.Add(npcComponent);
+
+            if (characterDTO.murderer)
+            {
+                if (murdererNPC != null)
+                {
+                    Debug.LogError($"More than one Characters are the murderer!");
+                }
+                murdererNPC = npcComponent;
+            }
         }
-        
-        murdererNPC = npcs[Random.Range(0, npcs.Count)];
     }
 
     /// <summary>
@@ -250,10 +264,9 @@ public class GameManager : MonoBehaviour
         resp = resp.Substring(resp.IndexOf('{'));
         resp = resp.Substring(0, resp.LastIndexOf('}') + 1);
         
-        var generatedHistory = JsonUtility.FromJson<GeneratedHistoryDTO>(resp);
+        generatedHistory = JsonUtility.FromJson<GeneratedHistoryDTO>(resp);
         
         Debug.Log($"GameManager: Generate history complete:\n{generatedHistory}");
-        
         
         HistoryGenerated = true;
     }
