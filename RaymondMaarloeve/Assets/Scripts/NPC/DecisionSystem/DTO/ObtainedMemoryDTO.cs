@@ -4,6 +4,6 @@ using System;
 public class ObtainedMemoryDTO
 {
     public string memory;
-    public int weight;
+    public float weight;
     public override string ToString() => $"memory: {memory}, weight: {weight}";
 }

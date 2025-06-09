@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -13,6 +13,7 @@ public class NPC : MonoBehaviour
     /// The current target the NPC is looking at.
     /// </summary>
     private Transform lookTarget;
+
     /// <summary>
     /// Stores the previous rotation before looking at a target.
     /// </summary>
@@ -22,18 +23,22 @@ public class NPC : MonoBehaviour
     /// The current decision being executed by the NPC.
     /// </summary>
     private IDecision currentDecision;
+
     /// <summary>
     /// The decision system used by the NPC.
     /// </summary>
     private IDecisionSystem decisionSystem;
+
     /// <summary>
     /// The NavMeshAgent component for navigation.
     /// </summary>
     public NavMeshAgent agent;
+
     /// <summary>
     /// The building associated with this NPC.
     /// </summary>
     public GameObject HisBuilding = null;
+
     /// <summary>
     /// The Animator component for controlling animations.
     /// </summary>
@@ -43,10 +48,12 @@ public class NPC : MonoBehaviour
     /// The system prompt used for LLM-based decision making.
     /// </summary>
     public string SystemPrompt { get; private set; } = null;
+
     /// <summary>
     /// The model ID used for LLM-based decision making.
     /// </summary>
     public string ModelID { get; private set; } = null;
+
     /// <summary>
     /// The name of the NPC.
     /// </summary>
@@ -61,6 +68,7 @@ public class NPC : MonoBehaviour
     /// The hunger level of the NPC.
     /// </summary>
     public float Hunger = 0f;
+
     /// <summary>
     /// The thirst level of the NPC.
     /// </summary>
@@ -70,6 +78,7 @@ public class NPC : MonoBehaviour
     /// The movement speed of the NPC.
     /// </summary>
     public float speed = 3f;
+
     /// <summary>
     /// The unique entity ID of the NPC.
     /// </summary>
@@ -79,10 +88,12 @@ public class NPC : MonoBehaviour
     /// The list of NPCs currently visible to this NPC.
     /// </summary>
     private List<NPC> visibleNpcs = new List<NPC>();
+
     /// <summary>
     /// The cooldown time between vision updates.
     /// </summary>
     private float visionUpdateCooldown = 1f;
+
     /// <summary>
     /// The timer for vision updates.
     /// </summary>
@@ -92,6 +103,7 @@ public class NPC : MonoBehaviour
     /// The radius of the NPC's field of view.
     /// </summary>
     private float viewRadius = 4f;
+
     /// <summary>
     /// The angle of the NPC's field of view.
     /// </summary>
@@ -103,16 +115,30 @@ public class NPC : MonoBehaviour
     private Dictionary<int, string> lastObservedActions = new Dictionary<int, string>();
 
     /// <summary>
+    /// Accumulator for tracking game hours passed since the last memory decay.
+    /// </summary>
+    private float gameHourTimer = 0f;
+
+    /// <summary>
+    /// The factor by which memory weight decays each game hour.
+    /// </summary>
+    private const float decayFactorPerHour = 0.995f;
+
+    /// <summary>
+    /// The weight threshold below which a memory is removed.
+    /// </summary>
+    private const float removalThreshold = 0.01f;
+
+    /// <summary>
     /// Initializes the NPC, sets up the entity ID, animator, and subscribes to the NPC event bus.
     /// </summary>
     public void Awake()
     {
         EntityID = GameManager.Instance.GetEntityID();
-
         animator = GetComponent<Animator>();
-
         NpcEventBus.OnNpcAction += OnNpcActionObserved;
     }
+
     /// <summary>
     /// Initializes the NavMeshAgent component.
     /// </summary>
@@ -145,6 +171,7 @@ public class NPC : MonoBehaviour
     /// </summary>
     /// <returns>The current decision.</returns>
     public IDecision GetCurrentDecision() => currentDecision;
+
     /// <summary>
     /// Gets the decision system used by the NPC.
     /// </summary>
@@ -152,7 +179,7 @@ public class NPC : MonoBehaviour
     public IDecisionSystem GetDecisionSystem() => decisionSystem;
 
     /// <summary>
-    /// Updates the NPC's state every frame, including animation, decision making, hunger/thirst, and vision.
+    /// Updates the NPC's state every frame, including animation, decision making, hunger/thirst, vision, and memory decay.
     /// </summary>
     void Update()
     {
@@ -192,12 +219,37 @@ public class NPC : MonoBehaviour
             UpdateVision();
             visionTimer = 0f;
         }
+
+        // Memory decay based on game hours
+        float minutesPerDay = DayNightCycle.Instance.dayDurationInMinutes;
+        float deltaGameHours = Time.deltaTime / (minutesPerDay * 60f) * 24f;
+        gameHourTimer += deltaGameHours;
+        while (gameHourTimer >= 1f)
+        {
+            gameHourTimer -= 1f;
+            DecayMemories();
+        }
     }
 
     /// <summary>
-    /// Updates the list of visible NPCs within the vision cone.
-    /// Performs a sphere overlap to find nearby NPCs, checks if they are within the field of view,
-    /// and updates the visibleNpcs list. Also tracks observed actions for memory and debugging.
+    /// Reduces the weight of all obtained memories by the decay factor.
+    /// Removes memories whose weight falls below the removal threshold.
+    /// </summary>
+    private void DecayMemories()
+    {
+        for (int i = ObtainedMemories.Count - 1; i >= 0; i--)
+        {
+            var mem = ObtainedMemories[i];
+            mem.weight *= decayFactorPerHour;
+            if (mem.weight <= removalThreshold)
+            {
+                ObtainedMemories.RemoveAt(i);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Updates the list of visible NPCs within the vision cone and records new memories for observed actions.
     /// </summary>
     void UpdateVision()
     {
@@ -222,8 +274,8 @@ public class NPC : MonoBehaviour
                             {
                                 lastObservedActions[npc.EntityID] = currentAction;
 
-                                string newMemory = $"Saw {npc.NpcName} doing {currentAction}"; //TODO add hour
-            
+                                string newMemory = $"Saw {npc.NpcName} doing {currentAction}"; // TODO add hour
+
                                 decisionSystem.CalculateRelevance(newMemory, relevance =>
                                 {
                                     ObtainedMemories.Add(new ObtainedMemoryDTO
@@ -233,7 +285,7 @@ public class NPC : MonoBehaviour
                                     });
                                     Debug.Log($"{NpcName} immediately observed {npc.NpcName} doing {currentAction}. Assigned relevance value: {relevance}");
                                 });
-                                
+
                             }
                             visibleNpcs.Add(npc);
                         }
@@ -241,7 +293,6 @@ public class NPC : MonoBehaviour
                 }
             }
         }
-
 
     }
 
@@ -260,8 +311,8 @@ public class NPC : MonoBehaviour
         {
             lastObservedActions[observedNpc.EntityID] = e.Action;
 
-            string newMemory = $"Saw {observedNpc.NpcName} doing {e.Action}"; //TODO add hour
-            
+            string newMemory = $"Saw {observedNpc.NpcName} doing {e.Action}"; // TODO add hour
+
             decisionSystem.CalculateRelevance(newMemory, relevance =>
             {
                 ObtainedMemories.Add(new ObtainedMemoryDTO
@@ -274,8 +325,6 @@ public class NPC : MonoBehaviour
             });
         }
     }
-
-
 
     /// <summary>
     /// Makes the NPC look at a specified target transform.
@@ -306,7 +355,7 @@ public class NPC : MonoBehaviour
     public List<CurrentEnvironment> GetCurrentEnvironment()
     {
         List<CurrentEnvironment> environments = new List<CurrentEnvironment>();
-        
+
         foreach (var buildingGO in MapGenerator.Instance.spawnedBuildings)
         {
             var buildingData = buildingGO.GetComponent<BuildingData>();
@@ -344,7 +393,7 @@ public class NPC : MonoBehaviour
 
         environments.Add(new CurrentEnvironment(new IdleDecision(), null));
         environments.Add(new CurrentEnvironment(new WalkDecision(this), null));
-        
+
         return environments;
     }
 
@@ -362,7 +411,7 @@ public class NPC : MonoBehaviour
 
         Debug.DrawLine(transform.position, transform.position + transform.forward * viewRadius, Color.yellow);
     }
-    
+
     /// <summary>
     /// Unsubscribes from the NPC event bus when the NPC is destroyed.
     /// </summary>
@@ -382,19 +431,22 @@ public class NpcActionEvent
     /// The source NPC's entity ID.
     /// </summary>
     public int SourceId;
+
     /// <summary>
     /// The action performed by the NPC.
     /// </summary>
     public string Action;
+
     /// <summary>
     /// The position where the action was performed.
     /// </summary>
     public Vector3 Position;
+
     /// <summary>
     /// The timestamp when the event was created.
     /// </summary>
     public float Timestamp;
-    
+
     /// <summary>
     /// Constructs a new NpcActionEvent.
     /// </summary>
