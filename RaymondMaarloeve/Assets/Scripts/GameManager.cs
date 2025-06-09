@@ -48,6 +48,8 @@ public class GameManager : MonoBehaviour
 
         yield return StartCoroutine(GenerateHistory());
 
+        yield return StartCoroutine(ConvertHistoryToBlocks());
+
         MapGenerator.Instance.GenerateMap();
         
         List<GameObject> npcPrefabsList = npcPrefabs.ToList();
@@ -196,7 +198,6 @@ public class GameManager : MonoBehaviour
 
     /// <summary>
     /// Coroutine that generates a story using Narrator LLM Model,
-    /// If the generation fails, it retries automatically.
     /// </summary>
     /// <returns>IEnumerator for coroutine execution.</returns>
     private IEnumerator GenerateHistory()
@@ -267,6 +268,63 @@ public class GameManager : MonoBehaviour
         generatedHistory = JsonUtility.FromJson<GeneratedHistoryDTO>(resp);
         
         Debug.Log($"GameManager: Generate history complete:\n{generatedHistory}");
+    }
+
+    /// <summary>
+    /// Coroutine that generates blocks from Story using Narrator LLM Model
+    /// </summary>
+    /// <returns>IEnumerator for coroutine execution.</returns>
+    private IEnumerator ConvertHistoryToBlocks()
+    {
+        string prompt = $"You will read a short story and extract the six most important factual events. " +
+                        $"Then, generate two false sentences that do not occur in the story. " +
+                        $"Return your output strictly as a JSON object with two keys:\n\n" +
+                        $"\"key_events\" — an array of exactly six short English sentences, each stating a concrete, factual event that actually appears in the story.\n" +
+                        $"\"false_events\" — an array of exactly two short English sentences that are believable but clearly did not happen in the story.\n" +
+                        $"Do not include any notes, explanation, comments, or prose. Use only concise, fact-based language.\n\n" +
+                        $"Here is the story:\n" +
+                        $"\"{generatedHistory.story}\"\n\n" +
+                        $"Your response must be ONLY this EXACT CORRENT JSON object:\n" +
+                            $"{{\n\"key_events\": [\n" +
+                                $"\"Event 1 here.\",\n" +
+                                $"\"Event 2 here.\",\n" +
+                                $"\"Event 3 here.\",\n" +
+                                $"\"Event 4 here.\",\n" +
+                                $"\"Event 5 here.\",\n" +
+                                $"\"Event 6 here.\"\n" +
+                            $"],\n" +
+                            $"\"false_events\": [\n" +
+                                $"\"False event 1 here.\",\n" +
+                                $"\"False event 2 here.\"\n" +
+                            $"]\n}}";
+        List<Message> messages = new List<Message>();
+        messages.Add(new Message { role =  "user", content = prompt});
+        
+        bool callbackCalled = false;
+
+        string resp = null;
+        
+        LlmManager.Instance.Chat(gameConfig.NarratorModelId.ToString(), messages, result =>
+        {
+            callbackCalled = true;
+            resp = result.response;
+        }, (error) =>
+        {
+            Debug.LogError($"GameManager: ConvertHistoryToBlocks error: {error}");
+        });
+        
+        // Wait for the callback to be called
+        while (!callbackCalled)
+            yield return null;
+
+        resp = resp.Substring(resp.IndexOf('{'));
+        resp = resp.Substring(0, resp.LastIndexOf('}') + 1);
+        
+        Debug.Log($"GameManager: ConvertHistoryToBlocks response:\n{resp}");
+        
+        var converted = JsonUtility.FromJson<ConvertHistoryToBlocksDTO>(resp);
+        
+        Debug.Log($"GameManager: ConvertHistoryToBlocks complete:\n{converted}");
         
         HistoryGenerated = true;
     }
