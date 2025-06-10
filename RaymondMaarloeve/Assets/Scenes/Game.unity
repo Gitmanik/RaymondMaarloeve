@@ -3275,27 +3275,27 @@ MonoBehaviour:
   decorations:
   - prefab: {fileID: 3045040967433266602, guid: 04383b4e2e99718428159531b28b1c67, type: 3}
     weight: 0.2
-    maxCount: 3
+    maxCount: 10
     currentCount: 0
   - prefab: {fileID: 3045040967433266602, guid: 04383b4e2e99718428159531b28b1c67, type: 3}
     weight: 0.2
-    maxCount: 3
+    maxCount: 10
     currentCount: 0
   - prefab: {fileID: 2044052314510883550, guid: ecbfea977636f8d4b8d083e997d197fa, type: 3}
     weight: 0.2
-    maxCount: 3
+    maxCount: 10
     currentCount: 0
   - prefab: {fileID: 1590564260741474642, guid: 70aef14dbd16e0047816de55b9d26545, type: 3}
     weight: 0.2
-    maxCount: 3
+    maxCount: 10
     currentCount: 0
   - prefab: {fileID: 6487759302446060899, guid: 481e0b3786586414caa8b77a50f92d9e, type: 3}
     weight: 0.2
-    maxCount: 3
+    maxCount: 10
     currentCount: 0
   - prefab: {fileID: 7940860190077275469, guid: 5df6b0cd63f22a24a9f939b1e4f59409, type: 3}
     weight: 0.2
-    maxCount: 3
+    maxCount: 10
     currentCount: 0
   spawnedBuildings: []
   mapWidth: 0
