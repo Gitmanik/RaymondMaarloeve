@@ -67,7 +67,7 @@ public class NPC : MonoBehaviour
     /// <summary>
     /// The list of memories obtained by the NPC.
     /// </summary>
-    public List<ObtainedMemoryDTO> ObtainedMemories { get; private set; } = new List<ObtainedMemoryDTO>();
+    public List<ObtainedMemory> ObtainedMemories { get; private set; } = new();
 
     /// <summary>
     /// The hunger level of the NPC.
@@ -127,7 +127,7 @@ public class NPC : MonoBehaviour
     /// <summary>
     /// The factor by which memory weight decays each game hour.
     /// </summary>
-    private const float decayFactorPerHour = 0.995f;
+    private const float decayFactorPerHour = 0.9f;
 
     /// <summary>
     /// The weight threshold below which a memory is removed.
@@ -245,8 +245,8 @@ public class NPC : MonoBehaviour
         for (int i = ObtainedMemories.Count - 1; i >= 0; i--)
         {
             var mem = ObtainedMemories[i];
-            mem.weight *= decayFactorPerHour;
-            if (mem.weight <= removalThreshold)
+            mem.multiplier *= decayFactorPerHour;
+            if (mem.Weight <= removalThreshold)
             {
                 ObtainedMemories.RemoveAt(i);
             }
@@ -283,10 +283,12 @@ public class NPC : MonoBehaviour
             
                                 decisionSystem.CalculateRelevance(newMemory, relevance =>
                                 {
-                                    ObtainedMemories.Add(new ObtainedMemoryDTO
+                                    ObtainedMemories.Add(new ObtainedMemory()
                                     {
                                         memory = newMemory,
-                                        weight = relevance + 5 + 10, // TODO: Hard-coded importance = 5, recency = 10
+                                        relevance = relevance,
+                                        importance = 5,
+                                        recency = 10
                                     });
                                     Debug.Log($"{NpcName} immediately observed {npc.NpcName} doing {currentAction}. Assigned relevance value: {relevance}");
                                 });
@@ -320,10 +322,12 @@ public class NPC : MonoBehaviour
 
             decisionSystem.CalculateRelevance(newMemory, relevance =>
             {
-                ObtainedMemories.Add(new ObtainedMemoryDTO
+                ObtainedMemories.Add(new ObtainedMemory()
                 {
                     memory = newMemory,
-                    weight = relevance + 5 + 10, // TODO: Hard-coded importance = 5, recency = 10
+                    relevance = relevance,
+                    importance = 5,
+                    recency = 10
                 });
 
                 Debug.Log($"{NpcName} observed {observedNpc.NpcName} doing {e.Action}. Assigned relevance value: {relevance}");

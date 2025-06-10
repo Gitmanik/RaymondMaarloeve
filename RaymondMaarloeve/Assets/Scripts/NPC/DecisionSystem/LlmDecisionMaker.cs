@@ -80,7 +80,7 @@ public class LlmDecisionMaker : IDecisionSystem
       List<CurrentEnvironmentDTO> currentEnvironmentDtos = currentEnvironment.ConvertAll(x => x.ToDTO(npc));
       dto.current_environment = currentEnvironmentDtos;
       
-      dto.obtained_memories = npc.ObtainedMemories;
+      dto.obtained_memories = npc.ObtainedMemories.ConvertAll(x => x.ToDTO());;
 
       string prompt =
         $"It it currently {DayNightCycle.Instance.GetCurrentTimeText()}, day {DayNightCycle.Instance.GetCurrentDay()}.\n" +
@@ -180,7 +180,7 @@ Output format must be **EXACTLY AND ONLY** an integer. Do not explain your reaso
         
       var dto = new CalculateRelevanceDTO();
       dto.core_memories = npc.SystemPrompt.Split('.').ToList().ConvertAll(x => x.Trim());
-      dto.obtained_memories = npc.ObtainedMemories;
+      dto.obtained_memories = npc.ObtainedMemories.ConvertAll(x => x.ToDTO());
       dto.new_memory = newMemory;
       
       var dtoJson = JsonUtility.ToJson(dto);
