@@ -156,6 +156,12 @@ public class LlmDecisionMaker : IDecisionSystem
     /// <param name="relevanceFunc">Delegate which will be called when the value is calculated.</param>
     public void CalculateRelevance(string newMemory, Action<int> relevanceFunc)
     {
+      if (GameManager.Instance.SkipRelevance)
+      {
+        relevanceFunc(5);
+        return;
+      }
+      
       string prompt = @"
 You are a memory analysis model in a mystery narrative game.
 Your task is to assign a Relevance score (1–10) to a newly obtained memory.

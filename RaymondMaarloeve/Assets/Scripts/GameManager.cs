@@ -32,11 +32,15 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private AudioSource musicAudioSource;
 
-    [Header("Debug toggles")]
+    [Header("DEBUG")]
+    [Header("Narrator")]
     [SerializeField] private bool DontGenerateHistory = false;
     [SerializeField] private string historyJSON = "";
     [SerializeField] private bool DontConvertHistoryToBlocks = false;
     [SerializeField] private string historyBlocksJSON = "";
+
+    [Header("Decision Making")]
+    public bool SkipRelevance = false;
 
     IEnumerator Start()
     {
