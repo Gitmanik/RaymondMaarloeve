@@ -54,7 +54,7 @@ public abstract class VisitBuildingDecision : IDecision
             if (NpcShouldDisappear)
             {
                 npc.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
-                npc.agent.enabled = true;
+                npc.agent.radius = 0.5f;
             }
             OnFinished();
             return false;
@@ -67,8 +67,7 @@ public abstract class VisitBuildingDecision : IDecision
                 if (NpcShouldDisappear)
                 {
                     npc.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
-                    npc.agent.enabled = false;
-
+                    npc.agent.radius = 0.01f;
                 }
                 reachedBuilding = true;
             }
