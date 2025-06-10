@@ -62,9 +62,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9b5211e140d2ac04d9c5404fd277bc35, type: 3}
       insertIndex: -1
       addedObject: {fileID: -2166310958672154395}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9b5211e140d2ac04d9c5404fd277bc35, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: -4921235742858482161}
     - targetCorrespondingSourceObject: {fileID: 9198908157259179412, guid: 9b5211e140d2ac04d9c5404fd277bc35, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4953473139653710303}
@@ -223,19 +220,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HisNPC: {fileID: 0}
+  HisMainTileGridPosition: {x: -1, y: -1}
   HisType: 11
---- !u!114 &-4921235742858482161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6398382561017800961}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af0d6ea39ca28ef4094f81ea6eaf1529, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  HisTileCount: 0
 --- !u!1 &7912180742739602116 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4163367491951017620, guid: 9b5211e140d2ac04d9c5404fd277bc35, type: 3}
