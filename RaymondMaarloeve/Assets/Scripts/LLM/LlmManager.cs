@@ -239,13 +239,16 @@ public class LlmManager : MonoBehaviour
     /// <param name="messages">List of messages forming the conversation history.</param>
     /// <param name="onComplete">Callback on successful response.</param>
     /// <param name="onError">Callback on error.</param>
-    public void Chat(string modelID, List<Message> messages, Action<ChatResponseDTO> onComplete, Action<string> onError, float top_p = 0.95f, float temperature = 0.8f)
+    /// <param name="top_p">top_p LLM parameter</param>
+    /// <param name="temperature">Temperature LLM parameter</param>
+    /// <param name="maxTokens">Max tokens to generate</param>
+    public void Chat(string modelID, List<Message> messages, Action<ChatResponseDTO> onComplete, Action<string> onError, float top_p = 0.95f, float temperature = 0.8f, int maxTokens = 4096)
     {
         var data = new ChatRequestDTO()
         {
             model_id = modelID,
             messages = messages,
-            max_tokens = 4096,
+            max_tokens = maxTokens,
             f16_kv = false,
             n_ctx = 4096,
             n_parts = -1,
