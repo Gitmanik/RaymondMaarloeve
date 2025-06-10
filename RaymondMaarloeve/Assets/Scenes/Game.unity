@@ -3157,6 +3157,63 @@ MonoBehaviour:
   uiGameObject: {fileID: 330165694}
   MinimapGameObject: {fileID: 1191064608}
   musicAudioSource: {fileID: 0}
+  DontGenerateHistory: 0
+  historyJSON: '{"story":"The villagers of Ashwood gathered in the church, their
+    faces lit only by the faint moonlight filtering through the stained glass windows.
+    The air was heavy with the scent of wet earth and decay. In the center of the
+    church, the body of Bridget, a 7-year-old girl, lay motionless on the stone floor.
+    The helpful man, Godric, knelt beside her, his hands clasped together in prayer.
+    The ribald man, Grimbold, stood by the door, his eyes fixed on the well outside,
+    his mind elsewhere. The priest, Father Thomas, stood watchfully beside the altar,
+    his eyes scanning the crowd. The seductive woman, Elara, stood apart, her gaze
+    fixed on Godric, a mixture of concern and curiosity on her face. The guard, Wulfric,
+    stood at the entrance, his hand on the hilt of his sword, his eyes scanning the
+    crowd with a mixture of suspicion and boredom. As the night wore on, the silence
+    grew thicker, punctuated only by the sound of dripping water from the well and
+    the distant hooting of an owl. It was as if the very forest itself was holding
+    its breath, waiting to see what would happen next. The villagers exchanged nervous
+    glances, their faces pale and drawn. And in the darkness, a figure watched from
+    the shadows, its eyes fixed on the scene before it, its heart beating with a
+    malevolent intent.","characters":[{"name":"Godric","archetype":1,"age":52,"description":"You
+    are a helpful man. You are 52 years old. You are the village priest''s assistant
+    and are responsible for maintaining the church and its grounds. You are a kind
+    and gentle soul, always willing to lend a hand to those in need. You have a warm
+    smile and a quick wit, and the villagers often come to you for advice. You are
+    a bit of a neat freak and have a habit of straightening up the church after each
+    service.","murderer":false},{"name":"Grimbold","archetype":2,"age":45,"description":"You
+    are a ribald man. You are 45 years old. You are the village blacksmith and are
+    known for your love of ale and good company. You are a bit of a jokester and
+    often regale the villagers with tales of your adventures. You are a bit of a
+    ladies'' man and have a habit of flirting with the village women.","murderer":false},{"name":"Father
+    Thomas","archetype":3,"age":60,"description":"You are a priest. You are 60 years
+    old. You are the village priest and are responsible for the spiritual well-being
+    of the villagers. You are a wise and compassionate man, often sought out for
+    guidance and advice. You have a strong sense of justice and are not afraid to
+    speak truth to power. You have a habit of wearing a silver crucifix around your
+    neck.","murderer":false},{"name":"Elara","archetype":4,"age":28,"description":"You
+    are a seductive woman. You are 28 years old. You are a traveling performer and
+    are known for your beauty and charm. You are a bit of a free spirit and often
+    find yourself at odds with the village elders. You have a habit of wearing elaborate
+    costumes and wigs.","murderer":false},{"name":"Wulfric","archetype":5,"age":35,"description":"You
+    are a guard. You are 35 years old. You are the village guard and are responsible
+    for maintaining law and order. You are a bit of a loner and often find yourself
+    at odds with the villagers. You have a habit of carrying a large wooden shield
+    with you at all times.","murderer":false},{"name":"Bridget","archetype":6,"age":7,"description":"You
+    are a delusional child. You are 7 years old. You are the daughter of the village
+    baker and are known for your wild imagination and love of games. You are a bit
+    of a daydreamer and often get lost in your own thoughts. You have a habit of
+    talking to yourself and often forget what is real and what is not.","murderer":true}]}'
+  historyBlocksJSON: '{"key_events":["The villagers of Ashwood gathered in the church.","The
+    body of Bridget, a 7-year-old girl, lay motionless on the stone floor.","The
+    helpful man, Godric, knelt beside her, his hands clasped together in prayer.","The
+    priest, Father Thomas, stood watchfully beside the altar, his eyes scanning the
+    crowd.","The seductive woman, Elara, stood apart, her gaze fixed on Godric, a
+    mixture of concern and curiosity on her face.","The guard, Wulfric, stood at
+    the entrance, his hand on the hilt of his sword, his eyes scanning the crowd
+    with a mixture of suspicion and boredom."],"false_events":["The villagers gathered
+    in the town square to celebrate the summer solstice.","The villagers of Ashwood
+    had been plagued by a series of strange and terrifying events in the preceding
+    weeks."]}'
 --- !u!114 &1294622897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3316,6 +3373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9fa2b6daf246d7a183057693259627, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LogDebug: 0
 --- !u!114 &1294622902
 MonoBehaviour:
   m_ObjectHideFlags: 0

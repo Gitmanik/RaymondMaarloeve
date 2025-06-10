@@ -32,6 +32,11 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private AudioSource musicAudioSource;
 
+    [Header("Debug toggles")]
+    [SerializeField] private bool DontGenerateHistory = false;
+    [SerializeField] private string historyJSON = "";
+    [SerializeField] private bool DontConvertHistoryToBlocks = false;
+    [SerializeField] private string historyBlocksJSON = "";
 
     IEnumerator Start()
     {
@@ -53,9 +58,16 @@ public class GameManager : MonoBehaviour
         // Wait for LLM connection and model loading
         yield return StartCoroutine(WaitForLlmConnection());
 
-        yield return StartCoroutine(GenerateHistory());
+        if (DontGenerateHistory)
+            generatedHistory = JsonUtility.FromJson<GeneratedHistoryDTO>(historyJSON);
+        else
+            yield return StartCoroutine(GenerateHistory());
+        
+        if (DontConvertHistoryToBlocks)
+            storyBlocks = JsonUtility.FromJson<ConvertHistoryToBlocksDTO>(historyBlocksJSON);
+        else
+            yield return StartCoroutine(ConvertHistoryToBlocks());
 
-        yield return StartCoroutine(ConvertHistoryToBlocks());
         MiniGameManager.Instance.Setup(storyBlocks.key_events, storyBlocks.false_events);
 
         MapGenerator.Instance.GenerateMap();
