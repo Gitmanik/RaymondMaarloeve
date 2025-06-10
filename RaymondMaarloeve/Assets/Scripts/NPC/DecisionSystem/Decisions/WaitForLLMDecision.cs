@@ -6,6 +6,7 @@
     public string DebugInfo() => "waiting for LLM Decision";
 
     public void Start() {}
+    public void Finish() {}
 
     public bool Tick()
     {

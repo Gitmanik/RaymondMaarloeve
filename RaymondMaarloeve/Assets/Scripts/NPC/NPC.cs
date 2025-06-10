@@ -194,19 +194,6 @@ public class NPC : MonoBehaviour
             animator.SetBool("isWalking", isWalking);
         }
 
-        if (lookTarget != null)
-        {
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, lookTarget.eulerAngles.y - 180, transform.eulerAngles.z);
-            currentDecision = null;
-            agent.ResetPath();
-        }
-        
-        if (currentDecision is GoToSleepDecision && DayNightCycle.Instance.timeOfDay >= 7.75f)
-        {
-            currentDecision = null;
-            agent.ResetPath();
-        }
-
         if (currentDecision == null || !currentDecision.Tick())
         {
             Debug.Log($"{NpcName}: Current decision finished");
@@ -448,7 +435,11 @@ public class NPC : MonoBehaviour
     public void OnInteraction()
     {
         LookAt(CameraFollow.Instance.transform);
+        currentDecision?.Finish();
         StoppedDecision = currentDecision;
+        currentDecision = null;
+        agent.ResetPath();
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, lookTarget.eulerAngles.y - 180, transform.eulerAngles.z);
     }
 }
 

@@ -84,6 +84,16 @@ public abstract class VisitBuildingDecision : IDecision
         npc.agent.SetDestination(destination);
         npc.agent.stoppingDistance = StoppingDistance;
     }
+
+    public void Finish()
+    {
+        if (NpcShouldDisappear)
+        {
+            npc.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
+            npc.agent.radius = 0.5f;
+        }
+        OnFinished();
+    }
     
     public string DebugInfo() => $"visiting building {(buildingGO.name == "Entrance" ? buildingGO.transform.parent.gameObject.name : buildingGO.name)} at: {destination}, reachedBuilding: {reachedBuilding}, waitDuration: {WaitDuration}, stoppingDistance: {StoppingDistance}";
     public abstract string PrettyName { get; }
