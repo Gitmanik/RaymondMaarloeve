@@ -371,6 +371,14 @@ public class NPC : MonoBehaviour
         NpcEventBus.OnNpcAction -= OnNpcActionObserved;
     }
 
+    /// <summary>
+    /// Called when Player starts interacting with NPC, see <see cref="PlayerController::StartInteraction"/>
+    /// NPC will look at Player and <see cref="StoppedDecision"/> will be set to <see cref="currentDecision"/>
+    /// </summary>
+    public void OnInteraction()
+    {
+        LookAt(CameraFollow.Instance.transform);
+    }
 }
 
 /// <summary>

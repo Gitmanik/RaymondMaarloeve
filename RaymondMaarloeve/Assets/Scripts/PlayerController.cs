@@ -152,7 +152,7 @@ public class PlayerController : MonoBehaviour
 
         characterMesh.enabled = false;
 
-        npc.LookAt(CameraFollow.Instance.transform);
+        npc.OnInteraction();
         
         currentlyInteractingNPC = npc;
         
