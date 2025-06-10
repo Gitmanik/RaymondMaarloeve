@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - NPC
+  - DontDestroy
+  - StartMinigame
   layers:
   - Default
   - TransparentFX
