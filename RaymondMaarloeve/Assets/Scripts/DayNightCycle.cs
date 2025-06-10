@@ -99,6 +99,14 @@ public class DayNightCycle : MonoBehaviour
     {
         return currentDay;
     }
+
+    public string GetCurrentTimeText()
+    {
+        int hour = Mathf.FloorToInt(timeOfDay);
+        int minute = Mathf.FloorToInt((timeOfDay - hour) * 60f);
+        // Format in "HH:MM" format
+        return hour.ToString("00") + ":" + minute.ToString("00");
+    }
     void Awake()
     {
         if (Instance == null) Instance = this;
