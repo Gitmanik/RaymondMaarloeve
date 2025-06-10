@@ -76,6 +76,7 @@ public abstract class VisitBuildingDecision : IDecision
     public void Start()
     {
         npc.agent.SetDestination(destination);
+        npc.agent.stoppingDistance = StoppingDistance;
     }
     
     public string DebugInfo() => $"visiting building at: {destination}, reachedBuilding: {reachedBuilding}, waitDuration: {WaitDuration}, stoppingDistance: {StoppingDistance}";
