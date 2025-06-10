@@ -200,12 +200,24 @@ public class NPC : MonoBehaviour
             currentDecision = null;
             agent.ResetPath();
         }
-        else
+        
+        if (currentDecision is GoToSleepDecision && DayNightCycle.Instance.timeOfDay >= 7.75f)
+        {
+            currentDecision = null;
+            agent.ResetPath();
+        }
 
         if (currentDecision == null || !currentDecision.Tick())
         {
             Debug.Log($"{NpcName}: Current decision finished");
-            currentDecision = decisionSystem.Decide();
+            if (DayNightCycle.Instance.timeOfDay > 20.5f || DayNightCycle.Instance.timeOfDay < 7f)
+            {
+                currentDecision = new GoToSleepDecision(HisBuilding, this);
+            }
+            else
+            {
+                currentDecision = decisionSystem.Decide();
+            }
             currentDecision.Start();
             Debug.Log($"{NpcName}: New decision: {currentDecision.DebugInfo()}");
             NpcEventBus.Publish(new NpcActionEvent(
