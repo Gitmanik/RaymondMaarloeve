@@ -20,6 +20,6 @@ public class ObtainedMemoryDTO
     /// <summary>
     /// ToString override used for pretty printing
     /// </summary>
-    /// <returns>A pretty print representation of the ObtainedMemoryDTO object.<
+    /// <returns>A pretty print representation of the ObtainedMemoryDTO object.</returns>
     public override string ToString() => $"memory: {memory}, weight: {weight}";
 }
