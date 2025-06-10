@@ -81,11 +81,16 @@ public class LlmDecisionMaker : IDecisionSystem
       dto.current_environment = currentEnvironmentDtos;
       
       dto.obtained_memories = npc.ObtainedMemories;
+
+      string prompt =
+        $"It it currently {DayNightCycle.Instance.GetCurrentTimeText()}, day {DayNightCycle.Instance.GetCurrentDay()}.\n" +
+        $"Take needs into account.\n" +
+        $"What should {npc.NpcName} do now? Choose from CurrentEnvironment.\n" +
+        $"Respond ONLY with the action index (1-{dto.current_environment.Count}).";
       
       var content = JsonUtility.ToJson(dto);
       currentConversation.Add(new Message { role = "system", content = content});
-      
-      currentConversation.Add(new Message { role = "user", content = $"What should {npc.NpcName} do now? Choose from CurrentEnvironment. Respond ONLY with the action index (1-{dto.current_environment.Count})."});
+      currentConversation.Add(new Message { role = "user", content = prompt});
       
       LlmManager.Instance.Chat(
         npc.ModelID,
