@@ -107,9 +107,10 @@ public class LlmDecisionMaker : IDecisionSystem
     /// <returns>An implementation of <see cref="IDecision"/> representing the parsed action.</returns>
     private IDecision ParseDecision(ChatResponseDTO chatResponseDto)
     {
-      Debug.Log($"Idle response, content: ({chatResponseDto.response})");
+      string result = Regex.Replace(chatResponseDto.response, @"\D*(\d+)\D*", "$1");
 
-      if (int.TryParse(chatResponseDto.response, out int response) == false)
+
+      if (int.TryParse(result, out int response) == false)
       {
         Debug.LogError($"Idle response, invalid response: {chatResponseDto.response}");
         return new IdleDecision();
