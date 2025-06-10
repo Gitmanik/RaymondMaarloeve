@@ -311,7 +311,13 @@ public class GameManager : MonoBehaviour
 
             if (resp == null)
                 continue;
-            
+
+            if (!resp.Contains('{') || !resp.Contains('}'))
+            {
+                Debug.LogError($"GameManager: GenerateHistory error: missing JSON brackets\n{resp}");
+                continue;
+            } 
+                
             string strippedResp = resp.Substring(resp.IndexOf('{'));
             strippedResp = strippedResp.Substring(0, strippedResp.LastIndexOf('}') + 1);
 
@@ -394,6 +400,12 @@ public class GameManager : MonoBehaviour
             if (resp == null)
                 continue;
 
+            if (!resp.Contains('{') || !resp.Contains('}'))
+            {
+                Debug.LogError($"GameManager: ConvertHistoryToBlocks error: missing JSON brackets\n{resp}");
+                continue;
+            } 
+            
             string strippedResp = resp.Substring(resp.IndexOf('{'));
             strippedResp = strippedResp.Substring(0, strippedResp.LastIndexOf('}') + 1);
         
@@ -403,7 +415,7 @@ public class GameManager : MonoBehaviour
             }
             catch (Exception e)
             {
-                Debug.LogError($"GameManager: Error parsing generated history blocks output: {e.Message}:\nFull response:{resp}\n\nStripped response:{strippedResp}");
+                Debug.LogError($"GameManager: ConvertHistoryToBlocks error: {e.Message}:\nFull response:{resp}\n\nStripped response:{strippedResp}");
                 continue;
             }
         
