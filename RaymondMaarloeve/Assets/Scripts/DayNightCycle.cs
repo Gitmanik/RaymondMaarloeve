@@ -28,6 +28,8 @@ public class DayNightCycle : MonoBehaviour
     [Tooltip("Stopnie obrotu skyboxu na sekundê")]
     public float skyboxRotationSpeed = 1f;
 
+    public bool enableTimePass = false;
+    
     void Start()
     {
         // Ustaw pocz¹tkowy skybox i UI
@@ -38,6 +40,9 @@ public class DayNightCycle : MonoBehaviour
 
     void Update()
     {
+        if (!enableTimePass)
+            return;
+        
         // 1) Aktualizacja czasu
         timeOfDay += Time.deltaTime / (dayDurationInMinutes * 60f) * 24f;
         if (timeOfDay >= 24f)

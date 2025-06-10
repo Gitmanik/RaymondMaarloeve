@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour
         if (LlmServerReady && MapGenerator.Instance.IsMapGenerated)
         {
             uiGameObject.SetActive(true);
+            DayNightCycle.Instance.enableTimePass = true;
         }
         else
         {
