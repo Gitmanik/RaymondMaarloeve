@@ -194,7 +194,10 @@ public class NPC : MonoBehaviour
             animator.SetBool("isWalking", isWalking);
         }
 
-        if (currentDecision == null || !currentDecision.Tick())
+        if (PlayerController.Instance.currentlyInteractingNPC == this)
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, lookTarget.eulerAngles.y - 180, transform.eulerAngles.z);
+        
+        if (!PlayerController.Instance.currentlyInteractingNPC == this && (currentDecision == null || !currentDecision.Tick()))
         {
             Debug.Log($"{NpcName}: Current decision finished");
             if (DayNightCycle.Instance.timeOfDay > 20.5f || DayNightCycle.Instance.timeOfDay < 7f)
@@ -439,7 +442,6 @@ public class NPC : MonoBehaviour
         StoppedDecision = currentDecision;
         currentDecision = null;
         agent.ResetPath();
-        transform.eulerAngles = new Vector3(transform.eulerAngles.x, lookTarget.eulerAngles.y - 180, transform.eulerAngles.z);
     }
 }
 
