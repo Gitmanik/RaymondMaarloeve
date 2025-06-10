@@ -558,4 +558,17 @@ public class GameManager : MonoBehaviour
         PlayerController.Instance.StartInteraction(npc);
         return true;
     }
+
+    [ConsoleCommand("story", "Dumps GeneratedHistoryDTO as JSON")]
+    public static bool DumpStory()
+    {
+        Debug.Log(JsonUtility.ToJson(Instance.generatedHistory));
+        return true;
+    }
+    [ConsoleCommand("blocks", "Dumps ConvertHistoryToBlocksDTO as JSON")]
+    public static bool DumpBlocks()
+    {
+        Debug.Log(JsonUtility.ToJson(Instance.storyBlocks));
+        return true;
+    }
 }
