@@ -503,7 +503,7 @@ public class GameManager : MonoBehaviour
     {
         string x = "NPCs:\n";
         foreach (var npc in GameManager.Instance.npcs)
-            x += $"{npc.EntityID} Pos: {npc.transform.position} , Name: ({npc.NpcName}) System: ({npc.GetDecisionSystem()}: {npc.GetCurrentDecision().PrettyName}), Hunger: {npc.Hunger}, Thirst: {npc.Thirst}\nObtained Memories:{string.Join("\n", npc.ObtainedMemories)}\nSystem Prompt: {npc.SystemPrompt}\n";
+            x += $"<b>{npc.EntityID} {npc.NpcName}</b><b>Pos:</b> {npc.transform.position} , <b>System:</b> ({npc.GetDecisionSystem()}: {npc.GetCurrentDecision().DebugInfo()})\n<b>Hunger:</b> {npc.Hunger}\n<b>Thirst:</b> {npc.Thirst}\n<b>Obtained Memories:</b>\n{string.Join("\n", npc.ObtainedMemories)}\n<b>System Prompt:</b> {npc.SystemPrompt}\n";
         Debug.Log(x);
         return true;
     }
