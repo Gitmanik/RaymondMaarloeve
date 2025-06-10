@@ -28,7 +28,10 @@ Full project documentation is available at:
 
 🔻 **We have added a launcher for the game, available at:**  
 🔗 **[https://github.com/RaymondMaarloeve/RaymondMaarloeveLauncher](https://github.com/RaymondMaarloeve/RaymondMaarloeveLauncher)**  
-All instructions related to the launcher can be found on that page.
+All instructions related to the launcher can be found on that page.  
+
+🧠 **We have also created a separate repository for the server responsible for handling our LLMs:**  
+🔗 **[https://github.com/RaymondMaarloeve/LLMServer](https://github.com/RaymondMaarloeve/LLMServer)**
 
 
 ### 📄 Description
@@ -42,10 +45,26 @@ What sets this game apart is the lack of traditional, rigid scripting for events
   - Large Language Model (LLM), pathfinding with NavMesh  
   - We use **Llama 3.2 3B Instruct** for all in-game LLM-driven behaviors, including NPC dialogue and decision-making.
 - **Graphics:**  
-  - [Kenney Fantasy UI](https://kenney.nl/assets/fantasy-ui-borders)  
-  - [Free Medieval 3D People Low Poly Pack](https://free-game-assets.itch.io/free-medieval-3d-people-low-poly-pack)  
+  - [Kenney Fantasy UI](https://kenney.nl/assets/fantasy-ui-borders) 
+  - [Free Medieval 3D People Low Poly Pack](https://free-game-assets.itch.io/free-medieval-3d-people-low-poly-pack) 
   - [CC0 Terrain Textures](https://opengameart.org/content/cc0-terrain-textures)  
-  - Free assets ([Itch.io Free Assets](https://itch.io/game-assets/free/tag-isometric))
+  - Free assets ([Itch.io Free Assets](https://itch.io/game-assets/free/tag-isometric))  
+
+- **Audio:**  
+  - [Foot Steps](https://assetstore.unity.com/packages/audio/sound-fx/foley/footsteps-essentials-189879) 
+
+- **CraftPix 3D Models:**  
+  - [Free Medieval Props](https://craftpix.net/freebies/free-medieval-props-3d-low-poly-pack/) 
+  - [Medieval Weapons Pack](https://craftpix.net/product/medieval-weapons-3d-low-poly-models/) 
+  - [Free Bush Models](https://craftpix.net/freebies/free-bush-3d-low-poly-models/) 
+  - [Medieval Buildings Pack](https://craftpix.net/product/medieval-building-3d-low-poly-models/) 
+  - [Free Shrubs, Flowers & Mushrooms](https://craftpix.net/freebies/free-shrubs-flowers-and-mushrooms-3d-low-poly-models/) 
+  - [Free Tree Pack](https://craftpix.net/freebies/free-tree-3d-low-poly-pack/)  
+  - [Free Sword Models](https://craftpix.net/freebies/free-sword-3d-low-poly-models/) 
+  - [Tree Pack )](https://craftpix.net/product/tree-3d-low-poly-models/) 
+  - [Environment Props](https://craftpix.net/product/environment-props-3d-low-poly-pack/) 
+  - [Free Environment Props](https://craftpix.net/freebies/free-environment-props-3d-low-poly-models/) 
+  - [Medieval Fortress Pack](https://craftpix.net/product/medieval-fortress-pack-3d-low-poly-models/) 
 
 ---
 
