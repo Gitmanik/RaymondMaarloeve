@@ -112,17 +112,18 @@ public class LlmDecisionMaker : IDecisionSystem
 
       if (int.TryParse(result, out int response) == false)
       {
-        Debug.LogError($"Idle response, invalid response: {chatResponseDto.response}");
+        Debug.LogError($"{npc.NpcName}: Idle response error: invalid response: {chatResponseDto.response}");
         return new IdleDecision();
       }
 
       if (response < 0 || response > currentEnvironment.Count)
       {
-        Debug.LogError($"Idle response, invalid response: {chatResponseDto.response}");
+        Debug.LogError($"{npc.NpcName}: Idle response error: index out of bounds: {chatResponseDto.response}");
         return new IdleDecision();
       }
       
       var action = currentEnvironment[response - 1];
+      Debug.Log($"{npc.NpcName}: Idle response, selected action: {action.decision.DebugInfo()} (result: {result})");
 
       return action.decision;
     }
@@ -183,7 +184,7 @@ Output format must be **EXACTLY AND ONLY** an integer. Do not explain your reaso
       currentConversation.Add(new Message { role = "system", content = prompt});
       currentConversation.Add(new Message { role = "user", content = dtoJson});
       
-      Debug.Log($"Calculating relevance:\n{dtoJson}");
+      // Debug.Log($"Calculating relevance:\n{dtoJson}");
       
       LlmManager.Instance.Chat(
         npc.ModelID,
@@ -191,7 +192,7 @@ Output format must be **EXACTLY AND ONLY** an integer. Do not explain your reaso
         (response) =>
         {
           string result = Regex.Replace(response.response, @"\D*(\d+)\D*", "$1");
-          Debug.Log($"Relevance response: '{result}'");
+          Debug.Log($"{npc.NpcName}: Relevance response: '{result}'");
           
           int relevance = 5;
           if (!int.TryParse(result, out relevance))
