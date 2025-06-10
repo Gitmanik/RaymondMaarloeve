@@ -13,6 +13,7 @@ public abstract class VisitBuildingDecision : IDecision
     protected abstract float WaitDuration { get; }
     
     protected abstract float StoppingDistance { get; }
+    protected abstract bool NpcShouldDisappear { get; }
 
     private VisitBuildingDecision() {}
     
@@ -30,7 +31,6 @@ public abstract class VisitBuildingDecision : IDecision
         Transform entrance = buildingGO.transform.Find("Entrance");
         if (entrance != null)
         {
-            Debug.Log($"Entrance found for building {buildingGO.name} at position {entrance.position}");
             this.buildingGO = entrance.gameObject;
         }
         
@@ -51,6 +51,11 @@ public abstract class VisitBuildingDecision : IDecision
     {
         if (finished)
         {
+            if (NpcShouldDisappear)
+            {
+                npc.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
+                npc.agent.enabled = true;
+            }
             OnFinished();
             return false;
         }
@@ -59,6 +64,12 @@ public abstract class VisitBuildingDecision : IDecision
         {
             if (!npc.agent.pathPending && npc.agent.remainingDistance < StoppingDistance)
             {
+                if (NpcShouldDisappear)
+                {
+                    npc.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
+                    npc.agent.enabled = false;
+
+                }
                 reachedBuilding = true;
             }
             return true;
@@ -69,7 +80,8 @@ public abstract class VisitBuildingDecision : IDecision
         {
             finished = true;
         }
-        return !finished;
+
+        return true;
     }
 
 

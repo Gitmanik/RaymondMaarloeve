@@ -7,6 +7,7 @@ public class GetWaterDecision : VisitBuildingDecision
     }
 
     protected override float StoppingDistance => 2f;
+    protected override bool NpcShouldDisappear => false;
     protected override float WaitDuration => 4f;
     public override string PrettyName => "going to get water";
     protected override void OnFinished()
