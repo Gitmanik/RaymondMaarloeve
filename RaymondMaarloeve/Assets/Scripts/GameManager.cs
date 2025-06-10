@@ -382,9 +382,11 @@ public class GameManager : MonoBehaviour
     /// <returns>IEnumerator for coroutine execution.</returns>
     private IEnumerator ConvertHistoryToBlocks()
     {
-        string prompt = $"You will read a short story and extract the six most important factual events. " +
-                        $"Then, generate two false sentences that do not occur in the story, but are believable. " +
-                        $"JSON Object structure:\n\n" +
+        string prompt = $"You will be given a short story.\n" +
+                        $"Extract SIX most important factual events.\n" +
+                        $"Then, think of TWO false sentences that do not occur in the story, but are believable enough to fool someone. " +
+                        $"You will NOT include names in the output." + 
+                        $"Output these sentences into a JSON Object structure:\n\n" +
                         $"\"key_events\" — an array of exactly six short English sentences, each stating a concrete, factual event that actually appears in the story.\n" +
                         $"\"false_events\" — an array of exactly two short English sentences that are believable but clearly did not happen in the story.\n" +
                         $"Your response must be ONLY this EXACT CORRECT JSON object:\n" +
