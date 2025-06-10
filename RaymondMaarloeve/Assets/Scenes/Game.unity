@@ -2637,7 +2637,7 @@ GameObject:
   - component: {fileID: 1191064611}
   - component: {fileID: 1191064610}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Minimap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3182,6 +3182,7 @@ MonoBehaviour:
     false_events: []
   murdererNPC: {fileID: 0}
   uiGameObject: {fileID: 330165694}
+  MinimapGameObject: {fileID: 1191064608}
   musicAudioSource: {fileID: 0}
 --- !u!114 &1294622897
 MonoBehaviour:
@@ -3205,6 +3206,7 @@ MonoBehaviour:
   maxExposure: 1
   minExposure: 0.2
   skyboxRotationSpeed: 0.1
+  enableTimePass: 0
 --- !u!114 &1294622898
 MonoBehaviour:
   m_ObjectHideFlags: 0

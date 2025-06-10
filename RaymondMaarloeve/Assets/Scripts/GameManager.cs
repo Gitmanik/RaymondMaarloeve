@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     public GameConfig gameConfig { get; private set; }
 
     [SerializeField] private GameObject uiGameObject;
+    [SerializeField] public GameObject MinimapGameObject;
 
     [SerializeField] private AudioSource musicAudioSource;
 
