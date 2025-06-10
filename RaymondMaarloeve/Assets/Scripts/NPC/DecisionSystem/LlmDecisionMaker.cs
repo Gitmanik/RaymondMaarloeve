@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 /// <summary>
@@ -188,9 +189,11 @@ Output format must be **EXACTLY AND ONLY** an integer. Do not explain your reaso
         currentConversation,
         (response) =>
         {
-          Debug.Log($"Relevance response: '{response.response}'");
+          string result = Regex.Replace(response.response, @"\D*(\d+)\D*", "$1");
+          Debug.Log($"Relevance response: '{result}'");
+          
           int relevance = 5;
-          if (!int.TryParse(response.response, out relevance))
+          if (!int.TryParse(result, out relevance))
             Debug.LogWarning($"Wrong relevance response: '{response.response}'");
           relevanceFunc(relevance);
         },
