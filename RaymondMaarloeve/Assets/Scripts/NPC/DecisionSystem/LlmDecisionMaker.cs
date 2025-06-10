@@ -100,7 +100,10 @@ public class LlmDecisionMaker : IDecisionSystem
           waitingResponse = response;
           (npc.GetCurrentDecision() as WaitForLLMDecision).Ready = true;
         },
-        OnChatError
+        OnChatError,
+        0.95f,
+        0.5f,
+        10
       );
     }
 
