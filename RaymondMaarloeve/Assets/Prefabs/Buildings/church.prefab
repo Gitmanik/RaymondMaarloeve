@@ -1320,6 +1320,37 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8142994380160755962, guid: a509223802e3be14bb68a539d85cf35e, type: 3}
+--- !u!1 &713380135293201767
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6707237052498975173}
+  m_Layer: 0
+  m_Name: Entrance
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6707237052498975173
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 713380135293201767}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.586, y: 0, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3023281445452981588}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &716959193745979761
 GameObject:
   m_ObjectHideFlags: 0
@@ -14443,7 +14474,6 @@ GameObject:
   - component: {fileID: 7356446083010830845}
   - component: {fileID: 2183915206851776544}
   - component: {fileID: 1431321819391462217}
-  - component: {fileID: 8067385489842019016}
   m_Layer: 0
   m_Name: church
   m_TagString: Untagged
@@ -14461,7 +14491,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3628970813783951648}
@@ -14613,6 +14643,7 @@ Transform:
   - {fileID: 8836255767291673571}
   - {fileID: 2486833382349972749}
   - {fileID: 5364932725471549509}
+  - {fileID: 6707237052498975173}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7356446083010830845
@@ -14628,7 +14659,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HisNPC: {fileID: 0}
+  HisMainTileGridPosition: {x: -1, y: -1}
   HisType: 2
+  HisTileCount: 0
 --- !u!64 &2183915206851776544
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -14667,28 +14700,6 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
---- !u!64 &8067385489842019016
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6108394813680385468}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!1 &6116990581196797896
 GameObject:
   m_ObjectHideFlags: 0

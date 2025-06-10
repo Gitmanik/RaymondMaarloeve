@@ -1,4 +1,5 @@
-﻿//MapGenerator.cs
+﻿// Zawiera: generowanie mapy z podziałem na osobne klasy do murów, budynków i dekoracji
+
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,26 +12,28 @@ public class MapGenerator : MonoBehaviour
     public static MapGenerator Instance { get; private set; }
     public bool IsMapGenerated { get; private set; } = false;
 
+    [Header("Podstawowe dane mapy")]
     public NavMeshSurface surface;
     public Terrain terrain;
     public int tileSize = 10;
     public int mapWidthInTiles = 10, mapLengthInTiles = 10;
-    [Range(0f, 1f)]
-    public float buildingsDensity = 0.2f;
-    public bool markTiles = false; 
+    [Range(0f, 1f)] public float buildingsDensity = 0.2f;
+    public bool markTiles = false;
+    public int WallsMargin = 10;
 
-    Tile[,] tiles;
-
+    [Header("Prefabrykaty")]
     public List<BuildingSetup> buildings = new();
-    public List<GameObject> spawnedBuildings = new();
+    public List<WallsSetup> walls = new();
+    public List<BuildingSetup> decorations = new();
 
-    private List<Tile> buildingTiles;
+    private Tile[,] tiles;
+    private List<Tile> allTiles = new();
+    private GameObject wallsRoot;
 
-    private float[,,] baseAlphaMap;
-    [HideInInspector] public int mapWidth;
-    [HideInInspector] public int mapLength;
+    [HideInInspector] public List<Tile> buildingsMainTile;
+    [HideInInspector] public List<GameObject> spawnedBuildings;
+    [HideInInspector] public int mapWidth, mapLength;
 
-    
     void Awake()
     {
         Debug.Log("MapGenerator: Awake started");
@@ -40,36 +43,56 @@ public class MapGenerator : MonoBehaviour
 
         PathGenerator.ClearMap(terrain);
 
-        // rozmiar terenu
-        Vector3 newSize = new Vector3(mapWidthInTiles * tileSize,
-            terrain.terrainData.size.y, mapLengthInTiles * tileSize);
+        Vector3 newSize = new Vector3(mapWidthInTiles * tileSize, terrain.terrainData.size.y, mapLengthInTiles * tileSize);
         terrain.terrainData.size = newSize;
 
-        // wyśrodkowanie terenu względem obiektu
-        Vector3 centerOffset = new Vector3(mapWidthInTiles * tileSize / 2f,
-            0, mapLengthInTiles * tileSize / 2f);
+        Vector3 centerOffset = new Vector3(mapWidthInTiles * tileSize / 2f, 0, mapLengthInTiles * tileSize / 2f);
         terrain.transform.position = transform.position - centerOffset;
     }
 
     public void GenerateMap()
     {
-        Debug.Log("MapGenerator: Starting map generation");
         mapWidth = tileSize * mapWidthInTiles;
         mapLength = tileSize * mapLengthInTiles;
-        Debug.Log($"MapGenerator: Map size: {mapWidth}x{mapLength}");
+        buildingsMainTile = new();
+        spawnedBuildings = new();
 
-        buildingTiles = new List<Tile>();
+        InitializeTiles();
 
-        // 1) Inicjalizacja kafelków
+        var wallSpawner = new WallSpawner(walls, terrain, tileSize, mapWidthInTiles, mapLengthInTiles);
+        wallsRoot = wallSpawner.SpawnWalls(tiles);
+
+        var buildingSpawner = new BuildingSpawner(terrain, tileSize, mapWidthInTiles, mapLengthInTiles, WallsMargin);
+        spawnedBuildings = buildingSpawner.SpawnBuildings(tiles, allTiles, buildings);
+
+        PathGenerator.GeneratePaths(tiles, buildingsMainTile, terrain);
+
+        var decorationSpawner = new DecorationSpawner(terrain, tileSize);
+        decorationSpawner.SpawnDecorations(tiles, allTiles, decorations);
+
+        foreach (var tile in buildingsMainTile)
+        {
+            Debug.LogWarning($"{tile.Building.name} building tile at {tile.GridPosition}");
+        }
+
+        if (markTiles)
+            MarkTiles();
+
+        surface.BuildNavMesh();
+        IsMapGenerated = true;
+        Debug.Log("MapGenerator: Map generated, IsMapGenerated = TRUE");
+    }
+
+    void InitializeTiles()
+    {
+        allTiles.Clear();
+        tiles = new Tile[mapWidthInTiles, mapLengthInTiles];
+
         for (int x = 0; x < mapWidthInTiles; x++)
-            for (int z = 0; z < mapLengthInTiles; z++)
-                tiles[x, z] = new Tile();
-
-        // 2) Ustawienie pozycji, sąsiadów i ewentualny spawn budynków
-        for (int x = 0; x < mapWidthInTiles; x++)
+        {
             for (int z = 0; z < mapLengthInTiles; z++)
             {
-                var tile = tiles[x, z];
+                var tile = new Tile();
                 tile.GridPosition = new Vector2Int(x, z);
                 tile.TileCenter = new Vector2(
                     transform.position.x - mapWidth / 2 + x * tileSize + tileSize / 2f,
@@ -79,148 +102,127 @@ public class MapGenerator : MonoBehaviour
                     transform.position.x - mapWidth / 2 + x * tileSize + tileSize,
                     transform.position.z - mapLength / 2 + z * tileSize + tileSize / 2f);
 
+                tiles[x, z] = tile;
+                allTiles.Add(tile);
+            }
+        }
+
+        for (int x = 0; x < mapWidthInTiles; x++)
+        {
+            for (int z = 0; z < mapLengthInTiles; z++)
+            {
+                var tile = tiles[x, z];
                 var neighbours = new List<Tile>();
                 if (x > 0) neighbours.Add(tiles[x - 1, z]);
                 if (z > 0) neighbours.Add(tiles[x, z - 1]);
                 if (x < mapWidthInTiles - 1) neighbours.Add(tiles[x + 1, z]);
                 if (z < mapLengthInTiles - 1) neighbours.Add(tiles[x, z + 1]);
                 tile.Neighbors = neighbours.ToArray();
-
-                // spawn budynku z prawdopodobieństwem buildingsDensity
-                if (Random.value <= buildingsDensity)
-                {
-                    var prefab = PickBuilding();
-                    if (prefab != null)
-                    {
-                        Vector3 pos = new Vector3(
-                            transform.position.x - mapWidth / 2 + x * tileSize + tileSize / 2f,
-                            0,
-                            transform.position.z - mapLength / 2 + z * tileSize + tileSize / 2f);
-
-                        var go = Instantiate(prefab, pos, Quaternion.identity, terrain.transform);
-                        spawnedBuildings.Add(go);
-                        tile.IsBuilding = true;
-                        tile.Building = go;
-                        var buildingData = go.GetComponent<BuildingData>();
-
-                        if (buildingData != null)
-                        {
-                            buildingData.HisTile = tile;
-
-                        }
-
-                        buildingTiles.Add(tile);
-
-                    }
-                }
-            }
-
-        Debug.Log($"MapGenerator: Generated {buildingTiles.Count} buildings");
-        
-        // 3) Wyznaczanie i rysowanie ścieżek w osobnym managerze
-        PathGenerator.GeneratePaths(tiles, buildingTiles, terrain);
-        Debug.Log("MapGenerator: Paths generated");
-        
-        if (markTiles)
-        {
-            MarkTiles();
-            Debug.Log("MapGenerator: Tiles marked");
-        }
-
-
-        // 4) Budowa NavMesh dla całej mapy
-        surface.BuildNavMesh();
-        Debug.Log("MapGenerator: NavMesh built");
-        IsMapGenerated = true;
-        Debug.Log("MapGenerator: Map generated, IsMapGenerated = TRUE");
-    }
-
-    private GameObject PickBuilding()
-    {
-        var available = buildings.FindAll(b => b.currentCount < b.maxCount);
-        if (available.Count == 0) return null;
-
-        float totalWeight = 0f;
-        foreach (var b in available) totalWeight += b.weight;
-
-        float rnd = Random.value * totalWeight;
-        float cum = 0f;
-        foreach (var b in available)
-        {
-            cum += b.weight;
-            if (rnd <= cum)
-            {
-                b.currentCount++;
-                return b.prefab;
             }
         }
-        return null;
     }
 
-
+    //Funkcja wyboru budynku dla NPC
     public GameObject GetBuilding(HashSet<BuildingData.BuildingType> allowedTypes)
     {
-        List<GameObject> buildings = new List<GameObject>();
-
-        foreach (GameObject go in spawnedBuildings)
-        {
-            var buildingdata = go.GetComponent<BuildingData>();
-            if (buildingdata != null && allowedTypes.Contains(buildingdata.HisType) && buildingdata.HisNPC == null)
-            {
-                buildings.Add(go);
-            }
-        }
-        GameObject chosenBuilding = null;
-        int j = Random.Range(0, buildings.Count);
-        chosenBuilding = buildings[j];
-
-
-        return chosenBuilding;
+        var options = spawnedBuildings.FindAll(go => {
+            var bd = go.GetComponent<BuildingData>();
+            return bd != null && allowedTypes.Contains(bd.HisType) && bd.HisNPC == null;
+        });
+        return options.Count > 0 ? options[Random.Range(0, options.Count)] : null;
     }
 
-
     private void MarkTiles()
-    // Narysuj kropki na budynkach (taką samą grubością jak ścieżki)
     {
         var data = terrain.terrainData;
         var tPos = terrain.transform.position;
+
         int w = data.alphamapWidth;
         int h = data.alphamapHeight;
         int layers = data.alphamapLayers;
         var alphas = data.GetAlphamaps(0, 0, w, h);
 
-        float radius = 1.0f; // Taka sama jak szerokość ścieżki
-        float mapRad = (radius / data.size.x) * w; // Skalowanie promienia
+        float terrainWidth = data.size.x;
+        float terrainHeight = data.size.z;
+
+        int thickness = 1;
+        int tilePixelW = Mathf.RoundToInt((tileSize / terrainWidth) * w);
+        int tilePixelH = Mathf.RoundToInt((tileSize / terrainHeight) * h);
 
         foreach (var tile in tiles)
         {
-            if (tile != null && tile.IsBuilding == false)
+            if (tile != null && !tile.IsBuilding && !tile.IsPartOfBuilding)
             {
                 Vector2 center = tile.TileCenter;
 
-                int mapZ = (int)(((center.x - tPos.x) / data.size.x) * w);
-                int mapX = (int)(((center.y - tPos.z) / data.size.z) * h);
+                int mapX = Mathf.RoundToInt(((center.x - tPos.x) / terrainWidth) * w);
+                int mapZ = Mathf.RoundToInt(((center.y - tPos.z) / terrainHeight) * h);
 
-                // Maluj na trzeciej warstwie
-                PathGenerator.PaintCircle(alphas, mapX, mapZ, mapRad, 2, layers);
+                int startX = mapX - tilePixelW / 2;
+                int endX = startX + tilePixelW - 1;
+
+                int startZ = mapZ - tilePixelH / 2;
+                int endZ = startZ + tilePixelH - 1;
+
+                for (int x = startX; x <= endX; x++)
+                {
+                    for (int t = 0; t < thickness; t++)
+                    {
+                        SetAlphaSafe(alphas, x, startZ + t, 2, layers);
+                        SetAlphaSafe(alphas, x, endZ - t, 2, layers);
+                    }
+                }
+
+                for (int z = startZ; z <= endZ; z++)
+                {
+                    for (int t = 0; t < thickness; t++)
+                    {
+                        SetAlphaSafe(alphas, startX + t, z, 2, layers);
+                        SetAlphaSafe(alphas, endX - t, z, 2, layers);
+                    }
+                }
             }
         }
 
         data.SetAlphamaps(0, 0, alphas);
     }
+
+    private void SetAlphaSafe(float[,,] alphas, int x, int z, int layer, int layersCount)
+    {
+        if (z < 0 || z >= alphas.GetLength(0) || x < 0 || x >= alphas.GetLength(1))
+            return;
+
+        for (int i = 0; i < layersCount; i++)
+            alphas[z, x, i] = 0f;
+
+        alphas[z, x, layer] = 1f;
+    }
+
+    [ContextMenu("Debuguj tile'e w konsoli")]
+    public void DebugTilesInConsole()
+    {
+        for (int z = mapLengthInTiles - 1; z >= 0; z--)
+        {
+            string row = "";
+            for (int x = 0; x < mapWidthInTiles; x++)
+            {
+                row += tiles[x, z].IsBuilding ? "[X]" : "[ ]";
+            }
+            Debug.Log($"Rząd Z={z}: {row}");
+        }
+    }
 }
 
-// Klasa Tile i Building pozostają bez zmian
 public class Tile
 {
     public Vector2Int GridPosition;
     public Vector2 TileCenter;
     public Vector2 FrontWallCenter;
     public Tile[] Neighbors = new Tile[0];
-    public GameObject TileObject;
     public GameObject Building;
     public bool IsBuilding = false;
     public bool IsPath = false;
+    public bool IsPartOfBuilding = false;
 }
 
 [Serializable]
@@ -229,7 +231,11 @@ public class BuildingSetup
     public GameObject prefab;
     [Range(0f, 1f)] public float weight = 0.1f;
     public int maxCount = 3;
-    public int occurenceRadius = 5;
-
     [HideInInspector] public int currentCount = 0;
+}
+
+[Serializable]
+public class WallsSetup
+{
+    public GameObject prefab;
 }

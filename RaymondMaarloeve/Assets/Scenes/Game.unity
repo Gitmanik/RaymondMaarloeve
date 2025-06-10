@@ -2861,6 +2861,7 @@ MonoBehaviour:
   LlmServerReady: 0
   murdererNPC: {fileID: 0}
   uiGameObject: {fileID: 330165694}
+  musicAudioSource: {fileID: 0}
 --- !u!114 &1294622897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2897,61 +2898,81 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   surface: {fileID: 1438901265}
   terrain: {fileID: 1438901263}
-  tileSize: 10
-  mapWidthInTiles: 10
-  mapLengthInTiles: 10
-  buildingsDensity: 0.2
+  tileSize: 2
+  mapWidthInTiles: 50
+  mapLengthInTiles: 50
+  buildingsDensity: 0.8
   markTiles: 0
+  WallsMargin: 10
   buildings:
   - prefab: {fileID: 5083285615235793076, guid: 147ab689729ac2e49b82aac972788668, type: 3}
-    weight: 1
-    maxCount: 3
-    occurenceRadius: 1
+    weight: 0.2
+    maxCount: 1
     currentCount: 0
   - prefab: {fileID: 6108394813680385468, guid: 655e06dc9db1cb746b7da3e9dacba6e0, type: 3}
     weight: 1
-    maxCount: 3
-    occurenceRadius: 1
+    maxCount: 1
     currentCount: 0
   - prefab: {fileID: 4128734955017319067, guid: d1afe98c64fbce847b4bb993ad9a349f, type: 3}
-    weight: 1
+    weight: 0.2
     maxCount: 3
-    occurenceRadius: 1
     currentCount: 0
   - prefab: {fileID: 1869102301479979069, guid: 6f8f8f50cef4e5672ace240d64134866, type: 3}
-    weight: 1
+    weight: 0.2
     maxCount: 3
-    occurenceRadius: 1
     currentCount: 0
   - prefab: {fileID: 9012655438019880852, guid: dd61dcfce8cdfb1b9b2e09368a5c9e67, type: 3}
-    weight: 1
+    weight: 0.2
     maxCount: 3
-    occurenceRadius: 1
     currentCount: 0
   - prefab: {fileID: 206528979659577565, guid: cc6934e2e20fab840a439cc2178719de, type: 3}
     weight: 1
-    maxCount: 3
-    occurenceRadius: 1
+    maxCount: 1
     currentCount: 0
   - prefab: {fileID: 8097970678501141546, guid: 2728991a092826047ac869844385d4fe, type: 3}
-    weight: 1
+    weight: 0.2
     maxCount: 3
-    occurenceRadius: 1
     currentCount: 0
   - prefab: {fileID: 5809783869429004467, guid: 6c440fd867dc25c43b3eac01ed5171fa, type: 3}
     weight: 1
-    maxCount: 3
-    occurenceRadius: 1
+    maxCount: 1
     currentCount: 0
   - prefab: {fileID: 2378057268553226593, guid: e52c8f8704c3b9d44b660c2c75d98192, type: 3}
-    weight: 1
+    weight: 0.05
     maxCount: 3
-    occurenceRadius: 1
     currentCount: 0
   - prefab: {fileID: 489591695903564298, guid: cc6d52fdd67e37739b5d6a53fb8d7af7, type: 3}
     weight: 1
+    maxCount: 2
+    currentCount: 0
+  walls:
+  - prefab: {fileID: 4001755167029688240, guid: a737893b4dbaebe4eb1dcc9409b99044, type: 3}
+  - prefab: {fileID: 7202088873049624162, guid: cc79016811cfe34479bcd12091bdb83a, type: 3}
+  - prefab: {fileID: 6398382561017800961, guid: a890c3f1e1d4f8a49b39902f66ed38af, type: 3}
+  decorations:
+  - prefab: {fileID: 3045040967433266602, guid: 04383b4e2e99718428159531b28b1c67, type: 3}
+    weight: 0.2
     maxCount: 3
-    occurenceRadius: 1
+    currentCount: 0
+  - prefab: {fileID: 3045040967433266602, guid: 04383b4e2e99718428159531b28b1c67, type: 3}
+    weight: 0.2
+    maxCount: 3
+    currentCount: 0
+  - prefab: {fileID: 2044052314510883550, guid: ecbfea977636f8d4b8d083e997d197fa, type: 3}
+    weight: 0.2
+    maxCount: 3
+    currentCount: 0
+  - prefab: {fileID: 1590564260741474642, guid: 70aef14dbd16e0047816de55b9d26545, type: 3}
+    weight: 0.2
+    maxCount: 3
+    currentCount: 0
+  - prefab: {fileID: 6487759302446060899, guid: 481e0b3786586414caa8b77a50f92d9e, type: 3}
+    weight: 0.2
+    maxCount: 3
+    currentCount: 0
+  - prefab: {fileID: 7940860190077275469, guid: 5df6b0cd63f22a24a9f939b1e4f59409, type: 3}
+    weight: 0.2
+    maxCount: 3
     currentCount: 0
   spawnedBuildings: []
   mapWidth: 0

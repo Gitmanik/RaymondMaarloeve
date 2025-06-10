@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
     
     private int entityIDCounter = 0;
     public int GetEntityID() => ++entityIDCounter;
-    
     public List<NPC> npcs = new List<NPC>();
     [HideInInspector] public bool LlmServerReady = false;
     [HideInInspector] public bool HistoryGenerated = false;
@@ -131,6 +130,40 @@ public class GameManager : MonoBehaviour
                 }
                 murdererNPC = npcComponent;
             }
+
+            //Player spawn
+            GameObject wallsRoot = GameObject.Find("WallsRoot");
+
+            Transform gates = null;
+
+            foreach (Transform child in wallsRoot.transform)
+            {
+                if (child.name == "GATE(Clone)")
+                {
+                    gates = child;
+                    break;
+                }
+            }
+            if (gates == null)
+            {
+                Debug.LogError("Nie znaleziono bramy (Gate(Clone))!");
+                //return;
+            }
+
+            // Znajdź Entrance w _minnor_gates_02(Clone)
+            Transform entrance = gates.Find("PlayerSpawner");
+            if (entrance == null)
+            {
+                Debug.LogError("Nie znaleziono PlayerSpawner!");
+                //return;
+            }
+
+            // Ustaw gracza w pozycji Entrance
+            PlayerController.Instance.gameObject.transform.position = entrance.position;
+            PlayerController.Instance.gameObject.transform.rotation = entrance.rotation;
+
+            Debug.Log("Player ustawiony na spawn point Entrance.");
+
         }
     }
 
