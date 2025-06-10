@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public bool LlmServerReady = false;
     [HideInInspector] public bool HistoryGenerated = false;
     
+    private List<string> archetypes;
     public GeneratedHistoryDTO generatedHistory;
     public ConvertHistoryToBlocksDTO storyBlocks;
 
@@ -33,6 +34,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioSource musicAudioSource;
 
     [Header("DEBUG")]
+    [Header("Config")]
+    [SerializeField] private bool useCustomGameConfig = false;
+    [SerializeField] private string customGameConfigJSON = "";
+    
     [Header("Narrator")]
     [SerializeField] private bool DontGenerateHistory = false;
     [SerializeField] private string historyJSON = "";
@@ -42,13 +47,18 @@ public class GameManager : MonoBehaviour
     [Header("Decision Making")]
     public bool SkipRelevance = false;
 
+
     IEnumerator Start()
     {
         Debug.Log("GameManager: Start initialization");
         Instance = this;
         uiGameObject.SetActive(false);
 
-        gameConfig = GameConfig.LoadGameConfig(Path.Combine(Application.dataPath, "game_config.json"));
+        if (useCustomGameConfig)
+            gameConfig = JsonUtility.FromJson<GameConfig>(customGameConfigJSON);
+        else
+            gameConfig = GameConfig.LoadGameConfig(Path.Combine(Application.dataPath, "game_config.json"));
+        gameConfig.Models.ForEach(m => m.Name = m.Name.Substring(0, m.Name.LastIndexOf('.')));
         Debug.Log("GameManager: Config loaded");
 
         Screen.SetResolution(gameConfig.GameWindowWidth, gameConfig.GameWindowHeight, gameConfig.FullScreen);
@@ -61,7 +71,11 @@ public class GameManager : MonoBehaviour
 
         // Wait for LLM connection and model loading
         yield return StartCoroutine(WaitForLlmConnection());
+        
+        archetypes = gameConfig.Models.FindAll(x => x.Id != gameConfig.NarratorModelId).Select(x => x.Name.Replace('_', ' ')).ToList();
 
+        Debug.Log($"GameManager: Archetypes: {string.Join(',', archetypes)}");
+        
         if (DontGenerateHistory)
             generatedHistory = JsonUtility.FromJson<GeneratedHistoryDTO>(historyJSON);
         else
@@ -93,9 +107,6 @@ public class GameManager : MonoBehaviour
 
         var localGeneratedHistory = generatedHistory;
         
-        List<string> archetypes = gameConfig.Models.FindAll(x => x.Id != gameConfig.NarratorModelId).
-            ConvertAll(x => x.Name.Substring(0,x.Name.IndexOf('.')).Replace("_", " "));
-        
         foreach (var npcConfig in gameConfig.Npcs)
         {
             Vector3 npcPosition = new Vector3(
@@ -104,7 +115,13 @@ public class GameManager : MonoBehaviour
                 MapGenerator.Instance.transform.position.z - MapGenerator.Instance.mapLength / 2 + Random.Range(0, MapGenerator.Instance.mapLength)
             );
 
-            string npcModelPath = gameConfig.Models.FirstOrDefault(m => m.Id == npcConfig.ModelId)?.Path;
+            var npcModel = gameConfig.Models.FirstOrDefault(m => m.Id == npcConfig.ModelId);
+            if (npcModel == null)
+            {
+                Debug.LogError($"GameManager: NPC {npcConfig.Id} model not found (ModelId: {npcConfig.ModelId})");
+                continue;
+            }
+            
             int npcVariant = Random.Range(0, npcPrefabsList.Count);
             
             GameObject newNpc = Instantiate(npcPrefabsList[npcVariant], npcPosition, Quaternion.identity);
@@ -112,12 +129,14 @@ public class GameManager : MonoBehaviour
             npcPrefabsList.RemoveAt(npcVariant);
             var npcComponent = newNpc.GetComponent<NPC>();
 
+            var npcModelArchetype = npcModel.Name.Replace('_', ' ');
+            
             var characterDTO =
-                localGeneratedHistory.characters.Find(x => $"{archetypes[x.archetype - 1].Replace(" ", "_")}.gguf" == gameConfig.Models.Find(y => y.Id == npcConfig.ModelId).Name);
+                localGeneratedHistory.characters.Find(x => archetypes[x.archetype - 1] == npcModelArchetype);
             localGeneratedHistory.characters.Remove(characterDTO);
             
             IDecisionSystem system;
-            if (string.IsNullOrEmpty(npcModelPath))
+            if (string.IsNullOrEmpty(npcModel.Path))
             {
                 Debug.LogError($"Model path not found for NPC with ID {npcConfig.ModelId}");
                 system = new NullDecisionSystem();
@@ -261,9 +280,6 @@ public class GameManager : MonoBehaviour
     /// <returns>IEnumerator for coroutine execution.</returns>
     private IEnumerator GenerateHistory()
     {
-        List<string> archetypes = gameConfig.Models.FindAll(x => x.Id != gameConfig.NarratorModelId).
-            ConvertAll(x => x.Name.Substring(0,x.Name.IndexOf('.')).Replace("_", " "));
-
         string prompt = $"You are a creative writer. " +
                         $"Write ONLY a VALID JSON object with body specified below:\n\n" +
                         $"A short dark story (maximum 200 words) set in a medieval village. " +
