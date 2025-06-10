@@ -228,7 +228,7 @@ public class NPC : MonoBehaviour
                             {
                                 lastObservedActions[npc.EntityID] = currentAction;
 
-                                string newMemory = $"Saw {npc.NpcName} doing {currentAction}"; //TODO add hour
+                                string newMemory = $"Saw {npc.NpcName} {currentAction} at {DayNightCycle.Instance.GetCurrentTimeText()}, day {DayNightCycle.Instance.GetCurrentDay()}";
             
                                 decisionSystem.CalculateRelevance(newMemory, relevance =>
                                 {
