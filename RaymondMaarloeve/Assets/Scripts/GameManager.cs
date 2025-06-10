@@ -105,7 +105,8 @@ public class GameManager : MonoBehaviour
             
         Debug.Log("Game Manager: " + gameConfig.Npcs.Count + " NPCs to spawn");
 
-        var localGeneratedHistory = generatedHistory;
+        var localCharacters = generatedHistory.characters.ToList();
+        var localStoryBlocks = storyBlocks.key_events.ToList();
         
         foreach (var npcConfig in gameConfig.Npcs)
         {
@@ -131,9 +132,13 @@ public class GameManager : MonoBehaviour
 
             var npcModelArchetype = npcModel.Name.Replace('_', ' ');
             
-            var characterDTO =
-                localGeneratedHistory.characters.Find(x => archetypes[x.archetype - 1] == npcModelArchetype);
-            localGeneratedHistory.characters.Remove(characterDTO);
+            var characterDTO = localCharacters.Find(x => archetypes[x.archetype - 1] == npcModelArchetype);
+            localCharacters.Remove(characterDTO);
+            
+            var storyBlock = localStoryBlocks[Random.Range(0, localStoryBlocks.Count)];
+            localStoryBlocks.Remove(storyBlock);
+
+            npcComponent.SystemPrompt += "You know that the day of murder " + storyBlock;
             
             IDecisionSystem system;
             if (string.IsNullOrEmpty(npcModel.Path))
