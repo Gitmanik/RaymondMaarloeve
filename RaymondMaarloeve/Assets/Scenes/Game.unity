@@ -2859,6 +2859,13 @@ MonoBehaviour:
   - {fileID: 1148605829637295999, guid: 20e3d70f4158e349da9e7abcd86e2a13, type: 3}
   npcs: []
   LlmServerReady: 0
+  HistoryGenerated: 0
+  generatedHistory:
+    story: 
+    characters: []
+  storyBlocks:
+    key_events: []
+    false_events: []
   murdererNPC: {fileID: 0}
   uiGameObject: {fileID: 330165694}
   musicAudioSource: {fileID: 0}
@@ -2875,7 +2882,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeOfDay: 6
-  dayDurationInMinutes: 1
+  dayDurationInMinutes: 5
   directionalLight: {fileID: 1930731676}
   maxSunIntensity: 1
   minSunIntensity: 0
@@ -2883,7 +2890,7 @@ MonoBehaviour:
   nightSky: {fileID: 2100000, guid: 133347283e115d147a5fcce7f47a538f, type: 2}
   maxExposure: 1
   minExposure: 0.2
-  skyboxRotationSpeed: 0.5
+  skyboxRotationSpeed: 0.1
 --- !u!114 &1294622898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3040,7 +3047,6 @@ MonoBehaviour:
   submitButton: {fileID: 166442101}
   cancelButton: {fileID: 1435796869}
   resultText: {fileID: 1821656902}
-  murderDescription: 
   triggerDay: 3
 --- !u!1 &1310063284
 GameObject:
