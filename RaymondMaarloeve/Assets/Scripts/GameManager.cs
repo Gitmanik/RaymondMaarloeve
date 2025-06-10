@@ -338,19 +338,25 @@ public class GameManager : MonoBehaviour
                 generatedHistory = JsonUtility.FromJson<GeneratedHistoryDTO>(strippedResp);
                 if (string.IsNullOrWhiteSpace(generatedHistory.story))
                 {
-                    Debug.LogError($"GameManager: GenerateHistory error: generated history is empty");
+                    Debug.LogError($"GameManager: GenerateHistory error: generated history is empty\nFull response:{resp}\n\nStripped response:{strippedResp}");
                     continue;
                 }
 
                 if (generatedHistory.characters.All(x => x.murderer == false))
                 {
-                    Debug.LogError($"GameManager: GenerateHistory error: generated history has no murderer!");
+                    Debug.LogError($"GameManager: GenerateHistory error: generated history has no murderer!\nFull response:{resp}\n\nStripped response:{strippedResp}");
                     continue;
                 }
 
                 if (generatedHistory.characters.Any(x => x.archetype - 1 < 0 || x.archetype > archetypes.Count))
                 {
-                    Debug.LogError($"GameManager: GenerateHistory error: generated character has invalid archetype index!");
+                    Debug.LogError($"GameManager: GenerateHistory error: generated character has invalid archetype index!\nFull response:{resp}\n\nStripped response:{strippedResp}");
+                    continue;     
+                }
+
+                if (generatedHistory.characters.Count != gameConfig.Npcs.Count)
+                {
+                    Debug.LogError($"GameManager: GenerateHistory error: history character count does not match gameConfig.Npcs.Count!\nFull response:{resp}\n\nStripped response:{strippedResp}");
                     continue;     
                 }
             }
