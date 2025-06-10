@@ -335,6 +335,12 @@ public class GameManager : MonoBehaviour
                     Debug.LogError($"GameManager: GenerateHistory error: generated history has no murderer!");
                     continue;
                 }
+
+                if (generatedHistory.characters.Any(x => x.archetype - 1 < 0 || x.archetype > archetypes.Count))
+                {
+                    Debug.LogError($"GameManager: GenerateHistory error: generated character has invalid archetype index!");
+                    continue;     
+                }
             }
             catch (Exception e)
             {
