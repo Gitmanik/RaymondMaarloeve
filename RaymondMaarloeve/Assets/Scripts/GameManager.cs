@@ -287,27 +287,28 @@ public class GameManager : MonoBehaviour
     {
         string prompt = $"You are a creative writer. " +
                         $"Write ONLY a VALID JSON object with body specified below:\n\n" +
-                        $"A short dark story (maximum 200 words) set in a medieval village. " +
-                        $"The story must include a mysterious death or murder, but the victim must be a {gameConfig.Npcs.Count + 1} character not listed in the main {gameConfig.Npcs.Count}. " +
-                        $"The {gameConfig.Npcs.Count} characters in the JSON section must all be alive and active during the story." +
-                        $"Use a dark tone with rich sensory details (e.g., rain, silence, fear, time of day).\n" +
-                        $"Use only the following five locations:\nThe church\nThe well\n" +
-                        $"The house of each character in the story (Do not use any other places.)\n" +
-                        $"There must be exactly {gameConfig.Npcs.Count} game characters, each with one of these personality types (archetypes):\n" +
-                        $"[{string.Join(',', archetypes)}]\n\n" +
-                        $"Randomly select:\n" +
-                        $"One character who is the murderer (they can be guilty directly or indirectly)\n" +
-                        $"One character who is a witness (they saw the murder or something suspicious)\n" +
-                        $"Do not say directly who the murderer or witness is, but include subtle clues through behavior, dialogue, or physical evidence.\n" +
-                        $"The story must be a single paragraph of literary narration, not a list or report.\n" +
-                        $"Do not invent other characters. " +
+                        $"A short dark story set in a medieval village.\n" +
+                        $"The story must include a murder, with the victim being one of generated characters.\n" +
                         $"Describe a mysterious situation with tension and uncertainty.\n\n" +
-                        $"A list of the **{gameConfig.Npcs.Count}** characters with this information for each:\n" +
+                        $"ALL {gameConfig.Npcs.Count + 1} characters MUST BE in JSON section and OVER 18 years old." +
+                        $"Use a dark tone with rich sensory details (e.g., rain, silence, fear, time of day).\n" +
+                        $"Use only the following locations:\n" +
+                            $"The church\n" +
+                            $"The well\n" +
+                            $"The house of each character in the story (Do not use any other places.)\n\n" +
+                        $"There must be exactly {gameConfig.Npcs.Count + 1} game characters, each with one of these personality types (archetypes): [{string.Join(',', archetypes)}]\n\n" +
+                        $"Select ONE character who is the murderer (they NEED be guilty directly or indirectly)\n" +
+                        $"Select ONE character who is a witness (they saw the murder or something suspicious)\n" +
+                        $"Select ONE character who is a victim.\n" +
+                        $"Include who's the murderer and who's the victim in the story." +
+                        $"The story must be a single paragraph of literary narration, not a list or report.\n" +
+                        $"A list of the **{gameConfig.Npcs.Count + 1}** characters with this information for each:\n" +
                             $"name (you choose)\n" +
                             $"archetype (one of the four used)\n" +
                             $"age (an integer)\n" +
-                            $"description (about who they are, their personality, what they are doing during the story, how they feel, who they like or dislike, and one habit or routine they have)\n" +
+                            $"description (about who they are, their personality, what they saw at the moment of the murder, what they are doing during the story, how they feel, who they like or dislike, and one habit or routine they have)\n" +
                             $"murderer (boolean)\n" +
+                            $"dead (boolean)\n" + 
                             $"Remember to NOT write a comma after description as it is an end of the child JSON object. Remember to output ONLY VALID JSON with structure given above. Remember to not write comma after last objects in list and in object!" +
                             $"Use this EXACT format for your output:\n\n" +
                             $"{{\n" +
@@ -318,6 +319,7 @@ public class GameManager : MonoBehaviour
                                     $"\"age\": 52,\n" +
                                     $"\"description\": \"You are a delusional man. You are 52 years old. [Add more details here.]\",\n" +
                                     $"\"murderer\": false\n" +
+                                    $"\"dead\": false\n" + 
                                     $"}}," +
                                 $"\n...\n]" +
                             $"\n}}\n";
@@ -367,9 +369,15 @@ public class GameManager : MonoBehaviour
                     continue;
                 }
 
-                if (generatedHistory.characters.All(x => x.murderer == false))
+                if (generatedHistory.characters.Count(x => x.murderer) != 1)
                 {
-                    Debug.LogError($"GameManager: GenerateHistory error: generated history has no murderer!\nFull response:{resp}\n\nStripped response:{strippedResp}");
+                    Debug.LogError($"GameManager: GenerateHistory error: generated history has {generatedHistory.characters.Count(x => x.murderer)} murderers!\nFull response:{resp}\n\nStripped response:{strippedResp}");
+                    continue;
+                }
+                
+                if (generatedHistory.characters.Count(x => x.dead) != 1)
+                {
+                    Debug.LogError($"GameManager: GenerateHistory error: generated history has {generatedHistory.characters.Count(x => x.murderer)} victims!\nFull response:{resp}\n\nStripped response:{strippedResp}");
                     continue;
                 }
 
@@ -379,9 +387,9 @@ public class GameManager : MonoBehaviour
                     continue;     
                 }
 
-                if (generatedHistory.characters.Count != gameConfig.Npcs.Count)
+                if (generatedHistory.characters.Count != gameConfig.Npcs.Count + 1)
                 {
-                    Debug.LogError($"GameManager: GenerateHistory error: history character count does not match gameConfig.Npcs.Count!\nFull response:{resp}\n\nStripped response:{strippedResp}");
+                    Debug.LogError($"GameManager: GenerateHistory error: history character count does not match gameConfig.Npcs.Count + 1!\nFull response:{resp}\n\nStripped response:{strippedResp}");
                     continue;     
                 }
             }

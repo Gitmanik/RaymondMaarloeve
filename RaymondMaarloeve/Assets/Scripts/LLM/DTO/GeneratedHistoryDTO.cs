@@ -56,8 +56,13 @@ public class CharacterDTO
     public bool murderer;
 
     /// <summary>
+    /// Whether this Character is a victim
+    /// </summary>
+    public bool dead;
+
+    /// <summary>
     /// ToString override used for pretty printing
     /// </summary>
     /// <returns>Pretty print of the object containing all information about the Character</returns>
-    public override string ToString() => $"Character: Name: '{name}',\nArchetype: '{archetype}',\nAge: '{age}',\nMurderer: {murderer}\nDescription: '{description}'";
+    public override string ToString() => $"Character: Name: '{name}',\nArchetype: '{archetype}',\nAge: '{age}',\nMurderer: {murderer}\nDead: {dead}\nDescription: '{description}'";
 }
