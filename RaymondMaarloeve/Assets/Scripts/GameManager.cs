@@ -293,6 +293,8 @@ public class GameManager : MonoBehaviour
             bool callbackCalled = false;
             string resp = null;
         
+            Debug.Log("Generating history...");
+            
             LlmManager.Instance.Chat(gameConfig.NarratorModelId.ToString(), messages, result =>
             {
                 callbackCalled = true;
@@ -372,6 +374,8 @@ public class GameManager : MonoBehaviour
         {
             bool callbackCalled = false;
             string resp = null;
+            
+            Debug.Log("Converting history to blocks...");
         
             LlmManager.Instance.Chat(gameConfig.NarratorModelId.ToString(), messages, result =>
             {

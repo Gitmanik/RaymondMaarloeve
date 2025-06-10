@@ -33,6 +33,11 @@ public class LlmManager : MonoBehaviour
     private bool isProcessingQueue = false;
 
     /// <summary>
+    /// Whether log requests and responses
+    /// </summary>
+    public bool LogDebug = false;
+
+    /// <summary>
     /// Sets up the LLM manager with the specified API base URL.
     /// </summary>
     /// <param name="api">Base URL of the LLM server API.</param>
@@ -61,7 +66,8 @@ public class LlmManager : MonoBehaviour
     {
         using (UnityWebRequest request = UnityWebRequest.Get($"{BaseUrl}/{endpoint}"))
         {
-            Debug.Log($"LlmManager: Get request: /{endpoint}");
+            if (LogDebug)
+                Debug.Log($"LlmManager: Get request: /{endpoint}");
             yield return request.SendWebRequest();
 
             if (request.result != UnityWebRequest.Result.Success)
@@ -71,7 +77,8 @@ public class LlmManager : MonoBehaviour
             }
 
             var content = request.downloadHandler.text;
-            Debug.Log($"LlmManager: Get response: {content}");
+            if (LogDebug)
+                Debug.Log($"LlmManager: Get response: {content}");
             var result = JsonUtility.FromJson<T>(content);
             onSuccess?.Invoke(result);
         }
@@ -137,7 +144,8 @@ public class LlmManager : MonoBehaviour
             request.downloadHandler = new DownloadHandlerBuffer();
             request.SetRequestHeader("Content-Type", "application/json");
 
-            Debug.Log($"LlmManager: Post request: {json}");
+            if (LogDebug)
+                Debug.Log($"LlmManager: Post request: {json}");
             
             yield return request.SendWebRequest();
 
@@ -148,7 +156,8 @@ public class LlmManager : MonoBehaviour
                 onError?.Invoke($"LlmManager: Post request failed ({request.error}): {responseContent}");
                 yield break;
             }
-            Debug.Log($"LlmManager: Post response: {responseContent}");
+            if (LogDebug)
+                Debug.Log($"LlmManager: Post response: {responseContent}");
 
             var result = JsonUtility.FromJson<T>(responseContent);
             onSuccess?.Invoke(result);
@@ -280,7 +289,8 @@ public class LlmManager : MonoBehaviour
     public void GenericComplete(MessageDTO message)
     {
         if (message.success)
-            Debug.Log(message.message);
+            if (LogDebug)
+                Debug.Log(message.message);
         else 
             Debug.LogError(message.message);
     }

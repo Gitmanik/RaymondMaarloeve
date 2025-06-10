@@ -91,7 +91,7 @@ public abstract class VisitBuildingDecision : IDecision
         npc.agent.stoppingDistance = StoppingDistance;
     }
     
-    public string DebugInfo() => $"visiting building at: {destination}, reachedBuilding: {reachedBuilding}, waitDuration: {WaitDuration}, stoppingDistance: {StoppingDistance}";
+    public string DebugInfo() => $"visiting building {buildingGO.name} at: {destination}, reachedBuilding: {reachedBuilding}, waitDuration: {WaitDuration}, stoppingDistance: {StoppingDistance}";
     public abstract string PrettyName { get; }
     protected abstract void OnFinished();
 }

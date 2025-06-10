@@ -207,7 +207,7 @@ public class NPC : MonoBehaviour
             Debug.Log($"{NpcName}: Current decision finished");
             currentDecision = decisionSystem.Decide();
             currentDecision.Start();
-            Debug.Log($"New decision: {currentDecision.DebugInfo()}");
+            Debug.Log($"{NpcName}: New decision: {currentDecision.DebugInfo()}");
             NpcEventBus.Publish(new NpcActionEvent(
                 sourceId: EntityID,
                 action: currentDecision?.PrettyName ?? IdleDecision.RandomPrettyName,
@@ -290,7 +290,7 @@ public class NPC : MonoBehaviour
                                         importance = 5,
                                         recency = 10
                                     });
-                                    Debug.Log($"{NpcName} immediately observed {npc.NpcName} doing {currentAction}. Assigned relevance value: {relevance}");
+                                    Debug.Log($"{NpcName}: immediately observed {npc.NpcName} doing {currentAction}. Assigned relevance value: {relevance}");
                                 });
 
                             }
@@ -330,7 +330,7 @@ public class NPC : MonoBehaviour
                     recency = 10
                 });
 
-                Debug.Log($"{NpcName} observed {observedNpc.NpcName} doing {e.Action}. Assigned relevance value: {relevance}");
+                Debug.Log($"{NpcName}: observed {observedNpc.NpcName} doing {e.Action}. Assigned relevance value: {relevance}");
             });
         }
     }
@@ -343,7 +343,7 @@ public class NPC : MonoBehaviour
     /// <param name="targetTransform">The transform of the target to look at. If null, the NPC resets its rotation.</param>
     public void LookAt(Transform targetTransform)
     {
-        Debug.Log($"{NpcName} Looking at {(targetTransform == null ? "null" : targetTransform.name)}");
+        Debug.Log($"{NpcName}: Looking at {(targetTransform == null ? "null" : targetTransform.name)}");
         if (targetTransform != null)
         {
             oldLookTarget = transform.eulerAngles;

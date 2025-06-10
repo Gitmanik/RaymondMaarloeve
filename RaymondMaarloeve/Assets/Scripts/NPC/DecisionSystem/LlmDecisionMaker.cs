@@ -122,7 +122,7 @@ public class LlmDecisionMaker : IDecisionSystem
 
       if (response < 0 || response > currentEnvironment.Count)
       {
-        Debug.LogError($"{npc.NpcName}: Idle response error: index out of bounds: {chatResponseDto.response}");
+        Debug.LogError($"{npc.NpcName}: Idle response error: index out of bounds (currentEnvironment.Count: {currentEnvironment.Count}): {chatResponseDto.response}");
         return new IdleDecision();
       }
       
@@ -138,7 +138,7 @@ public class LlmDecisionMaker : IDecisionSystem
     /// <param name="error">The error message.</param>
     private void OnChatError(string error)
     {
-      Debug.LogError($"Idle error: {error}");
+      Debug.LogError($"{npc.NpcName}: Idle error: {error}");
     }
 
     /// <summary>
@@ -196,11 +196,11 @@ Output format must be **EXACTLY AND ONLY** an integer. Do not explain your reaso
         (response) =>
         {
           string result = Regex.Replace(response.response, @"\D*(\d+)\D*", "$1");
-          Debug.Log($"{npc.NpcName}: Relevance response: '{result}'");
+          //Debug.Log($"{npc.NpcName}: Relevance response: '{result}'");
           
           int relevance = 5;
           if (!int.TryParse(result, out relevance))
-            Debug.LogWarning($"Wrong relevance response: '{response.response}'");
+            Debug.LogWarning($"{npc.NpcName} Wrong relevance response: '{response.response}'");
           relevanceFunc(relevance);
         },
         OnChatError
