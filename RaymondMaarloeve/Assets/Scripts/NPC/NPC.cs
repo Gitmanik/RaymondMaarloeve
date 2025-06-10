@@ -22,6 +22,12 @@ public class NPC : MonoBehaviour
     /// The current decision being executed by the NPC.
     /// </summary>
     private IDecision currentDecision;
+
+    /// <summary>
+    /// Interrupted Decision, see <see cref="OnInteraction"/>
+    /// </summary>
+    public IDecision StoppedDecision;
+    
     /// <summary>
     /// The decision system used by the NPC.
     /// </summary>
@@ -378,6 +384,7 @@ public class NPC : MonoBehaviour
     public void OnInteraction()
     {
         LookAt(CameraFollow.Instance.transform);
+        StoppedDecision = currentDecision;
     }
 }
 

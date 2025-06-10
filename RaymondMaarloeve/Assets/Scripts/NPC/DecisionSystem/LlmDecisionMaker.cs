@@ -74,7 +74,7 @@ public class LlmDecisionMaker : IDecisionSystem
         new NeedDTO { need = "hunger", weight = (int) npc.Hunger },
         new NeedDTO { need = "thirst", weight = (int) npc.Thirst }
       };
-      dto.stopped_action = "";
+      dto.stopped_action = npc.StoppedDecision == null ? IdleDecision.RandomPrettyName : npc.StoppedDecision.PrettyName;
 
       currentEnvironment = npc.GetCurrentEnvironment();
       List<CurrentEnvironmentDTO> currentEnvironmentDtos = currentEnvironment.ConvertAll(x => x.ToDTO(npc));
@@ -85,7 +85,6 @@ public class LlmDecisionMaker : IDecisionSystem
       var content = JsonUtility.ToJson(dto);
       currentConversation.Add(new Message { role = "system", content = content});
       
-      // TODO: Read options from key -> Decision system
       currentConversation.Add(new Message { role = "user", content = $"What should {npc.NpcName} do now? Choose from CurrentEnvironment. Respond ONLY with the action index (1-{dto.current_environment.Count})."});
       
       LlmManager.Instance.Chat(
