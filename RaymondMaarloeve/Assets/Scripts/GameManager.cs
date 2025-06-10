@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("GameManager: Start initialization");
         Instance = this;
+        uiGameObject.SetActive(false);
 
         gameConfig = GameConfig.LoadGameConfig(Path.Combine(Application.dataPath, "game_config.json"));
         Debug.Log("GameManager: Config loaded");
