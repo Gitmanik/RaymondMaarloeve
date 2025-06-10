@@ -15,4 +15,5 @@ public class GetAleDecision : VisitBuildingDecision
         npc.Thirst = 0f;
         npc.Hunger = 0f;
     }
+    protected override bool ShouldFinish() => false;
 }

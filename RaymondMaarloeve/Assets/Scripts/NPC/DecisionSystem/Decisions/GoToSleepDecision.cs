@@ -15,4 +15,6 @@ public class GoToSleepDecision : VisitBuildingDecision
         npc.Thirst = 0f;
         npc.Hunger = 0f;
     }
+
+    protected override bool ShouldFinish() => DayNightCycle.Instance.timeOfDay > 7.5f && DayNightCycle.Instance.timeOfDay < 8.5f;
 }

@@ -14,4 +14,5 @@ public class GetWaterDecision : VisitBuildingDecision
     {
         npc.Thirst = 0f;
     }
+    protected override bool ShouldFinish() => false;
 }

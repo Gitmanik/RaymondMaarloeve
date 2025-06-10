@@ -49,14 +49,9 @@ public abstract class VisitBuildingDecision : IDecision
 
     public bool Tick()
     {
-        if (finished)
+        if (finished || ShouldFinish())
         {
-            if (NpcShouldDisappear)
-            {
-                npc.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
-                npc.agent.radius = 0.5f;
-            }
-            OnFinished();
+            Finish();
             return false;
         }
 
@@ -93,4 +88,5 @@ public abstract class VisitBuildingDecision : IDecision
     public string DebugInfo() => $"visiting building {(buildingGO.name == "Entrance" ? buildingGO.transform.parent.gameObject.name : buildingGO.name)} at: {destination}, reachedBuilding: {reachedBuilding}, waitDuration: {WaitDuration}, stoppingDistance: {StoppingDistance}";
     public abstract string PrettyName { get; }
     protected abstract void OnFinished();
+    protected abstract bool ShouldFinish();
 }
