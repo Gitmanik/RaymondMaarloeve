@@ -97,15 +97,22 @@ $(document).ready(function(){initNavTree('class_decoration_spawner.html',''); in
   <div class="headertitle"><div class="title">DecorationSpawner Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Responsible for placing decorative elements (e.g. trees, rocks) on available tiles in the terrain.  
+ <a href="class_decoration_spawner.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a39ec097f8823ea11f78751d998d7f009"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_decoration_spawner.html#a39ec097f8823ea11f78751d998d7f009">DecorationSpawner</a> (Terrain terrain, int tileSize)</td></tr>
+<tr class="memdesc:a39ec097f8823ea11f78751d998d7f009"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new instance of the <a class="el" href="class_decoration_spawner.html" title="Responsible for placing decorative elements (e.g. trees, rocks) on available tiles in the terrain.">DecorationSpawner</a> class.  <br /></td></tr>
 <tr class="separator:a39ec097f8823ea11f78751d998d7f009"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a797bcd8af5e8ef4de0b015e306be04d6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_decoration_spawner.html#a797bcd8af5e8ef4de0b015e306be04d6">SpawnDecorations</a> (<a class="el" href="class_tile.html">Tile</a>[,] tiles, List&lt; <a class="el" href="class_tile.html">Tile</a> &gt; allTiles, List&lt; <a class="el" href="class_building_setup.html">BuildingSetup</a> &gt; decorations)</td></tr>
+<tr class="memdesc:a797bcd8af5e8ef4de0b015e306be04d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spawns decorative objects randomly on unoccupied tiles.  <br /></td></tr>
 <tr class="separator:a797bcd8af5e8ef4de0b015e306be04d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Responsible for placing decorative elements (e.g. trees, rocks) on available tiles in the terrain. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a39ec097f8823ea11f78751d998d7f009" name="a39ec097f8823ea11f78751d998d7f009"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a39ec097f8823ea11f78751d998d7f009">&#9670;&#160;</a></span>DecorationSpawner()</h2>
 
@@ -131,6 +138,15 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Initializes a new instance of the <a class="el" href="class_decoration_spawner.html" title="Responsible for placing decorative elements (e.g. trees, rocks) on available tiles in the terrain.">DecorationSpawner</a> class. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">terrain</td><td>Reference to the terrain object for height placement.</td></tr>
+    <tr><td class="paramname">tileSize</td><td>Size of a single tile in world units.</td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -167,10 +183,21 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Spawns decorative objects randomly on unoccupied tiles. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tiles</td><td>2D grid of map tiles.</td></tr>
+    <tr><td class="paramname">allTiles</td><td>Flat list of all tiles for random sampling.</td></tr>
+    <tr><td class="paramname">decorations</td><td>List of decoration prefabs with weight configuration.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Total number of decorations placed.</dd></dl>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>RaymondMaarloeve/Assets/Scripts/<a class="el" href="_decoration_spawner_8cs.html">DecorationSpawner.cs</a></li>
+<li>RaymondMaarloeve/Assets/Scripts/Map/<a class="el" href="_decoration_spawner_8cs.html">DecorationSpawner.cs</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

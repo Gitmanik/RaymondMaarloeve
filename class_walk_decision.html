@@ -99,42 +99,59 @@ $(document).ready(function(){initNavTree('class_walk_decision.html',''); initRes
   <div class="headertitle"><div class="title">WalkDecision Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Represents a decision for an <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> to walk to a random destination within a specified radius.  
+ <a href="class_walk_decision.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a0a70b208d7c4fedb482db75300090224"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_walk_decision.html#a0a70b208d7c4fedb482db75300090224">DebugInfo</a> ()</td></tr>
+<tr class="memdesc:a0a70b208d7c4fedb482db75300090224"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets debug information about the current destination.  <br /></td></tr>
 <tr class="separator:a0a70b208d7c4fedb482db75300090224"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02b54f44d74e1307963b28099cd1980a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_walk_decision.html#a02b54f44d74e1307963b28099cd1980a">WalkDecision</a> (<a class="el" href="class_n_p_c.html">NPC</a> npc)</td></tr>
+<tr class="memdesc:a02b54f44d74e1307963b28099cd1980a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new instance of the <a class="el" href="class_walk_decision.html" title="Represents a decision for an NPC to walk to a random destination within a specified radius.">WalkDecision</a> class.  <br /></td></tr>
 <tr class="separator:a02b54f44d74e1307963b28099cd1980a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1684c261d89bf252ef84b2e7d939d0eb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_walk_decision.html#a1684c261d89bf252ef84b2e7d939d0eb">Start</a> ()</td></tr>
+<tr class="memdesc:a1684c261d89bf252ef84b2e7d939d0eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the walking decision by setting the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>'s NavMeshAgent destination.  <br /></td></tr>
 <tr class="separator:a1684c261d89bf252ef84b2e7d939d0eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d05dc6c560ba1f6f3d8a0806a0cf13e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_walk_decision.html#a0d05dc6c560ba1f6f3d8a0806a0cf13e">Finish</a> ()</td></tr>
+<tr class="memdesc:a0d05dc6c560ba1f6f3d8a0806a0cf13e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finishes the walking decision by resetting the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>'s NavMeshAgent path.  <br /></td></tr>
 <tr class="separator:a0d05dc6c560ba1f6f3d8a0806a0cf13e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a636c0195d74136988d8fed32ca16a2b9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_walk_decision.html#a636c0195d74136988d8fed32ca16a2b9">Tick</a> ()</td></tr>
+<tr class="memdesc:a636c0195d74136988d8fed32ca16a2b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the decision logic. Checks if the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> has reached its destination.  <br /></td></tr>
 <tr class="separator:a636c0195d74136988d8fed32ca16a2b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a434ed6530bf6a2f54229a8ded0121363"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_decision.html#a434ed6530bf6a2f54229a8ded0121363">Start</a> ()</td></tr>
+<tr class="memdesc:a434ed6530bf6a2f54229a8ded0121363"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the decision action. Implementation should begin execution of the decision logic.  <br /></td></tr>
 <tr class="separator:a434ed6530bf6a2f54229a8ded0121363"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57b195dd63b504ee6bf06076d66eac43"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_decision.html#a57b195dd63b504ee6bf06076d66eac43">Finish</a> ()</td></tr>
+<tr class="memdesc:a57b195dd63b504ee6bf06076d66eac43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finalizes the decision action. Implementation should clean up any resources or state related to the decision.  <br /></td></tr>
 <tr class="separator:a57b195dd63b504ee6bf06076d66eac43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace09880f10d7cc8eb66ef205f3b20163"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_decision.html#ace09880f10d7cc8eb66ef205f3b20163">Tick</a> ()</td></tr>
+<tr class="memdesc:ace09880f10d7cc8eb66ef205f3b20163"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes the decision logic and determines the outcome.  <br /></td></tr>
 <tr class="separator:ace09880f10d7cc8eb66ef205f3b20163"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae090e91b36d6dab9bca309ef32a2d507"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_decision.html#ae090e91b36d6dab9bca309ef32a2d507">DebugInfo</a> ()</td></tr>
+<tr class="memdesc:ae090e91b36d6dab9bca309ef32a2d507"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides debugging information for the decision.  <br /></td></tr>
 <tr class="separator:ae090e91b36d6dab9bca309ef32a2d507"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:adc5ad2baa7672e2a3b7606a03a92e68f"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_walk_decision.html#adc5ad2baa7672e2a3b7606a03a92e68f">wanderRadius</a> = 20f</td></tr>
+<tr class="memdesc:adc5ad2baa7672e2a3b7606a03a92e68f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The radius within which the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> will wander.  <br /></td></tr>
 <tr class="separator:adc5ad2baa7672e2a3b7606a03a92e68f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
 Properties</h2></td></tr>
 <tr class="memitem:afb9ff84907b5f7df54742ae1c1c468a2"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_walk_decision.html#afb9ff84907b5f7df54742ae1c1c468a2">PrettyName</a><code> [get]</code></td></tr>
+<tr class="memdesc:afb9ff84907b5f7df54742ae1c1c468a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the pretty name of the decision for LLM inference purposes.  <br /></td></tr>
 <tr class="separator:afb9ff84907b5f7df54742ae1c1c468a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header properties_interface_i_decision"><td colspan="2" onclick="javascript:toggleInherit('properties_interface_i_decision')"><img src="closed.png" alt="-"/>&#160;Properties inherited from <a class="el" href="interface_i_decision.html">IDecision</a></td></tr>
 <tr class="memitem:a3154ad5b52d373285b78c065a2d6d4da inherit properties_interface_i_decision"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_decision.html#a3154ad5b52d373285b78c065a2d6d4da">PrettyName</a><code> [get]</code></td></tr>
+<tr class="memdesc:a3154ad5b52d373285b78c065a2d6d4da inherit properties_interface_i_decision"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the human-readable description of the decision.  <br /></td></tr>
 <tr class="separator:a3154ad5b52d373285b78c065a2d6d4da inherit properties_interface_i_decision"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents a decision for an <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> to walk to a random destination within a specified radius. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a02b54f44d74e1307963b28099cd1980a" name="a02b54f44d74e1307963b28099cd1980a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a02b54f44d74e1307963b28099cd1980a">&#9670;&#160;</a></span>WalkDecision()</h2>
 
@@ -150,6 +167,14 @@ Properties</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Initializes a new instance of the <a class="el" href="class_walk_decision.html" title="Represents a decision for an NPC to walk to a random destination within a specified radius.">WalkDecision</a> class. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">npc</td><td>The <a class="el" href="class_n_p_c.html">associated with this decision.</a> </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -168,6 +193,9 @@ Properties</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Gets debug information about the current destination. </p>
+<dl class="section return"><dt>Returns</dt><dd>A string containing the current destination.</dd></dl>
 
 <p>Implements <a class="el" href="interface_i_decision.html#ae090e91b36d6dab9bca309ef32a2d507">IDecision</a>.</p>
 
@@ -188,6 +216,8 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Finishes the walking decision by resetting the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>'s NavMeshAgent path. </p>
+
 <p>Implements <a class="el" href="interface_i_decision.html#a57b195dd63b504ee6bf06076d66eac43">IDecision</a>.</p>
 
 </div>
@@ -206,6 +236,8 @@ Properties</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Starts the walking decision by setting the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>'s NavMeshAgent destination. </p>
 
 <p>Implements <a class="el" href="interface_i_decision.html#a434ed6530bf6a2f54229a8ded0121363">IDecision</a>.</p>
 
@@ -226,6 +258,9 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Updates the decision logic. Checks if the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> has reached its destination. </p>
+<dl class="section return"><dt>Returns</dt><dd>False if the walk is finished; otherwise, true.</dd></dl>
+
 <p>Implements <a class="el" href="interface_i_decision.html#ace09880f10d7cc8eb66ef205f3b20163">IDecision</a>.</p>
 
 </div>
@@ -242,6 +277,8 @@ Properties</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>The radius within which the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> will wander. </p>
 
 </div>
 </div>
@@ -265,6 +302,8 @@ Properties</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Gets the pretty name of the decision for LLM inference purposes. </p>
 
 <p>Implements <a class="el" href="interface_i_decision.html#a3154ad5b52d373285b78c065a2d6d4da">IDecision</a>.</p>
 

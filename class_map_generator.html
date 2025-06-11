@@ -99,14 +99,23 @@ $(document).ready(function(){initNavTree('class_map_generator.html',''); initRes
   <div class="headertitle"><div class="title">MapGenerator Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Responsible for generating the game map, including terrain layout, building placement, wall construction, decoration, and clues.  
+ <a href="class_map_generator.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:adc8f9ffbc33e6d4b1593900c3059fdf7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map_generator.html#adc8f9ffbc33e6d4b1593900c3059fdf7">GenerateMap</a> ()</td></tr>
+<tr class="memdesc:adc8f9ffbc33e6d4b1593900c3059fdf7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates the full map including walls, buildings, decorations, and paths.  <br /></td></tr>
 <tr class="separator:adc8f9ffbc33e6d4b1593900c3059fdf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86432ac08e088b46d33309cd3ece29a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map_generator.html#a86432ac08e088b46d33309cd3ece29a7">GenerateClue</a> ()</td></tr>
+<tr class="memdesc:a86432ac08e088b46d33309cd3ece29a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spawns clues randomly on the generated map.  <br /></td></tr>
+<tr class="separator:a86432ac08e088b46d33309cd3ece29a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5f439c0cb92bffbdeadb1a86b9485fc"><td class="memItemLeft" align="right" valign="top">GameObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map_generator.html#af5f439c0cb92bffbdeadb1a86b9485fc">GetBuilding</a> (HashSet&lt; <a class="el" href="class_building_data.html#afc07932823f7b925d75c838070aa4556">BuildingData.BuildingType</a> &gt; allowedTypes)</td></tr>
+<tr class="memdesc:af5f439c0cb92bffbdeadb1a86b9485fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a suitable building for an <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> from allowed types.  <br /></td></tr>
 <tr class="separator:af5f439c0cb92bffbdeadb1a86b9485fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a25bb86d1cb5943ffd824b2aaace1d8e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map_generator.html#a25bb86d1cb5943ffd824b2aaace1d8e3">DebugTilesInConsole</a> ()</td></tr>
+<tr class="memdesc:a25bb86d1cb5943ffd824b2aaace1d8e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints tile layout information to the Unity console for debugging purposes.  <br /></td></tr>
 <tr class="separator:a25bb86d1cb5943ffd824b2aaace1d8e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
@@ -133,6 +142,8 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a074064e97f4d0dce449a86b622be6598"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af86445c360a9811bd3cb0a91604e4ea3"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_building_setup.html">BuildingSetup</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map_generator.html#af86445c360a9811bd3cb0a91604e4ea3">decorations</a> = new()</td></tr>
 <tr class="separator:af86445c360a9811bd3cb0a91604e4ea3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad789ad635ed7bac8840d1f3ead5307e6"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_clue_setup.html">ClueSetup</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map_generator.html#ad789ad635ed7bac8840d1f3ead5307e6">clues</a> = new()</td></tr>
+<tr class="separator:ad789ad635ed7bac8840d1f3ead5307e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fe4c884d55e18abe072cdc37b9f53de"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_tile.html">Tile</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map_generator.html#a4fe4c884d55e18abe072cdc37b9f53de">buildingsMainTile</a></td></tr>
 <tr class="separator:a4fe4c884d55e18abe072cdc37b9f53de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac139d2902fbce9237436dc2683f2c942"><td class="memItemLeft" align="right" valign="top">List&lt; GameObject &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map_generator.html#ac139d2902fbce9237436dc2683f2c942">spawnedBuildings</a></td></tr>
@@ -145,11 +156,15 @@ Public Attributes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
 Properties</h2></td></tr>
 <tr class="memitem:ae14a62313a5f5d9490ab617851a69f94"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_map_generator.html">MapGenerator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map_generator.html#ae14a62313a5f5d9490ab617851a69f94">Instance</a><code> [get]</code></td></tr>
+<tr class="memdesc:ae14a62313a5f5d9490ab617851a69f94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Singleton instance of the <a class="el" href="class_map_generator.html" title="Responsible for generating the game map, including terrain layout, building placement,...">MapGenerator</a>.  <br /></td></tr>
 <tr class="separator:ae14a62313a5f5d9490ab617851a69f94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ad2f3599e56990433e0ff00a7b5263f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map_generator.html#a0ad2f3599e56990433e0ff00a7b5263f">IsMapGenerated</a> = false<code> [get]</code></td></tr>
+<tr class="memdesc:a0ad2f3599e56990433e0ff00a7b5263f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Indicates whether the map has already been generated.  <br /></td></tr>
 <tr class="separator:a0ad2f3599e56990433e0ff00a7b5263f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Responsible for generating the game map, including terrain layout, building placement, wall construction, decoration, and clues. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a25bb86d1cb5943ffd824b2aaace1d8e3" name="a25bb86d1cb5943ffd824b2aaace1d8e3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a25bb86d1cb5943ffd824b2aaace1d8e3">&#9670;&#160;</a></span>DebugTilesInConsole()</h2>
 
@@ -164,6 +179,27 @@ Properties</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Prints tile layout information to the Unity console for debugging purposes. </p>
+
+</div>
+</div>
+<a id="a86432ac08e088b46d33309cd3ece29a7" name="a86432ac08e088b46d33309cd3ece29a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86432ac08e088b46d33309cd3ece29a7">&#9670;&#160;</a></span>GenerateClue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MapGenerator.GenerateClue </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Spawns clues randomly on the generated map. </p>
 
 </div>
 </div>
@@ -182,6 +218,8 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Generates the full map including walls, buildings, decorations, and paths. </p>
+
 </div>
 </div>
 <a id="af5f439c0cb92bffbdeadb1a86b9485fc" name="af5f439c0cb92bffbdeadb1a86b9485fc"></a>
@@ -199,6 +237,15 @@ Properties</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Returns a suitable building for an <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> from allowed types. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">allowedTypes</td><td>Set of allowed building types.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Available building GameObject or null.</dd></dl>
 
 </div>
 </div>
@@ -239,6 +286,20 @@ Properties</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">List&lt;<a class="el" href="class_tile.html">Tile</a>&gt; MapGenerator.buildingsMainTile</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad789ad635ed7bac8840d1f3ead5307e6" name="ad789ad635ed7bac8840d1f3ead5307e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad789ad635ed7bac8840d1f3ead5307e6">&#9670;&#160;</a></span>clues</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">List&lt;<a class="el" href="class_clue_setup.html">ClueSetup</a>&gt; MapGenerator.clues = new()</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -434,6 +495,8 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Singleton instance of the <a class="el" href="class_map_generator.html" title="Responsible for generating the game map, including terrain layout, building placement,...">MapGenerator</a>. </p>
+
 </div>
 </div>
 <a id="a0ad2f3599e56990433e0ff00a7b5263f" name="a0ad2f3599e56990433e0ff00a7b5263f"></a>
@@ -456,10 +519,12 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Indicates whether the map has already been generated. </p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>RaymondMaarloeve/Assets/Scripts/<a class="el" href="_map_generator_8cs.html">MapGenerator.cs</a></li>
+<li>RaymondMaarloeve/Assets/Scripts/Map/<a class="el" href="_map_generator_8cs.html">MapGenerator.cs</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

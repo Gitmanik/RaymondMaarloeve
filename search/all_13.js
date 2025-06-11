@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['random_0',['Random',['../_map_generator_8cs.html#a832e8f52fca5a678819ec96269dcb532',1,'Random():&#160;MapGenerator.cs'],['../_game_manager_8cs.html#a832e8f52fca5a678819ec96269dcb532',1,'Random():&#160;GameManager.cs'],['../_decoration_spawner_8cs.html#a832e8f52fca5a678819ec96269dcb532',1,'Random():&#160;DecorationSpawner.cs'],['../_builiding_spawner_8cs.html#a832e8f52fca5a678819ec96269dcb532',1,'Random():&#160;BuilidingSpawner.cs']]],
+  ['random_0',['Random',['../_map_generator_8cs.html#a832e8f52fca5a678819ec96269dcb532',1,'Random():&#160;MapGenerator.cs'],['../_decoration_spawner_8cs.html#a832e8f52fca5a678819ec96269dcb532',1,'Random():&#160;DecorationSpawner.cs'],['../_clue_spawner_8cs.html#a832e8f52fca5a678819ec96269dcb532',1,'Random():&#160;ClueSpawner.cs'],['../_builiding_spawner_8cs.html#a832e8f52fca5a678819ec96269dcb532',1,'Random():&#160;BuilidingSpawner.cs'],['../_game_manager_8cs.html#a832e8f52fca5a678819ec96269dcb532',1,'Random():&#160;GameManager.cs']]],
   ['randomidlenames_1',['RandomIdleNames',['../class_idle_decision.html#ad4023e12743cb96aee4b489689c19889',1,'IdleDecision']]],
   ['randomprettyname_2',['RandomPrettyName',['../class_idle_decision.html#ab2324f2d576b72b763701aca630ef6f0',1,'IdleDecision']]],
   ['raymond_20maarloeve_20sp_2e_20z_20o_2eo_2e_3',['Raymond Maarloeve sp. z o.o.',['../index.html',1,'']]],

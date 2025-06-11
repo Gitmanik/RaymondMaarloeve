@@ -97,15 +97,22 @@ $(document).ready(function(){initNavTree('class_wall_spawner.html',''); initResi
   <div class="headertitle"><div class="title">WallSpawner Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Responsible for spawning the outer walls, towers, and gate around the map boundary.  
+ <a href="class_wall_spawner.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a9cedb1442fbd1707efed65d749ccc204"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_wall_spawner.html#a9cedb1442fbd1707efed65d749ccc204">WallSpawner</a> (List&lt; <a class="el" href="class_walls_setup.html">WallsSetup</a> &gt; walls, Terrain terrain, int tileSize, int mapWidthInTiles, int mapLengthInTiles)</td></tr>
+<tr class="memdesc:a9cedb1442fbd1707efed65d749ccc204"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new instance of the <a class="el" href="class_wall_spawner.html" title="Responsible for spawning the outer walls, towers, and gate around the map boundary.">WallSpawner</a> class.  <br /></td></tr>
 <tr class="separator:a9cedb1442fbd1707efed65d749ccc204"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7dd3bd6a727fbf77fe3122fd6e8a17cd"><td class="memItemLeft" align="right" valign="top">GameObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_wall_spawner.html#a7dd3bd6a727fbf77fe3122fd6e8a17cd">SpawnWalls</a> (<a class="el" href="class_tile.html">Tile</a>[,] tiles)</td></tr>
+<tr class="memdesc:a7dd3bd6a727fbf77fe3122fd6e8a17cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spawns the perimeter walls, towers, and gate around the map.  <br /></td></tr>
 <tr class="separator:a7dd3bd6a727fbf77fe3122fd6e8a17cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Responsible for spawning the outer walls, towers, and gate around the map boundary. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a9cedb1442fbd1707efed65d749ccc204" name="a9cedb1442fbd1707efed65d749ccc204"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9cedb1442fbd1707efed65d749ccc204">&#9670;&#160;</a></span>WallSpawner()</h2>
 
@@ -150,6 +157,18 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Initializes a new instance of the <a class="el" href="class_wall_spawner.html" title="Responsible for spawning the outer walls, towers, and gate around the map boundary.">WallSpawner</a> class. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">walls</td><td>List of wall prefabs with their configurations.</td></tr>
+    <tr><td class="paramname">terrain</td><td>Terrain reference for height sampling.</td></tr>
+    <tr><td class="paramname">tileSize</td><td>Size of a single tile in world units.</td></tr>
+    <tr><td class="paramname">mapWidthInTiles</td><td>Number of tiles in width.</td></tr>
+    <tr><td class="paramname">mapLengthInTiles</td><td>Number of tiles in length.</td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -169,10 +188,19 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Spawns the perimeter walls, towers, and gate around the map. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tiles</td><td>2D tile array of the map.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Parent GameObject containing all wall elements.</dd></dl>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>RaymondMaarloeve/Assets/Scripts/<a class="el" href="_wall_spawner_8cs.html">WallSpawner.cs</a></li>
+<li>RaymondMaarloeve/Assets/Scripts/Map/<a class="el" href="_wall_spawner_8cs.html">WallSpawner.cs</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

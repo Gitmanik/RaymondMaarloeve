@@ -97,31 +97,46 @@ $(document).ready(function(){initNavTree('class_chat_request_d_t_o.html',''); in
   <div class="headertitle"><div class="title">ChatRequestDTO Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Data Transfer Object for sending chat requests to the LLM.  
+ <a href="class_chat_request_d_t_o.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:af72481beeb341be8d2b76e7a98c4740c"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_chat_request_d_t_o.html#af72481beeb341be8d2b76e7a98c4740c">model_id</a></td></tr>
+<tr class="memdesc:af72481beeb341be8d2b76e7a98c4740c"><td class="mdescLeft">&#160;</td><td class="mdescRight">The identifier of the model to use.  <br /></td></tr>
 <tr class="separator:af72481beeb341be8d2b76e7a98c4740c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab580aa33d7f2360e8a3d5d50e15a4f58"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_message.html">Message</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_chat_request_d_t_o.html#ab580aa33d7f2360e8a3d5d50e15a4f58">messages</a></td></tr>
+<tr class="memdesc:ab580aa33d7f2360e8a3d5d50e15a4f58"><td class="mdescLeft">&#160;</td><td class="mdescRight">The list of <a class="el" href="class_message.html">in the conversation. </a> <br /></td></tr>
 <tr class="separator:ab580aa33d7f2360e8a3d5d50e15a4f58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a18d41429e9046b772e785b27a69fafbe"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_chat_request_d_t_o.html#a18d41429e9046b772e785b27a69fafbe">n_ctx</a></td></tr>
+<tr class="memdesc:a18d41429e9046b772e785b27a69fafbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">The context window size for model.  <br /></td></tr>
 <tr class="separator:a18d41429e9046b772e785b27a69fafbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5d25dd955d63438b3263c7468162f2b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_chat_request_d_t_o.html#ad5d25dd955d63438b3263c7468162f2b">f16_kv</a></td></tr>
+<tr class="memdesc:ad5d25dd955d63438b3263c7468162f2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether to use 16-bit key/value memory.  <br /></td></tr>
 <tr class="separator:ad5d25dd955d63438b3263c7468162f2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd4ffb4a3f5404f939e7813f2f2459af"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_chat_request_d_t_o.html#abd4ffb4a3f5404f939e7813f2f2459af">n_parts</a></td></tr>
+<tr class="memdesc:abd4ffb4a3f5404f939e7813f2f2459af"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of parts to split the model into.  <br /></td></tr>
 <tr class="separator:abd4ffb4a3f5404f939e7813f2f2459af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add7b89833ee7aa9642625ca0289441a9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_chat_request_d_t_o.html#add7b89833ee7aa9642625ca0289441a9">seed</a></td></tr>
+<tr class="memdesc:add7b89833ee7aa9642625ca0289441a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">The random seed for generation.  <br /></td></tr>
 <tr class="separator:add7b89833ee7aa9642625ca0289441a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2568ef6d38858544eef3041cc80ec460"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_chat_request_d_t_o.html#a2568ef6d38858544eef3041cc80ec460">n_gpu_layers</a></td></tr>
+<tr class="memdesc:a2568ef6d38858544eef3041cc80ec460"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of GPU layers to use. If set to -1, the model will use all available GPU layers. If set to 0, the model will run on CPU. If set to a positive integer, it will use that many GPU layers.  <br /></td></tr>
 <tr class="separator:a2568ef6d38858544eef3041cc80ec460"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac185ab021b1d160dc7e78b256654e708"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_chat_request_d_t_o.html#ac185ab021b1d160dc7e78b256654e708">max_tokens</a></td></tr>
+<tr class="memdesc:ac185ab021b1d160dc7e78b256654e708"><td class="mdescLeft">&#160;</td><td class="mdescRight">The maximum number of tokens to generate.  <br /></td></tr>
 <tr class="separator:ac185ab021b1d160dc7e78b256654e708"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae27c77a9a36c25159daa88c7e1cd8a2f"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_chat_request_d_t_o.html#ae27c77a9a36c25159daa88c7e1cd8a2f">temperature</a></td></tr>
+<tr class="memdesc:ae27c77a9a36c25159daa88c7e1cd8a2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The temperature for sampling.  <br /></td></tr>
 <tr class="separator:ae27c77a9a36c25159daa88c7e1cd8a2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad6ad4153726452c59790b60169690429"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_chat_request_d_t_o.html#ad6ad4153726452c59790b60169690429">top_p</a></td></tr>
+<tr class="memdesc:ad6ad4153726452c59790b60169690429"><td class="mdescLeft">&#160;</td><td class="mdescRight">The nucleus sampling probability.  <br /></td></tr>
 <tr class="separator:ad6ad4153726452c59790b60169690429"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Data Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Data Transfer Object for sending chat requests to the LLM. </p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="ad5d25dd955d63438b3263c7468162f2b" name="ad5d25dd955d63438b3263c7468162f2b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad5d25dd955d63438b3263c7468162f2b">&#9670;&#160;</a></span>f16_kv</h2>
 
@@ -133,6 +148,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Whether to use 16-bit key/value memory. </p>
 
 </div>
 </div>
@@ -148,6 +165,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>The maximum number of tokens to generate. </p>
+
 </div>
 </div>
 <a id="ab580aa33d7f2360e8a3d5d50e15a4f58" name="ab580aa33d7f2360e8a3d5d50e15a4f58"></a>
@@ -161,6 +180,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>The list of <a class="el" href="class_message.html">in the conversation. </a></p>
 
 </div>
 </div>
@@ -176,6 +197,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>The identifier of the model to use. </p>
+
 </div>
 </div>
 <a id="a18d41429e9046b772e785b27a69fafbe" name="a18d41429e9046b772e785b27a69fafbe"></a>
@@ -189,6 +212,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>The context window size for model. </p>
 
 </div>
 </div>
@@ -204,6 +229,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>The number of GPU layers to use. If set to -1, the model will use all available GPU layers. If set to 0, the model will run on CPU. If set to a positive integer, it will use that many GPU layers. </p>
+
 </div>
 </div>
 <a id="abd4ffb4a3f5404f939e7813f2f2459af" name="abd4ffb4a3f5404f939e7813f2f2459af"></a>
@@ -217,6 +244,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>The number of parts to split the model into. </p>
 
 </div>
 </div>
@@ -232,6 +261,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>The random seed for generation. </p>
+
 </div>
 </div>
 <a id="ae27c77a9a36c25159daa88c7e1cd8a2f" name="ae27c77a9a36c25159daa88c7e1cd8a2f"></a>
@@ -246,6 +277,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>The temperature for sampling. </p>
+
 </div>
 </div>
 <a id="ad6ad4153726452c59790b60169690429" name="ad6ad4153726452c59790b60169690429"></a>
@@ -259,6 +292,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>The nucleus sampling probability. </p>
 
 </div>
 </div>

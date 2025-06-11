@@ -6,6 +6,8 @@ var hierarchy =
     [ "CharacterDTO", "class_character_d_t_o.html", null ],
     [ "ChatRequestDTO", "class_chat_request_d_t_o.html", null ],
     [ "ChatResponseDTO", "class_chat_response_d_t_o.html", null ],
+    [ "ClueSetup", "class_clue_setup.html", null ],
+    [ "ClueSpawner", "class_clue_spawner.html", null ],
     [ "ConvertHistoryToBlocksDTO", "class_convert_history_to_blocks_d_t_o.html", null ],
     [ "CurrentEnvironment", "class_current_environment.html", null ],
     [ "CurrentEnvironmentDTO", "class_current_environment_d_t_o.html", null ],

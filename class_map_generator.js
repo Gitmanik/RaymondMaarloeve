@@ -1,11 +1,13 @@
 var class_map_generator =
 [
     [ "DebugTilesInConsole", "class_map_generator.html#a25bb86d1cb5943ffd824b2aaace1d8e3", null ],
+    [ "GenerateClue", "class_map_generator.html#a86432ac08e088b46d33309cd3ece29a7", null ],
     [ "GenerateMap", "class_map_generator.html#adc8f9ffbc33e6d4b1593900c3059fdf7", null ],
     [ "GetBuilding", "class_map_generator.html#af5f439c0cb92bffbdeadb1a86b9485fc", null ],
     [ "buildings", "class_map_generator.html#a75c3915379b35396d54169fbe1db8e96", null ],
     [ "buildingsDensity", "class_map_generator.html#a5bce0ff4dd9cf601f74b2ec76ff37f4b", null ],
     [ "buildingsMainTile", "class_map_generator.html#a4fe4c884d55e18abe072cdc37b9f53de", null ],
+    [ "clues", "class_map_generator.html#ad789ad635ed7bac8840d1f3ead5307e6", null ],
     [ "decorations", "class_map_generator.html#af86445c360a9811bd3cb0a91604e4ea3", null ],
     [ "mapLength", "class_map_generator.html#ae2b1ba360d4b891f7867cfac8ae87c7c", null ],
     [ "mapLengthInTiles", "class_map_generator.html#a3daeb42a5e3cb43e7e3576f57a0db58c", null ],

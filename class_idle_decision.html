@@ -99,46 +99,65 @@ $(document).ready(function(){initNavTree('class_idle_decision.html',''); initRes
   <div class="headertitle"><div class="title">IdleDecision Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Represents a decision for an <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> to idle for a specified duration.  
+ <a href="class_idle_decision.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:afbd018886aa03e7115989bbe5a5293b8"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_idle_decision.html#afbd018886aa03e7115989bbe5a5293b8">DebugInfo</a> ()</td></tr>
+<tr class="memdesc:afbd018886aa03e7115989bbe5a5293b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides debug information about the remaining idle time.  <br /></td></tr>
 <tr class="separator:afbd018886aa03e7115989bbe5a5293b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa06377f1bdee194d56252203593655a0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_idle_decision.html#aa06377f1bdee194d56252203593655a0">IdleDecision</a> (float idleTime)</td></tr>
+<tr class="memdesc:aa06377f1bdee194d56252203593655a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new instance of the <a class="el" href="class_idle_decision.html" title="Represents a decision for an NPC to idle for a specified duration.">IdleDecision</a> class with a specified idle time.  <br /></td></tr>
 <tr class="separator:aa06377f1bdee194d56252203593655a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac20741cddfc5e00dada611f7fbfabf93"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_idle_decision.html#ac20741cddfc5e00dada611f7fbfabf93">IdleDecision</a> ()</td></tr>
+<tr class="memdesc:ac20741cddfc5e00dada611f7fbfabf93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new instance of the <a class="el" href="class_idle_decision.html" title="Represents a decision for an NPC to idle for a specified duration.">IdleDecision</a> class with a random idle time.  <br /></td></tr>
 <tr class="separator:ac20741cddfc5e00dada611f7fbfabf93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa9103fbd04d50e2129e809385d0ec3cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_idle_decision.html#aa9103fbd04d50e2129e809385d0ec3cd">Start</a> ()</td></tr>
+<tr class="memdesc:aa9103fbd04d50e2129e809385d0ec3cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the idle decision by recording the current time.  <br /></td></tr>
 <tr class="separator:aa9103fbd04d50e2129e809385d0ec3cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab0be210044d87e0e31f9894f803756e2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_idle_decision.html#ab0be210044d87e0e31f9894f803756e2">Finish</a> ()</td></tr>
+<tr class="memdesc:ab0be210044d87e0e31f9894f803756e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when the decision finishes. Currently, no implementation is provided.  <br /></td></tr>
 <tr class="separator:ab0be210044d87e0e31f9894f803756e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8270b96ec9dcf299d734f0d7828c439e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_idle_decision.html#a8270b96ec9dcf299d734f0d7828c439e">Tick</a> ()</td></tr>
+<tr class="memdesc:a8270b96ec9dcf299d734f0d7828c439e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the idle decision and checks if the idle time has elapsed.  <br /></td></tr>
 <tr class="separator:a8270b96ec9dcf299d734f0d7828c439e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a434ed6530bf6a2f54229a8ded0121363"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_decision.html#a434ed6530bf6a2f54229a8ded0121363">Start</a> ()</td></tr>
+<tr class="memdesc:a434ed6530bf6a2f54229a8ded0121363"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the decision action. Implementation should begin execution of the decision logic.  <br /></td></tr>
 <tr class="separator:a434ed6530bf6a2f54229a8ded0121363"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57b195dd63b504ee6bf06076d66eac43"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_decision.html#a57b195dd63b504ee6bf06076d66eac43">Finish</a> ()</td></tr>
+<tr class="memdesc:a57b195dd63b504ee6bf06076d66eac43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finalizes the decision action. Implementation should clean up any resources or state related to the decision.  <br /></td></tr>
 <tr class="separator:a57b195dd63b504ee6bf06076d66eac43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace09880f10d7cc8eb66ef205f3b20163"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_decision.html#ace09880f10d7cc8eb66ef205f3b20163">Tick</a> ()</td></tr>
+<tr class="memdesc:ace09880f10d7cc8eb66ef205f3b20163"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes the decision logic and determines the outcome.  <br /></td></tr>
 <tr class="separator:ace09880f10d7cc8eb66ef205f3b20163"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae090e91b36d6dab9bca309ef32a2d507"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_decision.html#ae090e91b36d6dab9bca309ef32a2d507">DebugInfo</a> ()</td></tr>
+<tr class="memdesc:ae090e91b36d6dab9bca309ef32a2d507"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides debugging information for the decision.  <br /></td></tr>
 <tr class="separator:ae090e91b36d6dab9bca309ef32a2d507"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:ad4023e12743cb96aee4b489689c19889"><td class="memItemLeft" align="right" valign="top">static readonly List&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_idle_decision.html#ad4023e12743cb96aee4b489689c19889">RandomIdleNames</a></td></tr>
+<tr class="memdesc:ad4023e12743cb96aee4b489689c19889"><td class="mdescLeft">&#160;</td><td class="mdescRight">A list of random idle names for descriptive purposes.  <br /></td></tr>
 <tr class="separator:ad4023e12743cb96aee4b489689c19889"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
 Properties</h2></td></tr>
 <tr class="memitem:ab2324f2d576b72b763701aca630ef6f0"><td class="memItemLeft" align="right" valign="top">static string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_idle_decision.html#ab2324f2d576b72b763701aca630ef6f0">RandomPrettyName</a><code> [get]</code></td></tr>
+<tr class="memdesc:ab2324f2d576b72b763701aca630ef6f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a random idle name from the list of idle names.  <br /></td></tr>
 <tr class="separator:ab2324f2d576b72b763701aca630ef6f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d444359075d6535accaff3e98965888"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_idle_decision.html#a0d444359075d6535accaff3e98965888">PrettyName</a><code> [get]</code></td></tr>
+<tr class="memdesc:a0d444359075d6535accaff3e98965888"><td class="mdescLeft">&#160;</td><td class="mdescRight">Human-readable name of the decision.  <br /></td></tr>
 <tr class="separator:a0d444359075d6535accaff3e98965888"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header properties_interface_i_decision"><td colspan="2" onclick="javascript:toggleInherit('properties_interface_i_decision')"><img src="closed.png" alt="-"/>&#160;Properties inherited from <a class="el" href="interface_i_decision.html">IDecision</a></td></tr>
 <tr class="memitem:a3154ad5b52d373285b78c065a2d6d4da inherit properties_interface_i_decision"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_decision.html#a3154ad5b52d373285b78c065a2d6d4da">PrettyName</a><code> [get]</code></td></tr>
+<tr class="memdesc:a3154ad5b52d373285b78c065a2d6d4da inherit properties_interface_i_decision"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the human-readable description of the decision.  <br /></td></tr>
 <tr class="separator:a3154ad5b52d373285b78c065a2d6d4da inherit properties_interface_i_decision"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents a decision for an <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> to idle for a specified duration. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa06377f1bdee194d56252203593655a0" name="aa06377f1bdee194d56252203593655a0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa06377f1bdee194d56252203593655a0">&#9670;&#160;</a></span>IdleDecision() <span class="overload">[1/2]</span></h2>
 
@@ -154,6 +173,14 @@ Properties</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Initializes a new instance of the <a class="el" href="class_idle_decision.html" title="Represents a decision for an NPC to idle for a specified duration.">IdleDecision</a> class with a specified idle time. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idleTime</td><td>The duration of the idling in seconds.</td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -172,6 +199,8 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Initializes a new instance of the <a class="el" href="class_idle_decision.html" title="Represents a decision for an NPC to idle for a specified duration.">IdleDecision</a> class with a random idle time. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -189,6 +218,9 @@ Properties</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Provides debug information about the remaining idle time. </p>
+<dl class="section return"><dt>Returns</dt><dd>A string containing the remaining idle time.</dd></dl>
 
 <p>Implements <a class="el" href="interface_i_decision.html#ae090e91b36d6dab9bca309ef32a2d507">IDecision</a>.</p>
 
@@ -209,6 +241,8 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Called when the decision finishes. Currently, no implementation is provided. </p>
+
 <p>Implements <a class="el" href="interface_i_decision.html#a57b195dd63b504ee6bf06076d66eac43">IDecision</a>.</p>
 
 </div>
@@ -228,6 +262,8 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Starts the idle decision by recording the current time. </p>
+
 <p>Implements <a class="el" href="interface_i_decision.html#a434ed6530bf6a2f54229a8ded0121363">IDecision</a>.</p>
 
 </div>
@@ -246,6 +282,9 @@ Properties</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Updates the idle decision and checks if the idle time has elapsed. </p>
+<dl class="section return"><dt>Returns</dt><dd><code>true</code> if the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> should continue idling; otherwise, <code>false</code>.</dd></dl>
 
 <p>Implements <a class="el" href="interface_i_decision.html#ace09880f10d7cc8eb66ef205f3b20163">IDecision</a>.</p>
 
@@ -287,6 +326,8 @@ Properties</h2></td></tr>
 <div class="line">        </div>
 <div class="line">    }</div>
 </div><!-- fragment -->
+<p>A list of random idle names for descriptive purposes. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Property Documentation</h2>
@@ -309,6 +350,8 @@ Properties</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Human-readable name of the decision. </p>
 
 <p>Implements <a class="el" href="interface_i_decision.html#a3154ad5b52d373285b78c065a2d6d4da">IDecision</a>.</p>
 
@@ -333,6 +376,8 @@ Properties</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Gets a random idle name from the list of idle names. </p>
 
 </div>
 </div>

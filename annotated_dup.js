@@ -12,6 +12,8 @@ var annotated_dup =
     [ "CharacterDTO", "class_character_d_t_o.html", "class_character_d_t_o" ],
     [ "ChatRequestDTO", "class_chat_request_d_t_o.html", "class_chat_request_d_t_o" ],
     [ "ChatResponseDTO", "class_chat_response_d_t_o.html", "class_chat_response_d_t_o" ],
+    [ "ClueSetup", "class_clue_setup.html", "class_clue_setup" ],
+    [ "ClueSpawner", "class_clue_spawner.html", "class_clue_spawner" ],
     [ "ConvertHistoryToBlocksDTO", "class_convert_history_to_blocks_d_t_o.html", "class_convert_history_to_blocks_d_t_o" ],
     [ "CurrentEnvironment", "class_current_environment.html", "class_current_environment" ],
     [ "CurrentEnvironmentDTO", "class_current_environment_d_t_o.html", "class_current_environment_d_t_o" ],

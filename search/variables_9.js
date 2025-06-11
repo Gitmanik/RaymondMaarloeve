@@ -6,7 +6,9 @@ var searchData=
   ['interactionoffset_3',['interactionOffset',['../class_camera_follow.html#a8c4a1d87efb3c27c0ac00061fcab67ba',1,'CameraFollow']]],
   ['interactionrotation_4',['interactionRotation',['../class_camera_follow.html#a499d39cf54707eb903dcd3d5e72d39c4',1,'CameraFollow']]],
   ['isbuilding_5',['IsBuilding',['../class_tile.html#a10507d64269a71aba70c8bad814201a9',1,'Tile']]],
-  ['ispartofbuilding_6',['IsPartOfBuilding',['../class_tile.html#a2e13765c703f058c66e287aa80985d22',1,'Tile']]],
-  ['ispath_7',['IsPath',['../class_tile.html#af83411d40165370c275d923e5410812f',1,'Tile']]],
-  ['isreal_8',['isReal',['../class_history_block.html#af085d02ca6012132bbc00f2419e24def',1,'HistoryBlock']]]
+  ['isclue_6',['IsClue',['../class_tile.html#af21dac7eb432830ec7be23f7931cae8a',1,'Tile']]],
+  ['isdecoration_7',['IsDecoration',['../class_tile.html#aacef5edb3eea6133f82e4795b6aa4612',1,'Tile']]],
+  ['ispartofbuilding_8',['IsPartOfBuilding',['../class_tile.html#a2e13765c703f058c66e287aa80985d22',1,'Tile']]],
+  ['ispath_9',['IsPath',['../class_tile.html#af83411d40165370c275d923e5410812f',1,'Tile']]],
+  ['isreal_10',['isReal',['../class_history_block.html#af085d02ca6012132bbc00f2419e24def',1,'HistoryBlock']]]
 ];

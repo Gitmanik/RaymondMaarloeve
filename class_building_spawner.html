@@ -97,15 +97,22 @@ $(document).ready(function(){initNavTree('class_building_spawner.html',''); init
   <div class="headertitle"><div class="title">BuildingSpawner Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Responsible for spawning buildings on available map tiles, based on weighted probability and placement rules.  
+ <a href="class_building_spawner.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a6071cc8dd1d4f9a79299ecc1083dd633"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_building_spawner.html#a6071cc8dd1d4f9a79299ecc1083dd633">BuildingSpawner</a> (Terrain terrain, int tileSize, int mapWidthInTiles, int mapLengthInTiles, int wallsMargin)</td></tr>
+<tr class="memdesc:a6071cc8dd1d4f9a79299ecc1083dd633"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new instance of the <a class="el" href="class_building_spawner.html" title="Responsible for spawning buildings on available map tiles, based on weighted probability and placemen...">BuildingSpawner</a> class.  <br /></td></tr>
 <tr class="separator:a6071cc8dd1d4f9a79299ecc1083dd633"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a082398f923278319d75d4c52c10f8f40"><td class="memItemLeft" align="right" valign="top">List&lt; GameObject &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_building_spawner.html#a082398f923278319d75d4c52c10f8f40">SpawnBuildings</a> (<a class="el" href="class_tile.html">Tile</a>[,] tiles, List&lt; <a class="el" href="class_tile.html">Tile</a> &gt; allTiles, List&lt; <a class="el" href="class_building_setup.html">BuildingSetup</a> &gt; buildings)</td></tr>
+<tr class="memdesc:a082398f923278319d75d4c52c10f8f40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to spawn buildings on the map based on tile availability and weighted prefab selection.  <br /></td></tr>
 <tr class="separator:a082398f923278319d75d4c52c10f8f40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Responsible for spawning buildings on available map tiles, based on weighted probability and placement rules. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a6071cc8dd1d4f9a79299ecc1083dd633" name="a6071cc8dd1d4f9a79299ecc1083dd633"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6071cc8dd1d4f9a79299ecc1083dd633">&#9670;&#160;</a></span>BuildingSpawner()</h2>
 
@@ -150,6 +157,18 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Initializes a new instance of the <a class="el" href="class_building_spawner.html" title="Responsible for spawning buildings on available map tiles, based on weighted probability and placemen...">BuildingSpawner</a> class. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">terrain</td><td>Terrain used for height sampling.</td></tr>
+    <tr><td class="paramname">tileSize</td><td>Size of a tile in world units.</td></tr>
+    <tr><td class="paramname">mapWidthInTiles</td><td>Total map width in tiles.</td></tr>
+    <tr><td class="paramname">mapLengthInTiles</td><td>Total map length in tiles.</td></tr>
+    <tr><td class="paramname">wallsMargin</td><td>Minimum number of tiles to leave empty near the map edge.</td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -185,10 +204,21 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Attempts to spawn buildings on the map based on tile availability and weighted prefab selection. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">tiles</td><td>2D grid of map tiles.</td></tr>
+    <tr><td class="paramname">allTiles</td><td>Flat list of all tiles for randomization.</td></tr>
+    <tr><td class="paramname">buildings</td><td>List of building prefabs and their configuration.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>List of spawned building GameObjects.</dd></dl>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>RaymondMaarloeve/Assets/Scripts/<a class="el" href="_builiding_spawner_8cs.html">BuilidingSpawner.cs</a></li>
+<li>RaymondMaarloeve/Assets/Scripts/Map/<a class="el" href="_builiding_spawner_8cs.html">BuilidingSpawner.cs</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
