@@ -229,6 +229,7 @@ public class Tile
     public bool IsPath = false;
     public bool IsPartOfBuilding = false;
     public bool IsClue = false;
+    public bool IsDecoration = false;
 }
 
 [Serializable]

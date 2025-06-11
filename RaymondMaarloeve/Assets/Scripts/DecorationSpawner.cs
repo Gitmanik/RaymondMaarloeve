@@ -36,12 +36,16 @@ public class DecorationSpawner
 
             int[] angles = { 0, 90, 180, 270 };
             int randomAngle = angles[Random.Range(0, angles.Length)];
-            Quaternion rotation = Quaternion.Euler(-90, randomAngle, 0);
+            var PrefabType = prefab.GetComponent<BuildingData>().HisType;
+            Quaternion rotation = Quaternion.Euler(0, randomAngle, 0);
+            if (PrefabType == BuildingData.BuildingType.Tree)
+            {
+                rotation = Quaternion.Euler(-90, randomAngle, 0);
+            }
 
             var go = Object.Instantiate(prefab, pos3, rotation, terrain.transform);
-            tile.IsPath = true;
-            tile.Building = go;
-
+            tile.IsDecoration = true;
+            tile.Prefab = go;
 
             decorationsPlaced++;
         }
