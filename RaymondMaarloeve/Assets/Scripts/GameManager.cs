@@ -132,7 +132,7 @@ public class GameManager : MonoBehaviour
 
             var npcModelArchetype = npcModel.Name.Replace('_', ' ');
             
-            var characterDTO = localCharacters.Find(x => archetypes[x.archetype - 1] == npcModelArchetype);
+            var characterDTO = localCharacters.Find(x => archetypes[x.archetype - 1] == npcModelArchetype && !x.dead);
             localCharacters.Remove(characterDTO);
             
             var storyBlock = localStoryBlocks[Random.Range(0, localStoryBlocks.Count)];
