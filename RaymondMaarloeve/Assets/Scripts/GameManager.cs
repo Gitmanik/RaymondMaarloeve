@@ -137,8 +137,6 @@ public class GameManager : MonoBehaviour
             
             var storyBlock = localStoryBlocks[Random.Range(0, localStoryBlocks.Count)];
             localStoryBlocks.Remove(storyBlock);
-
-            npcComponent.SystemPrompt += "You know that the day of murder " + storyBlock;
             
             IDecisionSystem system;
             if (string.IsNullOrEmpty(npcModel.Path))
@@ -151,6 +149,8 @@ public class GameManager : MonoBehaviour
                 system = new LlmDecisionMaker();
             }
             npcComponent.Setup(system, npcConfig.ModelId.ToString(), characterDTO.name, characterDTO.description);
+            npcComponent.SystemPrompt += "VERY IMPORTANT (it plays a very big role to You): You know that at the day of murder " + storyBlock;
+
             
             HashSet<BuildingData.BuildingType> allowedTypes = new HashSet<BuildingData.BuildingType>()
             {
@@ -534,7 +534,7 @@ public class GameManager : MonoBehaviour
     {
         string x = "NPCs:\n";
         foreach (var npc in GameManager.Instance.npcs)
-            x += $"<b>{npc.EntityID} {npc.NpcName}</b><b>Pos:</b> {npc.transform.position} , <b>System:</b> ({npc.GetDecisionSystem()}: {npc.GetCurrentDecision().DebugInfo()})\n<b>Hunger:</b> {npc.Hunger}\n<b>Thirst:</b> {npc.Thirst}\n<b>Obtained Memories:</b>\n{string.Join("\n", npc.ObtainedMemories)}\n<b>System Prompt:</b> {npc.SystemPrompt}\n";
+            x += $"<b>{npc.EntityID} {npc.NpcName}</b> ({npc.transform.position})\n<b>System:</b> ({npc.GetCurrentDecision().DebugInfo()})\n<b>Hunger:</b> {npc.Hunger}\n<b>Thirst:</b> {npc.Thirst}\n<b>Obtained Memories:</b>\n{string.Join("\n", npc.ObtainedMemories)}\n<b>System Prompt:</b>\n{npc.SystemPrompt.Replace('.', '\n')}\n";
         Debug.Log(x);
         return true;
     }
