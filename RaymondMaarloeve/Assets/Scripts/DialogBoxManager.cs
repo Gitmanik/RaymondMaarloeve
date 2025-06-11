@@ -197,7 +197,21 @@ public class DialogBoxManager : MonoBehaviour
 
         // Clear previous conversation and add system prompt
         currentConversation.Clear();
-        currentConversation.Add(new Message { role = "system", content = PlayerController.Instance.currentlyInteractingNPC.SystemPrompt });
+
+        string prompt =
+            $"You are now playing the role of a medieval character.\n" +
+            $"You will chat with a Detective named Raymond Maarloeve (<user>).\n" +
+            $"Your name is {PlayerController.Instance.currentlyInteractingNPC.NpcName} (<assistant>).\n" +
+            $"Below is your story:\n{PlayerController.Instance.currentlyInteractingNPC.SystemPrompt}.\n" +
+            $"It is {DayNightCycle.Instance.GetCurrentDay()} days after the murder of {GameManager.Instance.generatedHistory.characters.Find(x => x.dead).name}.\n";
+        if (PlayerController.Instance.currentlyInteractingNPC.CharacterData.murderer)
+            prompt +=
+                "You are the murderer. Try to deflect uneasy questions about the murder. Try to not get caught. Don't EVER tell anyone you are the murderer.";
+        else
+            prompt +=
+                "Try to help the detective with finding the murderer. Answer given questions as best as you can with given information in your story. Don't EVER fabricate or make up new informations about ANYONE or ANYTHING.";
+        
+        currentConversation.Add(new Message { role = "system", content = prompt});
 
         if (PlayerController.Instance != null && PlayerController.Instance.currentlyInteractingNPC != null)
         {
