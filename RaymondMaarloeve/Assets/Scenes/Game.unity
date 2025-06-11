@@ -3158,7 +3158,7 @@ MonoBehaviour:
   uiGameObject: {fileID: 330165694}
   MinimapGameObject: {fileID: 1191064608}
   musicAudioSource: {fileID: 1294622903}
-  useCustomGameConfig: 1
+  useCustomGameConfig: 0
   customGameConfigJSON: '{   "Revision": 1,   "LlmServerApi": "http://127.0.0.1:5000/",  
     "Localhost": true,   "FullScreen": false,   "GameWindowWidth": 1920,   "GameWindowHeight":
     1080,   "Models": [     {       "Id": 0,       "Name": "helpful_man.gguf",      
