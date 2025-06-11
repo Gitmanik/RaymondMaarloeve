@@ -29,6 +29,11 @@ public class BuildingData : MonoBehaviour
         Fortress,
         Tower,
         Gate,
+        Tree,
+        Bush,
+        Stone,
+        Small_Decoration,
+        Clue,
         Other
     }
 
@@ -75,7 +80,7 @@ public class BuildingData : MonoBehaviour
             {
                 Tile tile = tiles[x, z];
                 tile.IsPartOfBuilding = true;
-                tile.Building = gameObject;
+                tile.Prefab = gameObject;
                 HisTiles.Add(tile);
                 HisTileCount++;
             }
@@ -135,7 +140,7 @@ public class BuildingData : MonoBehaviour
             {
                 Tile tile = tiles[x, z];
                 tile.IsPartOfBuilding = true;
-                tile.Building = gameObject;
+                tile.Prefab = gameObject;
                 HisTiles.Add(tile);
                 HisTileCount++;
             }
