@@ -200,7 +200,8 @@ public class NPC : MonoBehaviour
         }
 
         if (PlayerController.Instance.currentlyInteractingNPC == this)
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, lookTarget.eulerAngles.y - 180, transform.eulerAngles.z);
+            if (lookTarget != null)
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x, lookTarget.eulerAngles.y - 180, transform.eulerAngles.z);
         
         if (!PlayerController.Instance.currentlyInteractingNPC == this && (currentDecision == null || !currentDecision.Tick()))
         {
