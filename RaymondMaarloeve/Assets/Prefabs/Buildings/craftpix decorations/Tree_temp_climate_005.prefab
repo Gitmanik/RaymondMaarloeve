@@ -62,6 +62,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4f408621b4c634a4a9dcd0981d98697f, type: 3}
       insertIndex: -1
       addedObject: {fileID: -7053652091325597656}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 4f408621b4c634a4a9dcd0981d98697f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8916770216902776442}
   m_SourcePrefab: {fileID: 100100000, guid: 4f408621b4c634a4a9dcd0981d98697f, type: 3}
 --- !u!1 &1809459367206293822 stripped
 GameObject:
@@ -106,3 +109,19 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: -0.004, y: -0.065000005, z: 3.3070002}
   m_TimeToStationary: 0.5
+--- !u!114 &8916770216902776442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809459367206293822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0705b4361b0b4c14d81d8e2614abf563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HisNPC: {fileID: 0}
+  HisMainTileGridPosition: {x: -1, y: -1}
+  HisType: 13
+  HisTileCount: 0
