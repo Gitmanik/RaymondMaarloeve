@@ -638,9 +638,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Authors:\nCyprian Zasada\nPawe\u0142 Reich\nMaciej Pitucha\nMaciej W\u0142udarski\nPawe\u0142
-    Dolak\nMicha\u0142 Eiser\n\u0141ukasz Jastrz\u0119bski\n\u0141ukasz Czarzasty\nKarol
-    Rzepi\u0144ski\nKamil W\u0142odarczyk\n"
+  m_text: "Authors:\nCyprian Zasada\nPawe\u0142 Reich\nMarek Nijakowski\nMaciej Pitucha\nMaciej
+    W\u0142udarski\nPawe\u0142 Dolak\nMicha\u0142 Eisler\n\u0141ukasz Jastrz\u0119bski\n\u0141ukasz
+    Czarzasty\nKarol Rzepi\u0144ski\nKamil W\u0142odarczyk\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
