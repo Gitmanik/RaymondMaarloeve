@@ -148,7 +148,7 @@ public class GameManager : MonoBehaviour
             {
                 system = new LlmDecisionMaker();
             }
-            npcComponent.Setup(system, npcConfig.ModelId.ToString(), characterDTO.name, characterDTO.description);
+            npcComponent.Setup(system, npcConfig.ModelId.ToString(), characterDTO);
             npcComponent.SystemPrompt += "VERY IMPORTANT (it plays a very big role to You): You know that at the day of murder " + storyBlock;
 
             
