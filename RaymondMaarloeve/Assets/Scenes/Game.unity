@@ -3270,7 +3270,7 @@ MonoBehaviour:
     weight: 0.2
     maxCount: 1
     currentCount: 0
-  - prefab: {fileID: 6108394813680385468, guid: 655e06dc9db1cb746b7da3e9dacba6e0, type: 3}
+  - prefab: {fileID: 4437863208952723622, guid: 7b6999e5311410f2892706733c8447bc, type: 3}
     weight: 1
     maxCount: 1
     currentCount: 0
@@ -3294,7 +3294,7 @@ MonoBehaviour:
     weight: 0.2
     maxCount: 3
     currentCount: 0
-  - prefab: {fileID: 5809783869429004467, guid: 6c440fd867dc25c43b3eac01ed5171fa, type: 3}
+  - prefab: {fileID: 2563849501544997127, guid: d863affebd441d9419822890ab098d4e, type: 3}
     weight: 1
     maxCount: 1
     currentCount: 0
