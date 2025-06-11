@@ -3405,7 +3405,7 @@ MonoBehaviour:
   submitButton: {fileID: 166442101}
   cancelButton: {fileID: 1435796869}
   resultText: {fileID: 1821656902}
-  triggerDay: 3
+  triggerDay: 7
 --- !u!82 &1294622903
 AudioSource:
   m_ObjectHideFlags: 0
