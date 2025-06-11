@@ -2270,7 +2270,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 936493700}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2279,8 +2279,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.5351, y: 0.91061}
-  m_SizeDelta: {x: 1180.2, y: 323.76}
+  m_AnchoredPosition: {x: -100, y: 0.91019}
+  m_SizeDelta: {x: 1180.2168, y: 323.76}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &936493702
 MonoBehaviour:
@@ -2333,7 +2333,7 @@ MonoBehaviour:
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
+  m_fontSizeMin: 12
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
@@ -2370,7 +2370,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &936493703
@@ -3158,6 +3158,23 @@ MonoBehaviour:
   uiGameObject: {fileID: 330165694}
   MinimapGameObject: {fileID: 1191064608}
   musicAudioSource: {fileID: 1294622903}
+  useCustomGameConfig: 1
+  customGameConfigJSON: '{   "Revision": 1,   "LlmServerApi": "http://127.0.0.1:5000/",  
+    "Localhost": true,   "FullScreen": false,   "GameWindowWidth": 1920,   "GameWindowHeight":
+    1080,   "Models": [     {       "Id": 0,       "Name": "helpful_man.gguf",      
+    "Path": "/home/gitmanik/Models/helpful_man.gguf"     },     {       "Id": 1,      
+    "Name": "ribald_man.gguf",       "Path": "/home/gitmanik/Models/ribald_man.gguf"    
+    },     {       "Id": 2,       "Name": "priest.gguf",       "Path": "/home/gitmanik/Models/priest.gguf"    
+    },     {       "Id": 3,       "Name": "delusional.gguf",       "Path": "/home/gitmanik/Models/delusional.gguf"    
+    },     {       "Id": 4,       "Name": "guard.gguf",       "Path": "/home/gitmanik/Models/guard.gguf"    
+    },     {       "Id": 5,       "Name": "narrator.gguf",       "Path": "/home/gitmanik/Models/narrator.gguf"    
+    },     {       "Id": 6,       "Name": "seductive.gguf",       "Path": "/home/gitmanik/Models/seductive.gguf"    
+    }   ],   "Npcs": [     {       "Id": 0,       "ModelId": 0     },     {      
+    "Id": 1,       "ModelId": 1     },     {       "Id": 2,       "ModelId": 2    
+    },     {       "Id": 3,       "ModelId": 3     },     {       "Id": 4,      
+    "ModelId": 4     },     {       "Id": 5,       "ModelId": 6     }   ],   "NarratorModelId":
+    5 }'
+  DontGenerateHistory: 1
   historyJSON: '{"story":"The villagers of Ashwood awoke to an eerie silence on the
     night of the autumnal equinox. The church bells, which usually rang out at this
     time, remained still. In the church, Father Thomas, a priest of 55 years, sat
@@ -3207,6 +3224,7 @@ MonoBehaviour:
     occurred. You were seen flirting with Silas earlier that day. You felt a sense
     of excitement and danger. You are trying to enjoy the moment before you die.
     You like Silas, but you dislike Godric''s ribald nature.","murderer":true,"dead":false}]}'
+  DontConvertHistoryToBlocks: 1
   historyBlocksJSON: '{"key_events":["The villagers of Ashwood awoke to an eerie
     silence on the night of the autumnal equinox.","Father Thomas, a priest of 55
     years, found the lifeless body of Elara, a 25-year-old seductress, with a single
