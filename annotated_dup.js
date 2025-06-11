@@ -21,6 +21,7 @@ var annotated_dup =
     [ "DayNightCycle", "class_day_night_cycle.html", "class_day_night_cycle" ],
     [ "DecorationSpawner", "class_decoration_spawner.html", "class_decoration_spawner" ],
     [ "DialogBoxManager", "class_dialog_box_manager.html", "class_dialog_box_manager" ],
+    [ "DrawConclusionsResponseDTO", "class_draw_conclusions_response_d_t_o.html", "class_draw_conclusions_response_d_t_o" ],
     [ "footstep_manager_npc", "classfootstep__manager__npc.html", "classfootstep__manager__npc" ],
     [ "GameConfig", "class_game_config.html", "class_game_config" ],
     [ "GameManager", "class_game_manager.html", "class_game_manager" ],

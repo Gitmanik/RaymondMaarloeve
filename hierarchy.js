@@ -12,6 +12,7 @@ var hierarchy =
     [ "CurrentEnvironment", "class_current_environment.html", null ],
     [ "CurrentEnvironmentDTO", "class_current_environment_d_t_o.html", null ],
     [ "DecorationSpawner", "class_decoration_spawner.html", null ],
+    [ "DrawConclusionsResponseDTO", "class_draw_conclusions_response_d_t_o.html", null ],
     [ "GameConfig", "class_game_config.html", null ],
     [ "GeneratedHistoryDTO", "class_generated_history_d_t_o.html", null ],
     [ "IBeginDragHandler", null, [

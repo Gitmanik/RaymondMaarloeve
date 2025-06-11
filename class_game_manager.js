@@ -8,6 +8,8 @@ var class_game_manager =
     [ "murdererNPC", "class_game_manager.html#a73f17991a064054726b6a7329d3df58e", null ],
     [ "npcPrefabs", "class_game_manager.html#a0523461b9deabfad2744a47ba13c409d", null ],
     [ "npcs", "class_game_manager.html#aa95c1de6ccfe5a73aa74108640c4667d", null ],
+    [ "Seed", "class_game_manager.html#aca8a6d312e1832516afc9b9a4fd20f05", null ],
+    [ "SkipConslusions", "class_game_manager.html#afef9e156bd9ba1c5476efd22e5369b3c", null ],
     [ "SkipRelevance", "class_game_manager.html#a828576c16489608497711c8120a500ed", null ],
     [ "storyBlocks", "class_game_manager.html#aa2794ad3ee121793b23e974083ad1aba", null ],
     [ "gameConfig", "class_game_manager.html#a3da0f49598f151231f2602021e934eed", null ]

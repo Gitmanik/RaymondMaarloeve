@@ -4,6 +4,7 @@ var searchData=
   ['debugtilesinconsole_1',['DebugTilesInConsole',['../class_map_generator.html#a25bb86d1cb5943ffd824b2aaace1d8e3',1,'MapGenerator']]],
   ['decide_2',['Decide',['../interface_i_decision_system.html#ac45e7479d2a6c4f776c464250774143c',1,'IDecisionSystem.Decide()'],['../class_llm_decision_maker.html#a8db905b2318507fcb3f04c098dac96e9',1,'LlmDecisionMaker.Decide()'],['../class_null_decision_system.html#a21d581e76feaf72caa14a0bbd82468f4',1,'NullDecisionSystem.Decide()']]],
   ['decorationspawner_3',['DecorationSpawner',['../class_decoration_spawner.html#a39ec097f8823ea11f78751d998d7f009',1,'DecorationSpawner']]],
-  ['dumpblocks_4',['DumpBlocks',['../class_game_manager.html#a8e11274dbf1abcd3c083ac2cc97b8150',1,'GameManager']]],
-  ['dumpstory_5',['DumpStory',['../class_game_manager.html#ad829644ce96d9d68ee71a10b2cbf9060',1,'GameManager']]]
+  ['drawconclusions_4',['DrawConclusions',['../class_n_p_c.html#a8e208f04917ea2d45627623396f5d4e7',1,'NPC']]],
+  ['dumpblocks_5',['DumpBlocks',['../class_game_manager.html#a8e11274dbf1abcd3c083ac2cc97b8150',1,'GameManager']]],
+  ['dumpstory_6',['DumpStory',['../class_game_manager.html#ad829644ce96d9d68ee71a10b2cbf9060',1,'GameManager']]]
 ];

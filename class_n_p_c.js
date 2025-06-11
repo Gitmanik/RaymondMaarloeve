@@ -1,6 +1,7 @@
 var class_n_p_c =
 [
     [ "Awake", "class_n_p_c.html#a53072000e96e4843481d0c2df9f79c56", null ],
+    [ "DrawConclusions", "class_n_p_c.html#a8e208f04917ea2d45627623396f5d4e7", null ],
     [ "GetCurrentDecision", "class_n_p_c.html#a8c575d0e01fe56a1e356a9a6b042d44e", null ],
     [ "GetCurrentEnvironment", "class_n_p_c.html#a1b2d243c5bf16a6bd8464a6ad5d154c6", null ],
     [ "GetDecisionSystem", "class_n_p_c.html#a09a8839a2883d5a685d7a0752c7f9cd6", null ],
