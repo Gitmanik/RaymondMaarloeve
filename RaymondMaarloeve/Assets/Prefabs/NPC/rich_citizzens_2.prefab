@@ -72,6 +72,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 62894920a15154c47916a99326684274, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7144848733010848240}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 62894920a15154c47916a99326684274, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -8116141016571367882}
   m_SourcePrefab: {fileID: 100100000, guid: 62894920a15154c47916a99326684274, type: 3}
 --- !u!1 &5295356990428816727 stripped
 GameObject:
@@ -112,7 +115,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  npcName: Unnamed NPC
+  HisBuilding: {fileID: 0}
+  Hunger: 0
+  Thirst: 0
   speed: 3
 --- !u!195 &2585418917517059413
 NavMeshAgent:
@@ -158,3 +163,16 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-8116141016571367882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5295356990428816727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1250eddd49bc6c745934342b0a28ad8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcName: Elizabeth

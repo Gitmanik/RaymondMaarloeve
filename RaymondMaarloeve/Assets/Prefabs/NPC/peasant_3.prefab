@@ -72,6 +72,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 25e8eae6593654540b34a4d7ed9b0c75, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2532313062695834727}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 25e8eae6593654540b34a4d7ed9b0c75, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8041852807661459906}
   m_SourcePrefab: {fileID: 100100000, guid: 25e8eae6593654540b34a4d7ed9b0c75, type: 3}
 --- !u!1 &3733819454152075934 stripped
 GameObject:
@@ -112,7 +115,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
-  npcName: Unnamed NPC
+  HisBuilding: {fileID: 0}
+  Hunger: 0
+  Thirst: 0
   speed: 3
 --- !u!195 &8927719405995080233
 NavMeshAgent:
@@ -158,3 +163,16 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8041852807661459906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3733819454152075934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1250eddd49bc6c745934342b0a28ad8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcName: Bruno
