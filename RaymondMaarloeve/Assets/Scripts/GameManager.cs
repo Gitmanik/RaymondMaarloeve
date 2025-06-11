@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     [Header("Config")]
     [SerializeField] private bool useCustomGameConfig = false;
     [SerializeField] private string customGameConfigJSON = "";
+    [SerializeField] private bool DontRandomizeSeed = false;
     
     [Header("Narrator")]
     [SerializeField] private bool DontGenerateHistory = false;
@@ -56,8 +57,12 @@ public class GameManager : MonoBehaviour
         Debug.Log("GameManager: Start initialization");
         Instance = this;
         uiGameObject.SetActive(false);
+
+        if (DontRandomizeSeed)
+            Seed = 42;
+        else
+            Seed = Random.Range(int.MinValue, int.MaxValue);
         
-        Seed = Random.Range(int.MinValue, int.MaxValue);
         Debug.Log($"GameManager: Seed: {Seed}");
 
         if (useCustomGameConfig)
