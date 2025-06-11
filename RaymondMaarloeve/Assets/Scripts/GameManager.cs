@@ -84,6 +84,7 @@ public class GameManager : MonoBehaviour
         yield return StartCoroutine(WaitForLlmConnection());
         
         archetypes = gameConfig.Models.FindAll(x => x.Id != gameConfig.NarratorModelId).Select(x => x.Name.Replace('_', ' ')).ToList();
+        archetypes.Shuffle();
 
         Debug.Log($"GameManager: Archetypes: {string.Join(',', archetypes)}");
         
