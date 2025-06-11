@@ -94,6 +94,7 @@ $(document).ready(function(){initNavTree('class_llm_manager.html',''); initResiz
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="#properties">Properties</a> &#124;
 <a href="class_llm_manager-members.html">List of all members</a>  </div>
@@ -127,14 +128,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa7eb33076d9bbed1eb8de2504817b0bf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_llm_manager.html#aa7eb33076d9bbed1eb8de2504817b0bf">Register</a> (string modelID, string path, Action&lt; <a class="el" href="class_message_d_t_o.html">MessageDTO</a> &gt; onComplete, Action&lt; string &gt; onError)</td></tr>
 <tr class="memdesc:aa7eb33076d9bbed1eb8de2504817b0bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a model with the LLM server, making it available for loading and inference.  <br /></td></tr>
 <tr class="separator:aa7eb33076d9bbed1eb8de2504817b0bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7323028440445948f87a006b69d0801"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_llm_manager.html#af7323028440445948f87a006b69d0801">Chat</a> (string modelID, List&lt; <a class="el" href="class_message.html">Message</a> &gt; messages, Action&lt; <a class="el" href="class_chat_response_d_t_o.html">ChatResponseDTO</a> &gt; onComplete, Action&lt; string &gt; onError, float top_p=0.95f, float temperature=0.8f)</td></tr>
-<tr class="memdesc:af7323028440445948f87a006b69d0801"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a chat request to the LLM server using the specified model and message history.  <br /></td></tr>
-<tr class="separator:af7323028440445948f87a006b69d0801"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab64735d2b7617475c1b9f7466d6521ff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_llm_manager.html#ab64735d2b7617475c1b9f7466d6521ff">Chat</a> (string modelID, List&lt; <a class="el" href="class_message.html">Message</a> &gt; messages, Action&lt; <a class="el" href="class_chat_response_d_t_o.html">ChatResponseDTO</a> &gt; onComplete, Action&lt; string &gt; onError, float top_p=0.95f, float temperature=0.8f, int maxTokens=4096)</td></tr>
+<tr class="memdesc:ab64735d2b7617475c1b9f7466d6521ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a chat request to the LLM server using the specified model and message history.  <br /></td></tr>
+<tr class="separator:ab64735d2b7617475c1b9f7466d6521ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a16ee38ba51ddab349c04ad0b9bce0630"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_llm_manager.html#a16ee38ba51ddab349c04ad0b9bce0630">Connect</a> (Action&lt; bool &gt; onComplete)</td></tr>
 <tr class="memdesc:a16ee38ba51ddab349c04ad0b9bce0630"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connects to the LLM server and unloads all currently loaded models.  <br /></td></tr>
 <tr class="separator:a16ee38ba51ddab349c04ad0b9bce0630"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ef2ce3c8d883f1acb5e7b3783cda61d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_llm_manager.html#a2ef2ce3c8d883f1acb5e7b3783cda61d">GenericComplete</a> (<a class="el" href="class_message_d_t_o.html">MessageDTO</a> message)</td></tr>
-<tr class="memdesc:a2ef2ce3c8d883f1acb5e7b3783cda61d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic callback for handling <a class="el" href="class_message_d_t_o.html">MessageDTO</a> responses, logs success or error messages.  <br /></td></tr>
+<tr class="memdesc:a2ef2ce3c8d883f1acb5e7b3783cda61d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic callback for handling <a class="el" href="class_message_d_t_o.html" title="Represents a response message of the LLMServer.">MessageDTO</a> responses, logs success or error messages.  <br /></td></tr>
 <tr class="separator:a2ef2ce3c8d883f1acb5e7b3783cda61d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
@@ -142,6 +143,14 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a1f7fceaa5bb77313bdf91fd4cd7fe476"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_llm_manager.html#a1f7fceaa5bb77313bdf91fd4cd7fe476">StatusCommand</a> ()</td></tr>
 <tr class="memdesc:a1f7fceaa5bb77313bdf91fd4cd7fe476"><td class="mdescLeft">&#160;</td><td class="mdescRight">Console command to check the status of the LLM server.  <br /></td></tr>
 <tr class="separator:a1f7fceaa5bb77313bdf91fd4cd7fe476"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9bf4e00f663f997cbe6d83aac0a0e8c"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_llm_manager.html#aa9bf4e00f663f997cbe6d83aac0a0e8c">LLMQueue</a> ()</td></tr>
+<tr class="separator:aa9bf4e00f663f997cbe6d83aac0a0e8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:aabdea52995036d70d49980b004a0dfd5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_llm_manager.html#aabdea52995036d70d49980b004a0dfd5">LogDebug</a> = false</td></tr>
+<tr class="memdesc:aabdea52995036d70d49980b004a0dfd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether log requests and responses.  <br /></td></tr>
+<tr class="separator:aabdea52995036d70d49980b004a0dfd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
@@ -158,8 +167,8 @@ Properties</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Manages communication with the LLM server, including model registration, loading, unloading, and chat requests. Handles request queuing and ensures only one POST request is processed at a time. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="af7323028440445948f87a006b69d0801" name="af7323028440445948f87a006b69d0801"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af7323028440445948f87a006b69d0801">&#9670;&#160;</a></span>Chat()</h2>
+<a id="ab64735d2b7617475c1b9f7466d6521ff" name="ab64735d2b7617475c1b9f7466d6521ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab64735d2b7617475c1b9f7466d6521ff">&#9670;&#160;</a></span>Chat()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -198,7 +207,13 @@ Properties</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>temperature</em> = <code>0::8f</code>&#160;</td>
+          <td class="paramname"><em>temperature</em> = <code>0::8f</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>maxTokens</em> = <code>4096</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -215,10 +230,12 @@ Properties</h2></td></tr>
     <tr><td class="paramname">messages</td><td>List of messages forming the conversation history.</td></tr>
     <tr><td class="paramname">onComplete</td><td>Callback on successful response.</td></tr>
     <tr><td class="paramname">onError</td><td>Callback on error.</td></tr>
+    <tr><td class="paramname">top_p</td><td>top_p LLM parameter</td></tr>
+    <tr><td class="paramname">temperature</td><td>Temperature LLM parameter</td></tr>
+    <tr><td class="paramname">maxTokens</td><td>Max tokens to generate</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>: Make it randomized </dd></dl>
 
 </div>
 </div>
@@ -264,7 +281,7 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Generic callback for handling <a class="el" href="class_message_d_t_o.html">MessageDTO</a> responses, logs success or error messages. </p>
+<p>Generic callback for handling <a class="el" href="class_message_d_t_o.html" title="Represents a response message of the LLMServer.">MessageDTO</a> responses, logs success or error messages. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">message</td><td>The message DTO returned from the server.</td></tr>
@@ -330,6 +347,31 @@ Properties</h2></td></tr>
 </dd>
 </dl>
 </div>
+
+</div>
+</div>
+<a id="aa9bf4e00f663f997cbe6d83aac0a0e8c" name="aa9bf4e00f663f997cbe6d83aac0a0e8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9bf4e00f663f997cbe6d83aac0a0e8c">&#9670;&#160;</a></span>LLMQueue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool LlmManager.LLMQueue </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -660,6 +702,22 @@ Properties</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Singleton instance of the <a class="el" href="class_llm_manager.html" title="Manages communication with the LLM server, including model registration, loading, unloading,...">LlmManager</a>. </p>
+
+</div>
+</div>
+<a id="aabdea52995036d70d49980b004a0dfd5" name="aabdea52995036d70d49980b004a0dfd5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabdea52995036d70d49980b004a0dfd5">&#9670;&#160;</a></span>LogDebug</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool LlmManager.LogDebug = false</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Whether log requests and responses. </p>
 
 </div>
 </div>

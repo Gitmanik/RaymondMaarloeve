@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['path_0',['Path',['../class_model_config.html#a502f7636fe02dce406d68ae2636543f6',1,'ModelConfig']]],
-  ['position_1',['Position',['../class_npc_action_event.html#af4c739f09b541ad1edddaa3d9d4266dc',1,'NpcActionEvent']]],
-  ['prefab_2',['prefab',['../class_building_setup.html#a22a364f78bfb2e4e23e16e329ccb2353',1,'BuildingSetup']]]
+  ['obtained_5fmemories_0',['obtained_memories',['../class_calculate_relevance_d_t_o.html#ad1533ee6bcf4d1a95ac22a2d5e4b734d',1,'CalculateRelevanceDTO.obtained_memories()'],['../class_idle_d_t_o.html#a230ad807c9f89ec9f4126d8b7fcf7ad3',1,'IdleDTO.obtained_memories()']]],
+  ['outputthesesentencesintoajsonobjectstructure_1',['OutputthesesentencesintoaJSONObjectstructure',['../_game_manager_8cs.html#a76216be52d03202858a73d829340a2f2',1,'GameManager.cs']]]
 ];

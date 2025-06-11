@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['playercontroller_0',['PlayerController',['../class_player_controller.html',1,'']]],
-  ['praydecision_1',['PrayDecision',['../class_pray_decision.html',1,'']]]
+  ['obtainedmemory_0',['ObtainedMemory',['../class_obtained_memory.html',1,'']]],
+  ['obtainedmemorydto_1',['ObtainedMemoryDTO',['../class_obtained_memory_d_t_o.html',1,'']]]
 ];

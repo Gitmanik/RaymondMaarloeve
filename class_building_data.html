@@ -93,6 +93,7 @@ $(document).ready(function(){initNavTree('class_building_data.html',''); initRes
 <div class="header">
   <div class="summary">
 <a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="class_building_data-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">BuildingData Class Reference</div></div>
@@ -110,19 +111,40 @@ Public Types</h2></td></tr>
 &#160;&#160;<a class="el" href="class_building_data.html#afc07932823f7b925d75c838070aa4556afe94f888001c39006b96f0fc39d689a6">Blacksmith</a>
 , <a class="el" href="class_building_data.html#afc07932823f7b925d75c838070aa4556a8cf7d045589f2730ee3c79c4e50fe97a">Tavern</a>
 , <a class="el" href="class_building_data.html#afc07932823f7b925d75c838070aa4556a877eaa140ad42c5ac0c1dd6b754cb7fc">Scaffold</a>
+, <a class="el" href="class_building_data.html#afc07932823f7b925d75c838070aa4556a94e8a499539d1a472f3b5dbbb85508c0">Wall</a>
+, <br />
+&#160;&#160;<a class="el" href="class_building_data.html#afc07932823f7b925d75c838070aa4556a742770a5babbeff3215b6110af970d8c">Armoury</a>
+, <a class="el" href="class_building_data.html#afc07932823f7b925d75c838070aa4556a5bef4b9467f4039984dbb3e68df9f0b0">Barracks</a>
+, <a class="el" href="class_building_data.html#afc07932823f7b925d75c838070aa4556a3cfbf3022c9e476ea09ebc7ce6d81a8f">Fortress</a>
+, <a class="el" href="class_building_data.html#afc07932823f7b925d75c838070aa4556a8f8b35b2b5f50b489f1e528f89bdd6e4">Tower</a>
+, <br />
+&#160;&#160;<a class="el" href="class_building_data.html#afc07932823f7b925d75c838070aa4556ad25b4bd4c72aa2c07ee87adb10b59f16">Gate</a>
 , <a class="el" href="class_building_data.html#afc07932823f7b925d75c838070aa4556a6311ae17c1ee52b36e68aaf4ad066387">Other</a>
 <br />
  }</td></tr>
 <tr class="separator:afc07932823f7b925d75c838070aa4556"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a586932c7f89b36d2e014a19aef7fde4b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_building_data.html#a586932c7f89b36d2e014a19aef7fde4b">AssignOccupiedTiles</a> (float tileSize, <a class="el" href="class_tile.html">Tile</a>[,] tiles)</td></tr>
+<tr class="separator:a586932c7f89b36d2e014a19aef7fde4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7c01d61737aa1ab5a111c1dac68104b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_building_data.html#af7c01d61737aa1ab5a111c1dac68104b">AssignWallTilesForcefully</a> (float tileSize, <a class="el" href="class_tile.html">Tile</a>[,] tiles)</td></tr>
+<tr class="separator:af7c01d61737aa1ab5a111c1dac68104b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:afb8a2cda1c8f8e14fbb3ceb3bab0184d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_tile.html">Tile</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_building_data.html#afb8a2cda1c8f8e14fbb3ceb3bab0184d">HisTile</a> = null</td></tr>
-<tr class="separator:afb8a2cda1c8f8e14fbb3ceb3bab0184d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4d958c71f4d49302a32d465be7bfe84"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_tile.html">Tile</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_building_data.html#af4d958c71f4d49302a32d465be7bfe84">HisMainTile</a> = null</td></tr>
+<tr class="separator:af4d958c71f4d49302a32d465be7bfe84"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2389c0f83945ac7286fe672c5c5b4534"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_n_p_c.html">NPC</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_building_data.html#a2389c0f83945ac7286fe672c5c5b4534">HisNPC</a> = null</td></tr>
 <tr class="separator:a2389c0f83945ac7286fe672c5c5b4534"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b0f13aa61d42a13fbf8440ffcf60d41"><td class="memItemLeft" align="right" valign="top">Vector2Int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_building_data.html#a4b0f13aa61d42a13fbf8440ffcf60d41">HisMainTileGridPosition</a> = new Vector2Int(-1, -1)</td></tr>
+<tr class="separator:a4b0f13aa61d42a13fbf8440ffcf60d41"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23b807d1ff996853e905406766b9817c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_building_data.html#afc07932823f7b925d75c838070aa4556">BuildingType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_building_data.html#a23b807d1ff996853e905406766b9817c">HisType</a> = <a class="el" href="class_building_data.html#afc07932823f7b925d75c838070aa4556a6adf97f83acf6453d4a6a4b1070f3754">BuildingType.None</a></td></tr>
 <tr class="separator:a23b807d1ff996853e905406766b9817c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad989569e27d85d9b5e652032f66b5479"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_tile.html">Tile</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_building_data.html#ad989569e27d85d9b5e652032f66b5479">HisTiles</a> = new()</td></tr>
+<tr class="separator:ad989569e27d85d9b5e652032f66b5479"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e79c565a41abb23bf06a738f8c675a6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_building_data.html#a7e79c565a41abb23bf06a738f8c675a6">HisTileCount</a> = 0</td></tr>
+<tr class="separator:a7e79c565a41abb23bf06a738f8c675a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Enumeration Documentation</h2>
 <a id="afc07932823f7b925d75c838070aa4556" name="afc07932823f7b925d75c838070aa4556"></a>
@@ -144,12 +166,103 @@ Public Attributes</h2></td></tr>
 <tr><td class="fieldname"><a id="afc07932823f7b925d75c838070aa4556afe94f888001c39006b96f0fc39d689a6" name="afc07932823f7b925d75c838070aa4556afe94f888001c39006b96f0fc39d689a6"></a>Blacksmith&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="afc07932823f7b925d75c838070aa4556a8cf7d045589f2730ee3c79c4e50fe97a" name="afc07932823f7b925d75c838070aa4556a8cf7d045589f2730ee3c79c4e50fe97a"></a>Tavern&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="afc07932823f7b925d75c838070aa4556a877eaa140ad42c5ac0c1dd6b754cb7fc" name="afc07932823f7b925d75c838070aa4556a877eaa140ad42c5ac0c1dd6b754cb7fc"></a>Scaffold&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="afc07932823f7b925d75c838070aa4556a94e8a499539d1a472f3b5dbbb85508c0" name="afc07932823f7b925d75c838070aa4556a94e8a499539d1a472f3b5dbbb85508c0"></a>Wall&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="afc07932823f7b925d75c838070aa4556a742770a5babbeff3215b6110af970d8c" name="afc07932823f7b925d75c838070aa4556a742770a5babbeff3215b6110af970d8c"></a>Armoury&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="afc07932823f7b925d75c838070aa4556a5bef4b9467f4039984dbb3e68df9f0b0" name="afc07932823f7b925d75c838070aa4556a5bef4b9467f4039984dbb3e68df9f0b0"></a>Barracks&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="afc07932823f7b925d75c838070aa4556a3cfbf3022c9e476ea09ebc7ce6d81a8f" name="afc07932823f7b925d75c838070aa4556a3cfbf3022c9e476ea09ebc7ce6d81a8f"></a>Fortress&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="afc07932823f7b925d75c838070aa4556a8f8b35b2b5f50b489f1e528f89bdd6e4" name="afc07932823f7b925d75c838070aa4556a8f8b35b2b5f50b489f1e528f89bdd6e4"></a>Tower&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="afc07932823f7b925d75c838070aa4556ad25b4bd4c72aa2c07ee87adb10b59f16" name="afc07932823f7b925d75c838070aa4556ad25b4bd4c72aa2c07ee87adb10b59f16"></a>Gate&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="afc07932823f7b925d75c838070aa4556a6311ae17c1ee52b36e68aaf4ad066387" name="afc07932823f7b925d75c838070aa4556a6311ae17c1ee52b36e68aaf4ad066387"></a>Other&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>
 </div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a586932c7f89b36d2e014a19aef7fde4b" name="a586932c7f89b36d2e014a19aef7fde4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a586932c7f89b36d2e014a19aef7fde4b">&#9670;&#160;</a></span>AssignOccupiedTiles()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool BuildingData.AssignOccupiedTiles </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>tileSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_tile.html">Tile</a>&#160;</td>
+          <td class="paramname"><em>tiles</em>[,]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af7c01d61737aa1ab5a111c1dac68104b" name="af7c01d61737aa1ab5a111c1dac68104b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7c01d61737aa1ab5a111c1dac68104b">&#9670;&#160;</a></span>AssignWallTilesForcefully()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BuildingData.AssignWallTilesForcefully </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>tileSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_tile.html">Tile</a>&#160;</td>
+          <td class="paramname"><em>tiles</em>[,]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="af4d958c71f4d49302a32d465be7bfe84" name="af4d958c71f4d49302a32d465be7bfe84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4d958c71f4d49302a32d465be7bfe84">&#9670;&#160;</a></span>HisMainTile</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_tile.html">Tile</a> BuildingData.HisMainTile = null</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4b0f13aa61d42a13fbf8440ffcf60d41" name="a4b0f13aa61d42a13fbf8440ffcf60d41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b0f13aa61d42a13fbf8440ffcf60d41">&#9670;&#160;</a></span>HisMainTileGridPosition</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector2Int BuildingData.HisMainTileGridPosition = new Vector2Int(-1, -1)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a2389c0f83945ac7286fe672c5c5b4534" name="a2389c0f83945ac7286fe672c5c5b4534"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2389c0f83945ac7286fe672c5c5b4534">&#9670;&#160;</a></span>HisNPC</h2>
 
@@ -164,14 +277,28 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="afb8a2cda1c8f8e14fbb3ceb3bab0184d" name="afb8a2cda1c8f8e14fbb3ceb3bab0184d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afb8a2cda1c8f8e14fbb3ceb3bab0184d">&#9670;&#160;</a></span>HisTile</h2>
+<a id="a7e79c565a41abb23bf06a738f8c675a6" name="a7e79c565a41abb23bf06a738f8c675a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e79c565a41abb23bf06a738f8c675a6">&#9670;&#160;</a></span>HisTileCount</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_tile.html">Tile</a> BuildingData.HisTile = null</td>
+          <td class="memname">int BuildingData.HisTileCount = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad989569e27d85d9b5e652032f66b5479" name="ad989569e27d85d9b5e652032f66b5479"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad989569e27d85d9b5e652032f66b5479">&#9670;&#160;</a></span>HisTiles</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">List&lt;<a class="el" href="class_tile.html">Tile</a>&gt; BuildingData.HisTiles = new()</td>
         </tr>
       </table>
 </div><div class="memdoc">

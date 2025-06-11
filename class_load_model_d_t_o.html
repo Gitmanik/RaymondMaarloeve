@@ -97,25 +97,37 @@ $(document).ready(function(){initNavTree('class_load_model_d_t_o.html',''); init
   <div class="headertitle"><div class="title">LoadModelDTO Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Represents a request to load a model into the system.  
+ <a href="class_load_model_d_t_o.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:aae8d616a4d4ea2e4fb712302efa0073a"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_load_model_d_t_o.html#aae8d616a4d4ea2e4fb712302efa0073a">model_id</a></td></tr>
+<tr class="memdesc:aae8d616a4d4ea2e4fb712302efa0073a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The unique identifier of the model to be loaded.  <br /></td></tr>
 <tr class="separator:aae8d616a4d4ea2e4fb712302efa0073a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1b1229a305e3509a7df6dad693de9ea"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_load_model_d_t_o.html#af1b1229a305e3509a7df6dad693de9ea">model_path</a></td></tr>
+<tr class="memdesc:af1b1229a305e3509a7df6dad693de9ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">The path to the model file to be loaded.  <br /></td></tr>
 <tr class="separator:af1b1229a305e3509a7df6dad693de9ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d765b1e728ba7f650e765eb013920fa"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_load_model_d_t_o.html#a5d765b1e728ba7f650e765eb013920fa">n_ctx</a></td></tr>
+<tr class="memdesc:a5d765b1e728ba7f650e765eb013920fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Context size for the model, which determines how many tokens can be processed at once.  <br /></td></tr>
 <tr class="separator:a5d765b1e728ba7f650e765eb013920fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d481047a5957414c76f03dd31712048"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_load_model_d_t_o.html#a7d481047a5957414c76f03dd31712048">n_parts</a></td></tr>
+<tr class="memdesc:a7d481047a5957414c76f03dd31712048"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of parts to split the model into for loading.  <br /></td></tr>
 <tr class="separator:a7d481047a5957414c76f03dd31712048"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af2aa765a918d6485792834a1c9fdb616"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_load_model_d_t_o.html#af2aa765a918d6485792834a1c9fdb616">seed</a></td></tr>
+<tr class="memdesc:af2aa765a918d6485792834a1c9fdb616"><td class="mdescLeft">&#160;</td><td class="mdescRight">Seed for random number generation, used for reproducibility in model loading.  <br /></td></tr>
 <tr class="separator:af2aa765a918d6485792834a1c9fdb616"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a38704e141d3724670cc95add6cfe2157"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_load_model_d_t_o.html#a38704e141d3724670cc95add6cfe2157">f16_kv</a></td></tr>
+<tr class="memdesc:a38704e141d3724670cc95add6cfe2157"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether to use quantization for the model, which can reduce memory usage and improve performance.  <br /></td></tr>
 <tr class="separator:a38704e141d3724670cc95add6cfe2157"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a603ac9b8c8944b57c7d7cbe267cbdd84"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_load_model_d_t_o.html#a603ac9b8c8944b57c7d7cbe267cbdd84">n_gpu_layers</a></td></tr>
+<tr class="memdesc:a603ac9b8c8944b57c7d7cbe267cbdd84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether to use GPU acceleration for the model, which can significantly speed up processing, -1 for uinlimited GPU, 0 for CPU, and positive integers for specific GPU IDs.  <br /></td></tr>
 <tr class="separator:a603ac9b8c8944b57c7d7cbe267cbdd84"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Data Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents a request to load a model into the system. </p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="a38704e141d3724670cc95add6cfe2157" name="a38704e141d3724670cc95add6cfe2157"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a38704e141d3724670cc95add6cfe2157">&#9670;&#160;</a></span>f16_kv</h2>
 
@@ -127,6 +139,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Whether to use quantization for the model, which can reduce memory usage and improve performance. </p>
 
 </div>
 </div>
@@ -142,6 +156,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>The unique identifier of the model to be loaded. </p>
+
 </div>
 </div>
 <a id="af1b1229a305e3509a7df6dad693de9ea" name="af1b1229a305e3509a7df6dad693de9ea"></a>
@@ -155,6 +171,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>The path to the model file to be loaded. </p>
 
 </div>
 </div>
@@ -170,6 +188,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Context size for the model, which determines how many tokens can be processed at once. </p>
+
 </div>
 </div>
 <a id="a603ac9b8c8944b57c7d7cbe267cbdd84" name="a603ac9b8c8944b57c7d7cbe267cbdd84"></a>
@@ -183,6 +203,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Whether to use GPU acceleration for the model, which can significantly speed up processing, -1 for uinlimited GPU, 0 for CPU, and positive integers for specific GPU IDs. </p>
 
 </div>
 </div>
@@ -198,6 +220,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Number of parts to split the model into for loading. </p>
+
 </div>
 </div>
 <a id="af2aa765a918d6485792834a1c9fdb616" name="af2aa765a918d6485792834a1c9fdb616"></a>
@@ -211,6 +235,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Seed for random number generation, used for reproducibility in model loading. </p>
 
 </div>
 </div>

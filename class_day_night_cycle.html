@@ -99,41 +99,72 @@ $(document).ready(function(){initNavTree('class_day_night_cycle.html',''); initR
   <div class="headertitle"><div class="title">DayNightCycle Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Manages in-game time visuals and logic.  
+ <a href="class_day_night_cycle.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a1e6b5354c480d8da0c02fbe386d87831"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_day_night_cycle.html#a1e6b5354c480d8da0c02fbe386d87831">GetCurrentDay</a> ()</td></tr>
+<tr class="memdesc:a1e6b5354c480d8da0c02fbe386d87831"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current day number.  <br /></td></tr>
 <tr class="separator:a1e6b5354c480d8da0c02fbe386d87831"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad487bf60865932174a9cf1879653fdcf"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_day_night_cycle.html#ad487bf60865932174a9cf1879653fdcf">GetCurrentTimeText</a> ()</td></tr>
+<tr class="memdesc:ad487bf60865932174a9cf1879653fdcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current time in "HH:MM" format.  <br /></td></tr>
+<tr class="separator:ad487bf60865932174a9cf1879653fdcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a6c61a375a66994cf4737d4f6975e7cd9"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_day_night_cycle.html#a6c61a375a66994cf4737d4f6975e7cd9">timeOfDay</a></td></tr>
+<tr class="memdesc:a6c61a375a66994cf4737d4f6975e7cd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Current time of day, ranging from 0 to 24.  <br /></td></tr>
 <tr class="separator:a6c61a375a66994cf4737d4f6975e7cd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa123e19018ea5e5b38e66d1843ca2c02"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_day_night_cycle.html#aa123e19018ea5e5b38e66d1843ca2c02">dayDurationInMinutes</a> = 1f</td></tr>
+<tr class="memdesc:aa123e19018ea5e5b38e66d1843ca2c02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Duration of a full day in minutes. 1 minute equals 24 hours in-game.  <br /></td></tr>
 <tr class="separator:aa123e19018ea5e5b38e66d1843ca2c02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1c255e1a083a85218c458256a87b45b"><td class="memItemLeft" align="right" valign="top">Light&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_day_night_cycle.html#ad1c255e1a083a85218c458256a87b45b">directionalLight</a></td></tr>
+<tr class="memdesc:ad1c255e1a083a85218c458256a87b45b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference to the directional light representing the sun.  <br /></td></tr>
 <tr class="separator:ad1c255e1a083a85218c458256a87b45b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7df033543fcb07e85e2cd7c783b39af"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_day_night_cycle.html#ab7df033543fcb07e85e2cd7c783b39af">maxSunIntensity</a> = 1f</td></tr>
+<tr class="memdesc:ab7df033543fcb07e85e2cd7c783b39af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum intensity of the sun during the day.  <br /></td></tr>
 <tr class="separator:ab7df033543fcb07e85e2cd7c783b39af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3bc5b838f0e4e539f18950f9b8ebce97"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_day_night_cycle.html#a3bc5b838f0e4e539f18950f9b8ebce97">minSunIntensity</a> = 0f</td></tr>
+<tr class="memdesc:a3bc5b838f0e4e539f18950f9b8ebce97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum intensity of the sun during the night.  <br /></td></tr>
 <tr class="separator:a3bc5b838f0e4e539f18950f9b8ebce97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa8d01dbe2196385b703469971684aad6"><td class="memItemLeft" align="right" valign="top">Material&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_day_night_cycle.html#aa8d01dbe2196385b703469971684aad6">daySky</a></td></tr>
+<tr class="memdesc:aa8d01dbe2196385b703469971684aad6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Skybox material used during the day. Material with Skybox/Cubemap or Panoramic shader.  <br /></td></tr>
 <tr class="separator:aa8d01dbe2196385b703469971684aad6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a816c4c58400c9cc914dd0a2e472e96b6"><td class="memItemLeft" align="right" valign="top">Material&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_day_night_cycle.html#a816c4c58400c9cc914dd0a2e472e96b6">nightSky</a></td></tr>
+<tr class="memdesc:a816c4c58400c9cc914dd0a2e472e96b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Skybox material used during the night.  <br /></td></tr>
 <tr class="separator:a816c4c58400c9cc914dd0a2e472e96b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adaa1ecc2416976d0f8a866daff8821ca"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_day_night_cycle.html#adaa1ecc2416976d0f8a866daff8821ca">maxExposure</a> = 1.3f</td></tr>
+<tr class="memdesc:adaa1ecc2416976d0f8a866daff8821ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum exposure level during the day.  <br /></td></tr>
 <tr class="separator:adaa1ecc2416976d0f8a866daff8821ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afbea844e304a17559731a8310359c177"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_day_night_cycle.html#afbea844e304a17559731a8310359c177">minExposure</a> = 0.3f</td></tr>
+<tr class="memdesc:afbea844e304a17559731a8310359c177"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum exposure level during the night.  <br /></td></tr>
 <tr class="separator:afbea844e304a17559731a8310359c177"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a9e221019b318595bd9723384c0e123"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_day_night_cycle.html#a3a9e221019b318595bd9723384c0e123">skyboxRotationSpeed</a> = 1f</td></tr>
+<tr class="memdesc:a3a9e221019b318595bd9723384c0e123"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotation speed of the skybox in degrees per second.  <br /></td></tr>
 <tr class="separator:a3a9e221019b318595bd9723384c0e123"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9515649d5c90c56c7b91629cae949f3d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_day_night_cycle.html#a9515649d5c90c56c7b91629cae949f3d">enableTimePass</a> = false</td></tr>
+<tr class="memdesc:a9515649d5c90c56c7b91629cae949f3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables or disables the passage of time.  <br /></td></tr>
+<tr class="separator:a9515649d5c90c56c7b91629cae949f3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef63094c4f11f2bba2ec66a7fa5abd9f"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_day_night_cycle.html#aef63094c4f11f2bba2ec66a7fa5abd9f">nightTimeSpeed</a> = 20f</td></tr>
+<tr class="memdesc:aef63094c4f11f2bba2ec66a7fa5abd9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Speed multiplier for time progression during the night.  <br /></td></tr>
+<tr class="separator:aef63094c4f11f2bba2ec66a7fa5abd9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a469c877a0b19301b03d574b82c5d8702"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_day_night_cycle.html#a469c877a0b19301b03d574b82c5d8702">nightOverlayMaxAlpha</a> = 1f</td></tr>
+<tr class="memdesc:a469c877a0b19301b03d574b82c5d8702"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum alpha value for the night overlay.  <br /></td></tr>
+<tr class="separator:a469c877a0b19301b03d574b82c5d8702"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0520234b1fa9f49ed38b271bc8eec98"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_day_night_cycle.html#aa0520234b1fa9f49ed38b271bc8eec98">requiredSleepingNPCPercentage</a> = 0.80f</td></tr>
+<tr class="memdesc:aa0520234b1fa9f49ed38b271bc8eec98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Required percentage of NPCs sleeping to trigger night conditions.  <br /></td></tr>
+<tr class="separator:aa0520234b1fa9f49ed38b271bc8eec98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
 Properties</h2></td></tr>
 <tr class="memitem:a30451c310193793b81820ff2ba37b9b4"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_day_night_cycle.html">DayNightCycle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_day_night_cycle.html#a30451c310193793b81820ff2ba37b9b4">Instance</a><code> [get]</code></td></tr>
 <tr class="separator:a30451c310193793b81820ff2ba37b9b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Manages in-game time visuals and logic. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a1e6b5354c480d8da0c02fbe386d87831" name="a1e6b5354c480d8da0c02fbe386d87831"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1e6b5354c480d8da0c02fbe386d87831">&#9670;&#160;</a></span>GetCurrentDay()</h2>
 
@@ -148,6 +179,29 @@ Properties</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Gets the current day number. </p>
+<dl class="section return"><dt>Returns</dt><dd>Current day number.</dd></dl>
+
+</div>
+</div>
+<a id="ad487bf60865932174a9cf1879653fdcf" name="ad487bf60865932174a9cf1879653fdcf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad487bf60865932174a9cf1879653fdcf">&#9670;&#160;</a></span>GetCurrentTimeText()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string DayNightCycle.GetCurrentTimeText </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the current time in "HH:MM" format. </p>
+<dl class="section return"><dt>Returns</dt><dd>Current time as a string.</dd></dl>
 
 </div>
 </div>
@@ -164,6 +218,8 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Duration of a full day in minutes. 1 minute equals 24 hours in-game. </p>
+
 </div>
 </div>
 <a id="aa8d01dbe2196385b703469971684aad6" name="aa8d01dbe2196385b703469971684aad6"></a>
@@ -177,6 +233,8 @@ Properties</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Skybox material used during the day. Material with Skybox/Cubemap or Panoramic shader. </p>
 
 </div>
 </div>
@@ -192,6 +250,24 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Reference to the directional light representing the sun. </p>
+
+</div>
+</div>
+<a id="a9515649d5c90c56c7b91629cae949f3d" name="a9515649d5c90c56c7b91629cae949f3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9515649d5c90c56c7b91629cae949f3d">&#9670;&#160;</a></span>enableTimePass</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool DayNightCycle.enableTimePass = false</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enables or disables the passage of time. </p>
+
 </div>
 </div>
 <a id="adaa1ecc2416976d0f8a866daff8821ca" name="adaa1ecc2416976d0f8a866daff8821ca"></a>
@@ -205,6 +281,8 @@ Properties</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Maximum exposure level during the day. </p>
 
 </div>
 </div>
@@ -220,6 +298,8 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Maximum intensity of the sun during the day. </p>
+
 </div>
 </div>
 <a id="afbea844e304a17559731a8310359c177" name="afbea844e304a17559731a8310359c177"></a>
@@ -233,6 +313,8 @@ Properties</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Minimum exposure level during the night. </p>
 
 </div>
 </div>
@@ -248,6 +330,24 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Minimum intensity of the sun during the night. </p>
+
+</div>
+</div>
+<a id="a469c877a0b19301b03d574b82c5d8702" name="a469c877a0b19301b03d574b82c5d8702"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a469c877a0b19301b03d574b82c5d8702">&#9670;&#160;</a></span>nightOverlayMaxAlpha</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float DayNightCycle.nightOverlayMaxAlpha = 1f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Maximum alpha value for the night overlay. </p>
+
 </div>
 </div>
 <a id="a816c4c58400c9cc914dd0a2e472e96b6" name="a816c4c58400c9cc914dd0a2e472e96b6"></a>
@@ -261,6 +361,40 @@ Properties</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Skybox material used during the night. </p>
+
+</div>
+</div>
+<a id="aef63094c4f11f2bba2ec66a7fa5abd9f" name="aef63094c4f11f2bba2ec66a7fa5abd9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef63094c4f11f2bba2ec66a7fa5abd9f">&#9670;&#160;</a></span>nightTimeSpeed</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float DayNightCycle.nightTimeSpeed = 20f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Speed multiplier for time progression during the night. </p>
+
+</div>
+</div>
+<a id="aa0520234b1fa9f49ed38b271bc8eec98" name="aa0520234b1fa9f49ed38b271bc8eec98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0520234b1fa9f49ed38b271bc8eec98">&#9670;&#160;</a></span>requiredSleepingNPCPercentage</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float DayNightCycle.requiredSleepingNPCPercentage = 0.80f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Required percentage of NPCs sleeping to trigger night conditions. </p>
 
 </div>
 </div>
@@ -276,6 +410,8 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Rotation speed of the skybox in degrees per second. </p>
+
 </div>
 </div>
 <a id="a6c61a375a66994cf4737d4f6975e7cd9" name="a6c61a375a66994cf4737d4f6975e7cd9"></a>
@@ -289,6 +425,8 @@ Properties</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Current time of day, ranging from 0 to 24. </p>
 
 </div>
 </div>

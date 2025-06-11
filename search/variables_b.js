@@ -1,27 +1,8 @@
 var searchData=
 [
-  ['mainmenuscenename_0',['mainMenuSceneName',['../class_main_menu_manager.html#ae38ce5ee7551606478a2027c8c4c374c',1,'MainMenuManager']]],
-  ['maplength_1',['mapLength',['../class_map_generator.html#ae2b1ba360d4b891f7867cfac8ae87c7c',1,'MapGenerator']]],
-  ['maplengthintiles_2',['mapLengthInTiles',['../class_map_generator.html#a3daeb42a5e3cb43e7e3576f57a0db58c',1,'MapGenerator']]],
-  ['mapwidth_3',['mapWidth',['../class_map_generator.html#aa87e9b628bd6bab33834859e4f5917ef',1,'MapGenerator']]],
-  ['mapwidthintiles_4',['mapWidthInTiles',['../class_map_generator.html#ae9215f29fb5a5812ad84aefc47b04fbb',1,'MapGenerator']]],
-  ['marktiles_5',['markTiles',['../class_map_generator.html#aad5a33eb1b1a391edf84bf9ff0fb8d20',1,'MapGenerator']]],
-  ['mastervolumeslider_6',['masterVolumeSlider',['../class_main_menu_manager.html#aa040d4326bc461108f0997973c5313bb',1,'MainMenuManager']]],
-  ['max_5ftokens_7',['max_tokens',['../class_chat_request_d_t_o.html#ac185ab021b1d160dc7e78b256654e708',1,'ChatRequestDTO']]],
-  ['maxcount_8',['maxCount',['../class_building_setup.html#aeb8aac28f5a7aff67e832bd336799ee7',1,'BuildingSetup']]],
-  ['maxexposure_9',['maxExposure',['../class_day_night_cycle.html#adaa1ecc2416976d0f8a866daff8821ca',1,'DayNightCycle']]],
-  ['maxsunintensity_10',['maxSunIntensity',['../class_day_night_cycle.html#ab7df033543fcb07e85e2cd7c783b39af',1,'DayNightCycle']]],
-  ['memory_11',['memory',['../class_obtained_memory_d_t_o.html#acfdbef6702a267f4f8a3bb47ecbf80bf',1,'ObtainedMemoryDTO']]],
-  ['message_12',['message',['../class_message_d_t_o.html#a8bc52402377e2e53d4d09f8f006d0e16',1,'MessageDTO']]],
-  ['messages_13',['messages',['../class_chat_request_d_t_o.html#ab580aa33d7f2360e8a3d5d50e15a4f58',1,'ChatRequestDTO']]],
-  ['minexposure_14',['minExposure',['../class_day_night_cycle.html#afbea844e304a17559731a8310359c177',1,'DayNightCycle']]],
-  ['minsunintensity_15',['minSunIntensity',['../class_day_night_cycle.html#a3bc5b838f0e4e539f18950f9b8ebce97',1,'DayNightCycle']]],
-  ['model_5fid_16',['model_id',['../class_chat_request_d_t_o.html#af72481beeb341be8d2b76e7a98c4740c',1,'ChatRequestDTO.model_id()'],['../class_load_model_d_t_o.html#aae8d616a4d4ea2e4fb712302efa0073a',1,'LoadModelDTO.model_id()'],['../class_register_d_t_o.html#ac1386434c8b229a0b1066d8bb12a5bfa',1,'RegisterDTO.model_id()'],['../class_unload_model_request_d_t_o.html#a1d8be963adba600514f1f7e5eb41e9d1',1,'UnloadModelRequestDTO.model_id()']]],
-  ['model_5fpath_17',['model_path',['../class_load_model_d_t_o.html#af1b1229a305e3509a7df6dad693de9ea',1,'LoadModelDTO.model_path()'],['../class_register_d_t_o.html#a2815564d1a5dd50fb79de7bc0a657812',1,'RegisterDTO.model_path()']]],
-  ['modelid_18',['ModelId',['../class_npc_config.html#a2f36713fcac38941687a5e4af55a6f9d',1,'NpcConfig']]],
-  ['models_19',['models',['../class_status_d_t_o.html#a9f20e9f9f185f0e72d52183135baf17f',1,'StatusDTO']]],
-  ['models_20',['Models',['../class_game_config.html#a50f229e7279e6c98c707e3f27bcc49f7',1,'GameConfig']]],
-  ['movespeed_21',['moveSpeed',['../class_player_controller.html#abb12e85ca1b12efdbc8684bff2e19c4c',1,'PlayerController']]],
-  ['murderernpc_22',['murdererNPC',['../class_game_manager.html#a73f17991a064054726b6a7329d3df58e',1,'GameManager']]],
-  ['musicvolumeslider_23',['musicVolumeSlider',['../class_main_menu_manager.html#a32885bbf589a25d3fd3039e5bb9f26e2',1,'MainMenuManager']]]
+  ['llmserverapi_0',['LlmServerApi',['../class_game_config.html#a71bc48d87ef617b091ef3b47de8caa3f',1,'GameConfig']]],
+  ['llmserverready_1',['LlmServerReady',['../class_game_manager.html#a134211005c0f35e2430849a32012a6ec',1,'GameManager']]],
+  ['llmserverstatus_2',['LLMServerstatus',['../_llm_manager_8cs.html#a7ebbc6591b05db10098d25ad1e99fc72',1,'LlmManager.cs']]],
+  ['loadingscreenscenename_3',['LoadingscreenSceneName',['../class_main_menu_manager.html#ae4d1d5b4230ab9e9c14bacb245ac08ba',1,'MainMenuManager']]],
+  ['logdebug_4',['LogDebug',['../class_llm_manager.html#aabdea52995036d70d49980b004a0dfd5',1,'LlmManager']]]
 ];

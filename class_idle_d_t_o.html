@@ -97,21 +97,31 @@ $(document).ready(function(){initNavTree('class_idle_d_t_o.html',''); initResiza
   <div class="headertitle"><div class="title">IdleDTO Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Represents the idle state of an <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> in the decision-making system. This state includes core memories, obtained memories, current environment, needs, and the stopped action. This DTO is used for prompting the LLM to understand the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>'s current context.  
+ <a href="class_idle_d_t_o.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a7fb8df875b3cfaee37afb3473918dea3"><td class="memItemLeft" align="right" valign="top">List&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_idle_d_t_o.html#a7fb8df875b3cfaee37afb3473918dea3">core_memories</a></td></tr>
+<tr class="memdesc:a7fb8df875b3cfaee37afb3473918dea3"><td class="mdescLeft">&#160;</td><td class="mdescRight">A list of core memories that the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> has, which are fundamental to its decision-making process.  <br /></td></tr>
 <tr class="separator:a7fb8df875b3cfaee37afb3473918dea3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a230ad807c9f89ec9f4126d8b7fcf7ad3"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_obtained_memory_d_t_o.html">ObtainedMemoryDTO</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_idle_d_t_o.html#a230ad807c9f89ec9f4126d8b7fcf7ad3">obtained_memories</a></td></tr>
+<tr class="memdesc:a230ad807c9f89ec9f4126d8b7fcf7ad3"><td class="mdescLeft">&#160;</td><td class="mdescRight">A list of memories that the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> has obtained, which may influence its current decisions.  <br /></td></tr>
 <tr class="separator:a230ad807c9f89ec9f4126d8b7fcf7ad3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8632c641acb06f6e41ea97a83ad606fa"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_current_environment_d_t_o.html">CurrentEnvironmentDTO</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_idle_d_t_o.html#a8632c641acb06f6e41ea97a83ad606fa">current_environment</a></td></tr>
+<tr class="memdesc:a8632c641acb06f6e41ea97a83ad606fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">A list of current environment objects that the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> is aware of, which <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> will choose from when making decisions.  <br /></td></tr>
 <tr class="separator:a8632c641acb06f6e41ea97a83ad606fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0954540122d99b48435b4a342581782c"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_need_d_t_o.html">NeedDTO</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_idle_d_t_o.html#a0954540122d99b48435b4a342581782c">needs</a></td></tr>
+<tr class="memdesc:a0954540122d99b48435b4a342581782c"><td class="mdescLeft">&#160;</td><td class="mdescRight">A list of needs that the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> has, which are used to prioritize actions and decisions.  <br /></td></tr>
 <tr class="separator:a0954540122d99b48435b4a342581782c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a852aa5f2f7fae60be1469312c2c161"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_idle_d_t_o.html#a1a852aa5f2f7fae60be1469312c2c161">stopped_action</a></td></tr>
+<tr class="memdesc:a1a852aa5f2f7fae60be1469312c2c161"><td class="mdescLeft">&#160;</td><td class="mdescRight">The action that the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> was stopped from performing, which may be relevant for decision-making.  <br /></td></tr>
 <tr class="separator:a1a852aa5f2f7fae60be1469312c2c161"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Data Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents the idle state of an <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> in the decision-making system. This state includes core memories, obtained memories, current environment, needs, and the stopped action. This DTO is used for prompting the LLM to understand the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>'s current context. </p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="a7fb8df875b3cfaee37afb3473918dea3" name="a7fb8df875b3cfaee37afb3473918dea3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7fb8df875b3cfaee37afb3473918dea3">&#9670;&#160;</a></span>core_memories</h2>
 
@@ -123,6 +133,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>A list of core memories that the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> has, which are fundamental to its decision-making process. </p>
 
 </div>
 </div>
@@ -138,6 +150,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>A list of current environment objects that the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> is aware of, which <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> will choose from when making decisions. </p>
+
 </div>
 </div>
 <a id="a0954540122d99b48435b4a342581782c" name="a0954540122d99b48435b4a342581782c"></a>
@@ -151,6 +165,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>A list of needs that the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> has, which are used to prioritize actions and decisions. </p>
 
 </div>
 </div>
@@ -166,6 +182,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>A list of memories that the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> has obtained, which may influence its current decisions. </p>
+
 </div>
 </div>
 <a id="a1a852aa5f2f7fae60be1469312c2c161" name="a1a852aa5f2f7fae60be1469312c2c161"></a>
@@ -179,6 +197,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>The action that the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> was stopped from performing, which may be relevant for decision-making. </p>
 
 </div>
 </div>

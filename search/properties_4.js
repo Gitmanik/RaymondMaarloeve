@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['npcname_0',['NpcName',['../class_n_p_c.html#a0d742bb06873712cf0c72f663fda6cab',1,'NPC']]]
+  ['modelid_0',['ModelID',['../class_n_p_c.html#af0303bd88886d0417f54719bb4895265',1,'NPC']]]
 ];

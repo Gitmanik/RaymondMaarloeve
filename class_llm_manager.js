@@ -1,6 +1,6 @@
 var class_llm_manager =
 [
-    [ "Chat", "class_llm_manager.html#af7323028440445948f87a006b69d0801", null ],
+    [ "Chat", "class_llm_manager.html#ab64735d2b7617475c1b9f7466d6521ff", null ],
     [ "Connect", "class_llm_manager.html#a16ee38ba51ddab349c04ad0b9bce0630", null ],
     [ "GenericComplete", "class_llm_manager.html#a2ef2ce3c8d883f1acb5e7b3783cda61d", null ],
     [ "Get< T >", "class_llm_manager.html#a997ff35fdfcb490cea877b231ed903d9", null ],
@@ -10,5 +10,6 @@ var class_llm_manager =
     [ "Setup", "class_llm_manager.html#ab6e34bc3aece1952728ac29dea13a2b9", null ],
     [ "Status", "class_llm_manager.html#a97f29d33ad99c68a6f8ef018e80b6136", null ],
     [ "UnloadModel", "class_llm_manager.html#a8ab2ff7c38b6a286126723fa4562f2a5", null ],
+    [ "LogDebug", "class_llm_manager.html#aabdea52995036d70d49980b004a0dfd5", null ],
     [ "IsConnected", "class_llm_manager.html#a91bc2cf70b9c9f62ba5d7890e6292223", null ]
 ];

@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['randomidlenames_0',['RandomIdleNames',['../class_idle_decision.html#ad4023e12743cb96aee4b489689c19889',1,'IdleDecision']]],
-  ['ready_1',['Ready',['../class_wait_for_l_l_m_decision.html#aca28b62e8cc4db345d2adca2f154bd26',1,'WaitForLLMDecision']]],
-  ['response_2',['response',['../class_chat_response_d_t_o.html#a89abc4a4cee0fc6ff1e229cec63c6593',1,'ChatResponseDTO']]],
-  ['revision_3',['Revision',['../class_game_config.html#a14f3670d840a2cee3e3ccc59f0a34d3c',1,'GameConfig']]],
-  ['role_4',['role',['../class_message.html#a14eb12b1a78d6757757ecfcfa883146b',1,'Message']]]
+  ['path_0',['Path',['../class_model_config.html#a502f7636fe02dce406d68ae2636543f6',1,'ModelConfig']]],
+  ['player_1',['player',['../class_minimap_camera_script.html#a9b60bea31fdbab7a36f7ee42768adddd',1,'MinimapCameraScript']]],
+  ['position_2',['Position',['../class_npc_action_event.html#af4c739f09b541ad1edddaa3d9d4266dc',1,'NpcActionEvent']]],
+  ['prefab_3',['prefab',['../class_building_setup.html#a22a364f78bfb2e4e23e16e329ccb2353',1,'BuildingSetup.prefab()'],['../class_walls_setup.html#a0d404865bd880ccab3a9963c938a8b64',1,'WallsSetup.prefab()']]]
 ];

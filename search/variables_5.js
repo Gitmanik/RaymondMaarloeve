@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['daydurationinminutes_0',['dayDurationInMinutes',['../class_day_night_cycle.html#aa123e19018ea5e5b38e66d1843ca2c02',1,'DayNightCycle']]],
-  ['daysky_1',['daySky',['../class_day_night_cycle.html#aa8d01dbe2196385b703469971684aad6',1,'DayNightCycle']]],
-  ['decision_2',['decision',['../class_current_environment.html#a2a6259a88b5da56411f734fb9479a4d6',1,'CurrentEnvironment']]],
-  ['directionallight_3',['directionalLight',['../class_day_night_cycle.html#ad1c255e1a083a85218c458256a87b45b',1,'DayNightCycle']]],
-  ['distance_4',['distance',['../class_current_environment_d_t_o.html#af12c11e73d1d1a651465003cd1bf16e0',1,'CurrentEnvironmentDTO']]]
+  ['eachstatingaconcrete_0',['eachstatingaconcrete',['../_game_manager_8cs.html#a295b5d265c7bca3cef8d82ad42d36ece',1,'GameManager.cs']]],
+  ['enabletimepass_1',['enableTimePass',['../class_day_night_cycle.html#a9515649d5c90c56c7b91629cae949f3d',1,'DayNightCycle']]]
 ];

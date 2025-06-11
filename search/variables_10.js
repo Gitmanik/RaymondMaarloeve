@@ -1,13 +1,12 @@
 var searchData=
 [
-  ['seed_0',['seed',['../class_chat_request_d_t_o.html#add7b89833ee7aa9642625ca0289441a9',1,'ChatRequestDTO.seed()'],['../class_load_model_d_t_o.html#af2aa765a918d6485792834a1c9fdb616',1,'LoadModelDTO.seed()']]],
-  ['settingsscenename_1',['settingsSceneName',['../class_main_menu_manager.html#afbc367f8e041d8a7673a57555bbf4d97',1,'MainMenuManager']]],
-  ['skyboxrotationspeed_2',['skyboxRotationSpeed',['../class_day_night_cycle.html#a3a9e221019b318595bd9723384c0e123',1,'DayNightCycle']]],
-  ['smoothspeed_3',['smoothSpeed',['../class_camera_follow.html#a924c2f26a261004c89aa63ca0c89d454',1,'CameraFollow']]],
-  ['sourceid_4',['SourceId',['../class_npc_action_event.html#a3db48e89276785e6fb7c7dfeeb92e36a',1,'NpcActionEvent']]],
-  ['spawnedbuildings_5',['spawnedBuildings',['../class_map_generator.html#ac139d2902fbce9237436dc2683f2c942',1,'MapGenerator']]],
-  ['speed_6',['speed',['../class_n_p_c.html#a1ff4c824759ae05a03c0d1a10e14c626',1,'NPC']]],
-  ['stopped_5faction_7',['stopped_action',['../class_idle_d_t_o.html#a1a852aa5f2f7fae60be1469312c2c161',1,'IdleDTO']]],
-  ['success_8',['success',['../class_chat_response_d_t_o.html#a7f0ff887c90705b1ead27be2f7cb971b',1,'ChatResponseDTO.success()'],['../class_message_d_t_o.html#a05d910c7ab79289c9b5558ecdf7c267e',1,'MessageDTO.success()']]],
-  ['surface_9',['surface',['../class_map_generator.html#a6661513b196383432c4b555faddd4940',1,'MapGenerator']]]
+  ['randomidlenames_0',['RandomIdleNames',['../class_idle_decision.html#ad4023e12743cb96aee4b489689c19889',1,'IdleDecision']]],
+  ['ready_1',['Ready',['../class_wait_for_l_l_m_decision.html#aca28b62e8cc4db345d2adca2f154bd26',1,'WaitForLLMDecision']]],
+  ['recency_2',['recency',['../class_obtained_memory.html#ad41325745478738cf27b2b2414be592d',1,'ObtainedMemory']]],
+  ['relevance_3',['relevance',['../class_obtained_memory.html#a782f47c427878640b6920a8c5107fcba',1,'ObtainedMemory']]],
+  ['requiredsleepingnpcpercentage_4',['requiredSleepingNPCPercentage',['../class_day_night_cycle.html#aa0520234b1fa9f49ed38b271bc8eec98',1,'DayNightCycle']]],
+  ['response_5',['response',['../class_chat_response_d_t_o.html#a89abc4a4cee0fc6ff1e229cec63c6593',1,'ChatResponseDTO']]],
+  ['revision_6',['Revision',['../class_game_config.html#a14f3670d840a2cee3e3ccc59f0a34d3c',1,'GameConfig']]],
+  ['role_7',['role',['../class_message.html#a14eb12b1a78d6757757ecfcfa883146b',1,'Message']]],
+  ['running_8',['running',['../classfootstep__manager__npc.html#aa9fd4083ab4a8829bb43d09f34de6159',1,'footstep_manager_npc']]]
 ];

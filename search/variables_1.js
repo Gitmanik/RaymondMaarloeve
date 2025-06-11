@@ -1,4 +1,10 @@
 var searchData=
 [
-  ['_5f_5fpad0_5f_5f_0',['__pad0__',['../_game_manager_8cs.html#a6b391212c648baf8ba9171f996899053',1,'GameManager.cs']]]
+  ['action_0',['Action',['../class_npc_action_event.html#a2acd21ef6959d6863433d8ea32338d5d',1,'NpcActionEvent']]],
+  ['action_1',['action',['../class_current_environment_d_t_o.html#a50af43f5a3896db57ff318b86232cf0e',1,'CurrentEnvironmentDTO']]],
+  ['age_2',['age',['../class_character_d_t_o.html#afe1c709c84749d1edf91beaa66ef983e',1,'CharacterDTO']]],
+  ['agent_3',['agent',['../class_n_p_c.html#a8b21044a35e6b231ed328d3350c4ad3b',1,'NPC']]],
+  ['archetype_4',['archetype',['../class_character_d_t_o.html#ab779b5d157665efbfbf2b4920474c5b6',1,'CharacterDTO']]],
+  ['associatedgameobject_5',['associatedGameObject',['../class_current_environment.html#ab51252104c8a65b7d5955ff593a75c02',1,'CurrentEnvironment']]],
+  ['at_6',['at',['../_n_p_c_8cs.html#a9b77ffc728c31f7c2bfb388fb96e1e05',1,'NPC.cs']]]
 ];

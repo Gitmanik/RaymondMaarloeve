@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['walkdecision_0',['WalkDecision',['../class_walk_decision.html#a02b54f44d74e1307963b28099cd1980a',1,'WalkDecision']]]
+  ['unloadmodel_0',['UnloadModel',['../class_llm_manager.html#a8ab2ff7c38b6a286126723fa4562f2a5',1,'LlmManager']]],
+  ['updatedaytext_1',['UpdateDayText',['../class_day_box_manager.html#ab449710f1981fe2a18a57108dc9acef5',1,'DayBoxManager']]],
+  ['updatehourtext_2',['UpdateHourText',['../class_day_box_manager.html#a885010a1a4573c25d46b27cbf703cfd7',1,'DayBoxManager']]]
 ];

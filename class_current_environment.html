@@ -98,22 +98,31 @@ $(document).ready(function(){initNavTree('class_current_environment.html',''); i
   <div class="headertitle"><div class="title">CurrentEnvironment Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Represents a single current environment option of an <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>, including the decision to be made and the associated game object.  
+ <a href="class_current_environment.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aa1d06a75d40d0048d91c5cc5062c1427"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_current_environment.html#aa1d06a75d40d0048d91c5cc5062c1427">CurrentEnvironment</a> (<a class="el" href="interface_i_decision.html">IDecision</a> <a class="el" href="class_current_environment.html#a2a6259a88b5da56411f734fb9479a4d6">decision</a>, GameObject <a class="el" href="class_current_environment.html#ab51252104c8a65b7d5955ff593a75c02">associatedGameObject</a>)</td></tr>
+<tr class="memdesc:aa1d06a75d40d0048d91c5cc5062c1427"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes a new instance of the <a class="el" href="class_current_environment.html" title="Represents a single current environment option of an NPC, including the decision to be made and the a...">CurrentEnvironment</a> class.  <br /></td></tr>
 <tr class="separator:aa1d06a75d40d0048d91c5cc5062c1427"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af31bc8155eea60dc895856b6605ed5d6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_current_environment_d_t_o.html">CurrentEnvironmentDTO</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_current_environment.html#af31bc8155eea60dc895856b6605ed5d6">ToDTO</a> (<a class="el" href="class_n_p_c.html">NPC</a> npc)</td></tr>
+<tr class="memdesc:af31bc8155eea60dc895856b6605ed5d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts the current environment to a <a class="el" href="class_current_environment_d_t_o.html" title="Represents the CurrentEnvironment DTO object used for prompting the LLM. This object contains the act...">CurrentEnvironmentDTO</a> DTO representation. /// This DTO includes the decision's pretty name and the distance to the associated game object from the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>'s position. The distance is calculated as the Euclidean distance between the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>'s position and the associated game object's position. If the associated game object is null, the distance is set to 0.  <br /></td></tr>
 <tr class="separator:af31bc8155eea60dc895856b6605ed5d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a2a6259a88b5da56411f734fb9479a4d6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="interface_i_decision.html">IDecision</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_current_environment.html#a2a6259a88b5da56411f734fb9479a4d6">decision</a></td></tr>
+<tr class="memdesc:a2a6259a88b5da56411f734fb9479a4d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">The decision to be made in this action.  <br /></td></tr>
 <tr class="separator:a2a6259a88b5da56411f734fb9479a4d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab51252104c8a65b7d5955ff593a75c02"><td class="memItemLeft" align="right" valign="top">GameObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_current_environment.html#ab51252104c8a65b7d5955ff593a75c02">associatedGameObject</a></td></tr>
+<tr class="memdesc:ab51252104c8a65b7d5955ff593a75c02"><td class="mdescLeft">&#160;</td><td class="mdescRight">The game object associated with this environment option. This could be an object that the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> interacts with or observes, such as a door, item, or another character.  <br /></td></tr>
 <tr class="separator:ab51252104c8a65b7d5955ff593a75c02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents a single current environment option of an <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>, including the decision to be made and the associated game object. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa1d06a75d40d0048d91c5cc5062c1427" name="aa1d06a75d40d0048d91c5cc5062c1427"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa1d06a75d40d0048d91c5cc5062c1427">&#9670;&#160;</a></span>CurrentEnvironment()</h2>
 
@@ -140,6 +149,15 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Initializes a new instance of the <a class="el" href="class_current_environment.html" title="Represents a single current environment option of an NPC, including the decision to be made and the a...">CurrentEnvironment</a> class. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">decision</td><td></td></tr>
+    <tr><td class="paramname">associatedGameObject</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -159,6 +177,15 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Converts the current environment to a <a class="el" href="class_current_environment_d_t_o.html" title="Represents the CurrentEnvironment DTO object used for prompting the LLM. This object contains the act...">CurrentEnvironmentDTO</a> DTO representation. /// This DTO includes the decision's pretty name and the distance to the associated game object from the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>'s position. The distance is calculated as the Euclidean distance between the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>'s position and the associated game object's position. If the associated game object is null, the distance is set to 0. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">npc</td><td>Owner of this object</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_current_environment_d_t_o.html" title="Represents the CurrentEnvironment DTO object used for prompting the LLM. This object contains the act...">CurrentEnvironmentDTO</a> object </dd></dl>
+
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
@@ -174,6 +201,8 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>The game object associated with this environment option. This could be an object that the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> interacts with or observes, such as a door, item, or another character. </p>
+
 </div>
 </div>
 <a id="a2a6259a88b5da56411f734fb9479a4d6" name="a2a6259a88b5da56411f734fb9479a4d6"></a>
@@ -187,6 +216,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>The decision to be made in this action. </p>
 
 </div>
 </div>

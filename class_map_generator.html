@@ -106,6 +106,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:adc8f9ffbc33e6d4b1593900c3059fdf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5f439c0cb92bffbdeadb1a86b9485fc"><td class="memItemLeft" align="right" valign="top">GameObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map_generator.html#af5f439c0cb92bffbdeadb1a86b9485fc">GetBuilding</a> (HashSet&lt; <a class="el" href="class_building_data.html#afc07932823f7b925d75c838070aa4556">BuildingData.BuildingType</a> &gt; allowedTypes)</td></tr>
 <tr class="separator:af5f439c0cb92bffbdeadb1a86b9485fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25bb86d1cb5943ffd824b2aaace1d8e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map_generator.html#a25bb86d1cb5943ffd824b2aaace1d8e3">DebugTilesInConsole</a> ()</td></tr>
+<tr class="separator:a25bb86d1cb5943ffd824b2aaace1d8e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -123,9 +125,17 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a5bce0ff4dd9cf601f74b2ec76ff37f4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad5a33eb1b1a391edf84bf9ff0fb8d20"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map_generator.html#aad5a33eb1b1a391edf84bf9ff0fb8d20">markTiles</a> = false</td></tr>
 <tr class="separator:aad5a33eb1b1a391edf84bf9ff0fb8d20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebad690371e12ecbf0f5651496e972d1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map_generator.html#aebad690371e12ecbf0f5651496e972d1">WallsMargin</a> = 10</td></tr>
+<tr class="separator:aebad690371e12ecbf0f5651496e972d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75c3915379b35396d54169fbe1db8e96"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_building_setup.html">BuildingSetup</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map_generator.html#a75c3915379b35396d54169fbe1db8e96">buildings</a> = new()</td></tr>
 <tr class="separator:a75c3915379b35396d54169fbe1db8e96"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac139d2902fbce9237436dc2683f2c942"><td class="memItemLeft" align="right" valign="top">List&lt; GameObject &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map_generator.html#ac139d2902fbce9237436dc2683f2c942">spawnedBuildings</a> = new()</td></tr>
+<tr class="memitem:a074064e97f4d0dce449a86b622be6598"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_walls_setup.html">WallsSetup</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map_generator.html#a074064e97f4d0dce449a86b622be6598">walls</a> = new()</td></tr>
+<tr class="separator:a074064e97f4d0dce449a86b622be6598"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af86445c360a9811bd3cb0a91604e4ea3"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_building_setup.html">BuildingSetup</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map_generator.html#af86445c360a9811bd3cb0a91604e4ea3">decorations</a> = new()</td></tr>
+<tr class="separator:af86445c360a9811bd3cb0a91604e4ea3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fe4c884d55e18abe072cdc37b9f53de"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_tile.html">Tile</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map_generator.html#a4fe4c884d55e18abe072cdc37b9f53de">buildingsMainTile</a></td></tr>
+<tr class="separator:a4fe4c884d55e18abe072cdc37b9f53de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac139d2902fbce9237436dc2683f2c942"><td class="memItemLeft" align="right" valign="top">List&lt; GameObject &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map_generator.html#ac139d2902fbce9237436dc2683f2c942">spawnedBuildings</a></td></tr>
 <tr class="separator:ac139d2902fbce9237436dc2683f2c942"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa87e9b628bd6bab33834859e4f5917ef"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map_generator.html#aa87e9b628bd6bab33834859e4f5917ef">mapWidth</a></td></tr>
 <tr class="separator:aa87e9b628bd6bab33834859e4f5917ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -140,6 +150,23 @@ Properties</h2></td></tr>
 <tr class="separator:a0ad2f3599e56990433e0ff00a7b5263f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a25bb86d1cb5943ffd824b2aaace1d8e3" name="a25bb86d1cb5943ffd824b2aaace1d8e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25bb86d1cb5943ffd824b2aaace1d8e3">&#9670;&#160;</a></span>DebugTilesInConsole()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MapGenerator.DebugTilesInConsole </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="adc8f9ffbc33e6d4b1593900c3059fdf7" name="adc8f9ffbc33e6d4b1593900c3059fdf7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adc8f9ffbc33e6d4b1593900c3059fdf7">&#9670;&#160;</a></span>GenerateMap()</h2>
 
@@ -198,6 +225,34 @@ Properties</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">float MapGenerator.buildingsDensity = 0.2f</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4fe4c884d55e18abe072cdc37b9f53de" name="a4fe4c884d55e18abe072cdc37b9f53de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4fe4c884d55e18abe072cdc37b9f53de">&#9670;&#160;</a></span>buildingsMainTile</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">List&lt;<a class="el" href="class_tile.html">Tile</a>&gt; MapGenerator.buildingsMainTile</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af86445c360a9811bd3cb0a91604e4ea3" name="af86445c360a9811bd3cb0a91604e4ea3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af86445c360a9811bd3cb0a91604e4ea3">&#9670;&#160;</a></span>decorations</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">List&lt;<a class="el" href="class_building_setup.html">BuildingSetup</a>&gt; MapGenerator.decorations = new()</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -281,7 +336,7 @@ Properties</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">List&lt;GameObject&gt; MapGenerator.spawnedBuildings = new()</td>
+          <td class="memname">List&lt;GameObject&gt; MapGenerator.spawnedBuildings</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -324,6 +379,34 @@ Properties</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">int MapGenerator.tileSize = 10</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a074064e97f4d0dce449a86b622be6598" name="a074064e97f4d0dce449a86b622be6598"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a074064e97f4d0dce449a86b622be6598">&#9670;&#160;</a></span>walls</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">List&lt;<a class="el" href="class_walls_setup.html">WallsSetup</a>&gt; MapGenerator.walls = new()</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aebad690371e12ecbf0f5651496e972d1" name="aebad690371e12ecbf0f5651496e972d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebad690371e12ecbf0f5651496e972d1">&#9670;&#160;</a></span>WallsMargin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int MapGenerator.WallsMargin = 10</td>
         </tr>
       </table>
 </div><div class="memdoc">

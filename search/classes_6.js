@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['llmdecisionmaker_0',['LlmDecisionMaker',['../class_llm_decision_maker.html',1,'']]],
-  ['llmmanager_1',['LlmManager',['../class_llm_manager.html',1,'']]],
-  ['loadingscene_2',['LoadingScene',['../class_loading_scene.html',1,'']]],
-  ['loadmodeldto_3',['LoadModelDTO',['../class_load_model_d_t_o.html',1,'']]]
+  ['idecision_0',['IDecision',['../interface_i_decision.html',1,'']]],
+  ['idecisionsystem_1',['IDecisionSystem',['../interface_i_decision_system.html',1,'']]],
+  ['idledecision_2',['IdleDecision',['../class_idle_decision.html',1,'']]],
+  ['idledto_3',['IdleDTO',['../class_idle_d_t_o.html',1,'']]]
 ];

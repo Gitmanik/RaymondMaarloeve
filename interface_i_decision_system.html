@@ -97,6 +97,9 @@ $(document).ready(function(){initNavTree('interface_i_decision_system.html','');
   <div class="headertitle"><div class="title">IDecisionSystem Interface Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Interface for a decision-making system for NPCs.  
+ <a href="interface_i_decision_system.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -107,9 +110,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ac45e7479d2a6c4f776c464250774143c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decides the <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a>'s next action.  <br /></td></tr>
 <tr class="separator:ac45e7479d2a6c4f776c464250774143c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad2bbded2ec76d4be316ec26e2cf509c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_decision_system.html#ad2bbded2ec76d4be316ec26e2cf509c8">CalculateRelevance</a> (string newMemory, Action&lt; int &gt; relevanceFunc)</td></tr>
+<tr class="memdesc:ad2bbded2ec76d4be316ec26e2cf509c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Requests a calculation of relevance from the LLM server based on the current environment and <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> state.  <br /></td></tr>
 <tr class="separator:ad2bbded2ec76d4be316ec26e2cf509c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Interface for a decision-making system for NPCs. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ad2bbded2ec76d4be316ec26e2cf509c8" name="ad2bbded2ec76d4be316ec26e2cf509c8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad2bbded2ec76d4be316ec26e2cf509c8">&#9670;&#160;</a></span>CalculateRelevance()</h2>
 
@@ -135,6 +141,15 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Requests a calculation of relevance from the LLM server based on the current environment and <a class="el" href="class_n_p_c.html" title="Represents a Non-Player Character (NPC) in the game world. Handles decision making,...">NPC</a> state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">newMemory</td><td>New obtained memory to process</td></tr>
+    <tr><td class="paramname">relevanceFunc</td><td>Delegate which will be called when the value is calculated.</td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p>Implemented in <a class="el" href="class_llm_decision_maker.html#a7966e7db30b1f4644a25b76b1e7edf5e">LlmDecisionMaker</a>, and <a class="el" href="class_null_decision_system.html#afe4674ee15f621d59076f76e20b3fd04">NullDecisionSystem</a>.</p>
 

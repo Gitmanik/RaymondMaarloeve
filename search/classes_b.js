@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['registerdto_0',['RegisterDTO',['../class_register_d_t_o.html',1,'']]]
+  ['playercontroller_0',['PlayerController',['../class_player_controller.html',1,'']]],
+  ['praydecision_1',['PrayDecision',['../class_pray_decision.html',1,'']]]
 ];

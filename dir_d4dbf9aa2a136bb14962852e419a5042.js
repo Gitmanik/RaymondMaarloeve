@@ -2,6 +2,7 @@ var dir_d4dbf9aa2a136bb14962852e419a5042 =
 [
     [ "GetAleDecision.cs", "_get_ale_decision_8cs.html", "_get_ale_decision_8cs" ],
     [ "GetWaterDecision.cs", "_get_water_decision_8cs.html", "_get_water_decision_8cs" ],
+    [ "GoToSleepDecision.cs", "_go_to_sleep_decision_8cs.html", "_go_to_sleep_decision_8cs" ],
     [ "IDecision.cs", "_i_decision_8cs.html", "_i_decision_8cs" ],
     [ "IdleDecision.cs", "_idle_decision_8cs.html", "_idle_decision_8cs" ],
     [ "PrayDecision.cs", "_pray_decision_8cs.html", "_pray_decision_8cs" ],

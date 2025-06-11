@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['entityid_0',['EntityID',['../class_n_p_c.html#ad8cf37a7e909f0ec492792f00cfaddc8',1,'NPC']]]
+  ['characterdata_0',['CharacterData',['../class_n_p_c.html#ae8b6aede5c7eb49be6fdb1a50eb304b6',1,'NPC']]]
 ];

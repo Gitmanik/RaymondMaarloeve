@@ -1,6 +1,20 @@
 var searchData=
 [
-  ['unloadmodel_0',['UnloadModel',['../class_llm_manager.html#a8ab2ff7c38b6a286126723fa4562f2a5',1,'LlmManager']]],
-  ['updatedaytext_1',['UpdateDayText',['../class_day_box_manager.html#ab449710f1981fe2a18a57108dc9acef5',1,'DayBoxManager']]],
-  ['updatehourtext_2',['UpdateHourText',['../class_day_box_manager.html#a885010a1a4573c25d46b27cbf703cfd7',1,'DayBoxManager']]]
+  ['setfullscreen_0',['SetFullscreen',['../class_main_menu_manager.html#a3d541cf2d6b554a447f776b9f9b56011',1,'MainMenuManager']]],
+  ['setgraphicsquality_1',['SetGraphicsQuality',['../class_main_menu_manager.html#aa1060f63236cf750ad5b5bc07d95a107',1,'MainMenuManager']]],
+  ['setmastervolume_2',['SetMasterVolume',['../class_main_menu_manager.html#aa43e6cc82b428d2781fdbc70d38d9a05',1,'MainMenuManager']]],
+  ['setmusicvolume_3',['SetMusicVolume',['../class_main_menu_manager.html#aeffc3fa180ac540b944830db48307462',1,'MainMenuManager']]],
+  ['settarget_4',['SetTarget',['../class_camera_follow.html#a43e9ca4bdbbbe12bcf40d30528fd435b',1,'CameraFollow']]],
+  ['setup_5',['Setup',['../class_llm_manager.html#ab6e34bc3aece1952728ac29dea13a2b9',1,'LlmManager.Setup()'],['../class_mini_game_manager.html#abfae3017be6d8a88ad70725ac3c02e2b',1,'MiniGameManager.Setup()'],['../interface_i_decision_system.html#a3b1d48401d856df46851797003e35ddd',1,'IDecisionSystem.Setup()'],['../class_llm_decision_maker.html#a1957cb28b40e33411a5d5786173ccfdf',1,'LlmDecisionMaker.Setup()'],['../class_null_decision_system.html#a68488822e4c02cc13ec4341f8e5387c5',1,'NullDecisionSystem.Setup()'],['../class_n_p_c.html#ab5d57aa6b90b616e67156a20537be01a',1,'NPC.Setup()']]],
+  ['shouldfinish_6',['ShouldFinish',['../class_visit_building_decision.html#aa8e9ccd0508d85b371c9678d6f700591',1,'VisitBuildingDecision.ShouldFinish()'],['../class_pray_decision.html#a4fbea581128dd995daa91dc7e9f3c259',1,'PrayDecision.ShouldFinish()'],['../class_get_water_decision.html#a259cfd891dafa0dd2fa12bd9b3eeacaa',1,'GetWaterDecision.ShouldFinish()'],['../class_get_ale_decision.html#a5600b920e796ea80ab94025591b5bb47',1,'GetAleDecision.ShouldFinish()'],['../class_go_to_sleep_decision.html#a4307372c00fdace039e6c040e93407c8',1,'GoToSleepDecision.ShouldFinish()']]],
+  ['showdialogbox_7',['ShowDialogBox',['../class_dialog_box_manager.html#ae09d8bafa0c6a62037a36ce5908691cb',1,'DialogBoxManager']]],
+  ['spawnbuildings_8',['SpawnBuildings',['../class_building_spawner.html#a082398f923278319d75d4c52c10f8f40',1,'BuildingSpawner']]],
+  ['spawndecorations_9',['SpawnDecorations',['../class_decoration_spawner.html#a797bcd8af5e8ef4de0b015e306be04d6',1,'DecorationSpawner']]],
+  ['spawnwalls_10',['SpawnWalls',['../class_wall_spawner.html#a7dd3bd6a727fbf77fe3122fd6e8a17cd',1,'WallSpawner']]],
+  ['start_11',['Start',['../class_visit_building_decision.html#ad025cb24daa19a6e5fd0952b8fadf121',1,'VisitBuildingDecision.Start()'],['../class_walk_decision.html#a1684c261d89bf252ef84b2e7d939d0eb',1,'WalkDecision.Start()'],['../class_wait_for_l_l_m_ready_decision.html#a17cc832c0d2e25863a71414509eafb01',1,'WaitForLLMReadyDecision.Start()'],['../class_wait_for_l_l_m_decision.html#aa84917d0c26e77fda71267b9e29b3a05',1,'WaitForLLMDecision.Start()'],['../class_idle_decision.html#aa9103fbd04d50e2129e809385d0ec3cd',1,'IdleDecision.Start()'],['../interface_i_decision.html#a434ed6530bf6a2f54229a8ded0121363',1,'IDecision.Start()']]],
+  ['startgame_12',['StartGame',['../class_main_menu_manager.html#a270bbccf814c917e9854aadf7605eca7',1,'MainMenuManager']]],
+  ['startinteraction_13',['StartInteraction',['../class_player_controller.html#a6be26eccca2cb2a979c44fdedf25c77d',1,'PlayerController']]],
+  ['startminigame_14',['StartMiniGame',['../class_mini_game_manager.html#a1e255e95cc354ebfa1751652939005c1',1,'MiniGameManager']]],
+  ['status_15',['Status',['../class_llm_manager.html#a97f29d33ad99c68a6f8ef018e80b6136',1,'LlmManager']]],
+  ['statuscommand_16',['StatusCommand',['../class_llm_manager.html#a1f7fceaa5bb77313bdf91fd4cd7fe476',1,'LlmManager']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['gameconfig_0',['gameConfig',['../class_game_manager.html#a3da0f49598f151231f2602021e934eed',1,'GameManager']]]
+  ['entityid_0',['EntityID',['../class_n_p_c.html#ad8cf37a7e909f0ec492792f00cfaddc8',1,'NPC']]]
 ];
