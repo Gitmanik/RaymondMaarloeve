@@ -97,7 +97,7 @@ public class NPC : MonoBehaviour
     /// <summary>
     /// The cooldown time between vision updates.
     /// </summary>
-    private float visionUpdateCooldown = 1f;
+    private float visionUpdateCooldown = 5f;
 
     /// <summary>
     /// The timer for vision updates.
