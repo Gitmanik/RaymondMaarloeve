@@ -536,7 +536,7 @@ public class GameManager : MonoBehaviour
     {
         string x = "NPCs:\n";
         foreach (var npc in GameManager.Instance.npcs)
-            x += $"<b>{npc.EntityID} {npc.NpcName}</b> ({npc.transform.position})\n<b>System:</b> ({npc.GetCurrentDecision().DebugInfo()})\n<b>Hunger:</b> {npc.Hunger}\n<b>Thirst:</b> {npc.Thirst}\n<b>Obtained Memories:</b>\n{string.Join("\n", npc.ObtainedMemories)}\n<b>System Prompt:</b>\n{npc.SystemPrompt.Replace('.', '\n')}\n";
+            x += $"<b>{npc.EntityID} {npc.NpcName}</b> ({npc.transform.position})\n<b>System:</b> ({(npc.GetCurrentDecision() == null ? "NULL" : npc.GetCurrentDecision().DebugInfo())})\n<b>Hunger:</b> {npc.Hunger}\n<b>Thirst:</b> {npc.Thirst}\n<b>Obtained Memories:</b>\n{string.Join("\n", npc.ObtainedMemories)}\n<b>System Prompt:</b>\n{npc.SystemPrompt.Replace('.', '\n')}\n";
         Debug.Log(x);
         return true;
     }
