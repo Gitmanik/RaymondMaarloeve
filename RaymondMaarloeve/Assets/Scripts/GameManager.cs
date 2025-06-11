@@ -146,7 +146,9 @@ public class GameManager : MonoBehaviour
                 murdererNPC = npcComponent;
             }
         }
-        
+
+        //Clue spawn
+        MapGenerator.Instance.GenerateClue();
         //Player spawn
         GameObject wallsRoot = GameObject.Find("WallsRoot");
 

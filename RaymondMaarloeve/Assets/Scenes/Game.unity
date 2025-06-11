@@ -3327,6 +3327,18 @@ MonoBehaviour:
     weight: 0.2
     maxCount: 10
     currentCount: 0
+  clues:
+  - prefab: {fileID: 2172524297568368593, guid: 9c066a921ddfa5948bb98d96613586b5, type: 3}
+  - prefab: {fileID: 6965641498189695359, guid: 7e7b36e348a73a443abb833774676064, type: 3}
+  - prefab: {fileID: 5453566971757717554, guid: f337761a772dabc4e87e220ec952181d, type: 3}
+  - prefab: {fileID: 6380442777340532034, guid: c0015cb0702b19245aed9b0326b0fa40, type: 3}
+  - prefab: {fileID: 1941195688641756936, guid: 46ab7b4a00f04b140be96404178c4aaa, type: 3}
+  - prefab: {fileID: 6046029627060971662, guid: 475dc18c73b06f949907a39686e4ae36, type: 3}
+  - prefab: {fileID: 7933686704084450290, guid: 879894c64d4e8394a8a6ac2bc266f608, type: 3}
+  - prefab: {fileID: 4947670086768655470, guid: 5029479578dff084d899f98a466ebfa5, type: 3}
+  - prefab: {fileID: 8497587958465413025, guid: 3fac7382a45a99c49ab825161f0922cd, type: 3}
+  - prefab: {fileID: 7498869016217278683, guid: 7801523f9bd888847b16b5ab969a1369, type: 3}
+  - prefab: {fileID: 7335999817612048085, guid: 4fff25b60d513c2489fd42992bbf747c, type: 3}
   spawnedBuildings: []
   mapWidth: 0
   mapLength: 0

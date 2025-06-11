@@ -25,6 +25,7 @@ public class MapGenerator : MonoBehaviour
     public List<BuildingSetup> buildings = new();
     public List<WallsSetup> walls = new();
     public List<BuildingSetup> decorations = new();
+    public List<ClueSetup> clues = new();
 
     private Tile[,] tiles;
     private List<Tile> allTiles = new();
@@ -76,6 +77,15 @@ public class MapGenerator : MonoBehaviour
         surface.BuildNavMesh();
         IsMapGenerated = true;
         Debug.Log("MapGenerator: Map generated, IsMapGenerated = TRUE");
+    }
+    public void GenerateClue()
+    {
+        var clueSpawner = new ClueSpawner(terrain, tileSize);
+        clueSpawner.SpawnClues(tiles, allTiles, clues);
+
+
+        surface.BuildNavMesh();
+        Debug.Log("MapGenerator: Clue spawned");
     }
 
     void InitializeTiles()
@@ -218,6 +228,7 @@ public class Tile
     public bool IsBuilding = false;
     public bool IsPath = false;
     public bool IsPartOfBuilding = false;
+    public bool IsClue = false;
 }
 
 [Serializable]
@@ -231,6 +242,12 @@ public class BuildingSetup
 
 [Serializable]
 public class WallsSetup
+{
+    public GameObject prefab;
+}
+
+[Serializable]
+public class ClueSetup
 {
     public GameObject prefab;
 }
