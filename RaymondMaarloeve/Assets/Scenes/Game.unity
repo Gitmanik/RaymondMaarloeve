@@ -3174,7 +3174,7 @@ MonoBehaviour:
     },     {       "Id": 3,       "ModelId": 3     },     {       "Id": 4,      
     "ModelId": 4     },     {       "Id": 5,       "ModelId": 6     }   ],   "NarratorModelId":
     5 }'
-  DontGenerateHistory: 1
+  DontGenerateHistory: 0
   historyJSON: '{"story":"The villagers of Ashwood awoke to an eerie silence on the
     night of the autumnal equinox. The church bells, which usually rang out at this
     time, remained still. In the church, Father Thomas, a priest of 55 years, sat
@@ -3224,7 +3224,7 @@ MonoBehaviour:
     occurred. You were seen flirting with Silas earlier that day. You felt a sense
     of excitement and danger. You are trying to enjoy the moment before you die.
     You like Silas, but you dislike Godric''s ribald nature.","murderer":true,"dead":false}]}'
-  DontConvertHistoryToBlocks: 1
+  DontConvertHistoryToBlocks: 0
   historyBlocksJSON: '{"key_events":["The villagers of Ashwood awoke to an eerie
     silence on the night of the autumnal equinox.","Father Thomas, a priest of 55
     years, found the lifeless body of Elara, a 25-year-old seductress, with a single
