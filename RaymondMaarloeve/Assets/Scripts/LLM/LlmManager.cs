@@ -252,7 +252,7 @@ public class LlmManager : MonoBehaviour
             f16_kv = false,
             n_ctx = 4096,
             n_parts = -1,
-            seed = 42,
+            seed = GameManager.Instance.Seed,
             n_gpu_layers = -1,
             temperature = temperature, // Default temperature for generation
             top_p = top_p // Default top_p for generation

@@ -3174,6 +3174,7 @@ MonoBehaviour:
     },     {       "Id": 3,       "ModelId": 3     },     {       "Id": 4,      
     "ModelId": 4     },     {       "Id": 5,       "ModelId": 6     }   ],   "NarratorModelId":
     5 }'
+  DontRandomizeSeed: 1
   DontGenerateHistory: 0
   historyJSON: '{"story":"The villagers of Ashwood awoke to an eerie silence on the
     night of the autumnal equinox. The church bells, which usually rang out at this
@@ -3240,6 +3241,7 @@ MonoBehaviour:
     equinox.","Silas had been seen wearing a cloak with a distinctive silver clasp
     the night before the murder, which was later found to be stained with blood."]}'
   SkipRelevance: 1
+  SkipConslusions: 0
 --- !u!114 &1294622897
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -33,10 +33,13 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private AudioSource musicAudioSource;
 
+    public int Seed;
+    
     [Header("DEBUG")]
     [Header("Config")]
     [SerializeField] private bool useCustomGameConfig = false;
     [SerializeField] private string customGameConfigJSON = "";
+    [SerializeField] private bool DontRandomizeSeed = false;
     
     [Header("Narrator")]
     [SerializeField] private bool DontGenerateHistory = false;
@@ -46,6 +49,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Decision Making")]
     public bool SkipRelevance = false;
+    public bool SkipConslusions = false;
 
 
     IEnumerator Start()
@@ -53,6 +57,13 @@ public class GameManager : MonoBehaviour
         Debug.Log("GameManager: Start initialization");
         Instance = this;
         uiGameObject.SetActive(false);
+
+        if (DontRandomizeSeed)
+            Seed = 42;
+        else
+            Seed = Random.Range(int.MinValue, int.MaxValue);
+        
+        Debug.Log($"GameManager: Seed: {Seed}");
 
         if (useCustomGameConfig)
             gameConfig = JsonUtility.FromJson<GameConfig>(customGameConfigJSON);
@@ -73,6 +84,7 @@ public class GameManager : MonoBehaviour
         yield return StartCoroutine(WaitForLlmConnection());
         
         archetypes = gameConfig.Models.FindAll(x => x.Id != gameConfig.NarratorModelId).Select(x => x.Name.Replace('_', ' ')).ToList();
+        archetypes.Shuffle();
 
         Debug.Log($"GameManager: Archetypes: {string.Join(',', archetypes)}");
         
@@ -579,6 +591,24 @@ public class GameManager : MonoBehaviour
     public static bool DumpBlocks()
     {
         Debug.Log(JsonUtility.ToJson(Instance.storyBlocks));
+        return true;
+    }
+
+    [ConsoleCommand("getseed", "Return current Seed")]
+    public static bool GetSeed()
+    {
+        Debug.Log(Instance.Seed);
+        return true;
+    }
+
+    [ConsoleCommand("setseed", "Set current Seed")]
+    public static bool SetSeed(string par1)
+    {
+        if (!int.TryParse(par1, out var seed))
+            return false;
+        
+        Instance.Seed = seed;
+        Debug.Log($"Set Seed to: {Instance.Seed}");
         return true;
     }
 }

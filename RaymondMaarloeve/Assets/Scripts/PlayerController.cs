@@ -1,3 +1,4 @@
+using System.Linq;
 using Gitmanik.Console;
 using UnityEngine;
 
@@ -185,6 +186,12 @@ public class PlayerController : MonoBehaviour
         characterMesh.enabled = true;
         GameManager.Instance.MinimapGameObject.SetActive(true);
         currentlyInteractingNPC.LookAt(null);
+
+        var conv = DialogBoxManager.Instance.currentConversation.ToList();
+        
+        StartCoroutine(
+            Instance.currentlyInteractingNPC?.DrawConclusions(conv));
+        
         Instance.currentlyInteractingNPC = null;
         
         if (CameraFollow.Instance != null)
