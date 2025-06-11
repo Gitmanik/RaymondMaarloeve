@@ -396,7 +396,7 @@ public class NPC : MonoBehaviour
                 case BuildingData.BuildingType.Other:
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    break;
             }
         }
 
