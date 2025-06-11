@@ -379,7 +379,7 @@ public class GameManager : MonoBehaviour
                 
                 if (generatedHistory.characters.Count(x => x.dead) != 1)
                 {
-                    Debug.LogError($"GameManager: GenerateHistory error: generated history has {generatedHistory.characters.Count(x => x.murderer)} victims!\nFull response:{resp}\n\nStripped response:{strippedResp}");
+                    Debug.LogError($"GameManager: GenerateHistory error: generated history has {generatedHistory.characters.Count(x => x.dead)} victims!\nFull response:{resp}\n\nStripped response:{strippedResp}");
                     continue;
                 }
 
