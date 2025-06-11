@@ -4,6 +4,7 @@ public class WaitForLLMReadyDecision : IDecision
     public string DebugInfo() => "waiting for LLMServer";
 
     public void Start() {}
+    public void Finish() {}
 
     public bool Tick()
     {

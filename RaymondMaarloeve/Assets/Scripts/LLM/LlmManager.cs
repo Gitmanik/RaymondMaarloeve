@@ -312,6 +312,13 @@ public class LlmManager : MonoBehaviour
                 Debug.LogError(error));
         return true;
     }
+
+    [ConsoleCommand("llmqueue", "Shows Post queue")]
+    public static bool LLMQueue()
+    {
+        Debug.Log($"POST Status Queue: {Instance.postRequestQueue.Count} elements");
+        return true;
+    }
     
     #endregion
 }

@@ -40,6 +40,10 @@ public class IdleDecision : IDecision
         idleStart = Time.time;
     }
 
+    public void Finish()
+    {
+    }
+
     public bool Tick()
     {
         if (idleStart + idleTime > Time.time)

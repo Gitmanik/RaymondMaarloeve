@@ -13,4 +13,6 @@ public class PrayDecision : VisitBuildingDecision
     protected override void OnFinished()
     {
     }
+
+    protected override bool ShouldFinish() { return false; }
 }

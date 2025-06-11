@@ -21,7 +21,12 @@ public class WalkDecision : IDecision
     {
         npc.agent.SetDestination(destination);
     }
-    
+
+    public void Finish()
+    {
+        npc.agent.ResetPath();
+    }
+
     public bool Tick()
     {
         if (!npc.agent.pathPending && npc.agent.remainingDistance < 0.5f)

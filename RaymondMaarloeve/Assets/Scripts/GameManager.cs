@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public bool LlmServerReady = false;
     [HideInInspector] public bool HistoryGenerated = false;
     
+    private List<string> archetypes;
     public GeneratedHistoryDTO generatedHistory;
     public ConvertHistoryToBlocksDTO storyBlocks;
 
@@ -32,11 +33,20 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private AudioSource musicAudioSource;
 
-    [Header("Debug toggles")]
+    [Header("DEBUG")]
+    [Header("Config")]
+    [SerializeField] private bool useCustomGameConfig = false;
+    [SerializeField] private string customGameConfigJSON = "";
+    
+    [Header("Narrator")]
     [SerializeField] private bool DontGenerateHistory = false;
     [SerializeField] private string historyJSON = "";
     [SerializeField] private bool DontConvertHistoryToBlocks = false;
     [SerializeField] private string historyBlocksJSON = "";
+
+    [Header("Decision Making")]
+    public bool SkipRelevance = false;
+
 
     IEnumerator Start()
     {
@@ -44,7 +54,11 @@ public class GameManager : MonoBehaviour
         Instance = this;
         uiGameObject.SetActive(false);
 
-        gameConfig = GameConfig.LoadGameConfig(Path.Combine(Application.dataPath, "game_config.json"));
+        if (useCustomGameConfig)
+            gameConfig = JsonUtility.FromJson<GameConfig>(customGameConfigJSON);
+        else
+            gameConfig = GameConfig.LoadGameConfig(Path.Combine(Application.dataPath, "game_config.json"));
+        gameConfig.Models.ForEach(m => m.Name = m.Name.Substring(0, m.Name.LastIndexOf('.')));
         Debug.Log("GameManager: Config loaded");
 
         Screen.SetResolution(gameConfig.GameWindowWidth, gameConfig.GameWindowHeight, gameConfig.FullScreen);
@@ -57,7 +71,11 @@ public class GameManager : MonoBehaviour
 
         // Wait for LLM connection and model loading
         yield return StartCoroutine(WaitForLlmConnection());
+        
+        archetypes = gameConfig.Models.FindAll(x => x.Id != gameConfig.NarratorModelId).Select(x => x.Name.Replace('_', ' ')).ToList();
 
+        Debug.Log($"GameManager: Archetypes: {string.Join(',', archetypes)}");
+        
         if (DontGenerateHistory)
             generatedHistory = JsonUtility.FromJson<GeneratedHistoryDTO>(historyJSON);
         else
@@ -87,10 +105,8 @@ public class GameManager : MonoBehaviour
             
         Debug.Log("Game Manager: " + gameConfig.Npcs.Count + " NPCs to spawn");
 
-        var localGeneratedHistory = generatedHistory;
-        
-        List<string> archetypes = gameConfig.Models.FindAll(x => x.Id != gameConfig.NarratorModelId).
-            ConvertAll(x => x.Name.Substring(0,x.Name.IndexOf('.')).Replace("_", " "));
+        var localCharacters = generatedHistory.characters.ToList();
+        var localStoryBlocks = storyBlocks.key_events.ToList();
         
         foreach (var npcConfig in gameConfig.Npcs)
         {
@@ -100,7 +116,13 @@ public class GameManager : MonoBehaviour
                 MapGenerator.Instance.transform.position.z - MapGenerator.Instance.mapLength / 2 + Random.Range(0, MapGenerator.Instance.mapLength)
             );
 
-            string npcModelPath = gameConfig.Models.FirstOrDefault(m => m.Id == npcConfig.ModelId)?.Path;
+            var npcModel = gameConfig.Models.FirstOrDefault(m => m.Id == npcConfig.ModelId);
+            if (npcModel == null)
+            {
+                Debug.LogError($"GameManager: NPC {npcConfig.Id} model not found (ModelId: {npcConfig.ModelId})");
+                continue;
+            }
+            
             int npcVariant = Random.Range(0, npcPrefabsList.Count);
             
             GameObject newNpc = Instantiate(npcPrefabsList[npcVariant], npcPosition, Quaternion.identity);
@@ -108,12 +130,16 @@ public class GameManager : MonoBehaviour
             npcPrefabsList.RemoveAt(npcVariant);
             var npcComponent = newNpc.GetComponent<NPC>();
 
-            var characterDTO =
-                localGeneratedHistory.characters.Find(x => $"{archetypes[x.archetype - 1].Replace(" ", "_")}.gguf" == gameConfig.Models.Find(y => y.Id == npcConfig.ModelId).Name);
-            localGeneratedHistory.characters.Remove(characterDTO);
+            var npcModelArchetype = npcModel.Name.Replace('_', ' ');
+            
+            var characterDTO = localCharacters.Find(x => archetypes[x.archetype - 1] == npcModelArchetype && !x.dead);
+            localCharacters.Remove(characterDTO);
+            
+            var storyBlock = localStoryBlocks[Random.Range(0, localStoryBlocks.Count)];
+            localStoryBlocks.Remove(storyBlock);
             
             IDecisionSystem system;
-            if (string.IsNullOrEmpty(npcModelPath))
+            if (string.IsNullOrEmpty(npcModel.Path))
             {
                 Debug.LogError($"Model path not found for NPC with ID {npcConfig.ModelId}");
                 system = new NullDecisionSystem();
@@ -122,7 +148,9 @@ public class GameManager : MonoBehaviour
             {
                 system = new LlmDecisionMaker();
             }
-            npcComponent.Setup(system, npcConfig.ModelId.ToString(), characterDTO.name, characterDTO.description);
+            npcComponent.Setup(system, npcConfig.ModelId.ToString(), characterDTO);
+            npcComponent.SystemPrompt += "VERY IMPORTANT (it plays a very big role to You): You know that at the day of murder " + storyBlock;
+
             
             HashSet<BuildingData.BuildingType> allowedTypes = new HashSet<BuildingData.BuildingType>()
             {
@@ -259,32 +287,30 @@ public class GameManager : MonoBehaviour
     /// <returns>IEnumerator for coroutine execution.</returns>
     private IEnumerator GenerateHistory()
     {
-        List<string> archetypes = gameConfig.Models.FindAll(x => x.Id != gameConfig.NarratorModelId).
-            ConvertAll(x => x.Name.Substring(0,x.Name.IndexOf('.')).Replace("_", " "));
-
         string prompt = $"You are a creative writer. " +
                         $"Write ONLY a VALID JSON object with body specified below:\n\n" +
-                        $"A short dark story (maximum 200 words) set in a medieval village. " +
-                        $"The story must include a mysterious death or murder, but the victim must be a {gameConfig.Npcs.Count + 1} character not listed in the main {gameConfig.Npcs.Count}. " +
-                        $"The {gameConfig.Npcs.Count} characters in the JSON section must all be alive and active during the story." +
-                        $"Use a dark tone with rich sensory details (e.g., rain, silence, fear, time of day).\n" +
-                        $"Use only the following five locations:\nThe church\nThe well\n" +
-                        $"The house of each character in the story (Do not use any other places.)\n" +
-                        $"There must be exactly {gameConfig.Npcs.Count} game characters, each with one of these personality types (archetypes):\n" +
-                        $"[{string.Join(',', archetypes)}]\n\n" +
-                        $"Randomly select:\n" +
-                        $"One character who is the murderer (they can be guilty directly or indirectly)\n" +
-                        $"One character who is a witness (they saw the murder or something suspicious)\n" +
-                        $"Do not say directly who the murderer or witness is, but include subtle clues through behavior, dialogue, or physical evidence.\n" +
-                        $"The story must be a single paragraph of literary narration, not a list or report.\n" +
-                        $"Do not invent other characters. " +
+                        $"A short dark story set in a medieval village.\n" +
+                        $"The story must include a murder, with the victim being one of generated characters.\n" +
                         $"Describe a mysterious situation with tension and uncertainty.\n\n" +
-                        $"A list of the **{gameConfig.Npcs.Count}** characters with this information for each:\n" +
+                        $"ALL {gameConfig.Npcs.Count + 1} characters MUST BE in JSON section and OVER 18 years old." +
+                        $"Use a dark tone with rich sensory details (e.g., rain, silence, fear, time of day).\n" +
+                        $"Use only the following locations:\n" +
+                            $"The church\n" +
+                            $"The well\n" +
+                            $"The house of each character in the story (Do not use any other places.)\n\n" +
+                        $"There must be exactly {gameConfig.Npcs.Count + 1} game characters, each with one of these personality types (archetypes): [{string.Join(',', archetypes)}]\n\n" +
+                        $"Select ONE character who is the murderer (they NEED be guilty directly or indirectly)\n" +
+                        $"Select ONE character who is a witness (they saw the murder or something suspicious)\n" +
+                        $"Select ONE character who is a victim.\n" +
+                        $"Include who's the murderer and who's the victim in the story." +
+                        $"The story must be a single paragraph of literary narration, not a list or report.\n" +
+                        $"A list of the **{gameConfig.Npcs.Count + 1}** characters with this information for each:\n" +
                             $"name (you choose)\n" +
                             $"archetype (one of the four used)\n" +
                             $"age (an integer)\n" +
-                            $"description (about who they are, their personality, what they are doing during the story, how they feel, who they like or dislike, and one habit or routine they have)\n" +
+                            $"description (about who they are, their personality, what they saw at the moment of the murder, what they are doing during the story, how they feel, who they like or dislike, and one habit or routine they have)\n" +
                             $"murderer (boolean)\n" +
+                            $"dead (boolean)\n" + 
                             $"Remember to NOT write a comma after description as it is an end of the child JSON object. Remember to output ONLY VALID JSON with structure given above. Remember to not write comma after last objects in list and in object!" +
                             $"Use this EXACT format for your output:\n\n" +
                             $"{{\n" +
@@ -295,6 +321,7 @@ public class GameManager : MonoBehaviour
                                     $"\"age\": 52,\n" +
                                     $"\"description\": \"You are a delusional man. You are 52 years old. [Add more details here.]\",\n" +
                                     $"\"murderer\": false\n" +
+                                    $"\"dead\": false\n" + 
                                     $"}}," +
                                 $"\n...\n]" +
                             $"\n}}\n";
@@ -340,19 +367,31 @@ public class GameManager : MonoBehaviour
                 generatedHistory = JsonUtility.FromJson<GeneratedHistoryDTO>(strippedResp);
                 if (string.IsNullOrWhiteSpace(generatedHistory.story))
                 {
-                    Debug.LogError($"GameManager: GenerateHistory error: generated history is empty");
+                    Debug.LogError($"GameManager: GenerateHistory error: generated history is empty\nFull response:{resp}\n\nStripped response:{strippedResp}");
                     continue;
                 }
 
-                if (generatedHistory.characters.All(x => x.murderer == false))
+                if (generatedHistory.characters.Count(x => x.murderer) != 1)
                 {
-                    Debug.LogError($"GameManager: GenerateHistory error: generated history has no murderer!");
+                    Debug.LogError($"GameManager: GenerateHistory error: generated history has {generatedHistory.characters.Count(x => x.murderer)} murderers!\nFull response:{resp}\n\nStripped response:{strippedResp}");
+                    continue;
+                }
+                
+                if (generatedHistory.characters.Count(x => x.dead) != 1)
+                {
+                    Debug.LogError($"GameManager: GenerateHistory error: generated history has {generatedHistory.characters.Count(x => x.murderer)} victims!\nFull response:{resp}\n\nStripped response:{strippedResp}");
                     continue;
                 }
 
                 if (generatedHistory.characters.Any(x => x.archetype - 1 < 0 || x.archetype > archetypes.Count))
                 {
-                    Debug.LogError($"GameManager: GenerateHistory error: generated character has invalid archetype index!");
+                    Debug.LogError($"GameManager: GenerateHistory error: generated character has invalid archetype index!\nFull response:{resp}\n\nStripped response:{strippedResp}");
+                    continue;     
+                }
+
+                if (generatedHistory.characters.Count != gameConfig.Npcs.Count + 1)
+                {
+                    Debug.LogError($"GameManager: GenerateHistory error: history character count does not match gameConfig.Npcs.Count + 1!\nFull response:{resp}\n\nStripped response:{strippedResp}");
                     continue;     
                 }
             }
@@ -374,9 +413,11 @@ public class GameManager : MonoBehaviour
     /// <returns>IEnumerator for coroutine execution.</returns>
     private IEnumerator ConvertHistoryToBlocks()
     {
-        string prompt = $"You will read a short story and extract the six most important factual events. " +
-                        $"Then, generate two false sentences that do not occur in the story, but are believable. " +
-                        $"JSON Object structure:\n\n" +
+        string prompt = $"You will be given a short story.\n" +
+                        $"Extract SIX most important factual events.\n" +
+                        $"Then, think of TWO false sentences that do not occur in the story, but are believable enough to fool someone. " +
+                        $"You will NOT include names in the output." + 
+                        $"Output these sentences into a JSON Object structure:\n\n" +
                         $"\"key_events\" — an array of exactly six short English sentences, each stating a concrete, factual event that actually appears in the story.\n" +
                         $"\"false_events\" — an array of exactly two short English sentences that are believable but clearly did not happen in the story.\n" +
                         $"Your response must be ONLY this EXACT CORRECT JSON object:\n" +
@@ -495,7 +536,7 @@ public class GameManager : MonoBehaviour
     {
         string x = "NPCs:\n";
         foreach (var npc in GameManager.Instance.npcs)
-            x += $"{npc.EntityID} Pos: {npc.transform.position} , Name: ({npc.NpcName}) System: ({npc.GetDecisionSystem()}: {npc.GetCurrentDecision().PrettyName}), Hunger: {npc.Hunger}, Thirst: {npc.Thirst}\nObtained Memories:{string.Join("\n", npc.ObtainedMemories)}\nSystem Prompt: {npc.SystemPrompt}\n";
+            x += $"<b>{npc.EntityID} {npc.NpcName}</b> ({npc.transform.position})\n<b>System:</b> ({npc.GetCurrentDecision().DebugInfo()})\n<b>Hunger:</b> {npc.Hunger}\n<b>Thirst:</b> {npc.Thirst}\n<b>Obtained Memories:</b>\n{string.Join("\n", npc.ObtainedMemories)}\n<b>System Prompt:</b>\n{npc.SystemPrompt.Replace('.', '\n')}\n";
         Debug.Log(x);
         return true;
     }
@@ -525,6 +566,19 @@ public class GameManager : MonoBehaviour
             return false;
         
         PlayerController.Instance.StartInteraction(npc);
+        return true;
+    }
+
+    [ConsoleCommand("story", "Dumps GeneratedHistoryDTO as JSON")]
+    public static bool DumpStory()
+    {
+        Debug.Log(JsonUtility.ToJson(Instance.generatedHistory));
+        return true;
+    }
+    [ConsoleCommand("blocks", "Dumps ConvertHistoryToBlocksDTO as JSON")]
+    public static bool DumpBlocks()
+    {
+        Debug.Log(JsonUtility.ToJson(Instance.storyBlocks));
         return true;
     }
 }
