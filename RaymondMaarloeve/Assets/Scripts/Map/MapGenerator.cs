@@ -132,7 +132,7 @@ public class MapGenerator : MonoBehaviour
     {
         var options = spawnedBuildings.FindAll(go => {
             var bd = go.GetComponent<BuildingData>();
-            return bd != null && allowedTypes.Contains(bd.HisType) && bd.HisNPC == null;
+            return bd != null && allowedTypes.Contains(bd.HisType) && bd.HisNPC.Count <= 2;
         });
         return options.Count > 0 ? options[Random.Range(0, options.Count)] : null;
     }

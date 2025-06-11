@@ -5,7 +5,7 @@ public class BuildingData : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public Tile HisMainTile = null;
-    public NPC HisNPC = null;
+    public List<NPC> HisNPC = null;
     public Vector2Int HisMainTileGridPosition = new Vector2Int(-1, -1); // <- grid position of the main tile
     [SerializeField] public BuildingType HisType = BuildingType.None;
 

@@ -161,7 +161,7 @@ public class GameManager : MonoBehaviour
             };
             npcComponent.HisBuilding = MapGenerator.Instance.GetBuilding(allowedTypes);
             var buildingData = npcComponent.HisBuilding.GetComponent<BuildingData>();
-            buildingData.HisNPC = npcComponent;
+            buildingData.HisNPC.Add(npcComponent);
 
             npcs.Add(npcComponent);
 
