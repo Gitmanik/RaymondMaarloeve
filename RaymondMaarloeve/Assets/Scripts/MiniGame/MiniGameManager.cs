@@ -197,6 +197,8 @@ public class MiniGameManager : MonoBehaviour
         else
             resultMessage = $"Wrong! The murderer was {realName}.";
 
+        resultMessage += $"\n\n{GameManager.Instance.generatedHistory.story}";
+        
         PlayerPrefs.SetString("GameResult", resultMessage);
         PlayerPrefs.Save();
         SceneManager.LoadScene("EndScene");
