@@ -1,8 +1,17 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Converts all direct children of this GameObject from SkinnedMeshRenderers to static meshes
+/// with MeshFilters, MeshRenderers, and MeshColliders attached.
+/// </summary>
 public class SmartMeshColliderAdder : MonoBehaviour
 {
-    [ContextMenu("Zamień SkinnedMesh na statyczny + przypisz Mesh po nazwie lub z SMR")]
+    /// <summary>
+    /// Converts each child GameObject containing a SkinnedMeshRenderer into a static mesh setup.
+    /// This includes copying mesh and material, destroying the SkinnedMeshRenderer,
+    /// and attaching a MeshFilter, MeshRenderer, and MeshCollider.
+    /// </summary>
+    [ContextMenu("Convert SkinnedMesh to static + assign Mesh from name or SMR")]
     void ProcessChildren()
     {
         foreach (Transform child in transform)
@@ -12,28 +21,27 @@ public class SmartMeshColliderAdder : MonoBehaviour
             Mesh selectedMesh = null;
             Material selectedMaterial = null;
 
-            // === 1. Jeśli jest SkinnedMeshRenderer, zapamiętaj mesh i materiał
+            // Step 1: Try to extract mesh and material from SkinnedMeshRenderer
             var smr = child.GetComponent<SkinnedMeshRenderer>();
             if (smr)
             {
                 selectedMesh = smr.sharedMesh;
                 selectedMaterial = smr.sharedMaterial;
-
                 DestroyImmediate(smr);
             }
 
-            // === 2. Dodaj MeshFilter jeśli nie istnieje
+            // Step 2: Ensure a MeshFilter exists
             var mf = child.GetComponent<MeshFilter>();
             if (!mf)
                 mf = child.gameObject.AddComponent<MeshFilter>();
 
-            // === 3. Przypisz mesh (najpierw z SMR, potem po nazwie)
+            // Step 3: Assign mesh from SMR or (optional) name
             if (selectedMesh != null)
             {
                 mf.sharedMesh = selectedMesh;
             }
 
-            // === 4. Dodaj MeshRenderer i przypisz materiał
+            // Step 4: Ensure a MeshRenderer exists and assign material
             var mr = child.GetComponent<MeshRenderer>();
             if (!mr)
                 mr = child.gameObject.AddComponent<MeshRenderer>();
@@ -41,7 +49,7 @@ public class SmartMeshColliderAdder : MonoBehaviour
             if (selectedMaterial != null)
                 mr.sharedMaterial = selectedMaterial;
 
-            // === 5. Dodaj MeshCollider (jeśli nie istnieje)
+            // Step 5: Add MeshCollider if missing, using the selected mesh
             if (!child.GetComponent<MeshCollider>())
             {
                 var mc = child.gameObject.AddComponent<MeshCollider>();
@@ -50,10 +58,14 @@ public class SmartMeshColliderAdder : MonoBehaviour
             }
         }
 
-        Debug.Log("✅ Wszystkie dzieci przetworzone.");
+        Debug.Log("All children processed.");
     }
 
-    // Szuka mesha po nazwie w folderze projektu
+    /// <summary>
+    /// Searches all loaded Mesh assets in the project for one with a given name.
+    /// </summary>
+    /// <param name="name">The name of the mesh to find.</param>
+    /// <returns>The matching Mesh if found, otherwise null.</returns>
     Mesh FindMeshByName(string name)
     {
         Mesh[] allMeshes = Resources.FindObjectsOfTypeAll<Mesh>();
