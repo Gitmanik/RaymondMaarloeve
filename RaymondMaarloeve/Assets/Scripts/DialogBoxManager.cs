@@ -16,7 +16,7 @@ public class DialogBoxManager : MonoBehaviour
     /// <summary>
     /// List of messages forming the current conversation.
     /// </summary>
-    private List<Message> currentConversation = new List<Message>();
+    [HideInInspector] public List<Message> currentConversation = new List<Message>();
 
     /// <summary>
     /// Parent GameObject for the dialog box UI.

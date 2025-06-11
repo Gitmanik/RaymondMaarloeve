@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private AudioSource musicAudioSource;
 
+    public int Seed;
+    
     [Header("DEBUG")]
     [Header("Config")]
     [SerializeField] private bool useCustomGameConfig = false;
@@ -46,6 +48,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Decision Making")]
     public bool SkipRelevance = false;
+    public bool SkipConslusions = false;
 
 
     IEnumerator Start()
@@ -53,6 +56,9 @@ public class GameManager : MonoBehaviour
         Debug.Log("GameManager: Start initialization");
         Instance = this;
         uiGameObject.SetActive(false);
+        
+        Seed = Random.Range(int.MinValue, int.MaxValue);
+        Debug.Log($"GameManager: Seed: {Seed}");
 
         if (useCustomGameConfig)
             gameConfig = JsonUtility.FromJson<GameConfig>(customGameConfigJSON);

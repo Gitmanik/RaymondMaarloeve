@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -130,6 +131,11 @@ public class NPC : MonoBehaviour
     private float gameHourTimer = 0f;
 
     /// <summary>
+    /// Whether the NPC is currently concluding
+    /// </summary>
+    private bool isConcluding = false;
+
+    /// <summary>
     /// The factor by which memory weight decays each game hour.
     /// </summary>
     private const float decayFactorPerHour = 0.9f;
@@ -202,7 +208,7 @@ public class NPC : MonoBehaviour
         if (lookTarget != null)
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, lookTarget.eulerAngles.y - 180, transform.eulerAngles.z);
         
-        if (!PlayerController.Instance.currentlyInteractingNPC == this && (currentDecision == null || !currentDecision.Tick()))
+        if (!PlayerController.Instance.currentlyInteractingNPC == this && !isConcluding && (currentDecision == null || !currentDecision.Tick()))
         {
             Debug.Log($"{NpcName}: Current decision finished");
             if (DayNightCycle.Instance.timeOfDay > 20.5f || DayNightCycle.Instance.timeOfDay < 7f)
@@ -447,6 +453,107 @@ public class NPC : MonoBehaviour
         StoppedDecision = currentDecision;
         currentDecision = null;
         agent.ResetPath();
+    }
+    
+    /// <summary>
+    /// Coroutine that draws conclusions from conversation using Narrator LLM Model,
+    /// </summary>
+    /// <returns>IEnumerator for coroutine execution.</returns>
+    public IEnumerator DrawConclusions(List<Message> conversation)
+    {
+        if (GameManager.Instance.SkipConslusions)
+            yield break;
+        
+        isConcluding = true;
+        var env = GetCurrentEnvironment();
+        
+        string prompt = $"You will be given a conversation between a medieval character and Raymond Maarloeve, a detective.\n" +
+                        $"You will write a summary of given conversation and insert it into 'paragraph'.\n" +
+                        $"If the Detective was DIRECTLY asking the character to do something, write an index of selected action (1-{env.Count+1}) into 'action'\n" +
+                        $"If not, select 'none'\n" +
+                        $"Use simple reasoning and focus only on what is directly said or implied in the conversation.\n" +
+                        $"Do not invent information.\n" +
+                        $"Do not repeat the entire conversation.\n" +
+                        $"Pick only one action.\n" + 
+                        $"Actions to choose from: [\n" +
+                        $"['none'\n{string.Join('\n', env.ConvertAll(x => $"'{x.decision.PrettyName} {(x.associatedGameObject != null ? $"at {x.associatedGameObject?.name.ToLower().Replace("(clone)", "")}'" : "'")}"))}]\n" + 
+                        $"Conversation: [\n" +
+                        string.Join(',', conversation.ConvertAll(x => $"{(x.role == "user" ? "Raymond Maarloeve" : NpcName)}: {x.content}")) +
+                        $"]\n" +
+                        $"Your response must be ONLY this EXACT CORRECT JSON object:\n" +
+                        $"{{\n\"paragraph\": \"generated paragraph here\",\n\"action:\", <action index (1-{env.Count+1})>\n}}";
+        
+        List<Message> messages = new List<Message>();
+        messages.Add(new Message { role =  "system", content = prompt});
+        messages.Add(new Message { role =    "user", content = JsonUtility.ToJson(conversation)});
+        
+        bool callbackCalled = false;
+        string resp = null;
+        
+        Debug.Log("Drawing conclusions...");
+    
+        LlmManager.Instance.Chat(GameManager.Instance.gameConfig.NarratorModelId.ToString(), messages, result =>
+        {
+            callbackCalled = true;
+            resp = result.response;
+        }, (error) =>
+        {
+            Debug.LogError($"{NpcName}: DrawConclusions error: {error}");
+            callbackCalled = true;
+        }, 0.95f, 0.5f);
+    
+        // Wait for the callback to be called
+        while (!callbackCalled)
+            yield return null;
+
+        if (resp == null)
+        {
+            Debug.LogError($"{NpcName}: DrawConclusions error: resp is null");
+            yield break;
+        }
+
+        if (!resp.Contains('{') || !resp.Contains('}'))
+        {
+            Debug.LogError($"{NpcName}: DrawConclusions error: missing JSON brackets\n{resp}");
+            yield break;
+        } 
+        
+        string strippedResp = resp.Substring(resp.IndexOf('{'));
+        strippedResp = strippedResp.Substring(0, strippedResp.LastIndexOf('}') + 1);
+
+        DrawConclusionsResponseDTO conclusions;
+        try
+        {
+            conclusions = JsonUtility.FromJson<DrawConclusionsResponseDTO>(strippedResp);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"{NpcName}: DrawConclusions error: {e.Message}:\nFull response:{resp}\n\nStripped response:{strippedResp}");
+            yield break;
+        }
+
+        if (conclusions.action < 1 || conclusions.action > env.Count + 1)
+        {
+            Debug.LogError($"{NpcName}: DrawConclusions error: wrong action selected: {conclusions.action}\nFull response:{resp}\n\nStripped response:{strippedResp}");
+            yield break;
+        }
+        
+        Debug.Log($"{NpcName}: DrawConclusions complete:\nSelected action (1->): {conclusions.action}\nParagraph:{conclusions.paragraph}");
+
+        if (conclusions.action > 1)
+        {
+            currentDecision?.Finish();
+            currentDecision = env[conclusions.action - 2].decision;
+            Debug.Log($"{NpcName}: Concluded and selected decision: {currentDecision.DebugInfo()}");
+        }
+        ObtainedMemories.Add(new ObtainedMemory()
+        {
+            recency = 10,
+            relevance = 10,
+            importance = 10,
+            memory = conclusions.paragraph
+        });
+        isConcluding = false;
     }
 }
 

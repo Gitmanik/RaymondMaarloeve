@@ -3240,6 +3240,7 @@ MonoBehaviour:
     equinox.","Silas had been seen wearing a cloak with a distinctive silver clasp
     the night before the murder, which was later found to be stained with blood."]}'
   SkipRelevance: 1
+  SkipConslusions: 0
 --- !u!114 &1294622897
 MonoBehaviour:
   m_ObjectHideFlags: 0
