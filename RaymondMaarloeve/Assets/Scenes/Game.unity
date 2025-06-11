@@ -2270,7 +2270,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 936493700}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2279,8 +2279,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.5351, y: 0.91061}
-  m_SizeDelta: {x: 1180.2, y: 323.76}
+  m_AnchoredPosition: {x: -100, y: 0.91019}
+  m_SizeDelta: {x: 1180.2168, y: 323.76}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &936493702
 MonoBehaviour:
@@ -2333,7 +2333,7 @@ MonoBehaviour:
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
+  m_fontSizeMin: 12
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
@@ -2370,7 +2370,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &936493703
@@ -3158,6 +3158,23 @@ MonoBehaviour:
   uiGameObject: {fileID: 330165694}
   MinimapGameObject: {fileID: 1191064608}
   musicAudioSource: {fileID: 1294622903}
+  useCustomGameConfig: 1
+  customGameConfigJSON: '{   "Revision": 1,   "LlmServerApi": "http://127.0.0.1:5000/",  
+    "Localhost": true,   "FullScreen": false,   "GameWindowWidth": 1920,   "GameWindowHeight":
+    1080,   "Models": [     {       "Id": 0,       "Name": "helpful_man.gguf",      
+    "Path": "/home/gitmanik/Models/helpful_man.gguf"     },     {       "Id": 1,      
+    "Name": "ribald_man.gguf",       "Path": "/home/gitmanik/Models/ribald_man.gguf"    
+    },     {       "Id": 2,       "Name": "priest.gguf",       "Path": "/home/gitmanik/Models/priest.gguf"    
+    },     {       "Id": 3,       "Name": "delusional.gguf",       "Path": "/home/gitmanik/Models/delusional.gguf"    
+    },     {       "Id": 4,       "Name": "guard.gguf",       "Path": "/home/gitmanik/Models/guard.gguf"    
+    },     {       "Id": 5,       "Name": "narrator.gguf",       "Path": "/home/gitmanik/Models/narrator.gguf"    
+    },     {       "Id": 6,       "Name": "seductive.gguf",       "Path": "/home/gitmanik/Models/seductive.gguf"    
+    }   ],   "Npcs": [     {       "Id": 0,       "ModelId": 0     },     {      
+    "Id": 1,       "ModelId": 1     },     {       "Id": 2,       "ModelId": 2    
+    },     {       "Id": 3,       "ModelId": 3     },     {       "Id": 4,      
+    "ModelId": 4     },     {       "Id": 5,       "ModelId": 6     }   ],   "NarratorModelId":
+    5 }'
+  DontGenerateHistory: 1
   historyJSON: '{"story":"The villagers of Ashwood awoke to an eerie silence on the
     night of the autumnal equinox. The church bells, which usually rang out at this
     time, remained still. In the church, Father Thomas, a priest of 55 years, sat
@@ -3207,6 +3224,7 @@ MonoBehaviour:
     occurred. You were seen flirting with Silas earlier that day. You felt a sense
     of excitement and danger. You are trying to enjoy the moment before you die.
     You like Silas, but you dislike Godric''s ribald nature.","murderer":true,"dead":false}]}'
+  DontConvertHistoryToBlocks: 1
   historyBlocksJSON: '{"key_events":["The villagers of Ashwood awoke to an eerie
     silence on the night of the autumnal equinox.","Father Thomas, a priest of 55
     years, found the lifeless body of Elara, a 25-year-old seductress, with a single
@@ -3316,28 +3334,122 @@ MonoBehaviour:
   decorations:
   - prefab: {fileID: 3045040967433266602, guid: 04383b4e2e99718428159531b28b1c67, type: 3}
     weight: 0.2
-    maxCount: 10
+    maxCount: 7
     currentCount: 0
   - prefab: {fileID: 3045040967433266602, guid: 04383b4e2e99718428159531b28b1c67, type: 3}
     weight: 0.2
-    maxCount: 10
+    maxCount: 7
     currentCount: 0
   - prefab: {fileID: 2044052314510883550, guid: ecbfea977636f8d4b8d083e997d197fa, type: 3}
     weight: 0.2
-    maxCount: 10
+    maxCount: 7
     currentCount: 0
   - prefab: {fileID: 1590564260741474642, guid: 70aef14dbd16e0047816de55b9d26545, type: 3}
     weight: 0.2
-    maxCount: 10
+    maxCount: 7
     currentCount: 0
   - prefab: {fileID: 6487759302446060899, guid: 481e0b3786586414caa8b77a50f92d9e, type: 3}
     weight: 0.2
-    maxCount: 10
+    maxCount: 7
     currentCount: 0
   - prefab: {fileID: 7940860190077275469, guid: 5df6b0cd63f22a24a9f939b1e4f59409, type: 3}
     weight: 0.2
-    maxCount: 10
+    maxCount: 7
     currentCount: 0
+  - prefab: {fileID: 3466617432233856029, guid: e71c00958bfbedd478c4ec92c63585e1, type: 3}
+    weight: 0.2
+    maxCount: 7
+    currentCount: 0
+  - prefab: {fileID: 830424838952759311, guid: 7d85e7d3acfe79a4186fc5387fa2802e, type: 3}
+    weight: 0.2
+    maxCount: 4
+    currentCount: 0
+  - prefab: {fileID: 7966386956996448001, guid: b92b05c58429bf343b9d179005b93ec8, type: 3}
+    weight: 0.2
+    maxCount: 4
+    currentCount: 0
+  - prefab: {fileID: 181911340913125414, guid: 91464f1c5171d7c41b45d756ebe0c312, type: 3}
+    weight: 0.2
+    maxCount: 5
+    currentCount: 0
+  - prefab: {fileID: 7436187607256677877, guid: 3cc109070e3ab414791ad986e3458c63, type: 3}
+    weight: 0.2
+    maxCount: 5
+    currentCount: 0
+  - prefab: {fileID: 300887118136833142, guid: 7b131bdac7fa2aa449320bc2501b2233, type: 3}
+    weight: 0.2
+    maxCount: 5
+    currentCount: 0
+  - prefab: {fileID: 5135306957746615108, guid: f05d381e9d48c41419c82fc8be9af6ac, type: 3}
+    weight: 0.2
+    maxCount: 7
+    currentCount: 0
+  - prefab: {fileID: 5025266158718502801, guid: 9fd84910cf6b7e044a1a7a8354cf9376, type: 3}
+    weight: 1
+    maxCount: 3
+    currentCount: 0
+  - prefab: {fileID: 7984665037003230947, guid: 8fab28f2301f4a848a852c5a0a56cb41, type: 3}
+    weight: 0.8
+    maxCount: 2
+    currentCount: 0
+  - prefab: {fileID: 7485326137764503212, guid: abaa885fcd5b6f547bc74c3fb3c224c3, type: 3}
+    weight: 0.8
+    maxCount: 4
+    currentCount: 0
+  - prefab: {fileID: 6014752259599135458, guid: b9a46d02f7b1fd44a918392df7efd2be, type: 3}
+    weight: 0.8
+    maxCount: 2
+    currentCount: 0
+  - prefab: {fileID: 6881361510466829197, guid: 16d91c05c255353468ad420e6d7b1438, type: 3}
+    weight: 0.3
+    maxCount: 20
+    currentCount: 0
+  - prefab: {fileID: 5045886479356382841, guid: 9a3b90a4617784448971de68951a17b3, type: 3}
+    weight: 0.3
+    maxCount: 20
+    currentCount: 0
+  - prefab: {fileID: 3980528117646958331, guid: 8c00bd7e9cb3f7740bf2577089ca83c1, type: 3}
+    weight: 0.8
+    maxCount: 3
+    currentCount: 0
+  - prefab: {fileID: 6536337263657943678, guid: e247cb105387d36449b3b9667c057b17, type: 3}
+    weight: 0.8
+    maxCount: 3
+    currentCount: 0
+  - prefab: {fileID: 2478162349252603668, guid: 6e93d39c35c909f4d8137c2096f1be98, type: 3}
+    weight: 0.8
+    maxCount: 2
+    currentCount: 0
+  - prefab: {fileID: 4005573634136196991, guid: fbea407ef83735e44830251b42d3153c, type: 3}
+    weight: 0.3
+    maxCount: 7
+    currentCount: 0
+  - prefab: {fileID: 4005573634136196991, guid: fbea407ef83735e44830251b42d3153c, type: 3}
+    weight: 0.3
+    maxCount: 20
+    currentCount: 0
+  - prefab: {fileID: 4005573634136196991, guid: fbea407ef83735e44830251b42d3153c, type: 3}
+    weight: 0.3
+    maxCount: 7
+    currentCount: 0
+  - prefab: {fileID: 4005573634136196991, guid: fbea407ef83735e44830251b42d3153c, type: 3}
+    weight: 0.3
+    maxCount: 7
+    currentCount: 0
+  - prefab: {fileID: 4005573634136196991, guid: fbea407ef83735e44830251b42d3153c, type: 3}
+    weight: 0.3
+    maxCount: 7
+    currentCount: 0
+  clues:
+  - prefab: {fileID: 5453566971757717554, guid: f337761a772dabc4e87e220ec952181d, type: 3}
+  - prefab: {fileID: 6380442777340532034, guid: c0015cb0702b19245aed9b0326b0fa40, type: 3}
+  - prefab: {fileID: 1941195688641756936, guid: 46ab7b4a00f04b140be96404178c4aaa, type: 3}
+  - prefab: {fileID: 6046029627060971662, guid: 475dc18c73b06f949907a39686e4ae36, type: 3}
+  - prefab: {fileID: 7933686704084450290, guid: 879894c64d4e8394a8a6ac2bc266f608, type: 3}
+  - prefab: {fileID: 4947670086768655470, guid: 5029479578dff084d899f98a466ebfa5, type: 3}
+  - prefab: {fileID: 8497587958465413025, guid: 3fac7382a45a99c49ab825161f0922cd, type: 3}
+  - prefab: {fileID: 7498869016217278683, guid: 7801523f9bd888847b16b5ab969a1369, type: 3}
+  - prefab: {fileID: 7335999817612048085, guid: 4fff25b60d513c2489fd42992bbf747c, type: 3}
   spawnedBuildings: []
   mapWidth: 0
   mapLength: 0

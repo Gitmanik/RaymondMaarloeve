@@ -161,7 +161,7 @@ public class GameManager : MonoBehaviour
             };
             npcComponent.HisBuilding = MapGenerator.Instance.GetBuilding(allowedTypes);
             var buildingData = npcComponent.HisBuilding.GetComponent<BuildingData>();
-            buildingData.HisNPC = npcComponent;
+            buildingData.HisNPC.Add(npcComponent);
 
             npcs.Add(npcComponent);
 
@@ -174,7 +174,9 @@ public class GameManager : MonoBehaviour
                 murdererNPC = npcComponent;
             }
         }
-        
+
+        //Clue spawn
+        MapGenerator.Instance.GenerateClue();
         //Player spawn
         GameObject wallsRoot = GameObject.Find("WallsRoot");
 
@@ -534,7 +536,7 @@ public class GameManager : MonoBehaviour
     {
         string x = "NPCs:\n";
         foreach (var npc in GameManager.Instance.npcs)
-            x += $"<b>{npc.EntityID} {npc.NpcName}</b> ({npc.transform.position})\n<b>System:</b> ({npc.GetCurrentDecision().DebugInfo()})\n<b>Hunger:</b> {npc.Hunger}\n<b>Thirst:</b> {npc.Thirst}\n<b>Obtained Memories:</b>\n{string.Join("\n", npc.ObtainedMemories)}\n<b>System Prompt:</b>\n{npc.SystemPrompt.Replace('.', '\n')}\n";
+            x += $"<b>{npc.EntityID} {npc.NpcName}</b> ({npc.transform.position})\n<b>System:</b> ({(npc.GetCurrentDecision() == null ? "NULL" : npc.GetCurrentDecision().DebugInfo())})\n<b>Hunger:</b> {npc.Hunger}\n<b>Thirst:</b> {npc.Thirst}\n<b>Obtained Memories:</b>\n{string.Join("\n", npc.ObtainedMemories)}\n<b>System Prompt:</b>\n{npc.SystemPrompt.Replace('.', '\n')}\n";
         Debug.Log(x);
         return true;
     }

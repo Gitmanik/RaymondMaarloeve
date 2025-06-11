@@ -98,10 +98,6 @@ public class PlayerController : MonoBehaviour
             {
                 StartInteraction(targetNPC.GetComponent<NPC>());
             }
-            // else if (currentState == PlayerState.Interacting)
-            // {
-            //     EndInteraction();
-            // }
         }
 
         if (Input.GetKeyDown(KeyCode.Escape) && currentState == PlayerState.Interacting)
@@ -189,6 +185,7 @@ public class PlayerController : MonoBehaviour
         characterMesh.enabled = true;
         GameManager.Instance.MinimapGameObject.SetActive(true);
         currentlyInteractingNPC.LookAt(null);
+        Instance.currentlyInteractingNPC = null;
         
         if (CameraFollow.Instance != null)
         {

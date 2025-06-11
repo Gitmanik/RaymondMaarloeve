@@ -118,7 +118,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HisNPC: {fileID: 0}
+  HisMainTileGridPosition: {x: -1, y: -1}
   HisType: 6
+  HisTileCount: 0
 --- !u!64 &-80945597458920742
 MeshCollider:
   m_ObjectHideFlags: 0
