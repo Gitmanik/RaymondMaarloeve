@@ -46,6 +46,9 @@ public class MainMenuManager : MonoBehaviour
     /// </summary>
     public string settingsSceneName = "Settings";
 
+    [Header("End Scene UI")]
+    [SerializeField] private TextMeshProUGUI resultText; // Dodaj to pole
+
     /// <summary>
     /// Initializes settings when entering the settings scene.
     /// </summary>
@@ -53,6 +56,11 @@ public class MainMenuManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == settingsSceneName)
             LoadSettings();
+        else if (SceneManager.GetActiveScene().name == "EndScene" && resultText != null)
+        {
+            string result = PlayerPrefs.GetString("GameResult", "No result available");
+            resultText.text = result;
+        }
     }
 
     // === Menu Buttons ===

@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Singleton manager for the “history fragments” mini‐game.  
@@ -121,7 +122,7 @@ public class MiniGameManager : MonoBehaviour
         realBlockTexts = trueBlocks.ToArray();
         fakeBlockTexts = fakeBlocks.ToArray();
     }
-    
+
     /// <summary>
     /// Opens the mini‐game panel, hides the result text, populates suspects, and generates blocks.
     /// </summary>
@@ -190,11 +191,17 @@ public class MiniGameManager : MonoBehaviour
         string realName = GameManager.Instance.murdererNPC.GetComponent<NPC>().NpcName;
         bool suspectCorrect = chosen == realName;
 
-        resultText.gameObject.SetActive(true);
+        string resultMessage;
         if (correctMoved && correctRemaining && suspectCorrect)
-            resultText.text = "Well done! You pointed out all real history fragments and identified the murderer.";
+            resultMessage = "Well done! You pointed out all real history fragments and identified the murderer.";
         else
-            resultText.text = $"Wrong! The murderer was {realName}.";
+            resultMessage = $"Wrong! The murderer was {realName}.";
+
+        resultMessage += $"\n\n{GameManager.Instance.generatedHistory.story}";
+        
+        PlayerPrefs.SetString("GameResult", resultMessage);
+        PlayerPrefs.Save();
+        SceneManager.LoadScene("EndScene");
     }
 
     /// <summary>

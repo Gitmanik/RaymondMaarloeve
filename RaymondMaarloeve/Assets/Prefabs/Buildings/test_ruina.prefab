@@ -83,8 +83,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0705b4361b0b4c14d81d8e2614abf563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HisNPC: {fileID: 0}
-  HisType: 13
+  HisNPC:
+  - {fileID: 0}
+  HisMainTileGridPosition: {x: -1, y: -1}
+  HisType: 18
+  HisTileCount: 0
 --- !u!64 &40773747911313732
 MeshCollider:
   m_ObjectHideFlags: 0
