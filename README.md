@@ -39,6 +39,8 @@ The project we are working on is a computer game in which artificial intelligenc
 
 What sets this game apart is the lack of traditional, rigid scripting for events. Instead, the game world develops organically, and interactions between NPCs and the player determine the course of the detective investigation, which is the central element of the gameplay. Procedurally generated environments and complex NPC decision-making systems make each game session a unique experience.
 
+Whether you're on Windows or Linux, the game runs seamlessly, so you can enjoy the experience regardless of your operating system.
+
 ### ⚙️ Technology Stack
 - **Game Engine:** Unity 6 (6000.0.38f1) + C#
 - **Artificial Intelligence:**  
