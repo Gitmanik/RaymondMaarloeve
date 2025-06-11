@@ -44,7 +44,7 @@ public static class PathGenerator
             }
             else
             {
-                Debug.LogWarning($"Nie znaleziono wejścia dla budynku: {buildingTile.Building?.name}");
+                Debug.LogWarning($"Nie znaleziono wejścia dla budynku: {buildingTile.Prefab?.name}");
             }
         }
 
@@ -115,7 +115,7 @@ public static class PathGenerator
                     if (nb != null && nb.IsPath)
                     {
                         PaintPath(terrain, t.TileCenter, nb.TileCenter, 0.7f, 1);
-                        RotateBuilding(t.Building, t.TileCenter, nb.TileCenter);
+                        RotateBuilding(t.Prefab, t.TileCenter, nb.TileCenter);
                         t.FrontWallCenter = (t.TileCenter + nb.TileCenter) / 2f;
                         break;
                     }
@@ -136,13 +136,13 @@ public static class PathGenerator
     }
     private static Tile GetEntranceNeighbor(Tile buildingTile, Tile[,] tiles)
     {
-        if (buildingTile.Building == null)
+        if (buildingTile.Prefab == null)
             return null;
 
-        Transform entrance = buildingTile.Building.transform.Find("Entrance");
+        Transform entrance = buildingTile.Prefab.transform.Find("Entrance");
         if (entrance == null)
         {
-            Debug.LogWarning($"Brak 'entrance' w budynku: {buildingTile.Building.name}");
+            Debug.LogWarning($"Brak 'entrance' w budynku: {buildingTile.Prefab.name}");
             return null;
         }
 

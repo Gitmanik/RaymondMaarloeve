@@ -224,7 +224,7 @@ public class Tile
     public Vector2 TileCenter;
     public Vector2 FrontWallCenter;
     public Tile[] Neighbors = new Tile[0];
-    public GameObject Building;
+    public GameObject Prefab;
     public bool IsBuilding = false;
     public bool IsPath = false;
     public bool IsPartOfBuilding = false;

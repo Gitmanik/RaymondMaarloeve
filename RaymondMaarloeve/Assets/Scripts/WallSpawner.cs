@@ -200,7 +200,7 @@ public class WallSpawner
         Vector3 pos = ToWorld(tile.TileCenter);
         GameObject go = Object.Instantiate(prefab, pos, rotation, parent.transform);
         tile.IsPartOfBuilding = true;
-        tile.Building = go;
+        tile.Prefab = go;
 
         return go;
     }

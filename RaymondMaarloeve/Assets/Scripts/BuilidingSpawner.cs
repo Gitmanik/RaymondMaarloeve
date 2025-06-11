@@ -93,7 +93,7 @@ public class BuildingSpawner
 
             spawnedBuildings.Add(go);
             tile.IsBuilding = true;
-            tile.Building = go;
+            tile.Prefab = go;
 
             buildingsPlaced++;
         }
