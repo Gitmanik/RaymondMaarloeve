@@ -1,18 +1,26 @@
-﻿// Zawiera: generowanie mapy z podziałem na osobne klasy do murów, budynków i dekoracji
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Unity.AI.Navigation;
 using Random = UnityEngine.Random;
 
+/// <summary>
+/// Responsible for generating the game map, including terrain layout, building placement, wall construction, decoration, and clues.
+/// </summary>
 public class MapGenerator : MonoBehaviour
 {
+    /// <summary>
+    /// Singleton instance of the MapGenerator.
+    /// </summary>
     public static MapGenerator Instance { get; private set; }
+
+    /// <summary>
+    /// Indicates whether the map has already been generated.
+    /// </summary>
     public bool IsMapGenerated { get; private set; } = false;
 
-    [Header("Podstawowe dane mapy")]
+    [Header("Map configuration")]
     public NavMeshSurface surface;
     public Terrain terrain;
     public int tileSize = 10;
@@ -21,7 +29,7 @@ public class MapGenerator : MonoBehaviour
     public bool markTiles = false;
     public int WallsMargin = 10;
 
-    [Header("Prefabrykaty")]
+    [Header("Prefabs")]
     public List<BuildingSetup> buildings = new();
     public List<WallsSetup> walls = new();
     public List<BuildingSetup> decorations = new();
@@ -35,6 +43,9 @@ public class MapGenerator : MonoBehaviour
     [HideInInspector] public List<GameObject> spawnedBuildings;
     [HideInInspector] public int mapWidth, mapLength;
 
+    /// <summary>
+    /// Initializes the tile array and terrain properties.
+    /// </summary>
     void Awake()
     {
         Debug.Log("MapGenerator: Awake started");
@@ -51,6 +62,9 @@ public class MapGenerator : MonoBehaviour
         terrain.transform.position = transform.position - centerOffset;
     }
 
+    /// <summary>
+    /// Generates the full map including walls, buildings, decorations, and paths.
+    /// </summary>
     public void GenerateMap()
     {
         mapWidth = tileSize * mapWidthInTiles;
@@ -78,16 +92,22 @@ public class MapGenerator : MonoBehaviour
         IsMapGenerated = true;
         Debug.Log("MapGenerator: Map generated, IsMapGenerated = TRUE");
     }
+
+    /// <summary>
+    /// Spawns clues randomly on the generated map.
+    /// </summary>
     public void GenerateClue()
     {
         var clueSpawner = new ClueSpawner(terrain, tileSize);
         clueSpawner.SpawnClues(tiles, allTiles, clues);
 
-
         surface.BuildNavMesh();
         Debug.Log("MapGenerator: Clue spawned");
     }
 
+    /// <summary>
+    /// Initializes the tile grid and their neighbors.
+    /// </summary>
     void InitializeTiles()
     {
         allTiles.Clear();
@@ -127,7 +147,11 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-    //Funkcja wyboru budynku dla NPC
+    /// <summary>
+    /// Returns a suitable building for an NPC from allowed types.
+    /// </summary>
+    /// <param name="allowedTypes">Set of allowed building types.</param>
+    /// <returns>Available building GameObject or null.</returns>
     public GameObject GetBuilding(HashSet<BuildingData.BuildingType> allowedTypes)
     {
         var options = spawnedBuildings.FindAll(go => {
@@ -137,6 +161,9 @@ public class MapGenerator : MonoBehaviour
         return options.Count > 0 ? options[Random.Range(0, options.Count)] : null;
     }
 
+    /// <summary>
+    /// Marks unused tiles visually on the terrain using a specific texture layer.
+    /// </summary>
     private void MarkTiles()
     {
         var data = terrain.terrainData;
@@ -192,6 +219,9 @@ public class MapGenerator : MonoBehaviour
         data.SetAlphamaps(0, 0, alphas);
     }
 
+    /// <summary>
+    /// Sets the alpha texture layer value safely for a given tile coordinate.
+    /// </summary>
     private void SetAlphaSafe(float[,,] alphas, int x, int z, int layer, int layersCount)
     {
         if (z < 0 || z >= alphas.GetLength(0) || x < 0 || x >= alphas.GetLength(1))
@@ -203,7 +233,10 @@ public class MapGenerator : MonoBehaviour
         alphas[z, x, layer] = 1f;
     }
 
-    [ContextMenu("Debuguj tile'e w konsoli")]
+    /// <summary>
+    /// Prints tile layout information to the Unity console for debugging purposes.
+    /// </summary>
+    [ContextMenu("Debug tiles in console")]
     public void DebugTilesInConsole()
     {
         for (int z = mapLengthInTiles - 1; z >= 0; z--)
@@ -213,11 +246,14 @@ public class MapGenerator : MonoBehaviour
             {
                 row += tiles[x, z].IsBuilding ? "[X]" : "[ ]";
             }
-            Debug.Log($"Rząd Z={z}: {row}");
+            Debug.Log($"MapGenerator: Row Z={z}: {row}");
         }
     }
 }
 
+/// <summary>
+/// Represents a single map tile with spatial and classification metadata.
+/// </summary>
 public class Tile
 {
     public Vector2Int GridPosition;
@@ -232,6 +268,9 @@ public class Tile
     public bool IsDecoration = false;
 }
 
+/// <summary>
+/// Configuration for building prefabs with weighting and limits.
+/// </summary>
 [Serializable]
 public class BuildingSetup
 {
@@ -241,12 +280,18 @@ public class BuildingSetup
     [HideInInspector] public int currentCount = 0;
 }
 
+/// <summary>
+/// Configuration for wall prefabs.
+/// </summary>
 [Serializable]
 public class WallsSetup
 {
     public GameObject prefab;
 }
 
+/// <summary>
+/// Configuration for clue prefabs.
+/// </summary>
 [Serializable]
 public class ClueSetup
 {

@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+/// <summary>
+/// Responsible for spawning buildings on available map tiles, based on weighted probability and placement rules.
+/// </summary>
 public class BuildingSpawner
 {
     private readonly Terrain terrain;
@@ -10,6 +13,14 @@ public class BuildingSpawner
     private readonly int mapLengthInTiles;
     private readonly int wallsMargin;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="BuildingSpawner"/> class.
+    /// </summary>
+    /// <param name="terrain">Terrain used for height sampling.</param>
+    /// <param name="tileSize">Size of a tile in world units.</param>
+    /// <param name="mapWidthInTiles">Total map width in tiles.</param>
+    /// <param name="mapLengthInTiles">Total map length in tiles.</param>
+    /// <param name="wallsMargin">Minimum number of tiles to leave empty near the map edge.</param>
     public BuildingSpawner(Terrain terrain, int tileSize, int mapWidthInTiles, int mapLengthInTiles, int wallsMargin)
     {
         this.terrain = terrain;
@@ -19,6 +30,13 @@ public class BuildingSpawner
         this.wallsMargin = wallsMargin;
     }
 
+    /// <summary>
+    /// Attempts to spawn buildings on the map based on tile availability and weighted prefab selection.
+    /// </summary>
+    /// <param name="tiles">2D grid of map tiles.</param>
+    /// <param name="allTiles">Flat list of all tiles for randomization.</param>
+    /// <param name="buildings">List of building prefabs and their configuration.</param>
+    /// <returns>List of spawned building GameObjects.</returns>
     public List<GameObject> SpawnBuildings(Tile[,] tiles, List<Tile> allTiles, List<BuildingSetup> buildings)
     {
         var spawnedBuildings = new List<GameObject>();
@@ -46,37 +64,14 @@ public class BuildingSpawner
             var prefab = PickPrefab(buildings);
             if (prefab == null) continue;
 
-            //Vector3 mapCenter = new Vector3(
-            //    MapGenerator.Instance.mapWidthInTiles / 2f,
-            //    0,
-            //    MapGenerator.Instance.mapLengthInTiles / 2f
-            //);
-
-            //// pozycja budynku (np. spawn point muru, wie¿y itd.)
-            //Vector3 buildingPos = new Vector3(tile.GridPosition.x, mapCenter.y, tile.GridPosition.y);
-
-            //// upewnij siê, ¿e Y siê zgadza
-            ////buildingPos.y = mapCenter.y;
-
-            //// wektor kierunku: od budynku do œrodka mapy
-            //Vector3 directionToCenter = mapCenter - buildingPos;
-            //directionToCenter.y = 0; // ignoruj pionow¹ sk³adow¹
-
-            //// rotacja
-            //Quaternion rotation = Quaternion.LookRotation(directionToCenter);
-
             int[] angles = { 0, 90, 180, 270 };
             int randomAngle = angles[Random.Range(0, angles.Length)];
             Quaternion rotation = Quaternion.Euler(0, randomAngle, 0);
 
+            Vector3 pos = new(tile.TileCenter.x, 0, tile.TileCenter.y);
+            pos.y = terrain.SampleHeight(pos) + terrain.transform.position.y;
 
-
-
-
-            Vector3 pos3 = new(tile.TileCenter.x, 0, tile.TileCenter.y);
-            pos3.y = terrain.SampleHeight(pos3) + terrain.transform.position.y;
-
-            var go = Object.Instantiate(prefab, pos3, rotation, terrain.transform);
+            var go = Object.Instantiate(prefab, pos, rotation, terrain.transform);
             var buildingData = go.GetComponent<BuildingData>();
             if (buildingData == null)
             {
@@ -98,10 +93,15 @@ public class BuildingSpawner
             buildingsPlaced++;
         }
 
-        Debug.Log($"Zbudowano {buildingsPlaced} budynków.");
+        Debug.Log($"BuildingSpawner: Spawned {buildingsPlaced} buildings.");
         return spawnedBuildings;
     }
 
+    /// <summary>
+    /// Randomly selects a prefab from the available list based on weighted probability.
+    /// </summary>
+    /// <param name="prefabList">List of building setups.</param>
+    /// <returns>Selected prefab GameObject or null if none available.</returns>
     private GameObject PickPrefab(List<BuildingSetup> prefabList)
     {
         var available = prefabList.FindAll(b => b.currentCount < b.maxCount);
@@ -121,9 +121,15 @@ public class BuildingSpawner
                 return b.prefab;
             }
         }
+
         return null;
     }
 
+    /// <summary>
+    /// Randomly shuffles the given list in place.
+    /// </summary>
+    /// <typeparam name="T">Type of list elements.</typeparam>
+    /// <param name="list">List to shuffle.</param>
     private void Shuffle<T>(List<T> list)
     {
         for (int i = 0; i < list.Count; i++)

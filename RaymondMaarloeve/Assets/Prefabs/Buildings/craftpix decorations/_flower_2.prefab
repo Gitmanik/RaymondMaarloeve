@@ -58,12 +58,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0a739a430b186f34aa78990be023b414, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -6846884591719271984}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0a739a430b186f34aa78990be023b414, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: -1887455675367957602}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0a739a430b186f34aa78990be023b414, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 7374393919656335584}
   m_SourcePrefab: {fileID: 100100000, guid: 0a739a430b186f34aa78990be023b414, type: 3}
 --- !u!1 &7966386956996448001 stripped
@@ -71,44 +65,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0a739a430b186f34aa78990be023b414, type: 3}
   m_PrefabInstance: {fileID: 7083919682135732816}
   m_PrefabAsset: {fileID: 0}
---- !u!208 &-6846884591719271984
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7966386956996448001}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.35900003, y: 0.411, z: 0.374}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: -0.023000002, y: 0.40600002, z: -0.089}
-  m_TimeToStationary: 0.5
---- !u!64 &-1887455675367957602
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7966386956996448001}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 3037712121409173423, guid: 0a739a430b186f34aa78990be023b414, type: 3}
 --- !u!114 &7374393919656335584
 MonoBehaviour:
   m_ObjectHideFlags: 0
