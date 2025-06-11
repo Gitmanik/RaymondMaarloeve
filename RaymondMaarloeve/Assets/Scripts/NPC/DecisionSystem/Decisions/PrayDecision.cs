@@ -6,10 +6,13 @@ public class PrayDecision : VisitBuildingDecision
     {
     }
 
-    protected override float StoppingDistance => 0.5f;
+    protected override float StoppingDistance => 1f;
+    protected override bool NpcShouldDisappear => true;
     protected override float WaitDuration => 5f;
     public override string PrettyName => "praying";
     protected override void OnFinished()
     {
     }
+
+    protected override bool ShouldFinish() { return false; }
 }

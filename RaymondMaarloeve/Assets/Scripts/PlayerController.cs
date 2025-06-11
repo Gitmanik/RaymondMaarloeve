@@ -151,8 +151,9 @@ public class PlayerController : MonoBehaviour
         moveDirection = Vector3.zero; // Zatrzymanie gracza
 
         characterMesh.enabled = false;
+        GameManager.Instance.MinimapGameObject.SetActive(false);
 
-        npc.LookAt(CameraFollow.Instance.transform);
+        npc.OnInteraction();
         
         currentlyInteractingNPC = npc;
         
@@ -186,7 +187,7 @@ public class PlayerController : MonoBehaviour
         currentState = PlayerState.Moving;
 
         characterMesh.enabled = true;
-
+        GameManager.Instance.MinimapGameObject.SetActive(true);
         currentlyInteractingNPC.LookAt(null);
         
         if (CameraFollow.Instance != null)

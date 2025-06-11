@@ -8,18 +8,18 @@ public class IdleDecision : IDecision
 
     public static readonly List<string> RandomIdleNames = new List<string>()
     {
-        "loitering",
-        "lazing",
-        "lingering",
-        "dawdling",
-        "dallying",
-        "resting",
+        // "loitering",
+        // "lazing",
+        // "lingering",
+        // "dawdling",
+        // "dallying",
+        // "resting",
         "hanging around",
-        "vegetating",
-        "malingering",
-        "chilling",
-        "biding time",
-        "stalling"
+        // "vegetating",
+        // "malingering",
+        // "chilling",
+        // "biding time",
+        // "stalling"
     };
     public static string RandomPrettyName => RandomIdleNames[Random.Range(0, RandomIdleNames.Count)];
     public string PrettyName => RandomPrettyName;
@@ -38,6 +38,10 @@ public class IdleDecision : IDecision
     public void Start()
     {
         idleStart = Time.time;
+    }
+
+    public void Finish()
+    {
     }
 
     public bool Tick()

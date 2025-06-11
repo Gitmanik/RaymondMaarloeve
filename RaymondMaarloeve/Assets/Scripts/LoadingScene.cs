@@ -97,11 +97,18 @@ public class LoadingScene : MonoBehaviour
         UpdateLoadingStage("Waiting for LLM...");
         while (!gameManager.LlmServerReady)
         {
-            targetProgress = 0.80f;
+            targetProgress = 0.70f;
             yield return null;
         }
         UpdateLoadingStage("LLM ready!");
 
+        UpdateLoadingStage("Generating history...");
+        while (!gameManager.HistoryGenerated)
+        {
+            targetProgress = 0.80f;
+            yield return null;
+        }
+        
         UpdateLoadingStage("Waiting for MapGenerator...");
         while (MapGenerator.Instance == null || !MapGenerator.Instance.IsMapGenerated)
         {

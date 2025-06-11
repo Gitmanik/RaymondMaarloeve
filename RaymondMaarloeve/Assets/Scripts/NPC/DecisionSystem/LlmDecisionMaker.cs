@@ -1,14 +1,30 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
+/// <summary>
+/// Decision-making system for NPCs that uses a Large Language Model (LLM) to determine the next action based on the current environment and NPC state.
+/// This system interacts with the LLMServer to request decisions and processes the responses to guide NPC behavior.
+/// </summary>
 public class LlmDecisionMaker : IDecisionSystem
 {
+    /// <summary>
+    /// The NPC that this decision-making system is associated with.
+    /// </summary>
     private NPC npc;
     
+    /// <summary>
+    /// Represents the response from the LLM that is currently being processed.
+    /// This response contains the NPC's next action as determined by the LLM based on the current environment and NPC state.
+    /// </summary>
     private ChatResponseDTO waitingResponse = null;
 
+    /// <summary>
+    /// Represents the current environment that the NPC is aware of.
+    /// This list is populated with objects that the NPC can interact with or consider when making decisions.
+    /// </summary>
     private List<CurrentEnvironment> currentEnvironment;
 
     /// <summary>
@@ -58,29 +74,41 @@ public class LlmDecisionMaker : IDecisionSystem
         new NeedDTO { need = "hunger", weight = (int) npc.Hunger },
         new NeedDTO { need = "thirst", weight = (int) npc.Thirst }
       };
-      dto.stopped_action = "";
+      dto.stopped_action = npc.StoppedDecision == null ? IdleDecision.RandomPrettyName : npc.StoppedDecision.PrettyName;
 
       currentEnvironment = npc.GetCurrentEnvironment();
       List<CurrentEnvironmentDTO> currentEnvironmentDtos = currentEnvironment.ConvertAll(x => x.ToDTO(npc));
       dto.current_environment = currentEnvironmentDtos;
       
-      dto.obtained_memories = npc.ObtainedMemories;
+      dto.obtained_memories = npc.ObtainedMemories.ConvertAll(x => x.ToDTO());;
+
+      string prompt =
+        $"It it currently {DayNightCycle.Instance.GetCurrentTimeText()}, day {DayNightCycle.Instance.GetCurrentDay()}.\n" +
+        $"Take needs into account.\n" +
+        $"What should {npc.NpcName} do now? Choose from CurrentEnvironment.\n" +
+        $"Respond ONLY with the action index (1-{dto.current_environment.Count}).";
       
       var content = JsonUtility.ToJson(dto);
       currentConversation.Add(new Message { role = "system", content = content});
-      
-      // TODO: Read options from key -> Decision system
-      currentConversation.Add(new Message { role = "user", content = $"What should {npc.NpcName} do now? Choose from CurrentEnvironment. Respond ONLY with the action index (1-{dto.current_environment.Count})."});
+      currentConversation.Add(new Message { role = "user", content = prompt});
       
       LlmManager.Instance.Chat(
         npc.ModelID,
         currentConversation,
         (response) =>
         {
+          if (npc.GetCurrentDecision() is not WaitForLLMDecision)
+          {
+            Debug.LogWarning($"{npc.NpcName}: Received new action but not waiting for it anymore!");
+            return;
+          }
           waitingResponse = response;
           (npc.GetCurrentDecision() as WaitForLLMDecision).Ready = true;
         },
-        OnChatError
+        OnChatError,
+        0.95f,
+        0.5f,
+        10
       );
     }
 
@@ -91,21 +119,23 @@ public class LlmDecisionMaker : IDecisionSystem
     /// <returns>An implementation of <see cref="IDecision"/> representing the parsed action.</returns>
     private IDecision ParseDecision(ChatResponseDTO chatResponseDto)
     {
-      Debug.Log($"Idle response, content: ({chatResponseDto.response})");
+      string result = Regex.Replace(chatResponseDto.response, @"\D*(\d+)\D*", "$1");
 
-      if (int.TryParse(chatResponseDto.response, out int response) == false)
+
+      if (int.TryParse(result, out int response) == false)
       {
-        Debug.LogError($"Idle response, invalid response: {chatResponseDto.response}");
+        Debug.LogError($"{npc.NpcName}: Idle response error: invalid response: {chatResponseDto.response}");
         return new IdleDecision();
       }
 
       if (response < 0 || response > currentEnvironment.Count)
       {
-        Debug.LogError($"Idle response, invalid response: {chatResponseDto.response}");
+        Debug.LogError($"{npc.NpcName}: Idle response error: index out of bounds (currentEnvironment.Count: {currentEnvironment.Count}): {chatResponseDto.response}");
         return new IdleDecision();
       }
       
       var action = currentEnvironment[response - 1];
+      Debug.Log($"{npc.NpcName}: Idle response, selected action: {action.decision.DebugInfo()} (result: {result})");
 
       return action.decision;
     }
@@ -116,7 +146,7 @@ public class LlmDecisionMaker : IDecisionSystem
     /// <param name="error">The error message.</param>
     private void OnChatError(string error)
     {
-      Debug.LogError($"Idle error: {error}");
+      Debug.LogError($"{npc.NpcName}: Idle error: {error}");
     }
 
     /// <summary>
@@ -126,6 +156,12 @@ public class LlmDecisionMaker : IDecisionSystem
     /// <param name="relevanceFunc">Delegate which will be called when the value is calculated.</param>
     public void CalculateRelevance(string newMemory, Action<int> relevanceFunc)
     {
+      if (GameManager.Instance.SkipRelevance)
+      {
+        relevanceFunc(5);
+        return;
+      }
+      
       string prompt = @"
 You are a memory analysis model in a mystery narrative game.
 Your task is to assign a Relevance score (1–10) to a newly obtained memory.
@@ -158,7 +194,7 @@ Output format must be **EXACTLY AND ONLY** an integer. Do not explain your reaso
         
       var dto = new CalculateRelevanceDTO();
       dto.core_memories = npc.SystemPrompt.Split('.').ToList().ConvertAll(x => x.Trim());
-      dto.obtained_memories = npc.ObtainedMemories;
+      dto.obtained_memories = npc.ObtainedMemories.ConvertAll(x => x.ToDTO());
       dto.new_memory = newMemory;
       
       var dtoJson = JsonUtility.ToJson(dto);
@@ -166,17 +202,19 @@ Output format must be **EXACTLY AND ONLY** an integer. Do not explain your reaso
       currentConversation.Add(new Message { role = "system", content = prompt});
       currentConversation.Add(new Message { role = "user", content = dtoJson});
       
-      Debug.Log($"Calculating relevance:\n{dtoJson}");
+      // Debug.Log($"Calculating relevance:\n{dtoJson}");
       
       LlmManager.Instance.Chat(
         npc.ModelID,
         currentConversation,
         (response) =>
         {
-          Debug.Log($"Relevance response: '{response.response}'");
+          string result = Regex.Replace(response.response, @"\D*(\d+)\D*", "$1");
+          //Debug.Log($"{npc.NpcName}: Relevance response: '{result}'");
+          
           int relevance = 5;
-          if (!int.TryParse(response.response, out relevance))
-            Debug.LogWarning($"Wrong relevance response: '{response.response}'");
+          if (!int.TryParse(result, out relevance))
+            Debug.LogWarning($"{npc.NpcName} Wrong relevance response: '{response.response}'");
           relevanceFunc(relevance);
         },
         OnChatError

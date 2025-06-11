@@ -527,6 +527,148 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 108789637}
   m_CullTransparentMesh: 1
+--- !u!1 &114763439
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 114763443}
+  - component: {fileID: 114763442}
+  - component: {fileID: 114763440}
+  - component: {fileID: 114763444}
+  m_Layer: 0
+  m_Name: Minimap Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &114763440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 114763439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
+--- !u!20 &114763442
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 114763439}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 1
+  orthographic size: 15
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 8400000, guid: 7ceeae2b45700c74cb94ab05479c4991, type: 2}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!4 &114763443
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 114763439}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &114763444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 114763439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9d7b7ab7d5a9504eb9a09dbfcf67121, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 506150527}
 --- !u!1 &166442099
 GameObject:
   m_ObjectHideFlags: 0
@@ -821,6 +963,7 @@ RectTransform:
   - {fileID: 108789638}
   - {fileID: 1292770663}
   - {fileID: 1578456148}
+  - {fileID: 1191064609}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1053,33 +1196,101 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 398164991}
   m_CullTransparentMesh: 1
---- !u!1 &506150523 stripped
+--- !u!1 &447810721
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 5676725852435064086, guid: f1cd53ea223a5cf43bf282c3a34b494c, type: 3}
-  m_PrefabInstance: {fileID: 1738852691}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &506150524
-Animator:
-  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 506150523}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 447810722}
+  - component: {fileID: 447810725}
+  - component: {fileID: 447810724}
+  - component: {fileID: 447810723}
+  m_Layer: 5
+  m_Name: Minimap Mask
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &447810722
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 447810721}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2035828077}
+  m_Father: {fileID: 1191064609}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -160.00024, y: 160}
+  m_SizeDelta: {x: 300, y: 300}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &447810723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 447810721}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 291b936df418096439804f997053e7d5, type: 3}
-  m_Controller: {fileID: 9100000, guid: 0321e953814128848abf2e56458ba99c, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 1
+--- !u!114 &447810724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 447810721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: feab7330beab13cf0b2a0b21cc25de53, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &447810725
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 447810721}
+  m_CullTransparentMesh: 1
+--- !u!4 &506150527 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4507222578449718631, guid: f1cd53ea223a5cf43bf282c3a34b494c, type: 3}
+  m_PrefabInstance: {fileID: 1738852691}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &602030769
 GameObject:
   m_ObjectHideFlags: 0
@@ -2387,6 +2598,82 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1168775389}
   m_CullTransparentMesh: 1
+--- !u!1 &1191064608
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1191064609}
+  - component: {fileID: 1191064611}
+  - component: {fileID: 1191064610}
+  m_Layer: 5
+  m_Name: Minimap
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1191064609
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191064608}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 447810722}
+  m_Father: {fileID: 330165695}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -180, y: 180}
+  m_SizeDelta: {x: 320, y: 320}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1191064610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191064608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: feab7330beab13cf0b2a0b21cc25de53, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1191064611
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191064608}
+  m_CullTransparentMesh: 1
 --- !u!1 &1280728993
 GameObject:
   m_ObjectHideFlags: 0
@@ -2799,6 +3086,7 @@ GameObject:
   - component: {fileID: 1294622900}
   - component: {fileID: 1294622901}
   - component: {fileID: 1294622902}
+  - component: {fileID: 1294622903}
   m_Layer: 0
   m_Name: _GameManager
   m_TagString: Untagged
@@ -2859,8 +3147,81 @@ MonoBehaviour:
   - {fileID: 1148605829637295999, guid: 20e3d70f4158e349da9e7abcd86e2a13, type: 3}
   npcs: []
   LlmServerReady: 0
+  HistoryGenerated: 0
+  generatedHistory:
+    story: 
+    characters: []
+  storyBlocks:
+    key_events: []
+    false_events: []
   murdererNPC: {fileID: 0}
   uiGameObject: {fileID: 330165694}
+  MinimapGameObject: {fileID: 1191064608}
+  musicAudioSource: {fileID: 1294622903}
+  historyJSON: '{"story":"The villagers of Ashwood awoke to an eerie silence on the
+    night of the autumnal equinox. The church bells, which usually rang out at this
+    time, remained still. In the church, Father Thomas, a priest of 55 years, sat
+    in prayer, his eyes fixed on the altar. Suddenly, a faint scream pierced the
+    air, and he rose from his knees. He rushed to the well, where he found the lifeless
+    body of Elara, a 25-year-old seductress, her beauty marred by a single stab wound
+    to the chest. The villagers, including the ribald man, Godric, 42, the helpful
+    man, Edwin, 38, the delusional man, Silas, 52, the guard, Marcellus, 50, and
+    the seductive woman, Aria, 28, all gathered around the well, their faces etched
+    with fear and confusion. Silas, who had been seen arguing with Elara earlier
+    that day, seemed particularly agitated, his eyes darting about the group. As
+    the night wore on, the villagers began to suspect that Silas was responsible
+    for the murder. But as they watched him, they realized that he was not alone.
+    Aria, who had been flirting with Silas earlier, was now standing beside him,
+    her eyes gleaming with a mixture of guilt and innocence. It was then that Edwin
+    noticed a small, hidden compartment in Silas''s house, containing a bloody knife
+    and a piece of torn fabric that matched Elara''s dress. The villagers knew then
+    that Silas was not the murderer, but Aria was. She had been the one to stab Elara,
+    and Silas had been her accomplice. As the villagers turned to face Aria, she
+    vanished into the night, leaving behind a trail of fear and uncertainty.","characters":[{"name":"Father
+    Thomas","archetype":4,"age":55,"description":"You are a priest. You are 55 years
+    old. You are a man of prayer and faith. You were in the church when the murder
+    occurred. You felt a sense of shock and horror upon seeing the body. You are
+    trying to make sense of what happened. You dislike Silas and his delusional nature.
+    You have a habit of crossing yourself before meals.","murderer":false,"dead":false},{"name":"Elara","archetype":5,"age":25,"description":"You
+    are a seductress. You are 25 years old. You were at the well when you were murdered.
+    You were seen flirting with Godric earlier that day. You felt a sense of excitement
+    and danger. You are not sure who your killer is. You are trying to enjoy the
+    moment before you die.","murderer":false,"dead":true},{"name":"Godric","archetype":2,"age":42,"description":"You
+    are a ribald man. You are 42 years old. You were at the well when the murder
+    occurred. You were seen flirting with Elara earlier that day. You felt a sense
+    of excitement and curiosity. You are trying to make sense of what happened. You
+    like Silas, but you dislike his delusional nature.","murderer":false,"dead":false},{"name":"Edwin","archetype":1,"age":38,"description":"You
+    are a helpful man. You are 38 years old. You were at the well when the murder
+    occurred. You were the first to find the body. You felt a sense of shock and
+    horror. You are trying to help the villagers make sense of what happened. You
+    like Silas, but you dislike Aria''s flirtatious nature.","murderer":false,"dead":false},{"name":"Silas","archetype":3,"age":52,"description":"You
+    are a delusional man. You are 52 years old. You were seen arguing with Elara
+    earlier that day. You felt a sense of anger and frustration. You are trying to
+    convince yourself that you are innocent. You dislike Godric, but you like Edwin''s
+    helpful nature.","murderer":false,"dead":false},{"name":"Marcellus","archetype":6,"age":50,"description":"You
+    are a guard. You are 50 years old. You were at the well when the murder occurred.
+    You were trying to keep the peace. You felt a sense of duty and responsibility.
+    You are trying to protect the villagers. You like Silas, but you dislike Aria''s
+    flirtatious nature.","murderer":false,"dead":false},{"name":"Aria","archetype":5,"age":28,"description":"You
+    are a seductive woman. You are 28 years old. You were at the well when the murder
+    occurred. You were seen flirting with Silas earlier that day. You felt a sense
+    of excitement and danger. You are trying to enjoy the moment before you die.
+    You like Silas, but you dislike Godric''s ribald nature.","murderer":true,"dead":false}]}'
+  historyBlocksJSON: '{"key_events":["The villagers of Ashwood awoke to an eerie
+    silence on the night of the autumnal equinox.","Father Thomas, a priest of 55
+    years, found the lifeless body of Elara, a 25-year-old seductress, with a single
+    stab wound to the chest.","The villagers, including Godric, Edwin, Silas, Marcellus,
+    and Aria, gathered around the well to find Elara''s body.","Silas, who had been
+    seen arguing with Elara earlier that day, seemed particularly agitated and was
+    suspected of being the murderer.","Edwin noticed a small, hidden compartment
+    in Silas''s house, containing a bloody knife and a piece of torn fabric that
+    matched Elara''s dress.","Aria, who had been flirting with Silas earlier, was
+    revealed to be the actual murderer, and Silas was her accomplice."],"false_events":["The
+    villagers had previously discussed and decided to hold a grand ball in honor
+    of Elara''s beauty, which was scheduled to take place the night of the autumnal
+    equinox.","Silas had been seen wearing a cloak with a distinctive silver clasp
+    the night before the murder, which was later found to be stained with blood."]}'
+  SkipRelevance: 1
 --- !u!114 &1294622897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2874,7 +3235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeOfDay: 6
-  dayDurationInMinutes: 1
+  dayDurationInMinutes: 5
   directionalLight: {fileID: 1930731676}
   maxSunIntensity: 1
   minSunIntensity: 0
@@ -2882,7 +3243,11 @@ MonoBehaviour:
   nightSky: {fileID: 2100000, guid: 133347283e115d147a5fcce7f47a538f, type: 2}
   maxExposure: 1
   minExposure: 0.2
-  skyboxRotationSpeed: 0.5
+  skyboxRotationSpeed: 0.1
+  enableTimePass: 0
+  nightTimeSpeed: 20
+  nightOverlayMaxAlpha: 1
+  requiredSleepingNPCPercentage: 0.8
 --- !u!114 &1294622898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2897,61 +3262,81 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   surface: {fileID: 1438901265}
   terrain: {fileID: 1438901263}
-  tileSize: 10
-  mapWidthInTiles: 10
-  mapLengthInTiles: 10
-  buildingsDensity: 0.2
+  tileSize: 2
+  mapWidthInTiles: 50
+  mapLengthInTiles: 50
+  buildingsDensity: 0.8
   markTiles: 0
+  WallsMargin: 10
   buildings:
   - prefab: {fileID: 5083285615235793076, guid: 147ab689729ac2e49b82aac972788668, type: 3}
-    weight: 1
-    maxCount: 3
-    occurenceRadius: 1
+    weight: 0.2
+    maxCount: 1
     currentCount: 0
-  - prefab: {fileID: 6108394813680385468, guid: 655e06dc9db1cb746b7da3e9dacba6e0, type: 3}
+  - prefab: {fileID: 4437863208952723622, guid: 7b6999e5311410f2892706733c8447bc, type: 3}
     weight: 1
-    maxCount: 3
-    occurenceRadius: 1
+    maxCount: 1
     currentCount: 0
   - prefab: {fileID: 4128734955017319067, guid: d1afe98c64fbce847b4bb993ad9a349f, type: 3}
-    weight: 1
+    weight: 0.2
     maxCount: 3
-    occurenceRadius: 1
     currentCount: 0
   - prefab: {fileID: 1869102301479979069, guid: 6f8f8f50cef4e5672ace240d64134866, type: 3}
-    weight: 1
+    weight: 0.2
     maxCount: 3
-    occurenceRadius: 1
     currentCount: 0
   - prefab: {fileID: 9012655438019880852, guid: dd61dcfce8cdfb1b9b2e09368a5c9e67, type: 3}
-    weight: 1
+    weight: 0.2
     maxCount: 3
-    occurenceRadius: 1
     currentCount: 0
   - prefab: {fileID: 206528979659577565, guid: cc6934e2e20fab840a439cc2178719de, type: 3}
     weight: 1
-    maxCount: 3
-    occurenceRadius: 1
+    maxCount: 1
     currentCount: 0
   - prefab: {fileID: 8097970678501141546, guid: 2728991a092826047ac869844385d4fe, type: 3}
-    weight: 1
+    weight: 0.2
     maxCount: 3
-    occurenceRadius: 1
     currentCount: 0
-  - prefab: {fileID: 5809783869429004467, guid: 6c440fd867dc25c43b3eac01ed5171fa, type: 3}
+  - prefab: {fileID: 2563849501544997127, guid: d863affebd441d9419822890ab098d4e, type: 3}
     weight: 1
-    maxCount: 3
-    occurenceRadius: 1
+    maxCount: 1
     currentCount: 0
   - prefab: {fileID: 2378057268553226593, guid: e52c8f8704c3b9d44b660c2c75d98192, type: 3}
-    weight: 1
+    weight: 0.05
     maxCount: 3
-    occurenceRadius: 1
     currentCount: 0
   - prefab: {fileID: 489591695903564298, guid: cc6d52fdd67e37739b5d6a53fb8d7af7, type: 3}
     weight: 1
-    maxCount: 3
-    occurenceRadius: 1
+    maxCount: 2
+    currentCount: 0
+  walls:
+  - prefab: {fileID: 4001755167029688240, guid: a737893b4dbaebe4eb1dcc9409b99044, type: 3}
+  - prefab: {fileID: 7202088873049624162, guid: cc79016811cfe34479bcd12091bdb83a, type: 3}
+  - prefab: {fileID: 6398382561017800961, guid: a890c3f1e1d4f8a49b39902f66ed38af, type: 3}
+  decorations:
+  - prefab: {fileID: 3045040967433266602, guid: 04383b4e2e99718428159531b28b1c67, type: 3}
+    weight: 0.2
+    maxCount: 10
+    currentCount: 0
+  - prefab: {fileID: 3045040967433266602, guid: 04383b4e2e99718428159531b28b1c67, type: 3}
+    weight: 0.2
+    maxCount: 10
+    currentCount: 0
+  - prefab: {fileID: 2044052314510883550, guid: ecbfea977636f8d4b8d083e997d197fa, type: 3}
+    weight: 0.2
+    maxCount: 10
+    currentCount: 0
+  - prefab: {fileID: 1590564260741474642, guid: 70aef14dbd16e0047816de55b9d26545, type: 3}
+    weight: 0.2
+    maxCount: 10
+    currentCount: 0
+  - prefab: {fileID: 6487759302446060899, guid: 481e0b3786586414caa8b77a50f92d9e, type: 3}
+    weight: 0.2
+    maxCount: 10
+    currentCount: 0
+  - prefab: {fileID: 7940860190077275469, guid: 5df6b0cd63f22a24a9f939b1e4f59409, type: 3}
+    weight: 0.2
+    maxCount: 10
     currentCount: 0
   spawnedBuildings: []
   mapWidth: 0
@@ -2999,6 +3384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9fa2b6daf246d7a183057693259627, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LogDebug: 0
 --- !u!114 &1294622902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3019,8 +3405,104 @@ MonoBehaviour:
   submitButton: {fileID: 166442101}
   cancelButton: {fileID: 1435796869}
   resultText: {fileID: 1821656902}
-  murderDescription: 
-  triggerDay: 3
+  triggerDay: 7
+--- !u!82 &1294622903
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294622892}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 6c3879dbdce0c20e092ebf59554e5eb4, type: 3}
+  m_Resource: {fileID: 8300000, guid: 6c3879dbdce0c20e092ebf59554e5eb4, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1310063284
 GameObject:
   m_ObjectHideFlags: 0
@@ -4524,17 +5006,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: player
       objectReference: {fileID: 0}
-    - target: {fileID: 7533861580767750626, guid: f1cd53ea223a5cf43bf282c3a34b494c, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5676725852435064086, guid: f1cd53ea223a5cf43bf282c3a34b494c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 506150524}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1cd53ea223a5cf43bf282c3a34b494c, type: 3}
 --- !u!1 &1774876397
 GameObject:
@@ -4736,7 +5211,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1797548794
@@ -4872,7 +5347,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1815100734
@@ -5333,6 +5808,78 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &2035828076
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2035828077}
+  - component: {fileID: 2035828079}
+  - component: {fileID: 2035828078}
+  m_Layer: 5
+  m_Name: MinimapRawImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2035828077
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2035828076}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 447810722}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -150.00005, y: 150}
+  m_SizeDelta: {x: 300, y: 300}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2035828078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2035828076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 8400000, guid: 7ceeae2b45700c74cb94ab05479c4991, type: 2}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!222 &2035828079
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2035828076}
+  m_CullTransparentMesh: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -5344,3 +5891,4 @@ SceneRoots:
   - {fileID: 1738852691}
   - {fileID: 1438901264}
   - {fileID: 74861060}
+  - {fileID: 114763443}

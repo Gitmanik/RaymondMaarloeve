@@ -33,6 +33,11 @@ public class LlmManager : MonoBehaviour
     private bool isProcessingQueue = false;
 
     /// <summary>
+    /// Whether log requests and responses
+    /// </summary>
+    public bool LogDebug = false;
+
+    /// <summary>
     /// Sets up the LLM manager with the specified API base URL.
     /// </summary>
     /// <param name="api">Base URL of the LLM server API.</param>
@@ -61,7 +66,8 @@ public class LlmManager : MonoBehaviour
     {
         using (UnityWebRequest request = UnityWebRequest.Get($"{BaseUrl}/{endpoint}"))
         {
-            Debug.Log($"LlmManager: Get request: /{endpoint}");
+            if (LogDebug)
+                Debug.Log($"LlmManager: Get request: /{endpoint}");
             yield return request.SendWebRequest();
 
             if (request.result != UnityWebRequest.Result.Success)
@@ -71,7 +77,8 @@ public class LlmManager : MonoBehaviour
             }
 
             var content = request.downloadHandler.text;
-            Debug.Log($"LlmManager: Get response: {content}");
+            if (LogDebug)
+                Debug.Log($"LlmManager: Get response: {content}");
             var result = JsonUtility.FromJson<T>(content);
             onSuccess?.Invoke(result);
         }
@@ -137,7 +144,8 @@ public class LlmManager : MonoBehaviour
             request.downloadHandler = new DownloadHandlerBuffer();
             request.SetRequestHeader("Content-Type", "application/json");
 
-            Debug.Log($"LlmManager: Post request: {json}");
+            if (LogDebug)
+                Debug.Log($"LlmManager: Post request: {json}");
             
             yield return request.SendWebRequest();
 
@@ -148,7 +156,8 @@ public class LlmManager : MonoBehaviour
                 onError?.Invoke($"LlmManager: Post request failed ({request.error}): {responseContent}");
                 yield break;
             }
-            Debug.Log($"LlmManager: Post response: {responseContent}");
+            if (LogDebug)
+                Debug.Log($"LlmManager: Post response: {responseContent}");
 
             var result = JsonUtility.FromJson<T>(responseContent);
             onSuccess?.Invoke(result);
@@ -230,17 +239,20 @@ public class LlmManager : MonoBehaviour
     /// <param name="messages">List of messages forming the conversation history.</param>
     /// <param name="onComplete">Callback on successful response.</param>
     /// <param name="onError">Callback on error.</param>
-    public void Chat(string modelID, List<Message> messages, Action<ChatResponseDTO> onComplete, Action<string> onError, float top_p = 0.95f, float temperature = 0.8f)
+    /// <param name="top_p">top_p LLM parameter</param>
+    /// <param name="temperature">Temperature LLM parameter</param>
+    /// <param name="maxTokens">Max tokens to generate</param>
+    public void Chat(string modelID, List<Message> messages, Action<ChatResponseDTO> onComplete, Action<string> onError, float top_p = 0.95f, float temperature = 0.8f, int maxTokens = 4096)
     {
         var data = new ChatRequestDTO()
         {
             model_id = modelID,
             messages = messages,
-            max_tokens = 4096,
-            f16_kv = true,
+            max_tokens = maxTokens,
+            f16_kv = false,
             n_ctx = 4096,
             n_parts = -1,
-            seed = 42, // TODO: Make it randomized
+            seed = 42,
             n_gpu_layers = -1,
             temperature = temperature, // Default temperature for generation
             top_p = top_p // Default top_p for generation
@@ -280,7 +292,8 @@ public class LlmManager : MonoBehaviour
     public void GenericComplete(MessageDTO message)
     {
         if (message.success)
-            Debug.Log(message.message);
+            if (LogDebug)
+                Debug.Log(message.message);
         else 
             Debug.LogError(message.message);
     }
@@ -297,6 +310,13 @@ public class LlmManager : MonoBehaviour
                 Debug.Log($"LLM Server status: healthy: {statusData.healthy}\nLoaded models: {string.Join("\n", statusData.models)}"),
             error => 
                 Debug.LogError(error));
+        return true;
+    }
+
+    [ConsoleCommand("llmqueue", "Shows Post queue")]
+    public static bool LLMQueue()
+    {
+        Debug.Log($"POST Status Queue: {Instance.postRequestQueue.Count} elements");
         return true;
     }
     

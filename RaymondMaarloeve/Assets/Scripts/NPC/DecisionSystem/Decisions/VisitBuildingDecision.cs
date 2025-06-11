@@ -7,12 +7,13 @@ public abstract class VisitBuildingDecision : IDecision
     private bool finished;
     private Vector3 destination;
     protected NPC npc;
-    private bool reachedBuilding;
+    public bool reachedBuilding { get; private set; }
     private float waitTimer;
 
     protected abstract float WaitDuration { get; }
     
     protected abstract float StoppingDistance { get; }
+    protected abstract bool NpcShouldDisappear { get; }
 
     private VisitBuildingDecision() {}
     
@@ -30,7 +31,6 @@ public abstract class VisitBuildingDecision : IDecision
         Transform entrance = buildingGO.transform.Find("Entrance");
         if (entrance != null)
         {
-            Debug.Log($"Entrance found for building {buildingGO.name} at position {entrance.position}");
             this.buildingGO = entrance.gameObject;
         }
         
@@ -49,9 +49,9 @@ public abstract class VisitBuildingDecision : IDecision
 
     public bool Tick()
     {
-        if (finished)
+        if (finished || ShouldFinish())
         {
-            OnFinished();
+            Finish();
             return false;
         }
 
@@ -59,6 +59,11 @@ public abstract class VisitBuildingDecision : IDecision
         {
             if (!npc.agent.pathPending && npc.agent.remainingDistance < StoppingDistance)
             {
+                if (NpcShouldDisappear)
+                {
+                    npc.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
+                    npc.agent.radius = 0.01f;
+                }
                 reachedBuilding = true;
             }
             return true;
@@ -69,16 +74,29 @@ public abstract class VisitBuildingDecision : IDecision
         {
             finished = true;
         }
-        return !finished;
+
+        return true;
     }
 
 
     public void Start()
     {
         npc.agent.SetDestination(destination);
+        npc.agent.stoppingDistance = StoppingDistance;
+    }
+
+    public void Finish()
+    {
+        if (NpcShouldDisappear)
+        {
+            npc.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
+            npc.agent.radius = 0.5f;
+        }
+        OnFinished();
     }
     
-    public string DebugInfo() => $"visiting building at: {destination}, reachedBuilding: {reachedBuilding}, waitDuration: {WaitDuration}, stoppingDistance: {StoppingDistance}";
+    public string DebugInfo() => $"visiting building {(buildingGO.name == "Entrance" ? buildingGO.transform.parent.gameObject.name : buildingGO.name)} at: {destination}, reachedBuilding: {reachedBuilding}, waitDuration: {WaitDuration}, stoppingDistance: {StoppingDistance}";
     public abstract string PrettyName { get; }
     protected abstract void OnFinished();
+    protected abstract bool ShouldFinish();
 }
