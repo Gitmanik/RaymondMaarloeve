@@ -199,9 +199,8 @@ public class NPC : MonoBehaviour
             animator.SetBool("isWalking", isWalking);
         }
 
-        if (PlayerController.Instance.currentlyInteractingNPC == this)
-            if (lookTarget != null)
-                transform.eulerAngles = new Vector3(transform.eulerAngles.x, lookTarget.eulerAngles.y - 180, transform.eulerAngles.z);
+        if (lookTarget != null)
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, lookTarget.eulerAngles.y - 180, transform.eulerAngles.z);
         
         if (!PlayerController.Instance.currentlyInteractingNPC == this && (currentDecision == null || !currentDecision.Tick()))
         {
