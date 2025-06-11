@@ -587,4 +587,22 @@ public class GameManager : MonoBehaviour
         Debug.Log(JsonUtility.ToJson(Instance.storyBlocks));
         return true;
     }
+
+    [ConsoleCommand("getseed", "Return current Seed")]
+    public static bool GetSeed()
+    {
+        Debug.Log(Instance.Seed);
+        return true;
+    }
+
+    [ConsoleCommand("setseed", "Set current Seed")]
+    public static bool SetSeed(string par1)
+    {
+        if (!int.TryParse(par1, out var seed))
+            return false;
+        
+        Instance.Seed = seed;
+        Debug.Log($"Set Seed to: {Instance.Seed}");
+        return true;
+    }
 }
