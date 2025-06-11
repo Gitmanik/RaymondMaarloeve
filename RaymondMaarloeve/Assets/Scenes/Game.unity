@@ -3086,6 +3086,7 @@ GameObject:
   - component: {fileID: 1294622900}
   - component: {fileID: 1294622901}
   - component: {fileID: 1294622902}
+  - component: {fileID: 1294622903}
   m_Layer: 0
   m_Name: _GameManager
   m_TagString: Untagged
@@ -3156,64 +3157,71 @@ MonoBehaviour:
   murdererNPC: {fileID: 0}
   uiGameObject: {fileID: 330165694}
   MinimapGameObject: {fileID: 1191064608}
-  musicAudioSource: {fileID: 0}
-  DontGenerateHistory: 0
-  historyJSON: '{"story":"The villagers of Ashwood gathered in the church, their
-    faces lit only by the faint moonlight filtering through the stained glass windows.
-    The air was heavy with the scent of wet earth and decay. In the center of the
-    church, the body of Bridget, a 7-year-old girl, lay motionless on the stone floor.
-    The helpful man, Godric, knelt beside her, his hands clasped together in prayer.
-    The ribald man, Grimbold, stood by the door, his eyes fixed on the well outside,
-    his mind elsewhere. The priest, Father Thomas, stood watchfully beside the altar,
-    his eyes scanning the crowd. The seductive woman, Elara, stood apart, her gaze
-    fixed on Godric, a mixture of concern and curiosity on her face. The guard, Wulfric,
-    stood at the entrance, his hand on the hilt of his sword, his eyes scanning the
-    crowd with a mixture of suspicion and boredom. As the night wore on, the silence
-    grew thicker, punctuated only by the sound of dripping water from the well and
-    the distant hooting of an owl. It was as if the very forest itself was holding
-    its breath, waiting to see what would happen next. The villagers exchanged nervous
-    glances, their faces pale and drawn. And in the darkness, a figure watched from
-    the shadows, its eyes fixed on the scene before it, its heart beating with a
-    malevolent intent.","characters":[{"name":"Godric","archetype":1,"age":52,"description":"You
-    are a helpful man. You are 52 years old. You are the village priest''s assistant
-    and are responsible for maintaining the church and its grounds. You are a kind
-    and gentle soul, always willing to lend a hand to those in need. You have a warm
-    smile and a quick wit, and the villagers often come to you for advice. You are
-    a bit of a neat freak and have a habit of straightening up the church after each
-    service.","murderer":false},{"name":"Grimbold","archetype":2,"age":45,"description":"You
-    are a ribald man. You are 45 years old. You are the village blacksmith and are
-    known for your love of ale and good company. You are a bit of a jokester and
-    often regale the villagers with tales of your adventures. You are a bit of a
-    ladies'' man and have a habit of flirting with the village women.","murderer":false},{"name":"Father
-    Thomas","archetype":3,"age":60,"description":"You are a priest. You are 60 years
-    old. You are the village priest and are responsible for the spiritual well-being
-    of the villagers. You are a wise and compassionate man, often sought out for
-    guidance and advice. You have a strong sense of justice and are not afraid to
-    speak truth to power. You have a habit of wearing a silver crucifix around your
-    neck.","murderer":false},{"name":"Elara","archetype":4,"age":28,"description":"You
-    are a seductive woman. You are 28 years old. You are a traveling performer and
-    are known for your beauty and charm. You are a bit of a free spirit and often
-    find yourself at odds with the village elders. You have a habit of wearing elaborate
-    costumes and wigs.","murderer":false},{"name":"Wulfric","archetype":5,"age":35,"description":"You
-    are a guard. You are 35 years old. You are the village guard and are responsible
-    for maintaining law and order. You are a bit of a loner and often find yourself
-    at odds with the villagers. You have a habit of carrying a large wooden shield
-    with you at all times.","murderer":false},{"name":"Bridget","archetype":6,"age":7,"description":"You
-    are a delusional child. You are 7 years old. You are the daughter of the village
-    baker and are known for your wild imagination and love of games. You are a bit
-    of a daydreamer and often get lost in your own thoughts. You have a habit of
-    talking to yourself and often forget what is real and what is not.","murderer":true}]}'
-  historyBlocksJSON: '{"key_events":["The villagers of Ashwood gathered in the church.","The
-    body of Bridget, a 7-year-old girl, lay motionless on the stone floor.","The
-    helpful man, Godric, knelt beside her, his hands clasped together in prayer.","The
-    priest, Father Thomas, stood watchfully beside the altar, his eyes scanning the
-    crowd.","The seductive woman, Elara, stood apart, her gaze fixed on Godric, a
-    mixture of concern and curiosity on her face.","The guard, Wulfric, stood at
-    the entrance, his hand on the hilt of his sword, his eyes scanning the crowd
-    with a mixture of suspicion and boredom."],"false_events":["The villagers gathered
-    in the town square to celebrate the summer solstice.","The villagers of Ashwood
-    had been plagued by a series of strange and terrifying events in the preceding
-    weeks."]}'
+  musicAudioSource: {fileID: 1294622903}
+  historyJSON: '{"story":"The villagers of Ashwood awoke to an eerie silence on the
+    night of the autumnal equinox. The church bells, which usually rang out at this
+    time, remained still. In the church, Father Thomas, a priest of 55 years, sat
+    in prayer, his eyes fixed on the altar. Suddenly, a faint scream pierced the
+    air, and he rose from his knees. He rushed to the well, where he found the lifeless
+    body of Elara, a 25-year-old seductress, her beauty marred by a single stab wound
+    to the chest. The villagers, including the ribald man, Godric, 42, the helpful
+    man, Edwin, 38, the delusional man, Silas, 52, the guard, Marcellus, 50, and
+    the seductive woman, Aria, 28, all gathered around the well, their faces etched
+    with fear and confusion. Silas, who had been seen arguing with Elara earlier
+    that day, seemed particularly agitated, his eyes darting about the group. As
+    the night wore on, the villagers began to suspect that Silas was responsible
+    for the murder. But as they watched him, they realized that he was not alone.
+    Aria, who had been flirting with Silas earlier, was now standing beside him,
+    her eyes gleaming with a mixture of guilt and innocence. It was then that Edwin
+    noticed a small, hidden compartment in Silas''s house, containing a bloody knife
+    and a piece of torn fabric that matched Elara''s dress. The villagers knew then
+    that Silas was not the murderer, but Aria was. She had been the one to stab Elara,
+    and Silas had been her accomplice. As the villagers turned to face Aria, she
+    vanished into the night, leaving behind a trail of fear and uncertainty.","characters":[{"name":"Father
+    Thomas","archetype":4,"age":55,"description":"You are a priest. You are 55 years
+    old. You are a man of prayer and faith. You were in the church when the murder
+    occurred. You felt a sense of shock and horror upon seeing the body. You are
+    trying to make sense of what happened. You dislike Silas and his delusional nature.
+    You have a habit of crossing yourself before meals.","murderer":false,"dead":false},{"name":"Elara","archetype":5,"age":25,"description":"You
+    are a seductress. You are 25 years old. You were at the well when you were murdered.
+    You were seen flirting with Godric earlier that day. You felt a sense of excitement
+    and danger. You are not sure who your killer is. You are trying to enjoy the
+    moment before you die.","murderer":false,"dead":true},{"name":"Godric","archetype":2,"age":42,"description":"You
+    are a ribald man. You are 42 years old. You were at the well when the murder
+    occurred. You were seen flirting with Elara earlier that day. You felt a sense
+    of excitement and curiosity. You are trying to make sense of what happened. You
+    like Silas, but you dislike his delusional nature.","murderer":false,"dead":false},{"name":"Edwin","archetype":1,"age":38,"description":"You
+    are a helpful man. You are 38 years old. You were at the well when the murder
+    occurred. You were the first to find the body. You felt a sense of shock and
+    horror. You are trying to help the villagers make sense of what happened. You
+    like Silas, but you dislike Aria''s flirtatious nature.","murderer":false,"dead":false},{"name":"Silas","archetype":3,"age":52,"description":"You
+    are a delusional man. You are 52 years old. You were seen arguing with Elara
+    earlier that day. You felt a sense of anger and frustration. You are trying to
+    convince yourself that you are innocent. You dislike Godric, but you like Edwin''s
+    helpful nature.","murderer":false,"dead":false},{"name":"Marcellus","archetype":6,"age":50,"description":"You
+    are a guard. You are 50 years old. You were at the well when the murder occurred.
+    You were trying to keep the peace. You felt a sense of duty and responsibility.
+    You are trying to protect the villagers. You like Silas, but you dislike Aria''s
+    flirtatious nature.","murderer":false,"dead":false},{"name":"Aria","archetype":5,"age":28,"description":"You
+    are a seductive woman. You are 28 years old. You were at the well when the murder
+    occurred. You were seen flirting with Silas earlier that day. You felt a sense
+    of excitement and danger. You are trying to enjoy the moment before you die.
+    You like Silas, but you dislike Godric''s ribald nature.","murderer":true,"dead":false}]}'
+  historyBlocksJSON: '{"key_events":["The villagers of Ashwood awoke to an eerie
+    silence on the night of the autumnal equinox.","Father Thomas, a priest of 55
+    years, found the lifeless body of Elara, a 25-year-old seductress, with a single
+    stab wound to the chest.","The villagers, including Godric, Edwin, Silas, Marcellus,
+    and Aria, gathered around the well to find Elara''s body.","Silas, who had been
+    seen arguing with Elara earlier that day, seemed particularly agitated and was
+    suspected of being the murderer.","Edwin noticed a small, hidden compartment
+    in Silas''s house, containing a bloody knife and a piece of torn fabric that
+    matched Elara''s dress.","Aria, who had been flirting with Silas earlier, was
+    revealed to be the actual murderer, and Silas was her accomplice."],"false_events":["The
+    villagers had previously discussed and decided to hold a grand ball in honor
+    of Elara''s beauty, which was scheduled to take place the night of the autumnal
+    equinox.","Silas had been seen wearing a cloak with a distinctive silver clasp
+    the night before the murder, which was later found to be stained with blood."]}'
+  SkipRelevance: 1
 --- !u!114 &1294622897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3262,7 +3270,7 @@ MonoBehaviour:
     weight: 0.2
     maxCount: 1
     currentCount: 0
-  - prefab: {fileID: 6108394813680385468, guid: 655e06dc9db1cb746b7da3e9dacba6e0, type: 3}
+  - prefab: {fileID: 4437863208952723622, guid: 7b6999e5311410f2892706733c8447bc, type: 3}
     weight: 1
     maxCount: 1
     currentCount: 0
@@ -3286,7 +3294,7 @@ MonoBehaviour:
     weight: 0.2
     maxCount: 3
     currentCount: 0
-  - prefab: {fileID: 5809783869429004467, guid: 6c440fd867dc25c43b3eac01ed5171fa, type: 3}
+  - prefab: {fileID: 2563849501544997127, guid: d863affebd441d9419822890ab098d4e, type: 3}
     weight: 1
     maxCount: 1
     currentCount: 0
@@ -3395,6 +3403,103 @@ MonoBehaviour:
   cancelButton: {fileID: 1435796869}
   resultText: {fileID: 1821656902}
   triggerDay: 3
+--- !u!82 &1294622903
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294622892}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 6c3879dbdce0c20e092ebf59554e5eb4, type: 3}
+  m_Resource: {fileID: 8300000, guid: 6c3879dbdce0c20e092ebf59554e5eb4, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1310063284
 GameObject:
   m_ObjectHideFlags: 0

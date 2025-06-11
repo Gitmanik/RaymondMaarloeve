@@ -52,7 +52,7 @@ public class NPC : MonoBehaviour
     /// <summary>
     /// The system prompt used for LLM-based decision making.
     /// </summary>
-    public string SystemPrompt { get; private set; } = null;
+    public string SystemPrompt { get; set; } = null;
 
     /// <summary>
     /// The model ID used for LLM-based decision making.
@@ -97,7 +97,7 @@ public class NPC : MonoBehaviour
     /// <summary>
     /// The cooldown time between vision updates.
     /// </summary>
-    private float visionUpdateCooldown = 1f;
+    private float visionUpdateCooldown = 5f;
 
     /// <summary>
     /// The timer for vision updates.
