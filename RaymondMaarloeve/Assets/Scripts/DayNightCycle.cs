@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DayNightCycle : MonoBehaviour
 {
@@ -29,6 +31,16 @@ public class DayNightCycle : MonoBehaviour
     public float skyboxRotationSpeed = 1f;
 
     public bool enableTimePass = false;
+
+    [Header("Night Time Settings")]
+    public float nightTimeSpeed = 20f;
+    public float nightOverlayMaxAlpha = 1f;
+    public float requiredSleepingNPCPercentage = 0.80f;
+    
+    private bool isNightActive = false;
+    
+    private float normalTimeSpeed = 1f;
+    private UnityEngine.UI.Image nightOverlay; // referencja do ciemnej nakładki
     
     void Start()
     {
@@ -36,15 +48,80 @@ public class DayNightCycle : MonoBehaviour
         RenderSettings.skybox = daySky;
         if (DayBoxManager.Instance != null)
             DayBoxManager.Instance.UpdateDayText(currentDay);
+        
+        // Dodaj ciemną nakładkę
+        CreateNightOverlay();
     }
-
+    
+    private void CreateNightOverlay()
+    {
+        // Stwórz nowy obiekt Canvas (jeśli nie istnieje)
+        GameObject overlayCanvas = new GameObject("NightOverlay Canvas");
+        Canvas canvas = overlayCanvas.AddComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        canvas.sortingOrder = 0; // nad grą, pod UI
+        
+        // Dodaj CanvasScaler
+        CanvasScaler scaler = overlayCanvas.AddComponent<CanvasScaler>();
+        scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+        
+        // Stwórz obiekt z Image
+        GameObject overlayObj = new GameObject("NightOverlay");
+        overlayObj.transform.SetParent(overlayCanvas.transform, false);
+        nightOverlay = overlayObj.AddComponent<UnityEngine.UI.Image>();
+        nightOverlay.color = new Color(0, 0, 0, 0); // czarny, początkowo przezroczysty
+        
+        // Ustaw rozmiar na cały ekran
+        RectTransform rect = overlayObj.GetComponent<RectTransform>();
+        rect.anchorMin = Vector2.zero;
+        rect.anchorMax = Vector2.one;
+        rect.sizeDelta = Vector2.zero;
+    }
+    
     void Update()
     {
         if (!enableTimePass)
             return;
         
+        // Sprawdź warunki rozpoczęcia nocy
+        if (!isNightActive)
+        {
+            if (timeOfDay >= 22f) // Najpierw sprawdź czy jest 22:00
+            {
+                isNightActive = true;
+            }
+            else if (timeOfDay >= 21.25f) // Jeśli jest między 21:15 a 22:00
+            {
+                if (checkNPCsSleep(requiredSleepingNPCPercentage)) // Dopiero wtedy sprawdź NPCs
+                {
+                    isNightActive = true;
+                }
+            }
+        }
+        
+        // Sprawdź warunki zakończenia nocy
+        if (isNightActive && timeOfDay >= 7f && timeOfDay < 8f)
+        {
+            isNightActive = false;
+        }
+        
+        // Ustaw prędkość upływu czasu
+        float currentTimeSpeed = isNightActive ? nightTimeSpeed : normalTimeSpeed;
+        
+        // Aktualizacja czasu z uwzględnieniem prędkości
+        timeOfDay += (Time.deltaTime / (dayDurationInMinutes * 60f) * 24f) * currentTimeSpeed;
+        
+        // Zarządzaj przezroczystością nakładki nocnej
+        if (nightOverlay != null)
+        {
+            float targetAlpha = isNightActive ? nightOverlayMaxAlpha : 0f;
+            Color currentColor = nightOverlay.color;
+            currentColor.a = Mathf.Lerp(currentColor.a, targetAlpha, Time.deltaTime * 2f);
+            nightOverlay.color = currentColor;
+        }
+        
         // 1) Aktualizacja czasu
-        timeOfDay += Time.deltaTime / (dayDurationInMinutes * 60f) * 24f;
+        //timeOfDay += Time.deltaTime / (dayDurationInMinutes * 60f) * 24f;
         if (timeOfDay >= 24f)
         {
             timeOfDay -= 24f;
@@ -62,6 +139,29 @@ public class DayNightCycle : MonoBehaviour
         // 4) UI godziny
         if (DayBoxManager.Instance != null)
             DayBoxManager.Instance.UpdateHourText(timeOfDay);
+        
+    }
+
+    bool checkNPCsSleep(float requiredSleepingNPCPercentage = 0.5f)
+    {
+        NPC[] allNPCs = FindObjectsByType<NPC>(FindObjectsSortMode.None);
+        if (allNPCs.Length > 0)
+        {
+            int sleepingNPCs = 0;
+            foreach (NPC npc in allNPCs)
+            {
+                if (npc.GetCurrentDecision() is GoToSleepDecision)
+                {
+                    if (((VisitBuildingDecision)npc.GetCurrentDecision()).reachedBuilding)
+                        sleepingNPCs++;
+                }
+            }
+                
+            float sleepingPercentage = (float)sleepingNPCs / allNPCs.Length;
+            return sleepingPercentage >= requiredSleepingNPCPercentage;
+        }
+
+        return true;
     }
 
     void UpdateSun(float hour)

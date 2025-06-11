@@ -7,7 +7,7 @@ public abstract class VisitBuildingDecision : IDecision
     private bool finished;
     private Vector3 destination;
     protected NPC npc;
-    private bool reachedBuilding;
+    public bool reachedBuilding { get; private set; }
     private float waitTimer;
 
     protected abstract float WaitDuration { get; }
