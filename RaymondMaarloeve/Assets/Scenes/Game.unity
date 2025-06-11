@@ -3245,6 +3245,9 @@ MonoBehaviour:
   minExposure: 0.2
   skyboxRotationSpeed: 0.1
   enableTimePass: 0
+  nightTimeSpeed: 20
+  nightOverlayMaxAlpha: 1
+  requiredSleepingNPCPercentage: 0.8
 --- !u!114 &1294622898
 MonoBehaviour:
   m_ObjectHideFlags: 0

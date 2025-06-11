@@ -2,6 +2,9 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Manages in-game time visuals and logic
+/// </summary>
 public class DayNightCycle : MonoBehaviour
 {
     public static DayNightCycle Instance { get; private set; }
