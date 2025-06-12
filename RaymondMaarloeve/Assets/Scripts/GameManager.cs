@@ -301,7 +301,7 @@ public class GameManager : MonoBehaviour
     {
         string prompt = $"You are a creative writer. " +
                         $"Write ONLY a VALID JSON object with body specified below:\n\n" +
-                        $"A short dark story set in a medieval village.\n" +
+                        $"A short (300 words max) dark story set in a medieval village.\n" +
                         $"The story must include a murder, with the victim being one of generated characters.\n" +
                         $"Describe a mysterious situation with tension and uncertainty.\n\n" +
                         $"ALL {gameConfig.Npcs.Count + 1} characters MUST BE in JSON section and OVER 18 years old." +
