@@ -33,13 +33,13 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private AudioSource musicAudioSource;
 
-    public int Seed;
     
     [Header("DEBUG")]
     [Header("Config")]
     [SerializeField] private bool useCustomGameConfig = false;
     [SerializeField] private string customGameConfigJSON = "";
     [SerializeField] private bool DontRandomizeSeed = false;
+    public int Seed;
     
     [Header("Narrator")]
     [SerializeField] private bool DontGenerateHistory = false;
@@ -58,10 +58,10 @@ public class GameManager : MonoBehaviour
         Instance = this;
         uiGameObject.SetActive(false);
 
-        if (DontRandomizeSeed)
-            Seed = 42;
-        else
+        if (!DontRandomizeSeed)
             Seed = Random.Range(int.MinValue, int.MaxValue);
+        
+        Random.InitState(Seed);
         
         Debug.Log($"GameManager: Seed: {Seed}");
 
