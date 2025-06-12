@@ -43,6 +43,11 @@ public class GameConfig
     /// ID of the model used by the narrator.
     /// </summary>
     public int NarratorModelId;
+
+    /// <summary>
+    /// Custom seed for the game, set if value other than 0
+    /// </summary>
+    public int Seed = 0;
     
     /// <summary>
     /// Private constructor to prevent direct instantiation.

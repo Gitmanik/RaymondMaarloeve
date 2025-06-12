@@ -58,19 +58,23 @@ public class GameManager : MonoBehaviour
         Instance = this;
         uiGameObject.SetActive(false);
 
-        if (!DontRandomizeSeed)
-            Seed = Random.Range(int.MinValue, int.MaxValue);
-        
-        Random.InitState(Seed);
-        
-        Debug.Log($"GameManager: Seed: {Seed}");
-
         if (useCustomGameConfig)
             gameConfig = JsonUtility.FromJson<GameConfig>(customGameConfigJSON);
         else
             gameConfig = GameConfig.LoadGameConfig(Path.Combine(Application.dataPath, "game_config.json"));
         gameConfig.Models.ForEach(m => m.Name = m.Name.Substring(0, m.Name.LastIndexOf('.')));
         Debug.Log("GameManager: Config loaded");
+        
+        if (!DontRandomizeSeed)
+            Seed = Random.Range(int.MinValue, int.MaxValue);
+        
+        if (gameConfig.Seed != 0)
+            Seed = gameConfig.Seed;
+        
+        Random.InitState(Seed);
+        
+        Debug.Log($"GameManager: Seed: {Seed}");
+
 
         Screen.SetResolution(gameConfig.GameWindowWidth, gameConfig.GameWindowHeight, gameConfig.FullScreen);
         Application.targetFrameRate = 60;
