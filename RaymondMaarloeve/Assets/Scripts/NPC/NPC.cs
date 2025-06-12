@@ -544,6 +544,7 @@ public class NPC : MonoBehaviour
         {
             currentDecision?.Finish();
             currentDecision = env[conclusions.action - 2].decision;
+            currentDecision.Start();
             Debug.Log($"{NpcName}: Concluded and selected decision: {currentDecision.DebugInfo()}");
         }
         ObtainedMemories.Add(new ObtainedMemory()
