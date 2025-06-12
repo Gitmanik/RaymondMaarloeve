@@ -3174,7 +3174,8 @@ MonoBehaviour:
     },     {       "Id": 3,       "ModelId": 3     },     {       "Id": 4,      
     "ModelId": 4     },     {       "Id": 5,       "ModelId": 6     }   ],   "NarratorModelId":
     5 }'
-  DontRandomizeSeed: 1
+  DontRandomizeSeed: 0
+  Seed: 42
   DontGenerateHistory: 0
   historyJSON: '{"story":"The villagers of Ashwood awoke to an eerie silence on the
     night of the autumnal equinox. The church bells, which usually rang out at this
