@@ -1,5 +1,7 @@
 var NAVTREEINDEX2 =
 {
+"classfootstep__manager__npc.html#a2557f510c88fb99d2073e9d4645eff48":[3,0,20,1],
+"classfootstep__manager__npc.html#a472434cb53fd14a20151fd9731db71df":[3,0,20,2],
 "classfootstep__manager__npc.html#a54a7196b5555bcc519bc149f55354504":[3,0,20,5],
 "classfootstep__manager__npc.html#a91b153bc943a2e797e494e719f70daa8":[3,0,20,3],
 "classfootstep__manager__npc.html#aa9fd4083ab4a8829bb43d09f34de6159":[3,0,20,4],

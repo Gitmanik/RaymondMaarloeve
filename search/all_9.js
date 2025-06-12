@@ -3,7 +3,7 @@ var searchData=
   ['gameconfig_0',['GameConfig',['../class_game_config.html',1,'']]],
   ['gameconfig_1',['gameConfig',['../class_game_manager.html#a3da0f49598f151231f2602021e934eed',1,'GameManager']]],
   ['gameconfig_2ecs_2',['GameConfig.cs',['../_game_config_8cs.html',1,'']]],
-  ['gamemanager_3',['GameManager',['../class_game_manager.html',1,'GameManager'],['../_game_manager_8cs.html#ae943d2066ee572c92881dd27584ad2ea',1,'GameManager():&#160;GameManager.cs']]],
+  ['gamemanager_3',['GameManager',['../class_game_manager.html',1,'GameManager'],['../_game_manager_8cs.html#ac25262d0b394f748f1416bbccb255f5b',1,'GameManager():&#160;GameManager.cs']]],
   ['gamemanager_2ecs_4',['GameManager.cs',['../_game_manager_8cs.html',1,'']]],
   ['gamewindowheight_5',['GameWindowHeight',['../class_game_config.html#a767237c86f7412c4e05440c5b9e40fb2',1,'GameConfig']]],
   ['gamewindowwidth_6',['GameWindowWidth',['../class_game_config.html#a5ce9a20b6e478e7d975a83d63456bee0',1,'GameConfig']]],

@@ -1,8 +1,8 @@
 var searchData=
 [
   ['secondfootsteppercent_5ffloat_0',['secondFootstepPercent_float',['../classfootstep__manager__npc.html#a54a7196b5555bcc519bc149f55354504',1,'footstep_manager_npc']]],
-  ['seed_1',['seed',['../class_chat_request_d_t_o.html#add7b89833ee7aa9642625ca0289441a9',1,'ChatRequestDTO.seed()'],['../class_load_model_d_t_o.html#af2aa765a918d6485792834a1c9fdb616',1,'LoadModelDTO.seed()']]],
-  ['seed_2',['Seed',['../class_game_manager.html#aca8a6d312e1832516afc9b9a4fd20f05',1,'GameManager']]],
+  ['seed_1',['Seed',['../class_game_config.html#a526cd3fa4db4a086512212be56edf771',1,'GameConfig.Seed()'],['../class_game_manager.html#aca8a6d312e1832516afc9b9a4fd20f05',1,'GameManager.Seed()']]],
+  ['seed_2',['seed',['../class_chat_request_d_t_o.html#add7b89833ee7aa9642625ca0289441a9',1,'ChatRequestDTO.seed()'],['../class_load_model_d_t_o.html#af2aa765a918d6485792834a1c9fdb616',1,'LoadModelDTO.seed()']]],
   ['settingsscenename_3',['settingsSceneName',['../class_main_menu_manager.html#afbc367f8e041d8a7673a57555bbf4d97',1,'MainMenuManager']]],
   ['skipconslusions_4',['SkipConslusions',['../class_game_manager.html#afef9e156bd9ba1c5476efd22e5369b3c',1,'GameManager']]],
   ['skiprelevance_5',['SkipRelevance',['../class_game_manager.html#a828576c16489608497711c8120a500ed',1,'GameManager']]],

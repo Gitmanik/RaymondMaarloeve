@@ -1,5 +1,7 @@
 var NAVTREEINDEX1 =
 {
+"class_get_ale_decision.html#ae61592db9cecab35c761aa20f15da166":[3,0,24,5],
+"class_get_water_decision.html":[3,0,25],
 "class_get_water_decision.html#a259cfd891dafa0dd2fa12bd9b3eeacaa":[3,0,25,2],
 "class_get_water_decision.html#a3f2d4b9072bb25bd3d47fb24bb35c794":[3,0,25,5],
 "class_get_water_decision.html#a86e979d1cf1badd9a900565b422e92ac":[3,0,25,4],
@@ -242,12 +244,10 @@ var NAVTREEINDEX1 =
 "class_wall_spawner.html#a9cedb1442fbd1707efed65d749ccc204":[3,0,62,0],
 "class_walls_setup.html":[3,0,63],
 "class_walls_setup.html#a0d404865bd880ccab3a9963c938a8b64":[3,0,63,0],
-"class_your_namespace_1_1_slot_drop_handler.html":[2,0,0,0],
 "class_your_namespace_1_1_slot_drop_handler.html":[3,0,0,0],
+"class_your_namespace_1_1_slot_drop_handler.html":[2,0,0,0],
 "class_your_namespace_1_1_slot_drop_handler.html#a1c56294babd15fdab7c29d62121b9a5d":[2,0,0,0,0],
 "class_your_namespace_1_1_slot_drop_handler.html#a1c56294babd15fdab7c29d62121b9a5d":[3,0,0,0,0],
 "classes.html":[3,1],
-"classfootstep__manager__npc.html":[3,0,20],
-"classfootstep__manager__npc.html#a2557f510c88fb99d2073e9d4645eff48":[3,0,20,1],
-"classfootstep__manager__npc.html#a472434cb53fd14a20151fd9731db71df":[3,0,20,2]
+"classfootstep__manager__npc.html":[3,0,20]
 };
