@@ -406,6 +406,12 @@ public class GameManager : MonoBehaviour
                     Debug.LogError($"GameManager: GenerateHistory error: history character count does not match gameConfig.Npcs.Count + 1!\nFull response:{resp}\n\nStripped response:{strippedResp}");
                     continue;     
                 }
+
+                if (generatedHistory.characters.Find(x => x.dead) == generatedHistory.characters.Find(x => x.murderer))
+                {
+                    Debug.LogError($"GameManager: GenerateHistory error: Victim is the murderer!\nFull response:{resp}\n\nStripped response:{strippedResp}");
+                    continue;     
+                }
             }
             catch (Exception e)
             {
