@@ -356,7 +356,7 @@ public class GameManager : MonoBehaviour
             {
                 Debug.LogError($"GameManager: GenerateHistory error: {error}");
                 callbackCalled = true;
-            }, 0.95f, 0.5f);
+            }, 0.95f, 0.5f, 2000);
         
             // Wait for the callback to be called
             while (!callbackCalled)
@@ -470,7 +470,7 @@ public class GameManager : MonoBehaviour
             {
                 Debug.LogError($"GameManager: ConvertHistoryToBlocks error: {error}");
                 callbackCalled = true;
-            }, 0.95f, 0.5f);
+            }, 0.95f, 0.5f, 500);
         
             // Wait for the callback to be called
             while (!callbackCalled)
